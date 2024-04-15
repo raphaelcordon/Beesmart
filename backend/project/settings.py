@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['besmart.propulsion-learn.ch']
+ALLOWED_HOSTS = ['beesmart.propulsion-learn.ch']
 
 if DEBUG is True:
     ALLOWED_HOSTS += ['*']
