@@ -1,4 +1,6 @@
 import './App.css';
+import Button from './Components/Button';
+
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
       </div>
     </div>
   </div>
+  <button className="btn rounded-none" >Button</button>
+  <Button>Kisnyuszi</Button>
+
   </>
   );
 }
