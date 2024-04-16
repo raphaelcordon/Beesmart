@@ -4,9 +4,9 @@ module.exports = {
     themes: [
       {
         light: {
-          ...require("daisyui/src/theming/themes")["light"],
-          primary: "yellow",
-          secondary: "teal",
+          ...require('daisyui/src/theming/themes')['light'],
+          primary: 'yellow',
+          secondary: 'teal',
         },
       },
     ],
