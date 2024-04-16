@@ -163,4 +163,5 @@ class GenerateEndUserCard(ListAPIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
             # add card functionality
         except Exception as e:
+            print(e)
             return Response('Link is outdated', status=status.HTTP_400_BAD_REQUEST)

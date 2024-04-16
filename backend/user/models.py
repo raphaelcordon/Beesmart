@@ -11,6 +11,5 @@ class User(AbstractUser):
     is_customer = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
 
-
     def __str__(self):
         return self.email
