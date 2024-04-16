@@ -3,7 +3,7 @@ import datetime
 from django.db import models
 from django.utils import timezone
 
-from backend.customer_user_profile.models import CustomerUserProfile
+from customer_user_profile.models import CustomerUserProfile
 
 
 def get_tomorrow():
@@ -29,7 +29,8 @@ class Campaign(models.Model):
     image = models.ImageField(verbose_name='image', upload_to=campaign_directory_path, blank=True)
     logo = models.ImageField(verbose_name='logo', upload_to=campaign_directory_path, blank=True)
     style = models.ForeignKey(CampaignStyle, on_delete=models.SET_NULL, null=True, related_name='campaigns')
-    customer_user_profile = models.ForeignKey(CustomerUserProfile, on_delete=models.SET_NULL, null=True, related_name='campaigns')
+    customer_user_profile = models.ForeignKey(CustomerUserProfile, on_delete=models.SET_NULL, null=True,
+                                              related_name='campaigns')
 
     def __str__(self):
         return self.name

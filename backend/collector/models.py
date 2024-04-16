@@ -1,6 +1,7 @@
 from django.db import models
 
-from backend.campaign.models import Campaign
+from campaign.models import Campaign
+from end_user_profile.models import EndUserProfile
 
 
 class CollectorType(models.Model):
@@ -17,6 +18,7 @@ class Collector(models.Model):
     value_goal = models.FloatField(default=0)
     date_created = models.DateTimeField(auto_now_add=True)
     is_collected = models.BooleanField(default=False)
+    end_user_profile = models.ForeignKey(EndUserProfile, on_delete=models.DO_NOTHING, related_name='collectors')
 
     def __str__(self):
         return self.campaign.name
