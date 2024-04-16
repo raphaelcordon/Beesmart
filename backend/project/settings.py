@@ -52,6 +52,10 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework',
     'corsheaders',
+
+    'user',
+    'customer_user_profile',
+    'end_user_profile',
 ]
 
 MIDDLEWARE = [
@@ -158,7 +162,7 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=5)
 }
 
-# AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'user.User'
 
 USE_X_FORWARDED_HOST = True
 
