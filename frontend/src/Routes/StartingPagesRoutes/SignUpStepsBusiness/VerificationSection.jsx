@@ -112,6 +112,13 @@ const VerificationSection = () => {
                     required
                   />
                 </div>
+                <div className="mt-8 mb-6">
+                  <ul className="steps">
+                    <li className="step step-secondary"></li>
+                    <li className="step step-secondary"></li>
+                    <li className="step step-secondary"></li>
+                  </ul>
+                </div>
               </div>
             </form>
 
