@@ -24,6 +24,7 @@ def campaign_directory_path(instance, filename):
 class Campaign(models.Model):
     name = models.CharField(max_length=200, blank=False, null=False)
     value_goal = models.FloatField(blank=False, null=False)
+    date_created = models.DateTimeField(auto_now_add=True)
     beginning_date = models.DateField(blank=False, null=False, default=get_tomorrow)
     ending_date = models.DateField(blank=True, null=True)
     image = models.ImageField(verbose_name='image', upload_to=campaign_directory_path, blank=True)
