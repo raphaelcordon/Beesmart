@@ -13,6 +13,7 @@ class Voucher(models.Model):
     image = models.ImageField(upload_to=voucher_directory_path, blank=True, null=True)
     campaign = models.ForeignKey(Campaign, on_delete=models.DO_NOTHING)
     expiration_date = models.DateField()
+    is_used = models.BooleanField(default=False)
     end_user_profile = models.ForeignKey(EndUserProfile, on_delete=models.DO_NOTHING)
 
     def __str__(self):

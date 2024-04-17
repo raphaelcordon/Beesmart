@@ -40,5 +40,8 @@ urlpatterns = [
     path('backend/api/auth/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('backend/api/auth/token/verify/', jwt_views.TokenVerifyView.as_view(), name='token_refresh'),
     path('backend/api/docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('backend/api/', include('user.urls'))
+    path('backend/api/', include('user.urls')),
+    path('backend/api/', include('campaign.urls')),
+    path('backend/api/', include('collector.urls')),
+    path('backend/api/', include('voucher.urls')),
 ]
