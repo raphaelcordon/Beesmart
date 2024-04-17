@@ -1,7 +1,7 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticated
 
-from campaign.models import Campaign, CampaignStyle
+from campaign.models import Campaign
 from campaign.serializers import CampaignSerializer, CampaignStyleSerializer
 from customer_user_profile.models import CustomerUserProfile
 from end_user_profile.models import EndUserProfile
@@ -30,7 +30,6 @@ class ListEndUsersCampaignsView(ListAPIView):
     def get_queryset(self):
         end_user_profile = EndUserProfile.objects.get(secret_key=self.request.query_params.get('pk'))
         return Campaign.objects.filter(end_user_profile=end_user_profile)
-
 
 # class ListCreateApiCampaignStyleView(ListCreateAPIView):
 #     queryset = CampaignStyle.objects.all()
