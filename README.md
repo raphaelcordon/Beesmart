@@ -1,6 +1,19 @@
-# besmart
+# BeeSmart
 
 
+## Table of Contents
+
+- [Introduction](#introduction)
+
+
+## **INTRODUCTION**
+
+- Final project for the Batch27 of the Constructor Academy's Full-Stack Web Development Bootcamp;
+- BeeSmart team:
+  - << Böbi >>
+  - Joshua Sussman
+  - Raphael Cordon: https://github.com/raphaelcordon
+  - << Vytas >>
 
 ## Getting started
 
