@@ -7,6 +7,8 @@ import BusinessSignUp from "./StartingPagesRoutes/BusinessSignUp";
 import Login from "./StartingPagesRoutes/Login";
 import CongratulationsSection from "./StartingPagesRoutes/SignUpStepsBusiness/CongratulationSection";
 import VerificationSection from "./StartingPagesRoutes/SignUpStepsBusiness/VerificationSection";
+import BusinessUserRoutes from "./BusinessUserRoutes/index.jsx";
+import EndUserRoutes from "./EndUserRoutes/index.jsx";
 
 const Router = () => {
   return (
@@ -22,6 +24,9 @@ const Router = () => {
 
           <Route path="*" element={<NotFound />} />
         </Route>
+
+        <Route path="/business" element={<BusinessUserRoutes />} />
+        <Route path="/user" element={<EndUserRoutes />} />
       </Routes>
     </BrowserRouter>
   );
