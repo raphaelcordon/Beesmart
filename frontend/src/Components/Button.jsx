@@ -1,8 +1,7 @@
 const Button = ({ children }) => {
   return (
     <>
-      <div>Button</div>
-      <button className="btn rounded-none bg-primary px-16 ">{children}</button>
+      <button className="btn bg-secondary px-16 my-4 md:my-8 ">{children}</button>
     </>
   );
 };
