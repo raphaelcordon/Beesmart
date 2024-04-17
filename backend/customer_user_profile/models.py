@@ -17,6 +17,10 @@ def logo_directory_path(instance, filename):
     return f'business_logo/{instance.id}/{filename}'
 
 
+def customer_user_qr_directory_path(instance, filename):
+    return f'business_qr/{instance.id}/{filename}'
+
+
 # Create your models here.
 class CustomerUserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='customer_user_profile')
@@ -28,6 +32,10 @@ class CustomerUserProfile(models.Model):
     zip = models.CharField(verbose_name='zip', max_length=10)
     website = models.URLField(verbose_name='website', blank=True)
     logo = models.ImageField(verbose_name='logo', upload_to=logo_directory_path)
+    qr_code = models.ImageField(upload_to=customer_user_qr_directory_path)
+
+    def __str__(self):
+        return self.business_name
 
 
 @receiver(post_save, sender=User)

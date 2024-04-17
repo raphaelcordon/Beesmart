@@ -2,13 +2,19 @@ import random
 
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
+from django.http import Http404
 from rest_framework import status
-from rest_framework.generics import CreateAPIView, UpdateAPIView, ListAPIView
+from rest_framework.generics import CreateAPIView, UpdateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, \
+    DestroyAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from customer_user_profile.models import CustomerUserProfile
+from customer_user_profile.serializers import CustomerUserProfileSerializer
 from end_user_profile.models import EndUserProfile
-from user.serializers import CustomerUserSerializer, UserRegistrationSerializer, EndUserSerializer
+from project.permissions import IsSelf
+from user.serializers import CustomerUserSerializer, UserRegistrationSerializer, EndUserSerializer, \
+    CustomerUserUpdateDeleteSerializer
 
 User = get_user_model()
 
@@ -128,10 +134,10 @@ class CreateEndUser(CreateAPIView):
                 code = user.end_user_profile.code
             send_mail(
                 'Registration code:',
-                f'http://localhost:8000/backend/api/users/user/veryfi/{code}',
+                f'http://localhost:8000/backend/api/users/enduser/veryfi/{code}',
                 'mot83161@gmail.com',
                 [email],
-                html_message=f'<h1>WELCOME http://localhost:8000/backend/api/users/user/veryfi/{code}</h1>',
+                html_message=f'<h1>WELCOME http://localhost:8000/backend/api/users/enduser/veryfi/{code}</h1>',
                 fail_silently=False,
             )
             return Response("Link was sent to your email", status=status.HTTP_200_OK)
@@ -165,3 +171,39 @@ class GenerateEndUserCard(ListAPIView):
         except Exception as e:
             print(e)
             return Response('Link is outdated', status=status.HTTP_400_BAD_REQUEST)
+
+
+class DeleteCustomerUser(DestroyAPIView):
+    serializer_class = UserRegistrationSerializer
+    permission_classes = [IsAuthenticated, IsSelf]
+    queryset = CustomerUserProfile
+
+    def get_object(self):
+        # This method ensures that you retrieve the user's profile correctly.
+        try:
+            return User.objects.get(id=self.request.user.id)
+        except User.DoesNotExist:
+            raise Http404
+
+
+class UpdateCustomerUser(UpdateAPIView):
+    serializer_class = CustomerUserUpdateDeleteSerializer
+    permission_classes = [IsAuthenticated, IsSelf]
+    queryset = CustomerUserProfile
+
+    def get_object(self):
+        # This method ensures that you retrieve the user's profile correctly.
+        try:
+            return CustomerUserProfile.objects.get(user=self.request.user)
+        except CustomerUserProfile.DoesNotExist:
+            raise Http404
+
+    def patch(self, request, *args, **kwargs):
+        profile = self.get_object()
+        serializer = self.serializer_class(profile, data=request.data, partial=True)  # Allow partial updates
+
+        if serializer.is_valid():
+            serializer.save()  # This automatically updates the profile instance
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

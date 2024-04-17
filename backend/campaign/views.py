@@ -9,8 +9,23 @@ from project.permissions import IsCampaignOwner
 
 
 class ListCreateApiCampaignView(ListCreateAPIView):
-    queryset = Campaign.objects.all().order_by('date_created')
     serializer_class = CampaignSerializer
+
+    def get_queryset(self):
+        customer_user_profile = CustomerUserProfile.objects.get(user=self.request.user)
+        return Campaign.objects.filter(customer_user_profile=customer_user_profile).order_by('date_created')
+
+    def perform_create(self, serializer):
+        customer_user_profile = CustomerUserProfile.objects.get(user=self.request.user)
+        serializer.save(customer_user_profile=customer_user_profile)
+
+
+class ListCreateApiCampaignView(ListCreateAPIView):
+    serializer_class = CampaignSerializer
+
+    def get_queryset(self):
+        customer_user_profile = CustomerUserProfile.objects.get(user=self.request.user)
+        return Campaign.objects.filter(customer_user_profile=customer_user_profile).order_by('date_created')
 
     def perform_create(self, serializer):
         customer_user_profile = CustomerUserProfile.objects.get(user=self.request.user)
@@ -24,18 +39,9 @@ class ReadUpdateDeleteCampaignView(RetrieveUpdateDestroyAPIView):
 
 
 class ListEndUsersCampaignsView(ListAPIView):
-    serializer_class = CampaignStyleSerializer
+    serializer_class = CampaignSerializer
     permission_classes = []
+    queryset = Campaign.objects.all()
 
     def get_queryset(self):
-        end_user_profile = EndUserProfile.objects.get(secret_key=self.request.query_params.get('pk'))
-        return Campaign.objects.filter(end_user_profile=end_user_profile)
-
-# class ListCreateApiCampaignStyleView(ListCreateAPIView):
-#     queryset = CampaignStyle.objects.all()
-#     serializer_class = CampaignStyleSerializer
-#
-#
-# class ReadUpdateDeleteCampaignStyleView(RetrieveUpdateDestroyAPIView):
-#     queryset = CampaignStyle.objects.all()
-#     serializer_class = CampaignStyleSerializer
+        return Campaign.objects.filter(collectors__end_user_profile__secret_key=self.kwargs['secret_key']).distinct()
