@@ -1,5 +1,5 @@
-import beeLogo from '../../public/beeicon.png';
-
+import beeLogo from "../../public/beeicon.png";
+import { Link } from "react-router-dom";
 
 export const NavBarHome = () => {
   return (
@@ -12,9 +12,15 @@ export const NavBarHome = () => {
       </div>
 
       <div className="navbar-center flex flex-wrap justify-center md:justify-between items-center py-4">
-        <button className="text-xl mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12">LogIn</button>
-        <button className="text-xl mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12">Sign Up</button>
-        <button className="text-xl mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12">Business</button>
+        <Link to="/login" className="text-xl mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12">
+          LogIn
+        </Link>
+        <Link to="/private-signup" className="text-xl mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12">
+          Sign Up
+        </Link>
+        <Link to="/business-signup" className="text-xl mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12">
+          Business
+        </Link>
       </div>
     </div>
   );
