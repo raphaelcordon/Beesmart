@@ -242,7 +242,7 @@ const VerificationSection = () => {
       <div className="flex xl:items-center l:items-center justify-center sm:mt-p md:mt-50p">
         <div className="max-w-md w-full p-6 bg-base-100 rounded-lg shadow-lg mb-16">
           <h1 className="text-2xl font-semibold text-center mt-8 mb-6">Verification</h1>
-          <form className="mb-10" onSubmit={handleValidationSubmit}>
+          <form className="mb-10">
             <div className="grid sm:grid-cols-2 gap-y-7 gap-x-12">
               <div className="mb-2">
                 <label className="block mb-2 text-sm text-accent-content">Verification Code</label>
@@ -273,7 +273,7 @@ const VerificationSection = () => {
                   <input
                     name="name"
                     type="text"
-                    userData={userData.name}
+                    value={userData.firstname}
                     
                     onChange={handleInput}
                     id={"first_name"}
@@ -286,7 +286,7 @@ const VerificationSection = () => {
                   <input
                     name="lname"
                     type="text"
-                    userData={userData}
+                    value={userData.lastname}
                     
                     id={"last_name"}
                     onChange={handleInput}
@@ -300,7 +300,7 @@ const VerificationSection = () => {
                 <div className="mb-2">
                   <label className="block mb-2 text-sm text-accent-content">Adress</label>
                   <input
-                  userData={userData.street}
+                  value={userData.street}
                   
                   onChange={handleInput}
                   id={"street"}
@@ -314,8 +314,8 @@ const VerificationSection = () => {
                 <div className="mb-2">
                   <label className="block mb-2 text-sm text-accent-content">City</label>
                   <input
-                  userData={userData}
-                  error={error}
+                  
+                  
                   onChange={handleInput}
                   id={"city"}
                     name="city"
@@ -328,8 +328,8 @@ const VerificationSection = () => {
                 <div className="mb-2">
                   <label className="block mb-2 text-sm text-accent-content">Postal Code</label>
                   <input
-                  userData={userData}
-                  error={error}
+                  
+                  
                   onChange={handleInput}
                   id={"zip"}
                     name="postalcode"
@@ -342,8 +342,8 @@ const VerificationSection = () => {
                 <div className="mb-2">
                   <label className="block mb-2 text-sm text-accent-content">Country</label>
                   <input
-                  userData={userData}
-                  error={error}
+                  
+                 
                   onChange={handleInput}
                   id={"country"}
                     name="country"
@@ -356,9 +356,8 @@ const VerificationSection = () => {
                 <div className="mb-2">
                   <label className="block mb-2 text-sm text-accent-content">Password</label>
                   <input
-                    userData={userData}
+                    
                     label="Password"
-                    error={error}
                     id={"password"}
                     onChange={handleInput}
                     name="password"
@@ -371,9 +370,8 @@ const VerificationSection = () => {
                 <div className="mb-2">
                   <label className="block mb-2 text-sm text-accent-content">Confirm Password</label>
                   <input
-                    userData={userData}
+                    
                     label="Password"
-                    error={error}
                     id={"password_repeat"}
                     onChange={handleInput}
                     name="password_repeat"
@@ -387,12 +385,11 @@ const VerificationSection = () => {
                 <div className="mb-0">
                   <label className="block mb-2 text-sm text-accent-content">Business Name</label>
                   <input
-                    userData={userData}
-                    label="Password"
-                    error={error}
+                    
+                    label="businessname"
                     id={"business_name"}
                     onChange={handleInput}
-                    name="password_repeat"
+                    name="business_name"
                     type="text"
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                     
