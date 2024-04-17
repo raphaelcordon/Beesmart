@@ -55,11 +55,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
 
-    'campaign',
-    'collector',
+    'user',
     'customer_user_profile',
     'end_user_profile',
-    'user',
+    'campaign',
+    'collector',
     'voucher',
 
 ]
