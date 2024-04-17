@@ -1,5 +1,6 @@
 import beeLogo from '../../public/beeicon.png';
 
+
 export const NavBarHome = () => {
   return (
     <div className="navbar">
