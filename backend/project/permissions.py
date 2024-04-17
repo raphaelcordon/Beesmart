@@ -14,6 +14,7 @@ class IsReadOnly(BasePermission):
         return bool(request.method in SAFE_METHODS)
 
 
-class IsOwner(BasePermission):
+class IsCampaignOwner(BasePermission):
     def has_object_permission(self, request, view, obj):
-        return request.user == obj.author
+        customer_user_profile = request.user.customer_user_profile
+        return customer_user_profile == obj.customer_user_profile

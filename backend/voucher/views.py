@@ -1,6 +1,6 @@
 # from django.shortcuts import render
 from rest_framework import status
-from rest_framework.generics import UpdateAPIView
+from rest_framework.generics import UpdateAPIView, ListAPIView, CreateAPIView
 from rest_framework.response import Response
 
 from voucher.models import Voucher
@@ -21,4 +21,17 @@ class UseVoucherView(UpdateAPIView):
 
             voucher.is_used = True
             return Response('You just used your Voucher', status=status.HTTP_200_OK)
+        return Response('Voucher does not exist', status=status.HTTP_404_NOT_FOUND)
+
+
+class EndUsersSpecificCampaignVouchers(CreateAPIView):
+    serializer_class = UseVoucherSerializer
+    queryset = Voucher.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        secret_key = request.data['secret_key']
+        if Voucher.objects.filter(campaign__id=kwargs['pk'], end_user_profile__secret_key=secret_key).exists():
+            vouchers = Voucher.objects.filter(campaign__id=kwargs['pk'], end_user_profile__secret_key=secret_key)
+            serializer = UseVoucherSerializer(vouchers)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response('Voucher does not exist', status=status.HTTP_404_NOT_FOUND)
