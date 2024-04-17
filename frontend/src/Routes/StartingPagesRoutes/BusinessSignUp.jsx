@@ -13,6 +13,7 @@ const BusinessSignUp = () => {
       const res = await useApiRequest.post("/users/customer/add/", {
         email: userEmail,
       });
+      localStorage.setItem('registered_email', userEmail)
       navigate("/business-signup/congratulations");
     } catch (errors) {
       console.log(errors);
