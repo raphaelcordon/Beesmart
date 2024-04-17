@@ -17,9 +17,7 @@ export const NavBarHome = () => {
       <div className="navbar-center flex flex-wrap justify-center md:justify-between items-center py-4">
         <NavBarLink to="/login">LogIn</NavBarLink>
         <NavBarLink to="/private-signup">Sign Up</NavBarLink>
-
-        
-        <NavBarLink to="/business-signup">Business</NavBarLink>
+             <NavBarLink to="/business-signup">Business</NavBarLink>
       </div>
     </div>
   );
