@@ -9,7 +9,7 @@ export const NavBarHome = () => {
         <div>
           <Link to="/">
             <img src={beeLogo} className="h-10 w-10 sm:h-10 sm:w-10 lg:h-20 lg:w-20" alt="Bee Logo" />
-            <a className="text-l">BeeSmart</a>
+            <p className="text-l">BeeSmart</p>
           </Link>
         </div>
       </div>
