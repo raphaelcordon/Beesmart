@@ -6,6 +6,7 @@ import SignUpEndUser from "./StartingPagesRoutes/SignUpEndUser";
 import BusinessSignUp from "./StartingPagesRoutes/BusinessSignUp";
 import Login from "./StartingPagesRoutes/Login";
 import CongratulationsSection from "./StartingPagesRoutes/SignUpStepsBusiness/CongratulationSection";
+import VerificationSection from "./StartingPagesRoutes/SignUpStepsBusiness/VerificationSection";
 
 const Router = () => {
   return (
@@ -16,7 +17,8 @@ const Router = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/private-signup" element={<SignUpEndUser />} />
           <Route path="/business-signup" element={<BusinessSignUp />} />
-          <Route path="/congratulations" element={<CongratulationsSection />} />
+          <Route path="/business-signup/congratulations" element={<CongratulationsSection />} />
+          <Route path="/business-signup/verification" element={<VerificationSection />} />
 
           <Route path="*" element={<NotFound />} />
         </Route>
