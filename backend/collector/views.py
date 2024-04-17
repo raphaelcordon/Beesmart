@@ -48,3 +48,16 @@ class CollectorValidateView(CreateAPIView):
                                                  value_counted=value_count)
             collector.save()
             return Response('New collector was created', status=status.HTTP_201_CREATED)
+
+
+class EndUsersSpecificCampaignVouchers(CreateAPIView):
+    serializer_class = CollectorSerializer
+    queryset = Collector.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        secret_key = request.data['secret_key']
+        if Collector.objects.filter(campaign__id=kwargs['pk'], end_user_profile__secret_key=secret_key).exists():
+            vouchers = Collector.objects.filter(campaign__id=kwargs['pk'], end_user_profile__secret_key=secret_key)
+            serializer = CollectorSerializer(vouchers)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response('There is no collectors exist', status=status.HTTP_404_NOT_FOUND)
