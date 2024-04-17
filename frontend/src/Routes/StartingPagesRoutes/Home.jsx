@@ -1,4 +1,4 @@
-import Button from "../../Components/Button";
+import Button from "../../Components/SmallComponents/Button";
 
 const Home = () => {
   return (
