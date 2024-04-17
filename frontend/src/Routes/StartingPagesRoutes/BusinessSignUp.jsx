@@ -6,19 +6,17 @@ import { useNavigate } from "react-router-dom";
 const BusinessSignUp = () => {
   const [userEmail, setEmail] = useState("");
   const navigate = useNavigate();
+  const { sendRequest, error, data } = useApiRequest();
 
   const handleSignUpClick = async (e) => {
     e.preventDefault();
-    try {
-      const res = await useApiRequest.post("/users/customer/add/", {
-        email: userEmail,
-      });
-      navigate("/business-signup/congratulations");
-    } catch (errors) {
-      console.log(errors);
-    }
+    sendRequest("post", "/users/customer/add/", { email: userEmail });
   };
 
+  if (data === "success") {
+    localStorage.setItem("registered_email", userEmail);
+    navigate("/business-signup/congratulations");
+  }
   return (
     <>
       <div className="flex xl:items-center l:items-center justify-center sm:mt-50 md:mt-50">

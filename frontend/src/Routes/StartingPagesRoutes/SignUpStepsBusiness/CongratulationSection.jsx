@@ -1,7 +1,10 @@
 import Button from "../../../Components/SmallComponents/Button";
 import tick from "../../../assets/check-mark-forcongratulationsection.png";
+import { Link } from "react-router-dom";
 
 const CongratulationsSection = () => {
+  const userEmail = localStorage.getItem("registered_email");
+
   return (
     <>
       <div className="flex items-center justify-center">
@@ -11,7 +14,7 @@ const CongratulationsSection = () => {
         <img src="logo" alt="Logo" className="w-30 h-20"/>
       </div> */}
             <img src={tick} className="w-16 sm:w-24 md:w-40 lg:w-40 xl:w-48" alt="Tick" />
-            <h2 className="mt-8 mb-6">We’ve sent a confirmation code to your email </h2>
+            <h2 className="mt-8 mb-6">We’ve sent a confirmation code to your email: {userEmail} </h2>
             <div className="mt-8 mb-6">
               <ul className="steps">
                 <li className="step step-secondary"></li>
@@ -19,7 +22,9 @@ const CongratulationsSection = () => {
                 <li className="step"></li>
               </ul>
             </div>
-            <Button>Continue</Button>
+            <Link to="/business-signup/verification">
+              <Button>Continue</Button>
+            </Link>
           </div>
         </div>
       </div>
