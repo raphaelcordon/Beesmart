@@ -8,10 +8,13 @@ const SignUpEndUser = () => {
           {/* <div className="flex justify-center mb-8">
         <img src="logo" alt="Logo" className="w-30 h-20"/>
       </div> */}
+          <h2 className="mt-8 mb-6">
+            🎉 Want to stay in the loop about all the exciting promotions you're a part of?{" "}
+          </h2>
           <h1 className="text-2xl font-semibold text-center mt-8 mb-6">Join Us</h1>
           <form>
             <div className="mb-4">
-              <label for="email" className="block mb-2 text-sm text-accent-content">
+              <label htmlFor="email" className="block mb-2 text-sm text-accent-content">
                 Enter Your E-mail
               </label>
               <input
@@ -23,7 +26,7 @@ const SignUpEndUser = () => {
               />
             </div>
             <div className="mb-4">
-              <label for="password" className="block mb-2 text-sm text-accent-content">
+              <label htmlFor="password" className="block mb-2 text-sm text-accent-content">
                 Set Password
               </label>
               <input
@@ -35,7 +38,7 @@ const SignUpEndUser = () => {
               />
             </div>
             <div className="mb-4">
-              <label for="confirmpassword" className="block mb-2 text-sm text-accent-content">
+              <label htmlFor="confirmpassword" className="block mb-2 text-sm text-accent-content">
                 Repeat Password
               </label>
               <input
