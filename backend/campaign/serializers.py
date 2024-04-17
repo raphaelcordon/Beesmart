@@ -8,7 +8,7 @@ class CampaignSerializer(serializers.ModelSerializer):
         model = Campaign
         fields = ['id', 'name', 'style', 'value_goal', 'beginning_date', 'ending_date', 'image', 'logo',
                   'customer_user_profile']
-        read_only_fields = ['id', 'style', 'customer_user_profile']
+        read_only_fields = ['id', 'customer_user_profile', ]
 
         # def create(self, validated_data):
         #     validated_data['customer_user_profile'] = self.context['request'].user

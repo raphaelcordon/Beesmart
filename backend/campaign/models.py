@@ -1,7 +1,7 @@
-import datetime
+# import datetime
 
 from django.db import models
-from django.utils import timezone
+# from django.utils import timezone
 
 from customer_user_profile.models import CustomerUserProfile
 
