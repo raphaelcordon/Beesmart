@@ -5,11 +5,11 @@ const VerificationSection = () => {
     <>
       <div className="flex items-center justify-center">
         <div className="flex xl:items-center l:items-center justify-center sm:mt-p md:mt-50p">
-          <div className="max-w-md w-full p-6 bg-base-100 rounded-lg shadow-lg">
-            <div className="text-center mb-16">
+          <div className="max-w-md w-full p-6 bg-base-100 rounded-lg shadow-lg mb-16">
+            <div>
               <h1 className="text-2xl font-semibold text-center mt-8 mb-6">Verification</h1>
             </div>
-            <form>
+            <form className="mb-10">
               <div className="grid sm:grid-cols-2 gap-y-7 gap-x-12">
                 <div className="mb-2">
                   <label className="block mb-2 text-sm text-accent-content">First Name</label>
