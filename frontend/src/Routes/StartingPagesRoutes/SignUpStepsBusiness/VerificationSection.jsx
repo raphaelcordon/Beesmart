@@ -43,6 +43,17 @@ const VerificationSection = () => {
                   />
                 </div>
                 <div className="mb-2">
+                  <label className="block mb-2 text-sm text-accent-content">Verification Code</label>
+                  <input
+                    name="verification Code"
+                    type="text"
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                    /* placeholder="Enter your verification code" */
+                    /* value={code} */
+                    required
+                  />
+                </div>
+                <div className="mb-2">
                   <label className="block mb-2 text-sm text-accent-content">Adress</label>
                   <input
                     name="adress"
@@ -83,16 +94,6 @@ const VerificationSection = () => {
                   />
                 </div>
                 <div className="mb-2">
-                  <label className="block mb-2 text-sm text-accent-content">Upload Logo</label>
-                  <input
-                    name="logo"
-                    type="file"
-                    className="file-input file-input-ghost text-sm w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
-                    /*   placeholder="Enter password" */
-                    required
-                  />
-                </div>
-                <div className="mb-2">
                   <label className="block mb-2 text-sm text-accent-content">Password</label>
                   <input
                     name="password"
@@ -102,7 +103,7 @@ const VerificationSection = () => {
                     required
                   />
                 </div>
-                <div className="mb-10">
+                <div className="mb-2">
                   <label className="block mb-2 text-sm text-accent-content">Confirm Password</label>
                   <input
                     name="cpassword"
@@ -112,15 +113,24 @@ const VerificationSection = () => {
                     required
                   />
                 </div>
-                <div className="mt-8 mb-6">
-                  <ul className="steps">
-                    <li className="step step-secondary"></li>
-                    <li className="step step-secondary"></li>
-                    <li className="step step-secondary"></li>
-                  </ul>
+                <div className="mb-10">
+                  <label className="block mb-2 text-sm text-accent-content">Upload Logo</label>
+                  <input
+                    name="logo"
+                    type="file"
+                    className="file-input file-input-secondary text-sm w-full sm:w-auto px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                    /*   placeholder="Enter password" */
+                  />
                 </div>
               </div>
             </form>
+            <div className="mt-8 mb-6">
+              <ul className="steps">
+                <li className="step step-secondary"></li>
+                <li className="step step-secondary"></li>
+                <li className="step step-secondary"></li>
+              </ul>
+            </div>
 
             <Button>Continue</Button>
           </div>
