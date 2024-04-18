@@ -3,7 +3,7 @@ import beeLogo from "../../../public/beeicon.png";
 import NavBarToggling from "../SmallComponents/NavBarToggling.jsx";
 import { useEffect, useRef, useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {logoutUser} from "../../store/slices/userSlice.js";
+import {logoutUserCustomer} from "../../store/slices/userCustomerSlice.js";
 import useGetMeUser from "../../hooks/useGetMeUser.js";
 
 const NavBarBusiness = ({ setActiveTabProp }) => {
@@ -11,7 +11,7 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
     const [activeTab, setActiveTab] = useState('MyCampaigns');
     const menuRef = useRef(null);
     const dispatch = useDispatch();
-    const user = useSelector(state => state.user.userData);
+    const user = useSelector(state => state.customer.userCustomerData);
     const { getUser, error } = useGetMeUser();
     const navigate = useNavigate();
 
@@ -45,7 +45,7 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
     }, [user, getUser]);
 
     const logoutHandler = () => {
-    dispatch(logoutUser());
+    dispatch(logoutUserCustomer());
     window.localStorage.removeItem("accessToken")
     };
 

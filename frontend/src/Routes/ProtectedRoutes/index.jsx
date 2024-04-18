@@ -4,7 +4,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom"
 const ProtectedRoutes = () => {
 
     const location = useLocation()
-    const isLoggedIn = useSelector((state) => state.user.accessToken)
+    const isLoggedIn = useSelector((state) => state.customer.accessToken)
 
     return !isLoggedIn ? (
       // Navigate to the /login route and replace the current history entry

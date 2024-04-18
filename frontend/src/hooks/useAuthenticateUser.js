@@ -1,7 +1,7 @@
 import {useDispatch} from "react-redux";
 import {useCallback, useState} from "react";
-import {AuthenticateCustomer} from "../axios/axiosUser.js";
-import {loginUser, storeUserData} from "../store/slices/userSlice.js";
+import {AuthenticateCustomer} from "../axios/axiosCustomer.js";
+import {loginUserCustomer, storeUserCustomerData} from "../store/slices/userCustomerSlice.js";
 
 const useAuthenticateUser = () => {
     const dispatch = useDispatch();
@@ -12,8 +12,8 @@ const useAuthenticateUser = () => {
         try {
             const authResponse = await AuthenticateCustomer(email, password);
             window.localStorage.setItem("accessToken", authResponse.access);
-            dispatch(loginUser(authResponse.access));
-            dispatch(storeUserData(authResponse.user));
+            dispatch(loginUserCustomer(authResponse.access));
+            dispatch(storeUserCustomerData(authResponse.user));
         } catch (error) {
             setError(error.message || "An error occurred during login.");
             throw error;
