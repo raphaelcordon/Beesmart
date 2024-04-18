@@ -10,6 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from customer_user_profile.models import CustomerUserProfile
+from email_layouts.qr_email import email_layout
 
 from end_user_profile.models import EndUserProfile
 from project.permissions import IsSelf
@@ -183,10 +184,10 @@ class CreateEndUser(CreateAPIView):
         # Prepare and send the email.
         send_mail(
             'Registration code:',
-            f'http://localhost:8000/backend/api/users/enduser/veryfi/{code}',
+            f'{MEDIA_HOST}/backend/api/enduser/user/verify/{code}',
             'mot83161@gmail.com',
             [email],
-            html_message=f'<h1>WELCOME http://localhost:8000/backend/api/users/enduser/veryfi/{code}</h1>',
+            html_message=f'<h1>WELCOME {MEDIA_HOST}/backend/api/enduser/user/verify/{code}</h1>',
             fail_silently=False,
         )
         return Response("Link was sent to your email", status=status.HTTP_200_OK)
@@ -228,7 +229,7 @@ class GenerateEndUserCard(RetrieveAPIView):
                 'Here is your updated QR code.',
                 'from@example.com',  # Replace with your actual email or Django setting for default email.
                 [user.email],
-                html_message=f'<img src="{MEDIA_HOST}{profile.qr_code.url}" alt="QR Code" width="100" height="100">',
+                html_message=email_layout(profile.qr_code.url, MEDIA_HOST),
                 fail_silently=False,
             )
             serializer = EndUserSerializer(profile.user)  # Serialize user data
