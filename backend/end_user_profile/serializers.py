@@ -7,7 +7,7 @@ class EndUserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = EndUserProfile
         # Add campaigns to fields after created
-        fields = ['secret_key', 'first_name', 'last_name', 'city', 'street', 'zip', 'avatar']
+        fields = ['secret_key', 'first_name', 'last_name', 'city', 'street', 'zip', 'avatar', 'qr_code']
 
     # def to_representation(self, instance):
     #     representation = super().to_representation(instance)
@@ -19,4 +19,4 @@ class EndUserProfileOutSerializer(serializers.ModelSerializer):
     class Meta:
         model = EndUserProfile
         # Add campaigns to fields after created
-        fields = ['user', 'first_name', 'last_name', 'city', 'street', 'zip', 'avatar']
+        fields = ['user', 'first_name', 'last_name', 'city', 'street', 'zip', 'avatar', 'qr_code']

@@ -34,6 +34,13 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
+MEDIA_HOST = 'http://127.0.0.1:8000'
+
+if DEBUG is True:
+    MEDIA_HOST = 'http://127.0.0.1:8000'
+else:
+    MEDIA_HOST = 'https://beesmart.propulsion-learn.ch'
+
 ALLOWED_HOSTS = ['beesmart.propulsion-learn.ch']
 
 if DEBUG is True:
