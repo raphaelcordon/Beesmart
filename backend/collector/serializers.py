@@ -3,7 +3,7 @@ from datetime import date
 from rest_framework import serializers
 
 from collector.models import Collector, CollectorType
-from end_user_profile.serializers import EndUserProfileSerializer, EndUserProfileOutSerializer
+from end_user_profile.serializers import EndUserProfileOutSerializer
 
 
 class CollectorTypeSerializer(serializers.ModelSerializer):

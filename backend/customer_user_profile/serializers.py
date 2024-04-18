@@ -9,7 +9,6 @@ class CustomerUserProfileSerializer(serializers.ModelSerializer):
         # Add campaigns to fields after created
         fields = ['business_name', 'country', 'city', 'street', 'zip', 'website', 'logo']
 
-
     # def to_representation(self, instance):
     #     representation = super().to_representation(instance)
     #     representation['campaigns'] = CampaignSerializer(instance.campaigns, many=True).data
