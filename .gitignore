@@ -6,3 +6,4 @@ __pycache__
 static-files
 media-files
 node_modules
+migrations
