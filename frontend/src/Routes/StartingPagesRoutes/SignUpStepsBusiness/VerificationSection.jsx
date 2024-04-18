@@ -20,7 +20,6 @@ const VerificationSection = () => {
   const [logo, setLogo] = useState('');
 
 
-  // const [userData, setUserData] = useState({ email: registeredEmail, code: '' });
   const navigate = useNavigate();
   const [error, setError] = useState('');
 
