@@ -4,7 +4,7 @@ import NavBarToggling from "../SmallComponents/NavBarToggling.jsx";
 import { useEffect, useRef, useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutUserCustomer} from "../../store/slices/userCustomerSlice.js";
-import useGetMeUser from "../../hooks/useGetMeUser.js";
+import useGetMeUser from "../../Hooks/useGetMeUser.js";
 
 const NavBarBusiness = ({ setActiveTabProp }) => {
     const [isOpen, setIsOpen] = useState(false);
