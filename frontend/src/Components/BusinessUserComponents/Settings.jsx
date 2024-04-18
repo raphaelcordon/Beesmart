@@ -5,6 +5,7 @@ import { UpdateMeUser, GetMeUser} from "../../axios/axiosCustomer.js";
 
 
 
+
 const Settings = () => {
   const [user, setUser] = useState({
     business_name: "",
@@ -17,22 +18,29 @@ const Settings = () => {
   });
 
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     //function to get the userdata
     GetMeUser().then(userData => setUser(userData));
   }, []);
 
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await UpdateMeUser(user); 
-      console.log('Profile updated successfully');
-      
+      //console.log('Profile updated successfully');
+      setSuccess(true);
       setError(null);   
     } catch (err) {
       setError(err.message);
     }
+  };
+
+  const handleInputFocus = () => {
+    setSuccess(false); // Clear success message when any input field gains focus
   };
 
   return (
@@ -48,8 +56,10 @@ const Settings = () => {
                 <input
                   type="text"
                   defaultValue={user.email} 
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                  onFocus={handleInputFocus}
                   readOnly
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                  
                 />
               </div> 
               <div className="mb-2">
@@ -60,6 +70,7 @@ const Settings = () => {
                   type="text"
                   defaultValue={user.street} 
                   onChange={(e) => setUser({...user, street: e.target.value})}
+                  onFocus={handleInputFocus}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                   required
                 />
@@ -72,6 +83,7 @@ const Settings = () => {
                   type="text"
                   defaultValue={user.city} 
                   onChange={(e) => setUser({...user, city: e.target.value})}
+                  onFocus={handleInputFocus}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                   required
                 />
@@ -84,6 +96,7 @@ const Settings = () => {
                   type="text"
                   defaultValue={user.zip} 
                   onChange={(e) => setUser({...user, zip: e.target.value})}
+                  onFocus={handleInputFocus}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                   required
                 />
@@ -96,6 +109,7 @@ const Settings = () => {
                   type="text"
                   defaultValue={user.country} 
                   onChange={(e) => setUser({...user, country: e.target.value})}
+                  onFocus={handleInputFocus}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                   required
                 />
@@ -108,6 +122,7 @@ const Settings = () => {
                   type="text"
                   defaultValue={user.business_name} 
                   onChange={(e) => setUser({...user, business_name: e.target.value})}
+                  onFocus={handleInputFocus}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                   required
                 />
@@ -120,6 +135,7 @@ const Settings = () => {
                   type="text"
                   defaultValue={user.website} 
                   onChange={(e) => setUser({...user, website: e.target.value})}
+                  onFocus={handleInputFocus}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                 />
               </div>
@@ -131,12 +147,14 @@ const Settings = () => {
                   type="file"
                   defaultValue={user.logo} 
                   onChange={(e) => setUser({...user, logo: e.target.value})}
+                  onFocus={handleInputFocus}
                   className="file-input file-input-secondary text-sm px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                 />
               </div>
             </div>
             <Button type="submit">Save</Button>
           </form>
+          {success && <div className="text-success mb-4">Profile updated successfully!</div>}
           {error && <small>{String(error)}</small>}
         </div>
       </div>
