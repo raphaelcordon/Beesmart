@@ -4,12 +4,12 @@ from user.views import CreateCustomerUser, CreateEndUser, VeryfiCustomerUserView
     MeEndUser, UpdateCustomerUser, DeleteCustomerUser
 
 urlpatterns = [
-    path('users/customer/add/', CreateCustomerUser.as_view()),
-    path('users/customer/veryfi/', VeryfiCustomerUserView.as_view()),
-    path('users/customer/me/', MeCustomerUser.as_view()),
-    path('users/customer/update/', UpdateCustomerUser.as_view()),
-    path('users/customer/delete/', DeleteCustomerUser.as_view()),
-    path('users/enduser/add/', CreateEndUser.as_view()),
-    path('users/enduser/veryfi/<str:generated_code>/', GenerateEndUserCard.as_view()),
-    path('users/enduser/me/', MeEndUser.as_view()),
+    path('customer/user/add/', CreateCustomerUser.as_view()),
+    path('customer/user/verify/', VeryfiCustomerUserView.as_view()),
+    path('customer/user/me/', MeCustomerUser.as_view()),
+    path('customer/user/update/', UpdateCustomerUser.as_view()),
+    path('customer/user/delete/', DeleteCustomerUser.as_view()),
+    path('enduser/user/add/', CreateEndUser.as_view()),
+    path('enduser/user/verify/<str:generated_code>/', GenerateEndUserCard.as_view()),
+    path('enduser/user/me/', MeEndUser.as_view()),
 ]
