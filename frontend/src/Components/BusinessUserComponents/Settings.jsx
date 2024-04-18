@@ -148,7 +148,7 @@ const Settings = () => {
                   defaultValue={user.logo} 
                   onChange={(e) => setUser({...user, logo: e.target.value})}
                   onFocus={handleInputFocus}
-                  className="file-input file-input-secondary text-sm px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                  className="file-input file-input-secondary text-sm w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                 />
               </div>
             </div>
