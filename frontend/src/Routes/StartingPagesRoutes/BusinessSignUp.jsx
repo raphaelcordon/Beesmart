@@ -1,18 +1,18 @@
 import Button from "../../Components/SmallComponents/Button";
-import useApiRequest from "../../axios/useApiRequestBusinessUser";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {RegisterNewCustomer} from "../../axios/axiosUser.js";
 
 const BusinessSignUp = () => {
   const [userEmail, setEmail] = useState("");
   const navigate = useNavigate();
 
+
+
   const handleSignUpClick = async (e) => {
     e.preventDefault();
     try {
-      const res = await useApiRequest.post("/users/customer/add/", {
-        email: userEmail,
-      });
+      await RegisterNewCustomer(userEmail)
       localStorage.setItem('registered_email', userEmail)
       navigate("/business-signup/congratulations");
     } catch (errors) {

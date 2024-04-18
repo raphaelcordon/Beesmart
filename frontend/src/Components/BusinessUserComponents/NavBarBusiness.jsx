@@ -1,12 +1,19 @@
-import { Link } from "react-router-dom";
+import {Link, NavLink, useNavigate} from "react-router-dom";
 import beeLogo from "../../../public/beeicon.png";
 import NavBarToggling from "../SmallComponents/NavBarToggling.jsx";
 import { useEffect, useRef, useState } from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {logoutUser} from "../../store/slices/userSlice.js";
+import useGetMeUser from "../../hooks/useGetMeUser.js";
 
 const NavBarBusiness = ({ setActiveTabProp }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [activeTab, setActiveTab] = useState('MyCampaigns');
     const menuRef = useRef(null);
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.user.userData);
+    const { getUser, error } = useGetMeUser();
+    const navigate = useNavigate();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -29,6 +36,18 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
+
+
+    useEffect(() => {
+        if ((!user || (Array.isArray(user) && user.length === 0)) && window.localStorage.getItem("accessToken")) {
+            getUser();
+        }
+    }, [user, getUser]);
+
+    const logoutHandler = () => {
+    dispatch(logoutUser());
+    window.localStorage.removeItem("accessToken")
+    };
 
     return (
         <div className="navbar">
@@ -66,6 +85,12 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                                 tabName="NewCampaign">+ New Campaign</NavBarToggling>
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('Settings')} active={activeTab === 'Settings'}
                                 tabName="Settings">Settings</NavBarToggling>
+                <NavLink to="/" onClick={(e) => {
+                      e.preventDefault();
+                      logoutHandler();
+                      navigate("/");
+                    }}>Logout
+                </NavLink>
             </div>
         </div>
     );
