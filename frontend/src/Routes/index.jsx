@@ -9,6 +9,7 @@ import CongratulationsSection from "./StartingPagesRoutes/SignUpStepsBusiness/Co
 import VerificationSection from "./StartingPagesRoutes/SignUpStepsBusiness/VerificationSection";
 import BusinessUserRoutes from "./BusinessUserRoutes/index.jsx";
 import EndUserRoutes from "./EndUserRoutes/index.jsx";
+import ProtectedRoutes from "./ProtectedRoutes/index.jsx";
 
 const Router = () => {
   return (
@@ -21,12 +22,14 @@ const Router = () => {
           <Route path="/business-signup" element={<BusinessSignUp />} />
           <Route path="/business-signup/congratulations" element={<CongratulationsSection />} />
           <Route path="/business-signup/verification" element={<VerificationSection />} />
-
-          <Route path="*" element={<NotFound />} />
         </Route>
 
-        <Route path="/business" element={<BusinessUserRoutes />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/business" element={<BusinessUserRoutes />} />
+        </Route>
+
         <Route path="/user" element={<EndUserRoutes />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

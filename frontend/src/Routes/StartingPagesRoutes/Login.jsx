@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
 import Button from '../../Components/SmallComponents/Button';
-import useApiRequest, {GetMyBusinessPRofileData} from '../../axios/useApiRequestBusinessUser';
-import { loginUser } from '../../store/slices/loggedInUser';
+import useAuthenticateUser from "../../hooks/useAuthenticateUser.js";
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -11,29 +9,24 @@ const Login = () => {
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const { authenticate, AuthError } = useAuthenticateUser();
+  const location = useLocation();
 
-  const handleLogin = async (e) => {
-    e.preventDefault()
-    setError('')
-    setIsLoading(true)
-    try {
-      const res = await useApiRequest.post('/auth/token/', {
-        email,
-        password,
-      })
-      const token = res.data.access
-      navigate('/')
-      dispatch(loginUser(token))
-      window.localStorage.setItem('token', token)
-      const user = await GetMyBusinessPRofileDataa(token)
-      dispatch(userObject(user.data))
-    } catch (errors) {
-      setError(errors.response.data.detail)
-    } finally {
-      setIsLoading(false)
-    }
+  const getSubmitData = async (e) => {
+      e.preventDefault();
+      setError(null);
+      setIsLoading(true);
+      try {
+          await authenticate(email, password);
+          const from = location.state?.from || "/business";
+          navigate(from);
+      } catch(error) {
+          setError(error.message || "Failed to login. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
   }
+
   return (
     <>
       <div className="flex items-center justify-center h-full">
@@ -42,19 +35,19 @@ const Login = () => {
         <img src="logo" alt="Logo" className="w-30 h-20"/>
       </div> */}
           <h1 className="text-2xl font-semibold text-center mt-8 mb-6">Log In</h1>
-          <form>
+          <form onSubmit={getSubmitData}>
             <div className="mb-4">
               <label htmlFor="email" className="block mb-2 text-sm text-accent-content">
                 E-mail
               </label>
               <input
-                placeholder="Email"
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
-                
+                  name="email"
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
               />
             </div>
             <div className="mb-4">
@@ -62,17 +55,21 @@ const Login = () => {
                 Password
               </label>
               <input
-                 placeholder="Password"
-                 type="password"
-                 required
-                 value={password}
-                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                  name="password"
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
               />
             </div>
             {error?.password && <p>{error.password}</p>}
-            <Button onSubmit={handleLogin}>Login</Button>
+            <Button disabled={isLoading}>
+              {isLoading ? 'Logging in...' : 'Login'}
+            </Button>
           </form>
+          {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         </div>
       </div>
     </>
