@@ -275,7 +275,7 @@ class UpdateCustomerUser(UpdateAPIView):
         """
         Handle the PATCH request to partially update the user's profile.
         """
-        profile = self.get_object() # Retrieve the user profile.
+        profile = self.get_object()  # Retrieve the user profile.
         serializer = self.serializer_class(profile, data=request.data, partial=True)  # Allow partial updates
 
         if serializer.is_valid():
