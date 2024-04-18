@@ -1,13 +1,6 @@
-# import datetime
-
 from django.db import models
-# from django.utils import timezone
 
 from customer_user_profile.models import CustomerUserProfile
-
-
-# def get_tomorrow():
-#     return timezone.now()
 
 
 class CampaignStyle(models.Model):

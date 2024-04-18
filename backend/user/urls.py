@@ -10,6 +10,6 @@ urlpatterns = [
     path('users/customer/update/', UpdateCustomerUser.as_view()),
     path('users/customer/delete/', DeleteCustomerUser.as_view()),
     path('users/enduser/add/', CreateEndUser.as_view()),
-    path('users/enduser/veryfi/<str:pk>/', GenerateEndUserCard.as_view()),
+    path('users/enduser/veryfi/<str:generated_code>/', GenerateEndUserCard.as_view()),
     path('users/enduser/me/', MeEndUser.as_view()),
 ]

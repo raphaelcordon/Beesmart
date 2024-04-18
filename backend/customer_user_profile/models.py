@@ -5,6 +5,10 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+import segno
+from django.core.files.base import ContentFile
+from io import BytesIO
+
 User = get_user_model()
 
 
@@ -18,7 +22,7 @@ def logo_directory_path(instance, filename):
 
 
 def customer_user_qr_directory_path(instance, filename):
-    return f'business_qr/{instance.id}/{filename}'
+    return f'business_qr/{instance.user.email}/{filename}'
 
 
 # Create your models here.
@@ -34,11 +38,26 @@ class CustomerUserProfile(models.Model):
     logo = models.ImageField(verbose_name='logo', upload_to=logo_directory_path)
     qr_code = models.ImageField(upload_to=customer_user_qr_directory_path)
 
+    def save(self, *args, **kwargs):
+        if self.pk:
+            if CustomerUserProfile.objects.filter(pk=self.pk).exists():
+                old_instance = CustomerUserProfile.objects.get(pk=self.pk)
+                if old_instance.qr_code and old_instance.qr_code != self.qr_code:
+                    old_instance.qr_code.delete(save=False)
+        qr = segno.make(f'"user_id":{self.user.id}, "business_name":{self.business_name}')
+        buffer = BytesIO()
+        qr.save(buffer, kind='png', scale=5)
+        filename = f'qr_{self.user}.png'
+        if self.qr_code:
+            self.qr_code.delete(save=False)  # Delete the old file if it exists
+        self.qr_code.save(filename, ContentFile(buffer.getvalue()), save=False)
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.business_name
 
 
 @receiver(post_save, sender=User)
-def create_registration_profile(sender, instance, **kwargs):
-    if instance.is_customer:
+def create_registration_profile(sender, instance, created, **kwargs):
+    if created and instance.is_customer:
         CustomerUserProfile.objects.get_or_create(user=instance)
