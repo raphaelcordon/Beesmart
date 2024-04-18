@@ -13,3 +13,10 @@ class EndUserProfileSerializer(serializers.ModelSerializer):
     #     representation = super().to_representation(instance)
     #     representation['campaigns'] = CampaignSerializer(instance.campaigns, many=True).data
     #     return representation
+
+
+class EndUserProfileOutSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EndUserProfile
+        # Add campaigns to fields after created
+        fields = ['user', 'first_name', 'last_name', 'city', 'street', 'zip', 'avatar']

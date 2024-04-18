@@ -18,7 +18,8 @@ class Collector(models.Model):
     value_goal = models.FloatField(default=0)
     date_created = models.DateTimeField(auto_now_add=True)
     is_collected = models.BooleanField(default=False)
-    end_user_profile = models.ForeignKey(EndUserProfile, on_delete=models.DO_NOTHING, related_name='collectors')
+    end_user_profile = models.ForeignKey(EndUserProfile, on_delete=models.SET_NULL, related_name='collectors',
+                                         null=True)
 
     def __str__(self):
         return self.campaign.name

@@ -2,40 +2,54 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.permissions import IsAuthenticated
 
 from campaign.models import Campaign
-from campaign.serializers import CampaignSerializer, CampaignStyleSerializer
+from campaign.serializers import CampaignSerializer
 from customer_user_profile.models import CustomerUserProfile
-from end_user_profile.models import EndUserProfile
 from project.permissions import IsCampaignOwner
 
 
 class ListCreateApiCampaignView(ListCreateAPIView):
-    queryset = Campaign.objects.all().order_by('date_created')
+    """
+    API view to list and create campaigns for a customer user profile.
+    """
     serializer_class = CampaignSerializer
+    permission_classes = [IsAuthenticated]  # Ensures that only authenticated users can access this view
+
+    def get_queryset(self):
+        """
+        Return campaigns specifically for the logged-in user's customer profile.
+        """
+        # Efficient retrieval of the customer's profile with a one-time database query
+        customer_user_profile = CustomerUserProfile.objects.get(user=self.request.user)
+        return Campaign.objects.filter(customer_user_profile=customer_user_profile).order_by('date_created')
 
     def perform_create(self, serializer):
+        """
+        Automatically assigns the logged-in user's customer profile to the new campaign.
+        """
         customer_user_profile = CustomerUserProfile.objects.get(user=self.request.user)
         serializer.save(customer_user_profile=customer_user_profile)
 
 
 class ReadUpdateDeleteCampaignView(RetrieveUpdateDestroyAPIView):
+    """
+    API view to read, update, and delete a single campaign, ensuring that the user is authenticated and is the owner of the campaign.
+    """
     queryset = Campaign.objects.all()
     serializer_class = CampaignSerializer
-    permission_classes = (IsAuthenticated, IsCampaignOwner)
+    permission_classes = [IsAuthenticated, IsCampaignOwner]
 
 
 class ListEndUsersCampaignsView(ListAPIView):
-    serializer_class = CampaignStyleSerializer
-    permission_classes = []
+    """
+    API view to list all campaigns associated with a given end user identified by a secret key.
+    """
+    serializer_class = CampaignSerializer
+    queryset = Campaign.objects.all()
+    permission_classes = []  # no permissions, letting end users access endpoint with secret keys
 
     def get_queryset(self):
-        end_user_profile = EndUserProfile.objects.get(secret_key=self.request.query_params.get('pk'))
-        return Campaign.objects.filter(end_user_profile=end_user_profile)
-
-# class ListCreateApiCampaignStyleView(ListCreateAPIView):
-#     queryset = CampaignStyle.objects.all()
-#     serializer_class = CampaignStyleSerializer
-#
-#
-# class ReadUpdateDeleteCampaignStyleView(RetrieveUpdateDestroyAPIView):
-#     queryset = CampaignStyle.objects.all()
-#     serializer_class = CampaignStyleSerializer
+        """
+        Filters campaigns based on the secret key of the end user profile linked to the campaigns through collectors.
+        """
+        secret_key = self.kwargs['secret_key']
+        return Campaign.objects.filter(collectors__end_user_profile__secret_key=secret_key).distinct()

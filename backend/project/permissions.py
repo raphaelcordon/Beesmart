@@ -18,3 +18,15 @@ class IsCampaignOwner(BasePermission):
     def has_object_permission(self, request, view, obj):
         customer_user_profile = request.user.customer_user_profile
         return customer_user_profile == obj.customer_user_profile
+
+
+class IsBusinessOwner(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        customer_user_profile = request.user.customer_user_profile
+        return customer_user_profile == obj.campaign.customer_user_profile
+
+
+class IsSelf(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        user = request.user
+        return user == obj

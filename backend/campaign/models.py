@@ -1,13 +1,6 @@
-# import datetime
-
 from django.db import models
-# from django.utils import timezone
 
 from customer_user_profile.models import CustomerUserProfile
-
-
-# def get_tomorrow():
-#     return timezone.now()
 
 
 class CampaignStyle(models.Model):
@@ -27,6 +20,7 @@ class Campaign(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     beginning_date = models.DateField(blank=False, null=False, auto_now_add=True)
     ending_date = models.DateField(blank=True, null=True)
+    is_active = models.BooleanField(default=True)
     image = models.ImageField(verbose_name='image', upload_to=campaign_directory_path, blank=True)
     logo = models.ImageField(verbose_name='logo', upload_to=campaign_directory_path, blank=True)
     style = models.ForeignKey(CampaignStyle, on_delete=models.SET_NULL, null=True, related_name='campaigns')
