@@ -43,7 +43,7 @@ class EndUserProfile(models.Model):
                 old_instance = EndUserProfile.objects.get(pk=self.pk)
                 if old_instance.qr_code and old_instance.qr_code != self.qr_code:
                     old_instance.qr_code.delete(save=False)
-        qr = segno.make(f'{self.user.email}')
+        qr = segno.make(f'{self.secret_key}')
         buffer = BytesIO()
         qr.save(buffer, kind='png', scale=5)
         filename = f'qr_{self.user}.png'
