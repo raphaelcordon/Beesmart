@@ -254,23 +254,33 @@ class DeleteCustomerUser(DestroyAPIView):
 
 
 class UpdateCustomerUser(UpdateAPIView):
+    """
+    API view to update a CustomerUserProfile for the currently authenticated user.
+    """
     serializer_class = CustomerUserUpdateDeleteSerializer
     permission_classes = [IsAuthenticated, IsSelf]
-    queryset = CustomerUserProfile
+    queryset = CustomerUserProfile.objects.all()
 
     def get_object(self):
-        # This method ensures that you retrieve the user's profile correctly.
+        """
+        Retrieve the CustomerUserProfile associated with the current authenticated user.
+        This override ensures that we directly fetch the user's profile, raising Http404 if not found.
+        """
         try:
             return CustomerUserProfile.objects.get(user=self.request.user)
         except CustomerUserProfile.DoesNotExist:
             raise Http404
 
     def patch(self, request, *args, **kwargs):
-        profile = self.get_object()
+        """
+        Handle the PATCH request to partially update the user's profile.
+        """
+        profile = self.get_object()  # Retrieve the user profile.
         serializer = self.serializer_class(profile, data=request.data, partial=True)  # Allow partial updates
 
         if serializer.is_valid():
             serializer.save()  # This automatically updates the profile instance
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
+            # Return errors if validation fails.
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
