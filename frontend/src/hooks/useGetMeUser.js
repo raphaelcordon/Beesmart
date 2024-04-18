@@ -1,7 +1,7 @@
 import {useDispatch} from "react-redux";
 import {useCallback, useState} from "react";
-import {storeUserData} from "../store/slices/userSlice.js";
-import {GetMeUser} from "../axios/axiosUser.js";
+import {storeUserCustomerData} from "../store/slices/userCustomerSlice.js";
+import {GetMeUser} from "../axios/axiosCustomer.js";
 
 const useGetMeUser = () => {
     const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const useGetMeUser = () => {
         setError(null);
         try {
             const res = await GetMeUser();
-            dispatch(storeUserData(res));
+            dispatch(storeUserCustomerData(res));
         } catch (error) {
             setError(error.message || "An error occurred retrieving user.");
             throw error;

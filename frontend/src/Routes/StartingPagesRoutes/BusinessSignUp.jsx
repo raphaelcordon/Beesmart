@@ -1,7 +1,7 @@
 import Button from "../../Components/SmallComponents/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {RegisterNewCustomer} from "../../axios/axiosUser.js";
+import {RegisterNewCustomer} from "../../axios/axiosCustomer.js";
 
 const BusinessSignUp = () => {
   const [userEmail, setEmail] = useState("");

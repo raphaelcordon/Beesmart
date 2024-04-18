@@ -1,7 +1,7 @@
 import Button from "../../../Components/SmallComponents/Button";
 import { useNavigate } from "react-router-dom";
 import {useEffect, useState} from "react";
-import {RegisterCustomerValidation} from "../../../axios/axiosUser.js";
+import {RegisterCustomerValidation} from "../../../axios/axiosCustomer.js";
 import {CustomerRegistration} from "../../../models/customerRegistration.js";
 
 const VerificationSection = () => {

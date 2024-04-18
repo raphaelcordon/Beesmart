@@ -5,7 +5,7 @@ const axios = AxiosMotion;
 
  export const RegisterNewCustomer = async (email) => {
     try{
-        await axios.post("/users/customer/add/", { email } );
+        await axios.post("/customer/user/add/", { email } );
     } catch (error) {
         throw error("Fail, please try again");
     }
@@ -13,7 +13,7 @@ const axios = AxiosMotion;
 
   export const RegisterCustomerValidation = async (userData) => {
     try{
-        const res = await axios.patch("/users/customer/veryfi/", userData);
+        const res = await axios.patch("/customer/user/veryfi/", userData);
         return res.data.access;
     } catch (error) {
         console.error(error);
@@ -34,7 +34,7 @@ const axios = AxiosMotion;
   export const RegisterCustomerDetails = async (userData) => {
     try{
         const config = getAxiosConfig();
-        const res = await axios.patch("/users/customer/me/", userData, config);
+        const res = await axios.patch("/customer/user/me/", userData, config);
         return res.data.access;
     } catch (error) {
         console.error(error);
@@ -45,7 +45,7 @@ const axios = AxiosMotion;
 export const GetMeUser = async () => {
     try{
         const config = getAxiosConfig();
-        const res = await axios.get("/users/customer/me/", config);
+        const res = await axios.get("/customer/user/me/", config);
         return res.data;
     } catch (error) {
         throw error("Not possible fetch data");
@@ -55,7 +55,7 @@ export const GetMeUser = async () => {
  export const DeleteMeUser = async () => {
     try{
         const config = getAxiosConfig();
-        const res = await axios.delete("/users/customer/me/", config);
+        const res = await axios.delete("/customer/user/me/", config);
         return res.data;
     } catch (error) {
         throw error("Fail to delete, please try again");
