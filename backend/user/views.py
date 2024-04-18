@@ -13,6 +13,7 @@ from customer_user_profile.models import CustomerUserProfile
 
 from end_user_profile.models import EndUserProfile
 from project.permissions import IsSelf
+from project.settings import MEDIA_HOST
 from user.serializers import CustomerUserSerializer, UserRegistrationSerializer, EndUserSerializer, \
     CustomerUserUpdateDeleteSerializer
 
@@ -227,7 +228,7 @@ class GenerateEndUserCard(RetrieveAPIView):
                 'Here is your updated QR code.',
                 'from@example.com',  # Replace with your actual email or Django setting for default email.
                 [user.email],
-                html_message=f'<img src="{profile.qr_code.url}" alt="QR Code" width="100" height="100">',
+                html_message=f'<img src="{MEDIA_HOST}{profile.qr_code.url}" alt="QR Code" width="100" height="100">',
                 fail_silently=False,
             )
             serializer = EndUserSerializer(profile.user)  # Serialize user data
