@@ -44,7 +44,7 @@ class CustomerUserProfile(models.Model):
                 old_instance = CustomerUserProfile.objects.get(pk=self.pk)
                 if old_instance.qr_code and old_instance.qr_code != self.qr_code:
                     old_instance.qr_code.delete(save=False)
-        qr = segno.make(f'"user_id":{self.user.id}, "business_name":{self.business_name}')
+        qr = segno.make(f'{self.user.email}')
         buffer = BytesIO()
         qr.save(buffer, kind='png', scale=5)
         filename = f'qr_{self.user}.png'

@@ -39,7 +39,7 @@ class Voucher(models.Model):
                 if old_instance.qr_code and old_instance.qr_code != self.qr_code:
                     old_instance.qr_code.delete(save=False)
         qr = segno.make(
-            f'"name":{self.name}, "campaign_id":{self.campaign.id}, "user_id":{self.end_user_profile.user.id}"')
+            f'"campaign_id":{self.campaign.id}, "user_email":{self.end_user_profile.user.email}"')
         buffer = BytesIO()
         qr.save(buffer, kind='png', scale=5)
         filename = f'qr_{self.id}.png'
