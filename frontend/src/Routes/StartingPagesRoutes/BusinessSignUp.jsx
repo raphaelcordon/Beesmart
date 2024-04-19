@@ -6,7 +6,7 @@ import {RegisterNewCustomer} from "../../axios/axiosCustomer.js";
 const BusinessSignUp = () => {
   const [userEmail, setEmail] = useState("");
   const navigate = useNavigate();
-
+  const [error, setError] = useState('');
 
 
   const handleSignUpClick = async (e) => {
@@ -53,6 +53,8 @@ const BusinessSignUp = () => {
             </div>
 
             <Button onClick={handleSignUpClick}> Register</Button>
+            {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+
           </form>
         </div>
       </div>

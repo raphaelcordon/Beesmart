@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
 import Button from '../../Components/SmallComponents/Button';
-import useAuthenticateUser from "../../hooks/useAuthenticateUser.js";
+import useAuthenticateUser from "../../Hooks/useAuthenticateUser.js";
 
 const Login = () => {
   const [email, setEmail] = useState('')

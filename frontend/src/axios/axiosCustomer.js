@@ -13,7 +13,7 @@ const axios = AxiosMotion;
 
   export const RegisterCustomerValidation = async (userData) => {
     try{
-        const res = await axios.patch("/customer/user/veryfi/", userData);
+        const res = await axios.patch("/customer/user/verify/", userData);
         return res.data.access;
     } catch (error) {
         console.error(error);
@@ -62,6 +62,16 @@ export const GetMeUser = async () => {
     }
  }
 
+//  export const UpdateMeUser = async (userData) => {
+//     try{
+//         const res = await axios.patch("/customer/user/update/", userData);
+//         return res.data.access;
+//     } catch (error) {
+//         console.error(error);
+//         throw error;
+//     }
+//  }
+
 
 const getAxiosConfig = () => {
 const token = window.localStorage.getItem("accessToken");
@@ -75,3 +85,16 @@ const config = {
 
 return config
 }
+
+export const UpdateMeUser = async (user) => {
+    const config = getAxiosConfig();
+    const body = JSON.stringify(user);
+  
+    try {
+      const res = await axios.patch("/customer/user/update/", body, config);
+      return res.data;
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  };
