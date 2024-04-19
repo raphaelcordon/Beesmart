@@ -52,14 +52,24 @@ export const getAllOpenCampaigns = async () => {
     }
  }
 
-  export const deleteCampaignById = async (id) => {
-    try{
-        const res = await axios.delete(`/campaign/${id}`);
-        return(res.data);
-    } catch (error) {
-        console.error(error);
-    }
- }
+export const deleteCampaignById = async (id) => {
+try{
+    const res = await axios.delete(`/campaign/${id}`);
+    return(res.data);
+} catch (error) {
+    console.error(error);
+}
+}
+
+
+export const getCampaignByEndUser = async (id) => {
+try{
+    const res = await axios.get(`/campaign/endUser/${id}`);
+    return(res.data);
+} catch (error) {
+    console.error(error);
+}
+}
 
 
 const getAxiosConfig = () => {
