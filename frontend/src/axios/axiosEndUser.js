@@ -30,15 +30,15 @@ export const GetEndUserVerify = async (secretkey) => {
 }
 
 
- const getAxiosConfig = () => {
-const token = window.localStorage.getItem("accessToken");
-const headers = {
-  Authorization: `Bearer ${token}`,
-}
+const getAxiosConfig = () => {
+    const token = window.localStorage.getItem("accessToken");
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    }
 
-const config = {
-  headers,
-}
+    const config = {
+      headers,
+    }
 
-return config
+    return config
 }

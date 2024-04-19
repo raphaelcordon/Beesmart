@@ -7,7 +7,7 @@ import {getCampaignByEndUser} from "../../axios/axiosCampaign.js";
 const MyCampaigns = () => {
 
     let { id } = useParams();
-    const [cards, setCards] = useState([])
+    const [campaigns, setCampaigns] = useState([])
     const [currentCampaigns, setCurrentCampaigns] = useState('ongoing');
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -18,14 +18,13 @@ const MyCampaigns = () => {
             setIsLoading(true);
             try {
                 const data = await getCampaignByEndUser(id);
-                setCards(data); // Assuming getCampaignByEndUser returns the campaign data
+                setCampaigns(data); // Assuming getCampaignByEndUser returns the campaign data
             } catch (error) {
                 setError(error.message || "Failed to load campaigns. Please try again.");
             } finally {
                 setIsLoading(false);
             }
         };
-
         fetchData();
     }, [id]);
 
@@ -33,8 +32,6 @@ const MyCampaigns = () => {
         e.preventDefault();
         campaignsOption === 'ongoing' ? setCurrentCampaigns('ongoing') : setCurrentCampaigns('closed');
     }
-
-    console.log(cards)
 
     return (
         <>
@@ -51,7 +48,7 @@ const MyCampaigns = () => {
 
             <main>
                 {currentCampaigns === 'ongoing' && (
-                    <MyCampaignsOngoing />
+                    <MyCampaignsOngoing list={campaigns}/>
                 )}
 
                 {currentCampaigns === 'closed' && (
