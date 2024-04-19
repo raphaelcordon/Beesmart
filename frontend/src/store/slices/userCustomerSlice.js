@@ -4,7 +4,7 @@ export const userCustomerSlice = createSlice({
     name: "user",
     initialState: {
         accessToken: window.localStorage.getItem('accessToken') || null,
-        userCustomerData: null, // Changed from [] to null for single user data
+        userCustomerData: [],
     },
     reducers: {
         loginUserCustomer: (state, action) => {
@@ -12,18 +12,11 @@ export const userCustomerSlice = createSlice({
         },
         logoutUserCustomer: (state) => {
             state.accessToken = null;
-            state.userCustomerData = null; // Reset user data on logout
+            state.userData = null;
         },
         storeUserCustomerData: (state, action) => {
             state.userCustomerData = action.payload;
         },
-        // updateUserProfile: (state, action) => {
-        //     // Merge updated profile data into existing user data
-        //     state.userCustomerData = {
-        //         ...state.userCustomerData,
-        //         ...action.payload,
-        //     };
-        // },
     },
 });
 

@@ -1,7 +1,6 @@
 import Button from "../SmallComponents/Button.jsx";
 import { useState, useEffect } from "react";
 import { UpdateMeUser} from "../../axios/axiosCustomer.js";
-//import useGetMeUser from "../../Hooks/useGetMeUser.js";
 import { useSelector } from 'react-redux';
 
 
@@ -9,19 +8,10 @@ import { useSelector } from 'react-redux';
 
 
 const Settings = () => {
-  // const [user, setUser] = useState({
-  //   business_name: "",
-  //   country: "",
-  //   city: "",
-  //   street: "",
-  //   zip: "",
-  //   website: "",
-  //   logo: "",
-  // });
+ 
   const CustomerUser = useSelector(state => state.customer.userCustomerData);
   useEffect(() => {
-    //function to get the userdata
-   // GetMeUser().then(userData => setUser(userData));
+   
   }, []);
 
   const [business_name, setBusinessName] = useState(CustomerUser.customer_user_profile.business_name);
@@ -34,7 +24,7 @@ const Settings = () => {
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
-  //const { getUser, error } = useGetMeUser();
+  
 
  const user = {
     business_name: business_name,
@@ -45,9 +35,6 @@ const Settings = () => {
     website: website,
     //logo: logo, 
  }
-
- 
-
   
 
   const handleSubmit = async (e) => {
@@ -158,10 +145,11 @@ const Settings = () => {
                   type="text"
                  // value={user.website} 
                  value={website}
+                 placeholder="http://"
                   onChange={(e) => setWebsite(e.target.value)}
                   onFocus={handleInputFocus}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
-                />
+                /><div>should start with http://</div>
               </div>
               <div className="mb-2">
                 <label className="block mb-2 text-sm text-accent-content">Upload Logo</label>
@@ -169,6 +157,7 @@ const Settings = () => {
                   name="logo"
                   id="logo"
                   type="file"
+                  
                   value={logo} 
                   onChange={(e) => setLogo(e.target.value)}
                   onFocus={handleInputFocus}
