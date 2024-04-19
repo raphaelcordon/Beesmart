@@ -18,7 +18,7 @@ class CollectorValidateView(CreateAPIView):
         # Safely fetch the related objects, returning 404 if not found
         collector_type = get_object_or_404(CollectorType, id=data.get('collector_type_id'))
         campaign = get_object_or_404(Campaign, id=data.get('campaign_id'))
-        end_user_profile = get_object_or_404(EndUserProfile, user__id=data.get('end_user_id'))
+        end_user_profile = get_object_or_404(EndUserProfile, secret_key=data.get('secret_key'))
         # Retrieve the value count from data, assuming it could be None
         value_count = data.get('value_count')
 
