@@ -1,29 +1,52 @@
 import Button from "../SmallComponents/Button.jsx";
 import { useState, useEffect } from "react";
-import { UpdateMeUser, GetMeUser} from "../../axios/axiosCustomer.js";
+import { UpdateMeUser} from "../../axios/axiosCustomer.js";
+//import useGetMeUser from "../../Hooks/useGetMeUser.js";
+import { useSelector } from 'react-redux';
 
 
 
 
 
 const Settings = () => {
-  const [user, setUser] = useState({
-    business_name: "",
-    country: "",
-    city: "",
-    street: "",
-    zip: "",
-    website: "",
-    logo: "",
-  });
+  // const [user, setUser] = useState({
+  //   business_name: "",
+  //   country: "",
+  //   city: "",
+  //   street: "",
+  //   zip: "",
+  //   website: "",
+  //   logo: "",
+  // });
+  const CustomerUser = useSelector(state => state.customer.userCustomerData);
+  useEffect(() => {
+    //function to get the userdata
+   // GetMeUser().then(userData => setUser(userData));
+  }, []);
+
+  const [business_name, setBusinessName] = useState(CustomerUser.customer_user_profile.business_name);
+  const [country, setCountry] = useState(CustomerUser.customer_user_profile.country);
+  const [city, setCity] = useState(CustomerUser.customer_user_profile.city);
+  const [street, setStreet] = useState(CustomerUser.customer_user_profile.street);
+  const [zip, setZip] = useState(CustomerUser.customer_user_profile.zip);
+  const [website, setWebsite] = useState(CustomerUser.customer_user_profile.website);
+  const [logo, setLogo] = useState(CustomerUser.customer_user_profile.logo);
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  //const { getUser, error } = useGetMeUser();
 
-  useEffect(() => {
-    //function to get the userdata
-    GetMeUser().then(userData => setUser(userData));
-  }, []);
+ const user = {
+    business_name: business_name,
+    country: country,
+    city: city,
+    street: street,
+    zip: zip,
+    website: website,
+    //logo: logo, 
+ }
+
+ 
 
   
 
@@ -55,7 +78,7 @@ const Settings = () => {
                 <label className="block mb-2 text-sm text-accent-content">Email</label>
                 <input
                   type="text"
-                  defaultValue={user.email} 
+                  value={CustomerUser.email} 
                   onFocus={handleInputFocus}
                   readOnly
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
@@ -68,8 +91,8 @@ const Settings = () => {
                   name="address"
                   id="street"
                   type="text"
-                  defaultValue={user.street} 
-                  onChange={(e) => setUser({...user, street: e.target.value})}
+                  value={street} 
+                  onChange={(e) => setStreet(e.target.value )}
                   onFocus={handleInputFocus}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                   required
@@ -81,8 +104,8 @@ const Settings = () => {
                   name="city"
                   id="city"
                   type="text"
-                  defaultValue={user.city} 
-                  onChange={(e) => setUser({...user, city: e.target.value})}
+                  value={city} 
+                  onChange={(e) => setCity( e.target.value)}
                   onFocus={handleInputFocus}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                   required
@@ -94,8 +117,8 @@ const Settings = () => {
                   name="postalCode"
                   id="zip"
                   type="text"
-                  defaultValue={user.zip} 
-                  onChange={(e) => setUser({...user, zip: e.target.value})}
+                  value={zip} 
+                  onChange={(e) => setZip(e.target.value)}
                   onFocus={handleInputFocus}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                   required
@@ -107,8 +130,8 @@ const Settings = () => {
                   name="country"
                   id="country"
                   type="text"
-                  defaultValue={user.country} 
-                  onChange={(e) => setUser({...user, country: e.target.value})}
+                  value={country} 
+                  onChange={(e) => setCountry( e.target.value)}
                   onFocus={handleInputFocus}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                   required
@@ -120,8 +143,8 @@ const Settings = () => {
                   name="business_name"
                   id="business_name"
                   type="text"
-                  defaultValue={user.business_name} 
-                  onChange={(e) => setUser({...user, business_name: e.target.value})}
+                  value={business_name} 
+                  onChange={(e) => setBusinessName(e.target.value)}
                   onFocus={handleInputFocus}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                   required
@@ -133,8 +156,9 @@ const Settings = () => {
                   name="website"
                   id="website"
                   type="text"
-                  defaultValue={user.website} 
-                  onChange={(e) => setUser({...user, website: e.target.value})}
+                 // value={user.website} 
+                 value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
                   onFocus={handleInputFocus}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                 />
@@ -145,8 +169,8 @@ const Settings = () => {
                   name="logo"
                   id="logo"
                   type="file"
-                  defaultValue={user.logo} 
-                  onChange={(e) => setUser({...user, logo: e.target.value})}
+                  value={logo} 
+                  onChange={(e) => setLogo(e.target.value)}
                   onFocus={handleInputFocus}
                   className="file-input file-input-secondary text-sm w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                 />
@@ -158,7 +182,9 @@ const Settings = () => {
           {error && <small>{String(error)}</small>}
         </div>
       </div>
+      {console.log(CustomerUser)}
     </div>
+    
   );
 };
 

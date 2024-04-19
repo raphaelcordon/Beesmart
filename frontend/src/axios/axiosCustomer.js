@@ -88,10 +88,10 @@ return config
 
 export const UpdateMeUser = async (user) => {
     const config = getAxiosConfig();
-    const body = JSON.stringify(user);
+   // const body = JSON.stringify(user);
   
     try {
-      const res = await axios.patch("/customer/user/update/", body, config);
+      const res = await axios.patch("/customer/user/update/", user, config);
       return res.data;
     } catch (err) {
       console.error(err);
