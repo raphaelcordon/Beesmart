@@ -22,7 +22,8 @@ def email_layout(qr_code, media_root, front_end_root, secret_key):
                 <!-- Replace 'src' with the actual src of your QR code image -->
                 <img src="{media_root}{qr_code}" alt="QR Code" width="200" style="margin-bottom: 20px;">
                 <p style="color: #555; font-size: 16px;">
-                    <a href="{front_end_root}/user/{secret_key}" style="color: #333; text-decoration: none; font-weight: bold;">Here you can find all your profile details!</a>
+                    <a href="{front_end_root}/user/{secret_key}" style="color: #333; text-decoration: none;
+                     font-weight: bold;">Here you can find all your profile details!</a>
                 </p>
             </td>
         </tr>

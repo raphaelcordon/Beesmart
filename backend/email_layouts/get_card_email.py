@@ -32,7 +32,8 @@ def get_card_layout(front_end_root, code, media_host):
         </tr>
             <p>
                 (Activate account, will be deleted later:)
-                <a href="{media_host}/backend/api/enduser/user/verify/{code}" style="color: #333; text-decoration: none; font-weight: bold;">Link to Activate account</a>
+                <a href="{media_host}/backend/api/enduser/user/verify/{code}" style="color: #333; 
+                text-decoration: none; font-weight: bold;">Link to Activate account</a>
             </p>
     </table>
 </body>
