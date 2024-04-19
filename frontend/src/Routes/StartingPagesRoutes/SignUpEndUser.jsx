@@ -13,7 +13,7 @@ const SignUpEndUser = () => {
     try {
       await RegisterNewEndUser(email)
       localStorage.setItem('registered_email', email)
-      navigate("/user");
+      navigate("/private-signup/congratulations");
     } catch (errors) {
       console.log(errors);
     }
@@ -27,7 +27,6 @@ const SignUpEndUser = () => {
         <img src="logo" alt="Logo" className="w-30 h-20"/>
       </div> */}
           <h2 className="mt-8 mb-6">
-           <p> 🎉 Want to stay in the loop about all the exciting promotions you're a part of?{" "}</p>
           </h2>
           <h1 className="text-2xl font-semibold text-center mt-8 mb-6">Join Us</h1>
           <form>
@@ -36,16 +35,19 @@ const SignUpEndUser = () => {
                 Enter your E-mail
               </label>
               <input
-                type="email"
-                id="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
-                required
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                  required
               />
             </div>
-
+            <ul className="steps">
+              <li className="step step-secondary"></li>
+              <li className="step"></li>
+            </ul>
             <Button onClick={handleSignUpClick}> Register</Button>
           </form>
         </div>
