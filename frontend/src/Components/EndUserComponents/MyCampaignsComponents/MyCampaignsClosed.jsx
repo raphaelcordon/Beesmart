@@ -12,7 +12,7 @@ const MyCampaignsClosed = ({ list = [] }) => {
         <div className="p-10">
             {isCampaign ? (
                 list.map((item, index) => (
-                    !item.is_active && (
+                    item.is_active === false && (
                         <div key={item.id || index} className="bg-red-500 shadow-md rounded-lg p-4 my-2 max-w-md mx-auto">
                             <div>ID: {item.id}</div>
                             <div>NAME: {item.name}</div>

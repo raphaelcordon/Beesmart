@@ -18,7 +18,7 @@ const MyCampaigns = () => {
             setIsLoading(true);
             try {
                 const data = await getCampaignByEndUser(id);
-                setCampaigns(data); // Assuming getCampaignByEndUser returns the campaign data
+                setCampaigns(data);
             } catch (error) {
                 setError(error.message || "Failed to load campaigns. Please try again.");
             } finally {
@@ -32,7 +32,7 @@ const MyCampaigns = () => {
         e.preventDefault();
         campaignsOption === 'ongoing' ? setCurrentCampaigns('ongoing') : setCurrentCampaigns('closed');
     }
-
+    console.log(campaigns)
     return (
         <>
             <header className="container mx-auto flex flex-row gap-4 justify-center items-center">
@@ -52,7 +52,7 @@ const MyCampaigns = () => {
                 )}
 
                 {currentCampaigns === 'closed' && (
-                    <MyCampaignsClosed />
+                    <MyCampaignsClosed list={campaigns} />
                 )}
 
 
