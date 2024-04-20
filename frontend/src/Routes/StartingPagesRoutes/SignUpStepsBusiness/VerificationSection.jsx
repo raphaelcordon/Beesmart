@@ -1,15 +1,13 @@
 import Button from "../../../Components/SmallComponents/Button";
 import { useNavigate } from "react-router-dom";
-import {useEffect, useState} from "react";
-import {RegisterCustomerValidation} from "../../../axios/axiosCustomer.js";
-import {CustomerRegistration} from "../../../models/customerRegistration.js";
+import { useEffect, useState } from "react";
+import { RegisterCustomerValidation } from "../../../axios/axiosCustomer.js";
+import { CustomerRegistration } from "../../../models/customerRegistration.js";
 
 const VerificationSection = () => {
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password_repeat, setPassword_repeat] = useState('');
-
   const [code, setCode] = useState('');
   const [business_name, setBusiness_name] = useState('');
   const [country, setCountry] = useState('');
@@ -17,8 +15,7 @@ const VerificationSection = () => {
   const [street, setStreet] = useState('');
   const [zip, setZip] = useState('');
   const [website, setWebsite] = useState('');
-  const [logo, setLogo] = useState('');
-
+  const [logo, setLogo] = useState(null); 
 
   const navigate = useNavigate();
   const [error, setError] = useState('');
@@ -28,27 +25,28 @@ const VerificationSection = () => {
     setEmail(registeredEmail);
   }, []);
 
-      const getSubmitData = async (e) => {
-        e.preventDefault()
-        setError('');
+  const getSubmitData = async (e) => {
+    e.preventDefault();
+    setError('');
 
-        // Check if passwords match
-        if (password !== password_repeat) {
-            setError('Passwords do not match.');
-            return;
-        }
-
-        const userData = CustomerRegistration(email, code, business_name, country, city, street, zip, website, password, password_repeat, logo);
-        try{
-            setError('');
-            // Registration
-            await RegisterCustomerValidation(userData);
-            navigate("/login")
-
-        } catch(error) {
-            setError('Failed to register. Please try again.');
-        }
+    // Check if passwords match
+    if (password !== password_repeat) {
+      setError('Passwords do not match.');
+      return;
     }
+
+    const userData = CustomerRegistration(email, code, business_name, country, city, street, zip, website, password, password_repeat, logo);
+
+    try {
+      setError('');
+      // Registration
+      await RegisterCustomerValidation(userData);
+      navigate("/login");
+    } catch (error) {
+      setError('Failed to register. Please try again.');
+    }
+  }
+
 
   return (
     <div className="flex items-center justify-center">
@@ -182,14 +180,13 @@ const VerificationSection = () => {
               <div className="mb-10">
                 <label className="block mb-2 text-sm text-accent-content">Upload Logo</label>
                 <input
-                    name="logo"
-                    id={"logo"}
-                    type="file"
-                    value={logo}
-                    onChange={(e) => setLogo(e.target.value)}
-                    className="file-input file-input-secondary text-sm px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
-
-                />
+                name="logo"
+                id="logo"
+                type="file" 
+                accept="image/*"
+                onChange={(e) => setLogo(e.target.files[0])} 
+                className="file-input file-input-secondary text-xs w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+              />
               </div>
 
             </div>

@@ -152,7 +152,7 @@ const Settings = () => {
                   onChange={(e) => setLogo(e.target.files[0])} 
                   onFocus={handleInputFocus}
                   accept="image/*"
-                  className="file-input file-input-secondary text-sm w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                  className="file-input file-input-secondary text-sm w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                 />
               </div>
             </div>

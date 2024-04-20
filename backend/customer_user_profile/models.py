@@ -18,7 +18,7 @@ def code_generator(length=5):
 
 
 def logo_directory_path(instance, filename):
-    return f'business_logo/{instance.id}/{filename}'
+    return f'business_logo/{instance.user.id}/{filename}'
 
 
 def customer_user_qr_directory_path(instance, filename):
