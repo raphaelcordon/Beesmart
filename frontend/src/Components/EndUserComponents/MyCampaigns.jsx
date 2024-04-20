@@ -32,7 +32,7 @@ const MyCampaigns = () => {
         e.preventDefault();
         campaignsOption === 'ongoing' ? setCurrentCampaigns('ongoing') : setCurrentCampaigns('closed');
     }
-
+    console.log(campaigns)
     return (
         <>
             <header className="container mx-auto flex flex-row gap-4 justify-center items-center">
