@@ -62,30 +62,6 @@ export const GetMeUser = async () => {
     }
  }
 
-//  export const UpdateMeUser = async (userData) => {
-//     try{
-//         const res = await axios.patch("/customer/user/update/", userData);
-//         return res.data.access;
-//     } catch (error) {
-//         console.error(error);
-//         throw error;
-//     }
-//  }
-
-
-const getAxiosConfig = () => {
-const token = window.localStorage.getItem("accessToken");
-const headers = {
-  Authorization: `Bearer ${token}`,
-}
-
-const config = {
-  headers,
-}
-
-return config
-}
-
 export const UpdateMeUser = async (user) => {
     const config = getAxiosConfig();
    // const body = JSON.stringify(user);
@@ -97,4 +73,17 @@ export const UpdateMeUser = async (user) => {
       console.error(err);
       throw err;
     }
-  };
+};
+
+const getAxiosConfig = () => {
+    const token = window.localStorage.getItem("accessToken");
+    const headers = {
+    Authorization: `Bearer ${token}`,
+    }
+
+    const config = {
+    headers,
+    }
+
+    return config
+}

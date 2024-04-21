@@ -1,4 +1,4 @@
-def email_layout(qr_code, media_root, front_end_root, secret_key):
+def get_card_layout(front_end_root, code, media_host):
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,13 +17,10 @@ def email_layout(qr_code, media_root, front_end_root, secret_key):
         <tr>
             <td style="padding: 20px; text-align: center; background-color: #fff;">
                 <p style="color: #555; font-size: 16px; margin-bottom: 20px;">
-                    Thank you for joining us! Below is your QR code to access our services:
+                    Thank you for joining us! Please press on "GET CARD" below to finish your email authentication and to get your BeeSmart card:
                 </p>
-                <!-- Replace 'src' with the actual src of your QR code image -->
-                <img src="{media_root}{qr_code}" alt="QR Code" width="200" style="margin-bottom: 20px;">
                 <p style="color: #555; font-size: 16px;">
-                    <a href="{front_end_root}/user/{secret_key}" style="color: #333; text-decoration: none;
-                     font-weight: bold;">Here you can find all your profile details!</a>
+                    <a href="{front_end_root}/get-card/{code}" style="color: #333; text-decoration: none; font-weight: bold;">GET CARD!</a>
                 </p>
             </td>
         </tr>
@@ -33,6 +30,11 @@ def email_layout(qr_code, media_root, front_end_root, secret_key):
                 <a href="https://beesmart.propulsion-learn.ch/" style="color: #333; text-decoration: none; font-weight: bold;">Social Media</a>
             </td>
         </tr>
+            <p>
+                (Activate account, will be deleted later:)
+                <a href="{media_host}/backend/api/enduser/user/verify/{code}" style="color: #333;
+                text-decoration: none; font-weight: bold;">Link to Activate account</a>
+            </p>
     </table>
 </body>
 </html>'''

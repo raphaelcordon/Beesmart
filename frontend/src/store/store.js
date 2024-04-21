@@ -2,6 +2,7 @@ import {configureStore} from '@reduxjs/toolkit'
 import userCustomerReducer from './slices/userCustomerSlice.js';
 import userEndUserReducer from './slices/userEndUserSlice.js';
 import campaignReducer from './slices/campaignSlice.js';
+import collectorReducer from './slices/collectorSlice.js';
 
 
 export default configureStore({
@@ -9,5 +10,6 @@ export default configureStore({
         customer: userCustomerReducer,
         endUser: userEndUserReducer,
         campaign: campaignReducer,
+        collector: collectorReducer,
     },
 },)

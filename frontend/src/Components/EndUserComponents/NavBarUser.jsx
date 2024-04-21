@@ -54,16 +54,15 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
             <div ref={menuRef}
                  className={`navbar-center ${isOpen ? 'flex' : 'hidden md:flex'} absolute md:relative top-0 right-0 md:top-auto md:right-auto w-1/4 md:w-auto h-full md:h-auto bg-primary bg-opacity-75 md:bg-opacity-0 z-50 flex-col md:flex-row py-2 md:py-0`}>
 
+                <NavBarToggling setActiveTab={() => handleSetActiveTab('MyCampaigns')} active={activeTab === 'MyCampaigns'}
+                                tabName="MyCampaigns">My Campaigns</NavBarToggling>
+                <NavBarToggling setActiveTab={() => handleSetActiveTab('MyVouchers')} active={activeTab === 'MyVouchers'}
+                                tabName="MyVouchers">My Vouchers</NavBarToggling>
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('Scan')}
                                 active={activeTab === 'Scan'}
                                 tabName="Scan">Scan</NavBarToggling>
-                <NavBarToggling setActiveTab={() => handleSetActiveTab('MyCards')} active={activeTab === 'MyCards'}
-                                tabName="MyCards">My Cards</NavBarToggling>
-                <NavBarToggling setActiveTab={() => handleSetActiveTab('MyVouchers')} active={activeTab === 'MyVouchers'}
-                                tabName="MyVouchers">My Vouchers</NavBarToggling>
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('Profile')} active={activeTab === 'Profile'}
                                 tabName="Profile">Profile</NavBarToggling>
-
             </div>
         </div>
     );

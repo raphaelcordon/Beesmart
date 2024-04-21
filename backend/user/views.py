@@ -10,11 +10,12 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from customer_user_profile.models import CustomerUserProfile
+from email_layouts.get_card_email import get_card_layout
 from email_layouts.qr_email import email_layout
 
 from end_user_profile.models import EndUserProfile
 from project.permissions import IsSelf
-from project.settings import MEDIA_HOST
+from project.settings import MEDIA_HOST, FRONT_END_HOST
 from user.serializers import CustomerUserSerializer, UserRegistrationSerializer, EndUserSerializer, \
     CustomerUserUpdateDeleteSerializer
 
@@ -187,7 +188,8 @@ class CreateEndUser(CreateAPIView):
             f'{MEDIA_HOST}/backend/api/enduser/user/verify/{code}',
             'mot83161@gmail.com',
             [email],
-            html_message=f'<h1>WELCOME {MEDIA_HOST}/backend/api/enduser/user/verify/{code}</h1>',
+            # html_message=f'<h1>WELCOME {MEDIA_HOST}/backend/api/enduser/user/verify/{code}</h1>',
+            html_message=get_card_layout(FRONT_END_HOST, code, MEDIA_HOST),
             fail_silently=False,
         )
         return Response("Link was sent to your email", status=status.HTTP_200_OK)
@@ -221,6 +223,7 @@ class GenerateEndUserCard(RetrieveAPIView):
         """
         profile = self.get_object()  # Get the object using the overridden get_object method.
         user = profile.user  # Access user directly from profile assuming a reverse relation from User to EndUserProfile.
+        secret_key = profile.secret_key
 
         # Attempt to send an email with the QR code
         try:
@@ -229,7 +232,7 @@ class GenerateEndUserCard(RetrieveAPIView):
                 'Here is your updated QR code.',
                 'from@example.com',  # Replace with your actual email or Django setting for default email.
                 [user.email],
-                html_message=email_layout(profile.qr_code.url, MEDIA_HOST),
+                html_message=email_layout(profile.qr_code.url, MEDIA_HOST, FRONT_END_HOST, secret_key),
                 fail_silently=False,
             )
             serializer = EndUserSerializer(profile.user)  # Serialize user data

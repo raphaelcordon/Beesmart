@@ -1,6 +1,6 @@
 import {useState} from "react";
 import Scan from "../../Components/EndUserComponents/scan.jsx";
-import MyCards from "../../Components/EndUserComponents/MyCards.jsx";
+import MyCampaigns from "../../Components/EndUserComponents/MyCampaigns.jsx";
 import Profile from "../../Components/EndUserComponents/profile.jsx";
 import NavBarUser from "../../Components/EndUserComponents/NavBarUser.jsx";
 import MyVouchers from "../../Components/EndUserComponents/MyVouchers.jsx";
@@ -14,7 +14,7 @@ const EndUserHome = () => {
         <NavBarUser setActiveTabProp={setActiveTab} />
 
         {activeTab === 'Scan' && <Scan />}
-        {activeTab === 'MyCards' && <MyCards />}
+        {activeTab === 'MyCampaigns' && <MyCampaigns />}
         {activeTab === 'MyVouchers' && <MyVouchers />}
         {activeTab === 'Profile' && <Profile />}
 

@@ -4,6 +4,7 @@ import {RegisterNewCampaign} from "../../axios/axiosCampaign.js";
 import Button from "../SmallComponents/Button.jsx";
 import {useSelector} from "react-redux";
 
+
 const NewCampaign = () => {
 
     const [name, setName] = useState('');
