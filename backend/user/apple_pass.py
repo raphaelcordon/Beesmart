@@ -4,9 +4,9 @@ from wallet.models import Pass, Barcode, Generic
 
 def build_pass(nickname, serial_nr, to_qr, secret_key):
     cardInfo = Generic()
-    cardInfo.addPrimaryField(f'{nickname}', f'MILLION REWARDS CARD', f'BEESMART SMART CARD')
+    cardInfo.addPrimaryField(f'{nickname}', 'MILLION REWARDS CARD', 'BEESMART SMART CARD')
     cardInfo.addSecondaryField('Holder', f'{nickname}', 'CARD HOLDER')
-    cardInfo.addAuxiliaryField('profile', f'SOME INFO', 'SOME INFO')
+    cardInfo.addAuxiliaryField('profile', 'SOME INFO', 'SOME INFO')
     cardInfo.addBackField('website', f'https://beesmart.propulsion-learn.ch/user/{secret_key}', 'YOUR PROFILE')
 
     organizationName = 'BeeSmart'
@@ -40,6 +40,5 @@ def build_pass(nickname, serial_nr, to_qr, secret_key):
     file_name = f'passes/{nickname}.pkpass'
     passfile.create('user/keys/certificate.pem', 'user/keys/mykey.key', 'user/keys/AppleWWDRCA.pem', password,
                     file_name)
-    file_path = file_name
     response = FileResponse(open(f'{file_name}', 'rb'), as_attachment=True, filename=f'{nickname}.pkpass')
     return response

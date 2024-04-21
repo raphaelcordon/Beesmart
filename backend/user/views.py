@@ -19,7 +19,7 @@ from project.settings import MEDIA_HOST, FRONT_END_HOST
 from user.apple_pass import build_pass
 from user.serializers import CustomerUserSerializer, UserRegistrationSerializer, EndUserSerializer, \
     CustomerUserUpdateDeleteSerializer
-from django.core.mail import EmailMessage
+# from django.core.mail import EmailMessage
 from django.conf import settings
 
 User = get_user_model()
@@ -237,6 +237,7 @@ class GenerateEndUserCard(RetrieveAPIView):
             serial_nr = profile.serial_nr
             to_qr = f'https://beesmart.propulsion-learn.ch/user/{secret_key}'
             response = build_pass(nickname, serial_nr, to_qr, secret_key)
+
             # send_mail(
             #     'Registration code:',
             #     'Here is your updated QR code.',
@@ -272,8 +273,6 @@ class GenerateEndUserCard(RetrieveAPIView):
                 recipient_list=[user.email],
                 file_path=f'passes/{nickname}.pkpass'
             )
-
-
 
             return response
 
