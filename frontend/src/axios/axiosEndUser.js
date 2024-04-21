@@ -16,20 +16,29 @@ export const GetMeUser = async () => {
         const res = await axios.get("/enduser/user/me/", config);
         return res.data;
     } catch (error) {
-        throw error("Not possible fetch data");
+        throw error("Not possible to fetch data");
+    }
+}
+
+export const GetEndUserVerify = async (secretkey) => {
+    try{
+        const res = await axios.get(`/enduser/user/verify/${secretkey}`,);
+        return res.data;
+    } catch (error) {
+        throw error("Not possible to fetch data");
     }
 }
 
 
- const getAxiosConfig = () => {
-const token = window.localStorage.getItem("accessToken");
-const headers = {
-  Authorization: `Bearer ${token}`,
-}
+const getAxiosConfig = () => {
+    const token = window.localStorage.getItem("accessToken");
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    }
 
-const config = {
-  headers,
-}
+    const config = {
+      headers,
+    }
 
-return config
+    return config
 }
