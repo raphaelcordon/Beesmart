@@ -1,7 +1,7 @@
 import random
 
 from django.contrib.auth import get_user_model
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
 from django.http import Http404
 from rest_framework import status
 from rest_framework.exceptions import NotFound
@@ -16,8 +16,11 @@ from email_layouts.qr_email import email_layout
 from end_user_profile.models import EndUserProfile
 from project.permissions import IsSelf
 from project.settings import MEDIA_HOST, FRONT_END_HOST
+from user.apple_pass import build_pass
 from user.serializers import CustomerUserSerializer, UserRegistrationSerializer, EndUserSerializer, \
     CustomerUserUpdateDeleteSerializer
+from django.core.mail import EmailMessage
+from django.conf import settings
 
 User = get_user_model()
 
@@ -55,7 +58,7 @@ class MeEndUser(RetrieveAPIView):
         Uses a GET method to conform with the typical RESTful approach for data retrieval.
         """
         # Directly use the authenticated user from the request without additional database query
-        serializer = CustomerUserSerializer(self.request.user)
+        serializer = EndUserSerializer(self.request.user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -225,18 +228,57 @@ class GenerateEndUserCard(RetrieveAPIView):
         user = profile.user  # Access user directly from profile assuming a reverse relation from User to EndUserProfile.
         secret_key = profile.secret_key
 
+        def remove_domain(email):
+            return email.split('@')[0] + '@'
+
         # Attempt to send an email with the QR code
+        nickname = remove_domain(user.email)
         try:
-            send_mail(
-                'Registration code:',
-                'Here is your updated QR code.',
-                'from@example.com',  # Replace with your actual email or Django setting for default email.
-                [user.email],
-                html_message=email_layout(profile.qr_code.url, MEDIA_HOST, FRONT_END_HOST, secret_key),
-                fail_silently=False,
+            serial_nr = profile.serial_nr
+            to_qr = f'https://beesmart.propulsion-learn.ch/user/{secret_key}'
+            response = build_pass(nickname, serial_nr, to_qr, secret_key)
+            # send_mail(
+            #     'Registration code:',
+            #     'Here is your updated QR code.',
+            #     'from@example.com',  # Replace with your actual email or Django setting for default email.
+            #     [user.email],
+            #     html_message=email_layout(profile.qr_code.url, MEDIA_HOST, FRONT_END_HOST, secret_key),
+            #     fail_silently=False,
+            # )
+
+            def send_email_with_attachment(subject, body, html_body, recipient_list, file_path):
+                email = EmailMultiAlternatives(
+                    subject=subject,
+                    body=body,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    to=recipient_list,
+                )
+
+                # Add an attachment
+                with open(file_path, 'rb') as f:
+                    email.attach(filename=file_path.split('/')[-1], content=f.read(),
+                                 mimetype='application/pkpass')  # Change mimetype as per the file type
+
+                email.attach_alternative(html_body, "text/html")
+
+                # Send the email
+                email.send()
+
+            # Example usage
+            send_email_with_attachment(
+                subject="Your QR and card",
+                body='',
+                html_body=email_layout(profile.qr_code.url, MEDIA_HOST, FRONT_END_HOST, secret_key),
+                recipient_list=[user.email],
+                file_path=f'passes/{nickname}.pkpass'
             )
-            serializer = EndUserSerializer(profile.user)  # Serialize user data
-            return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+            return response
+
+            # serializer = EndUserSerializer(profile.user)  # Serialize user data
+            # return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as e:
             print(e)  # Consider logging this instead of printing for production.
             return Response('Failed to send QR code. Please try again.', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
