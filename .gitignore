@@ -2,6 +2,7 @@
 __pycache__
 .idea
 *.sqlite3
+*.pkpass
 .DS_STORE
 static-files
 media-files
