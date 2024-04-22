@@ -2,7 +2,7 @@ import tick from "../../assets/check-mark-forcongratulationsection.png";
 import {useEffect, useState} from "react";
 import { useParams } from 'react-router-dom';
 import {GetEndUserVerify} from "../../axios/axiosEndUser.js";
-import {RegisterNewCampaign} from "../../axios/axiosCampaign.js";
+
 
 const GetCard = () => {
 
@@ -12,7 +12,7 @@ const GetCard = () => {
 
     useEffect(() => {
         setError('');
-        const downlod = async () => {
+        const download = async () => {
           try {
             const data = await GetEndUserVerify(id);
             // Create a URL from the blob
@@ -26,15 +26,12 @@ const GetCard = () => {
             document.body.appendChild(link);
             link.click();
             setVerified(true)
-          downlod()
-
           } catch (error) {
               setError(error.message || 'Failed to register. Please try again.');
               setVerified(false)
           }
         }
-
-        downlod()
+        download()
     }, []);
 
     return (
