@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {RegisterNewCustomer} from "../../axios/axiosCustomer.js";
 
-const BusinessSignUp = () => {
+const SignUpBusiness = () => {
   const [userEmail, setEmail] = useState("");
   const navigate = useNavigate();
   const [error, setError] = useState('');
@@ -16,6 +16,7 @@ const BusinessSignUp = () => {
       localStorage.setItem('registered_email', userEmail)
       navigate("/business-signup/congratulations");
     } catch (errors) {
+      setError(errors)
       console.log(errors);
     }
   };
@@ -24,10 +25,6 @@ const BusinessSignUp = () => {
     <>
       <div className="flex xl:items-center l:items-center justify-center sm:mt-50 md:mt-50">
         <div className="max-w-md w-full p-6 bg-base-100 rounded-lg shadow-lg">
-          {/* <div className="flex justify-center mb-8">
-        <img src="logo" alt="Logo" className="w-30 h-20"/>
-      </div> */}
-          <h1 className="text-2xl font-semibold text-center mt-8 mb-6">Join Us</h1>
           <h2 className="mt-8 mb-6">Register as a business customer with BeeSmart in just a few steps.</h2>
           <form>
             <div className="mb-4">
@@ -62,5 +59,5 @@ const BusinessSignUp = () => {
   );
 };
 
-export default BusinessSignUp;
+export default SignUpBusiness;
 
