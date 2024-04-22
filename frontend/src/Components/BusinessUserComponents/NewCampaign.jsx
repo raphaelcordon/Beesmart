@@ -59,7 +59,7 @@ const NewCampaign = () => {
     <div className="flex items-center justify-center">
       <div className="flex xl:items-center l:items-center justify-center sm:mt-p md:mt-50p">
         <div className="max-w-md w-full p-6 bg-base-100 rounded-lg shadow-lg mb-16">
-          <h1 className="text-2xl font-semibold text-center mt-8 mb-6">Verification</h1>
+          <h2 className="text-2xl font-semibold text-center mt-8 mb-6">New Campaign Creation</h2>
           <form className="mb-10" onSubmit={getSubmitData}>
               <div className="grid sm:grid-cols-2 gap-y-7 gap-x-12">
                   <div className="mb-2">

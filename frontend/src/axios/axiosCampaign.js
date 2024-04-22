@@ -18,7 +18,8 @@ const axios = AxiosMotion;
 
 export const getAllOpenCampaigns = async () => {
     try{
-        const res = await axios.get("/campaign/");
+        const config = getAxiosConfig();
+        const res = await axios.get("/campaign/", config);
         return(res.data);
     } catch (error) {
         console.error(error);
@@ -27,7 +28,8 @@ export const getAllOpenCampaigns = async () => {
 
  export const getAllClosedCampaigns = async () => {
     try{
-        const res = await axios.get("/campaign/closed/");
+        const config = getAxiosConfig();
+        const res = await axios.get("/campaign/closed/", config);
         return(res.data);
     } catch (error) {
         console.error(error);
@@ -36,7 +38,8 @@ export const getAllOpenCampaigns = async () => {
 
  export const getCampaignById = async (id) => {
     try{
-        const res = await axios.get(`/campaign/${id}`);
+        const config = getAxiosConfig();
+        const res = await axios.get(`/campaign/${id}`, config);
         return(res.data);
     } catch (error) {
         console.error(error);
@@ -45,7 +48,8 @@ export const getAllOpenCampaigns = async () => {
 
   export const patchCampaignById = async (id) => {
     try{
-        const res = await axios.patch(`/campaign/${id}`);
+        const config = getAxiosConfig();
+        const res = await axios.patch(`/campaign/${id}`, config);
         return(res.data);
     } catch (error) {
         console.error(error);
@@ -54,7 +58,8 @@ export const getAllOpenCampaigns = async () => {
 
 export const deleteCampaignById = async (id) => {
 try{
-    const res = await axios.delete(`/campaign/${id}`);
+    const config = getAxiosConfig();
+    const res = await axios.delete(`/campaign/${id}`, config);
     return(res.data);
 } catch (error) {
     console.error(error);
