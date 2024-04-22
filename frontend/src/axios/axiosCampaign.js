@@ -69,7 +69,8 @@ try{
 
 export const getCampaignByEndUser = async (id) => {
 try{
-    const res = await axios.get(`/campaign/endUser/${id}`);
+    const config = getAxiosConfig();
+    const res = await axios.get(`/campaign/endUser/${id}`, config);
     return(res.data);
 } catch (error) {
     console.error(error);
