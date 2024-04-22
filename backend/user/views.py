@@ -120,7 +120,6 @@ class VeryfiCustomerUserView(UpdateAPIView):
         password = request.data.get('password')
         re_password = request.data.get('password_repeat')
 
-
         # Check if the provided passwords match, if not, return an error
         if password != re_password:
             return Response('Password does not match', status=status.HTTP_400_BAD_REQUEST)
