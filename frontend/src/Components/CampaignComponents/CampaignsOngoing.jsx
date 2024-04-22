@@ -20,7 +20,7 @@ const CampaignsOngoing = ({ list = [] }) => {
                                             <img src={`${item.logo}`} alt="Campaign Logo" class="w-20 h-20 rounded-full p-2"/>
                                         </div>
                                     <div class=" aligne grid justify-items-end mx-auto">
-                                        <h1 class="text-lg font-semibold text-gray-900">Coffee</h1>
+                                        <h1 class="text-lg font-semibold text-gray-900">{item.name}</h1>
                                         <p class="text-sm text-gray-600"><strong>Goal:</strong>{item.value_goal}</p>
                                         <p class="text-xs text-gray-600"><strong>Beginning Date:</strong>{item.beginning_date}</p>
                                         <p class="text-xs text-gray-600"><strong>Ending Date:</strong>{item.ending_date}</p>
