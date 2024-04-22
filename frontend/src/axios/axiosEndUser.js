@@ -24,12 +24,33 @@ export const GetMeUser = async () => {
 
 export const PostEndUserVerify = async (userData) => {
     try{
-        const res = await axios.post(`/enduser/user/verify/${userData.secret_key}`, userData);
+        const res = await axios.post(`/enduser/user/verify/${userData.secret_key}/`, userData, {
+            responseType: 'blob', // Important: This tells Axios to handle the response as a blob
+          });
         return res.data;
     } catch (error) {
         throw error("Not possible to fetch data");
     }
 }
+
+export const GetEndUserBySecretKey = async (secret_key) => {
+    try{
+        const res = await axios.get(`/enduser/user/${secret_key}/`);
+        return res.data;
+    } catch (error) {
+        throw error("Not possible to fetch data");
+    }
+}
+
+export const AuthenticateEndUser = async (email, password) => {
+    try{
+        const res = await axios.post(
+            "/auth/token/", { email, password });
+        return res.data;
+    } catch (error) {
+        throw new Error(error.response?.data?.message || "No account found");
+    }
+ }
 
 const getAxiosConfig = () => {
     const token = window.localStorage.getItem("accessToken");

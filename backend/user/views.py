@@ -197,6 +197,8 @@ class CreateEndUser(CreateAPIView):
         # Ensure the user profile is created, and generate new codes if the user was already in the system.
         if User.objects.filter(email=email).exists():
             user = User.objects.get(email=email)
+            if CustomerUserProfile.objects.filter(user=user).exists():
+                return Response("This email is already taken", status=status.HTTP_400_BAD_REQUEST)
             user_profile = EndUserProfile.objects.get(user=user)
             user_profile.code = code_generator()
             user_profile.secret_key = code_generator()
@@ -219,7 +221,7 @@ class CreateEndUser(CreateAPIView):
         return Response("Link was sent to your email", status=status.HTTP_200_OK)
 
 
-class GenerateEndUserCard(RetrieveAPIView):
+class GenerateEndUserCard(CreateAPIView):
     """
     API view to generate a new QR code for an end user and send it via email.
     """
@@ -240,7 +242,7 @@ class GenerateEndUserCard(RetrieveAPIView):
             # Handle case where profile does not exist to send a specific error response.
             raise NotFound('Profile with the given code does not exist.')
 
-    def retrieve(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         """
         Overridden retrieve method to send an email with the QR code after successful retrieval
         and regeneration of the user's code.
