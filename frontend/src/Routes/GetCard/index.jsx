@@ -1,11 +1,14 @@
 import tick from "../../assets/check-mark-forcongratulationsection.png";
 import {useState} from "react";
-import {useParams} from 'react-router-dom';
-import {PostEndUserVerify} from "../../axios/axiosEndUser.js";
+import {useNavigate, useParams} from 'react-router-dom';
+import {AuthenticateEndUser, GetEndUserBySecretKey, PostEndUserVerify} from "../../axios/axiosEndUser.js";
 import Button from "../../Components/SmallComponents/Button.jsx";
+import useAuthenticateUser from "../../Hooks/useAuthenticateUser.js";
+
 
 
 const GetCard = () => {
+    const navigator = useNavigate()
 
     let {id} = useParams();
     const [password, setPassword] = useState('');
@@ -14,6 +17,8 @@ const GetCard = () => {
     const [verified, setVerified] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false)
+
+    const { authenticate, AuthError } = useAuthenticateUser();
 
     const getSubmitData = async (e) => {
         e.preventDefault();
@@ -36,7 +41,7 @@ const GetCard = () => {
 
     const verifyEndUser = async (userData) => {
         try {
-            const data = await PostEndUserVerify({userData});
+            const data = await PostEndUserVerify(userData);
             const url = window.URL.createObjectURL(new Blob([data], {type: 'application/vnd.apple.pkpass'}));
             const link = document.createElement('a');
             link.href = url;
@@ -44,7 +49,11 @@ const GetCard = () => {
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            // const user = await GetEndUserBySecretKey(userData.secret_key)
+            // const token = await AuthenticateEndUser(user.email, userData.password)
+            // await authenticate(token)
             setVerified(true)
+            navigator(`/login`)
         } catch (error) {
             setError(error.message || 'Failed to register. Please try again.');
             setVerified(false)
