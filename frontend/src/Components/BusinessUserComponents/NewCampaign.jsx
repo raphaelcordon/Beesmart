@@ -118,7 +118,7 @@ const NewCampaign = () => {
                         id="logo"
                         type="file"
                         onChange={handleLogoChange}
-                        className="file-input file-input-secondary text-sm px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                        className="file-input file-input-secondary text-sm w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                       />
                   </div>
 
@@ -129,7 +129,7 @@ const NewCampaign = () => {
                         id="image"
                         type="file"
                         onChange={handleImageChange}
-                        className="file-input file-input-secondary text-sm px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                        className="file-input file-input-secondary text-sm w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                       />
                   </div>
               </div>

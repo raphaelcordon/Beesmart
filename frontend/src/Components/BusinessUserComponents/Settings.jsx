@@ -1,17 +1,11 @@
 import Button from "../SmallComponents/Button.jsx";
 import { useState, useEffect } from "react";
-import { UpdateMeUser} from "../../axios/axiosCustomer.js";
+import { UpdateMeUser } from "../../axios/axiosCustomer.js";
 import { useSelector } from 'react-redux';
 
-
-
-
-
 const Settings = () => {
- 
   const CustomerUser = useSelector(state => state.customer.userCustomerData);
   useEffect(() => {
-   
   }, []);
 
   const [business_name, setBusinessName] = useState(CustomerUser.customer_user_profile.business_name);
@@ -20,28 +14,27 @@ const Settings = () => {
   const [street, setStreet] = useState(CustomerUser.customer_user_profile.street);
   const [zip, setZip] = useState(CustomerUser.customer_user_profile.zip);
   const [website, setWebsite] = useState(CustomerUser.customer_user_profile.website);
-  const [logo, setLogo] = useState(CustomerUser.customer_user_profile.logo);
+  const [logo, setLogo] = useState(null); // Initialize logo state to null
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
-  
-
- const user = {
-    business_name: business_name,
-    country: country,
-    city: city,
-    street: street,
-    zip: zip,
-    website: website,
-    //logo: logo, 
- }
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('business_name', business_name);
+    formData.append('country', country);
+    formData.append('city', city);
+    formData.append('street', street);
+    formData.append('zip', zip);
+    formData.append('website', website);
+    if (logo) {
+      formData.append('logo', logo); // Only append logo if a file is selected
+    }
+
     try {
-      await UpdateMeUser(user); 
-      //console.log('Profile updated successfully');
+      await UpdateMeUser(formData); 
       setSuccess(true);
       setError(null);   
     } catch (err) {
@@ -145,11 +138,10 @@ const Settings = () => {
                   type="text"
                  // value={user.website} 
                  value={website}
-                 placeholder="http://"
                   onChange={(e) => setWebsite(e.target.value)}
                   onFocus={handleInputFocus}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
-                /><div>should start with http://</div>
+                />
               </div>
               <div className="mb-2">
                 <label className="block mb-2 text-sm text-accent-content">Upload Logo</label>
@@ -157,11 +149,10 @@ const Settings = () => {
                   name="logo"
                   id="logo"
                   type="file"
-                  
-                  value={logo} 
-                  onChange={(e) => setLogo(e.target.value)}
+                  onChange={(e) => setLogo(e.target.files[0])} 
                   onFocus={handleInputFocus}
-                  className="file-input file-input-secondary text-sm w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                  accept="image/*"
+                  className="file-input file-input-secondary text-sm w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                 />
               </div>
             </div>
@@ -171,7 +162,7 @@ const Settings = () => {
           {error && <small>{String(error)}</small>}
         </div>
       </div>
-      {console.log(CustomerUser)}
+      {/* {console.log(CustomerUser)} */}
     </div>
     
   );
