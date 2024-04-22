@@ -1,9 +1,9 @@
 import tick from "../../assets/check-mark-forcongratulationsection.png";
 import {useState} from "react";
 import {useNavigate, useParams} from 'react-router-dom';
-import {AuthenticateEndUser, GetEndUserBySecretKey, PostEndUserVerify} from "../../axios/axiosEndUser.js";
+import { PostEndUserVerify} from "../../axios/axiosEndUser.js";
 import Button from "../../Components/SmallComponents/Button.jsx";
-import useAuthenticateUser from "../../Hooks/useAuthenticateUser.js";
+
 
 
 
@@ -17,10 +17,30 @@ const GetCard = () => {
     const [verified, setVerified] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false)
+    const [userAgent, setUserAgent] = useState('')
 
-    const { authenticate, AuthError } = useAuthenticateUser();
+    function detectDevice() {
+        const userAgent = navigator.userAgent;
+    
+        // Check for Android
+        if (/android/i.test(userAgent)) {
+            return 'Android';
+        }
+    
+        // Check for iOS
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            return 'iOS';
+        }
+    
+        // Default to PC if neither Android nor iOS
+        return 'PC';
+    }
+    
+    
+    // Use the function to alert or display the device type
 
     const getSubmitData = async (e) => {
+        setUserAgent(detectDevice)
         e.preventDefault();
         setIsLoading(true);
         setError('');
@@ -42,16 +62,15 @@ const GetCard = () => {
     const verifyEndUser = async (userData) => {
         try {
             const data = await PostEndUserVerify(userData);
-            const url = window.URL.createObjectURL(new Blob([data], {type: 'application/vnd.apple.pkpass'}));
-            const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute('download', 'BeeSmart.pkpass');
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            // const user = await GetEndUserBySecretKey(userData.secret_key)
-            // const token = await AuthenticateEndUser(user.email, userData.password)
-            // await authenticate(token)
+            if (userAgent==='iOS') {
+                const url = window.URL.createObjectURL(new Blob([data], {type: 'application/vnd.apple.pkpass'}));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'BeeSmart.pkpass');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
             setVerified(true)
             navigator(`/login`)
         } catch (error) {
