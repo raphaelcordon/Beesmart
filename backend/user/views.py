@@ -62,6 +62,27 @@ class MeEndUser(RetrieveAPIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+class EndUserBySecretKey(RetrieveAPIView):
+    """
+    API view to retrieve the end user's details by secret_key.
+    """
+    serializer_class = EndUserSerializer
+    permission_classes = []
+
+    def get(self, request, *args, **kwargs):
+        """
+        Retrieves the authenticated user's details and returns them.
+        Uses a GET method to conform with the typical RESTful approach for data retrieval.
+        """
+        # Directly use the authenticated user from the request without additional database query
+        if EndUserProfile.objects.filter(secret_key=self.kwargs['secret_key']).exists():
+            profile = EndUserProfile.objects.get(secret_key=self.kwargs['secret_key'])
+            user = profile.user
+            serializer = EndUserSerializer(user)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response('User doesn\'t exist', status=status.HTTP_404_NOT_FOUND)
+
+
 # Create your views here.
 class CreateCustomerUser(CreateAPIView):
     """
@@ -224,8 +245,13 @@ class GenerateEndUserCard(RetrieveAPIView):
         Overridden retrieve method to send an email with the QR code after successful retrieval
         and regeneration of the user's code.
         """
+        data = self.request.data
+        if data['password'] != data['password_repeat']:
+            return Response({'Passwords didn\'t match'}, status=status.HTTP_400_BAD_REQUEST)
         profile = self.get_object()  # Get the object using the overridden get_object method.
         user = profile.user  # Access user directly from profile assuming a reverse relation from User to EndUserProfile.
+        user.set_password(data['password'])
+        user.save()
         secret_key = profile.secret_key
 
         def remove_domain(email):

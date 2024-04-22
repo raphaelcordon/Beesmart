@@ -1,6 +1,7 @@
 # from django.shortcuts import render
 from rest_framework import status
 from rest_framework.generics import UpdateAPIView, CreateAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from voucher.models import Voucher
@@ -11,6 +12,7 @@ from voucher.serializers import UseVoucherSerializer
 class UseVoucherView(UpdateAPIView):
     serializer_class = UseVoucherSerializer
     queryset = Voucher.objects.all()
+    permission_classes = [IsAuthenticated]
 
     def patch(self, request, *args, **kwargs):
         if Voucher.objects.filter(id=kwargs['voucher_id']).exists():
@@ -30,7 +32,7 @@ class UseVoucherView(UpdateAPIView):
 class EndUsersSpecificCampaignVouchers(CreateAPIView):
     serializer_class = UseVoucherSerializer
     queryset = Voucher.objects.all()
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         secret_key = request.data['secret_key']
