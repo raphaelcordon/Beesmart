@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import MyCampaignsOngoing from "./MyCampaignsComponents/MyCampaignsOngoing.jsx";
-import MyCampaignsClosed from "./MyCampaignsComponents/MyCampaignsClosed.jsx";
+import MyCampaignsOngoing from "../CampaignComponents/CampaignsOngoing.jsx";
+import MyCampaignsClosed from "../CampaignComponents/CampaignsClosed.jsx";
 import {useParams} from "react-router-dom";
 import {getCampaignByEndUser} from "../../axios/axiosCampaign.js";
 
