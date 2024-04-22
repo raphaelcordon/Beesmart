@@ -6,7 +6,7 @@ const Button = ({ children, className, ...props }) => {
   const combinedClasses = `${defaultBgClass} ${className}`;
 
   return (
-    <button className={`btn ${combinedClasses}`} {...props}>
+    <button className={`btn btn-md-wide px-20 text-base-100 ${combinedClasses}`} {...props}>
       {children}
     </button>
   );
