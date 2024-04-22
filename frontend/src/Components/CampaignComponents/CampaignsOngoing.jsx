@@ -9,22 +9,22 @@ const CampaignsOngoing = ({ list = [] }) => {
     }, [list]);
 
     return (
-        <div className="p-10">
+        <div className="p-1">
             {isCampaign ? (
                 list.map((item, index) => (
                     item.is_active === true && (
-                        <div key={item.id || index} className="bg-gray-100 shadow-md rounded-lg p-4 my-2 max-w-md mx-auto">
+                        <div key={item.id || index} className="bg-gray-100 shadow-md rounded-lg p-2 my-2 max-w-md mx-auto">
                                 <div class="mx-auto max-w-4xl">
-                                    <div class="flex items-center bg-white p-5 rounded-lg shadow-md">
+                                    <div class="flex items-center bg-white p-1 rounded-lg shadow-md">
                                         <div class="flex-shrink-0">
-                                            <img src="https://beesmart.propulsion-learn.ch/media-files/campaign/None/logo240x240.png" alt="Campaign Logo" class="w-24 h-24 rounded-full"/>
+                                            <img src={`${item.logo}`} alt="Campaign Logo" class="w-20 h-20 rounded-full p-2"/>
                                         </div>
-                                    <div class="ml-6">
+                                    <div class=" aligne grid justify-items-end mx-auto">
                                         <h1 class="text-lg font-semibold text-gray-900">Coffee</h1>
                                         <p class="text-sm text-gray-600"><strong>Goal:</strong>{item.value_goal}</p>
-                                        <p class="text-sm text-gray-600"><strong>Beginning Date:</strong>{item.beginning_date}</p>
-                                        <p class="text-sm text-gray-600"><strong>Ending Date:</strong>{item.ending_date}</p>
-                                        <p class="text-sm text-gray-500"><strong>Participants</strong>1544</p>
+                                        <p class="text-xs text-gray-600"><strong>Beginning Date:</strong>{item.beginning_date}</p>
+                                        <p class="text-xs text-gray-600"><strong>Ending Date:</strong>{item.ending_date}</p>
+                                        <p class="text-xs text-gray-500"><strong>Participants</strong>1544</p>
                                     </div>
                                 </div>
                             </div>
