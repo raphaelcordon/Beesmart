@@ -1,5 +1,6 @@
 from rest_framework import status
 from rest_framework.generics import CreateAPIView, ListAPIView, get_object_or_404
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.utils import timezone
 
@@ -83,7 +84,7 @@ class CollectorValidateView(CreateAPIView):
 class EndUsersSpecificCampaignCollectors(ListAPIView):
     # API view to list all collectors for a specific campaign and end user identified by a secret key.
     serializer_class = CollectorSerializer
-    permission_classes = []  # Define appropriate permissions or keep empty if intentional
+    permission_classes = [IsAuthenticated]  # Define appropriate permissions or keep empty if intentional
 
     def get_queryset(self):
         # Overriding the default queryset to filter collectors based on the campaign ID and secret key.

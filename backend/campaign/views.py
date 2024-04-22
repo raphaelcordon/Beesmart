@@ -45,7 +45,7 @@ class ListEndUsersCampaignsView(ListAPIView):
     """
     serializer_class = CampaignSerializer
     queryset = Campaign.objects.all()
-    permission_classes = []  # no permissions, letting end users access endpoint with secret keys
+    permission_classes = [IsAuthenticated]  # no permissions, letting end users access endpoint with secret keys
 
     def get_queryset(self):
         """
