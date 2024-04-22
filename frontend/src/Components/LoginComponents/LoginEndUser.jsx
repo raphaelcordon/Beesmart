@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
 import Button from '../../Components/SmallComponents/Button';
 import useAuthenticateUser from "../../Hooks/useAuthenticateUser.js";
+import { GetMeUser } from '../../axios/axiosEndUser.js';
 
 const LoginEndUser = () => {
   const [email, setEmail] = useState('')
@@ -18,7 +19,9 @@ const LoginEndUser = () => {
       setIsLoading(true);
       try {
           await authenticate(email, password);
-          const from = location.state?.from || "/user";
+          const data = await GetMeUser()
+          console.log(data)
+          const from = location.state?.from || `/user/${data.end_user_profile.secret_key}`;
           navigate(from);
       } catch(error) {
           setError(error.message || "Failed to login. Please try again.");
