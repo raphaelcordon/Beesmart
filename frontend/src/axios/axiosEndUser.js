@@ -22,13 +22,14 @@ export const GetMeUser = async () => {
 
 export const GetEndUserVerify = async (secretkey) => {
     try{
-        const res = await axios.get(`/enduser/user/verify/${secretkey}`,);
+        const res = await axios.get(`/enduser/user/verify/${secretkey}`,{
+            responseType: 'blob', // Handles the response as a binary file
+          });
         return res.data;
     } catch (error) {
         throw error("Not possible to fetch data");
     }
 }
-
 
 const getAxiosConfig = () => {
     const token = window.localStorage.getItem("accessToken");

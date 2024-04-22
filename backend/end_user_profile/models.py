@@ -36,6 +36,7 @@ class EndUserProfile(models.Model):
     zip = models.CharField(verbose_name='zip', max_length=10, blank=True)
     avatar = models.ImageField(verbose_name='avatar', upload_to=avatar_directory_path, blank=True)
     qr_code = models.ImageField(upload_to=end_user_qr_directory_path, blank=True)
+    serial_nr = models.CharField(max_length=15, unique=True, default=code_generator)
 
     def save(self, *args, **kwargs):
         if self.pk:

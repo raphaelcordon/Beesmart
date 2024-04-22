@@ -44,7 +44,7 @@ else:
     MEDIA_HOST = 'https://beesmart.propulsion-learn.ch'
     FRONT_END_HOST = 'https://beesmart.propulsion-learn.ch'
 
-ALLOWED_HOSTS = ['beesmart.propulsion-learn.ch']
+ALLOWED_HOSTS = ['beesmart.propulsion-learn.ch', '*']
 
 if DEBUG is True:
     ALLOWED_HOSTS += ['*']
