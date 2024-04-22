@@ -120,6 +120,7 @@ class VeryfiCustomerUserView(UpdateAPIView):
         password = request.data.get('password')
         re_password = request.data.get('password_repeat')
 
+
         # Check if the provided passwords match, if not, return an error
         if password != re_password:
             return Response('Password does not match', status=status.HTTP_400_BAD_REQUEST)
@@ -258,7 +259,7 @@ class GenerateEndUserCard(RetrieveAPIView):
                 # Add an attachment
                 with open(file_path, 'rb') as f:
                     email.attach(filename=file_path.split('/')[-1], content=f.read(),
-                                 mimetype='application/pkpass')  # Change mimetype as per the file type
+                                 mimetype='application/vnd.apple.pkpass')  # Change mimetype as per the file type
 
                 email.attach_alternative(html_body, "text/html")
 
