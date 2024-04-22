@@ -17,7 +17,7 @@ const CampaignsOngoing = ({ list = [] }) => {
                                 <div class="mx-auto max-w-4xl">
                                     <div class="flex items-center bg-white p-5 rounded-lg shadow-md">
                                         <div class="flex-shrink-0">
-                                            <img src="https://beesmart.propulsion-learn.ch/media-files/campaign/None/logo240x240.png" alt="Campaign Logo" class="w-24 h-24 rounded-full"/>
+                                            <img src={`${item.logo}`} alt="Campaign Logo" class="w-24 h-24 rounded-full"/>
                                         </div>
                                     <div class="ml-6">
                                         <h1 class="text-lg font-semibold text-gray-900">Coffee</h1>
