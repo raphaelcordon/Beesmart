@@ -4,8 +4,10 @@ const axios = AxiosMotion;
 
 export const RegisterNewEndUser = async (email) => {
     try{
-        await axios.post("/enduser/user/add/", { email } );
+        const res = await axios.post("/enduser/user/add/", { email } );
+        console.log(res)
     } catch (error) {
+        console.log(error)
         throw error("Fail, please try again");
     }
 }

@@ -7,6 +7,7 @@ const SignUpEndUser = () => {
 
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const [error, setError] = useState('');
 
     const handleSignUpClick = async (e) => {
     e.preventDefault();
@@ -15,6 +16,7 @@ const SignUpEndUser = () => {
       localStorage.setItem('registered_email', email)
       navigate("/private-signup/congratulations");
     } catch (errors) {
+      setError(errors)
       console.log(errors);
     }
   };
@@ -23,12 +25,7 @@ const SignUpEndUser = () => {
     <>
       <div className="flex xl:items-center l:items-center justify-center sm:mt-50 md:mt-50">
         <div className="max-w-md w-full p-6 bg-base-100 rounded-lg shadow-lg">
-          {/* <div className="flex justify-center mb-8">
-        <img src="logo" alt="Logo" className="w-30 h-20"/>
-      </div> */}
-          <h2 className="mt-8 mb-6">
-          </h2>
-          <h1 className="text-2xl font-semibold text-center mt-8 mb-6">Join Us</h1>
+
           <form>
             <div className="mb-4">
               <label htmlFor="email" className="block mb-2 text-sm text-accent-content">
@@ -44,11 +41,16 @@ const SignUpEndUser = () => {
                   required
               />
             </div>
-            <ul className="steps">
-              <li className="step step-secondary"></li>
-              <li className="step"></li>
-            </ul>
-            <Button onClick={handleSignUpClick}> Register</Button>
+            <div className="mt-8 mb-6">
+              <ul className="steps">
+                <li className="step step-secondary"></li>
+                <li className="step"></li>
+              </ul>
+            </div>
+
+              <Button onClick={handleSignUpClick}> Register</Button>
+              {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+
           </form>
         </div>
       </div>
