@@ -12,14 +12,29 @@ const GetCard = () => {
 
     useEffect(() => {
         setError('');
-        try {
-             GetEndUserVerify(id);
-             setVerified(true)
-        } catch (error) {
-            setError(error.message || 'Failed to register. Please try again.');
-            setVerified(false)
+        const downlod = async () => {
+          try {
+            const data = await GetEndUserVerify(id);
+            // Create a URL from the blob
+            console.log(data)
+            const url = window.URL.createObjectURL(new Blob([data], { type: 'application/vnd.apple.pkpass' }));
+  
+            // Create a temporary anchor tag to trigger download
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'BeeSmart.pkpass'); // Set the desired pass file name here
+            document.body.appendChild(link);
+            link.click();
+            setVerified(true)
+          downlod()
+
+          } catch (error) {
+              setError(error.message || 'Failed to register. Please try again.');
+              setVerified(false)
+          }
         }
 
+        downlod()
     }, []);
 
     return (
