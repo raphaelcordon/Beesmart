@@ -7,7 +7,7 @@ class CustomerUserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomerUserProfile
         # Add campaigns to fields after created
-        fields = ['business_name', 'country', 'city', 'street', 'zip', 'website', 'logo']
+        fields = ['business_name', 'country', 'city', 'street', 'zip', 'website', 'logo', 'qr_code']
 
     # def to_representation(self, instance):
     #     representation = super().to_representation(instance)
