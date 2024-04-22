@@ -9,7 +9,7 @@ const CampaignsClosed = ({ list = [] }) => {
     }, [list]);
 
     return (
-        <div className="p-10">
+        <div className="p-1">
             {isCampaign ? (
                 list.map((item, index) => (
                     item.is_active === false && (
