@@ -57,7 +57,7 @@ const MyCampaigns = () => {
         <>
             {!createNewCampaign ? (
                 <>
-                <div className="flex flex-col h-screen items-center justify-center text-center px-4 ">
+                
                     <header className="container mx-auto flex flex-row gap-4 justify-center items-center">
                 <span>
                     <a href="#" onClick={(e) => {
@@ -85,7 +85,7 @@ const MyCampaigns = () => {
                         </button> */}
                     </header>
 
-                    <main>
+                    <main className="flex flex-col h-screen items-center justify-center text-center px-4 ">
                         {currentCampaigns === 'ongoing' ? (
                             <MyCampaignsOngoing list={campaignsOpen}/>
                         ) : (
@@ -94,7 +94,7 @@ const MyCampaigns = () => {
 
                         {isLoading && <p>Loading...</p>}
                         {error && <p>Error: {error}</p>}
-                    <text>trysomething</text></main></div>
+                    </main>
                 </>
             ) : (
                 <div>

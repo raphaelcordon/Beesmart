@@ -111,7 +111,7 @@ const QrCode = () => {
 
   return (
     <>
-    <div className="flex flex-1 w-full flex-col items-center justify-center text-center sm:mt-28 mt-20">
+    <div className="flex flex-col h-screen items-center justify-center text-center px-4 ">
     <div className="flex flex-col items-center">
           <div className='mb-8'>
             <a href={qrcode} download="qr_code_beesmart.png">
