@@ -110,9 +110,8 @@ const QrCode = () => {
   const pdfData = <TextToPDF website={website} qrCode={qrcode} logo={logo} />; 
 
   return (
-    <div className="flex items-center justify-center h-full">
-      <div className='mb-8'>
-        <div className="max-w-md w-full p-6 bg-base-100 rounded-lg shadow-lg">
+    <div className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 sm:mt-28 mt-20">
+    <div className="flex flex-col items-center">
           <div className='mb-8'>
             <a href={qrcode} download="qr_code_beesmart.png">
             <Button>Download QR code only</Button>
@@ -125,13 +124,13 @@ const QrCode = () => {
             </PDFDownloadLink>
           
         </div>
-        <div>
+        {/* <div>
           <PDFViewer width={400} height={600}>
             {pdfData}
           </PDFViewer>
-        </div>
+        </div> */}
       </div>
-    </div>
+    
   );
 };
 
