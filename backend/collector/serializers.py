@@ -2,14 +2,9 @@ from datetime import date
 
 from rest_framework import serializers
 
-from collector.models import Collector, CollectorType
+from campaign.serializers import CollectorTypeSerializer
+from collector.models import Collector
 from end_user_profile.serializers import EndUserProfileOutSerializer
-
-
-class CollectorTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CollectorType
-        fields = '__all__'
 
 
 class CollectorSerializer(serializers.ModelSerializer):

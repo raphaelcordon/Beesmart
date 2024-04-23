@@ -4,16 +4,8 @@ from campaign.models import Campaign
 from end_user_profile.models import EndUserProfile
 
 
-class CollectorType(models.Model):
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
-
-
 class Collector(models.Model):
     campaign = models.ForeignKey(Campaign, on_delete=models.RESTRICT, related_name='collectors')
-    collector_type = models.ForeignKey(CollectorType, on_delete=models.DO_NOTHING, related_name='collectors')
     value_counted = models.FloatField(default=0)
     value_goal = models.FloatField(default=0)
     date_created = models.DateTimeField(auto_now_add=True)
