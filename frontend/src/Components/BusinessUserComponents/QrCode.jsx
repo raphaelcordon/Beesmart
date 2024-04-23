@@ -118,11 +118,12 @@ const QrCode = () => {
             <Button>Download QR code only</Button>
             </a>
             </div>
-          <Button>
-            <PDFDownloadLink document={pdfData} fileName="beesmart_qrcode.pdf">
+          
+            <PDFDownloadLink document={pdfData} fileName="beesmart_qrcode.pdf" 
+            className="btn bg-secondary btn-md-wide px-20 text-base-100">
               {({ loading }) => (loading ? 'Loading document...' : 'Download PDF')}
             </PDFDownloadLink>
-          </Button>
+          
         </div>
         <div>
           <PDFViewer width={400} height={600}>
