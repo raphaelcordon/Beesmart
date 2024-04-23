@@ -2,6 +2,7 @@ from datetime import date
 
 from rest_framework import serializers
 
+from campaign.serializers import CollectorTypeSerializer
 from collector.models import Collector
 from end_user_profile.serializers import EndUserProfileOutSerializer
 
