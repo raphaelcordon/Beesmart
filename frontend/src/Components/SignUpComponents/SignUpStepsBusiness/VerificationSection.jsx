@@ -166,7 +166,7 @@ const VerificationSection = () => {
                     required
                 />
               </div>
-              <div className="mb-0">
+              {/* <div className="mb-0">
                 <label className="block mb-2 text-sm text-accent-content">Website</label>
                 <input
                     name="website"
@@ -187,19 +187,25 @@ const VerificationSection = () => {
                 onChange={(e) => setLogo(e.target.files[0])} 
                 className="file-input file-input-secondary text-xs w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
               />
-              </div>
+              </div> */}
 
             </div>
             <div className="mt-8 mb-6">
+            <div className="text-center">
               <ul className="steps">
                 <li className="step step-secondary"></li>
                 <li className="step step-secondary"></li>
                 <li className="step step-secondary"></li>
               </ul>
             </div>
+            </div>
+            <div className="text-center">
             <Button> Continue </Button>
+            </div>
           </form>
+          <div className="text-center">
           {error && <small>{String(error)}</small>}
+          </div>
         </div>
       </div>
     </div>
