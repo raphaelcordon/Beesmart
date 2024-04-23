@@ -6,7 +6,7 @@ import {faRocket, faUser} from "@fortawesome/free-solid-svg-icons";
 
 export const NavBarHome = () => {
   return (
-    <div className="navbar">
+    <div className="navbar border border-base-300 bg-base-100/50 shadow-lg backdrop-blur-2xl ">
       
       <div className="navbar-start">
         <div>
