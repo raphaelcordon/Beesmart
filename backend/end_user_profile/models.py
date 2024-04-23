@@ -42,7 +42,7 @@ class EndUserProfile(models.Model):
         if self.pk:
             if EndUserProfile.objects.filter(pk=self.pk).exists():
                 old_instance = EndUserProfile.objects.get(pk=self.pk)
-                if old_instance.qr_code and old_instance.qr_code != self.qr_code:
+                if old_instance.qr_code:
                     old_instance.qr_code.delete(save=False)
         print('secret_key', self.secret_key)
         qr = segno.make(f'"{self.secret_key}"')
