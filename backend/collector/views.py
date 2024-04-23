@@ -7,6 +7,7 @@ from django.utils import timezone
 from campaign.models import Campaign
 from collector.models import Collector, CollectorType
 from collector.serializers import CollectorSerializer
+from customer_user_profile.models import CustomerUserProfile
 from end_user_profile.models import EndUserProfile
 from voucher.models import Voucher
 
@@ -88,12 +89,13 @@ class EndUsersSpecificCampaignCollectors(ListAPIView):
 
     def get_queryset(self):
         # Overriding the default queryset to filter collectors based on the campaign ID and secret key.
-        campaign_id = self.kwargs.get('campaign_id')
+        user = self.request.user
+        profile = CustomerUserProfile.objects.get(user=user)
         secret_key = self.request.data.get('secret_key')
         if not secret_key:
             return Collector.objects.none()  # Return an empty queryset if secret key is not provided
 
-        return Collector.objects.filter(campaign__id=campaign_id, end_user_profile__secret_key=secret_key)
+        return Collector.objects.filter(campaign__customer_user_profile=profile, end_user_profile__secret_key=secret_key)
 
     def list(self, request, *args, **kwargs):
         # Custom list method to handle the request and respond appropriately.
