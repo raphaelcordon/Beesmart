@@ -76,20 +76,23 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
             </div> */}
 
             <div ref={menuRef}
-             className="md:navbar-end sm:navbar-start xs:navbar-start"  
+             className="navbar-start"  
                 //  className="navbar-center flex md:flex-row absolute md:relative top-0 right-0 md:top-auto md:right-auto w-full md:w-auto h-full md:h-auto bg-primary bg-opacity-75 md:bg-opacity-0 z-50 py-2 md:py-0">
                 //className="navbar border border-base-300 bg-base-100/50 shadow-lg backdrop-blur-2xl fixed bottom-0 left-0 w-full z-10 md:relative md:flex md:justify-between sm:justify-around">
                 >
 
-<div className="flex justify-around">
+<div className="flex justify-between">
+<div className="ml-0 sm:ml-2">
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('MyCampaigns')}
                                 active={activeTab === 'MyCampaigns'}
                                 tabName="MyCampaigns">
                                     <FontAwesomeIcon icon={faBell} />Campaigns</NavBarToggling>
-                                    
+                                    </div>
+                                    <div className="ml-0 sm:ml-0">
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('Insights')} active={activeTab === 'Insights'}
                                 tabName="Insights">
                                     <FontAwesomeIcon icon={faChartLine} />Insights</NavBarToggling>
+                                    </div>
                                     <div className="ml-20 sm:ml-0">
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('QrCode')} active={activeTab === 'QrCode'}
                                 tabName="QrCode">
