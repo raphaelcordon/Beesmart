@@ -11,6 +11,7 @@
     "format": "npx prettier --write ."
   },
   "dependencies": {
+    "@react-pdf/renderer": "^3.4.2",
     "@reduxjs/toolkit": "^2.2.3",
     "axios": "^1.6.8",
     "date-fns": "^3.6.0",
