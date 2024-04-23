@@ -29,7 +29,7 @@ const GetStarted = () => {
                             Business
                         </button>
                         <button
-                            className={`px-4 py-2 rounded ${activeTab === 'user' ? 'bg-secondary text-base-100' : 'bg-neutral-content/500'}`}
+                            className={`px-4 py-2 rounded ${activeTab === 'user' ? 'bg-secondary text-base-100' : 'bg-neutral-content/50'}`}
                             onClick={() => toggleTab('user')}>
                             User
                         </button>
