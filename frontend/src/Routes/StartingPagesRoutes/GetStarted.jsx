@@ -24,12 +24,12 @@ const GetStarted = () => {
                     <h1 className="text-2xl font-semibold text-center mt-8 mb-6">I wish to create an account as</h1>
                     <div className="flex justify-around mb-6">
                         <button
-                            className={`px-4 py-2 rounded ${activeTab === 'business' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                            className={`px-4 py-2 rounded ${activeTab === 'business' ? 'bg-secondary text-base-100' : 'bg-neutral-content/50'}`}
                             onClick={() => toggleTab('business')}>
                             Business
                         </button>
                         <button
-                            className={`px-4 py-2 rounded ${activeTab === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                            className={`px-4 py-2 rounded ${activeTab === 'user' ? 'bg-secondary text-base-100' : 'bg-neutral-content/500'}`}
                             onClick={() => toggleTab('user')}>
                             User
                         </button>

@@ -11,7 +11,7 @@ export const NavBarHome = () => {
       <div className="navbar-start">
         <div>
           <Link to="/">
-            <img src={beeLogo}  className="h-20 sm:h-10 lg:h-20 " alt="Bee Logo" />
+            {/* <img src={beeLogo}  className="h-20 sm:h-10 lg:h-20 " alt="Bee Logo" /> */}
             <p className="text-xl">
   <span className="font-bold">B</span>
   <span className="font-semibold">ee</span><span className="font-bold">S</span><span className="font-semibold">mart</span>
@@ -20,12 +20,12 @@ export const NavBarHome = () => {
         </div>
       </div>
       {/* <div className="navbar-end"> */}
-      <div className="navbar-end flex py-4"> 
+      <div className="navbar-end flex"> 
   <div><NavBarLink to="/get-started">
-    <FontAwesomeIcon icon={faRocket} />
-    <span>Get</span> <span>Started</span>
+    <FontAwesomeIcon icon={faRocket} className="text-2xl"/>
+    <span className="text-xl">Register</span> 
   </NavBarLink></div>
-  <div className="ml-10 mr-5"> <NavBarLink to="/login">
+  <div className="ml-5 mr-5 text-xl"> <NavBarLink to="/login">
     <FontAwesomeIcon icon={faUser}/>
     <span> LogIn</span>
   </NavBarLink></div>
