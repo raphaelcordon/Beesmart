@@ -9,6 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faChartLine, faCirclePlus, faQrcode, faRightFromBracket, faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
 import campaign from "../../assets/campaign.png";
 import NavBarLink from "../SmallComponents/NavBarLinks.jsx";
+import NavBarTogglingNew from "../SmallComponents/NavBarTogglingNew.jsx";
+import NavBarTogglingNewMobile from "../SmallComponents/NavBarTogglingNewMobile.jsx";
 
 const NavBarBusiness = ({ setActiveTabProp }) => {
     const [activeTab, setActiveTab] = useState('MyCampaigns');
@@ -57,6 +59,11 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                     }}><FontAwesomeIcon icon={faRightFromBracket} />
                 </NavLink>
         </div>
+        <div className="fixed md:hidden bottom-12 left-1/2 transform -translate-x-1/2 z-50" >
+            <NavBarTogglingNewMobile setActiveTab={() => handleSetActiveTab('NewCampaign')}
+                                active={activeTab === 'NewCampaign'}
+                                tabName="NewCampaign">
+                                    <FontAwesomeIcon icon={faCirclePlus}  style={{ fontSize: "2.5em" }} /></NavBarTogglingNewMobile></div>
 
         <div className="navbar border border-base-300 bg-base-100/50 shadow-lg backdrop-blur-2xl fixed bottom-0 left-0 w-full z-10 md:relative md:flex md:justify-between sm:justify-around">
             {/* <div className="navbar-start">
@@ -68,28 +75,37 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                 </div>
             </div> */}
 
-            <div ref={menuRef} 
+            <div ref={menuRef}
+             className="md:navbar-end sm:navbar-start xs:navbar-start"  
                 //  className="navbar-center flex md:flex-row absolute md:relative top-0 right-0 md:top-auto md:right-auto w-full md:w-auto h-full md:h-auto bg-primary bg-opacity-75 md:bg-opacity-0 z-50 py-2 md:py-0">
                 //className="navbar border border-base-300 bg-base-100/50 shadow-lg backdrop-blur-2xl fixed bottom-0 left-0 w-full z-10 md:relative md:flex md:justify-between sm:justify-around">
                 >
 
+<div className="flex justify-around">
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('MyCampaigns')}
                                 active={activeTab === 'MyCampaigns'}
                                 tabName="MyCampaigns">
                                     <FontAwesomeIcon icon={faBell} />Campaigns</NavBarToggling>
+                                    
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('Insights')} active={activeTab === 'Insights'}
                                 tabName="Insights">
                                     <FontAwesomeIcon icon={faChartLine} />Insights</NavBarToggling>
+                                    <div className="ml-20 sm:ml-0">
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('QrCode')} active={activeTab === 'QrCode'}
                                 tabName="QrCode">
-                                    <FontAwesomeIcon icon={faQrcode} />QR Code</NavBarToggling>
-                <NavBarToggling setActiveTab={() => handleSetActiveTab('NewCampaign')}
+                                    <FontAwesomeIcon icon={faQrcode} />QR</NavBarToggling>
+                                    </div>
+                                    <div>
+                <NavBarTogglingNew setActiveTab={() => handleSetActiveTab('NewCampaign')}
                                 active={activeTab === 'NewCampaign'}
                                 tabName="NewCampaign">
-                                    <FontAwesomeIcon icon={faCirclePlus} />+ New Campaign</NavBarToggling>
+                                    <FontAwesomeIcon icon={faCirclePlus} /> New Campaign</NavBarTogglingNew>
+                                    </div>
+                                    <div className="ml-6 sm:ml-0">
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('Settings')} active={activeTab === 'Settings'}
                                 tabName="Settings">
                                     <FontAwesomeIcon icon={faScrewdriverWrench} />Settings</NavBarToggling>
+                                    </div>
                                  
                 <div className="hidden sm:inline-block">
                 <NavBarLink to="/" onClick={(e) => {
@@ -99,6 +115,7 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                     }}><FontAwesomeIcon icon={faRightFromBracket} /><span> Logout</span>
                 </NavBarLink></div>
             </div>
+        </div>
         </div>
         </>
     );

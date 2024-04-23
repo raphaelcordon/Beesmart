@@ -22,11 +22,11 @@ export const NavBarHome = () => {
       <div className="md:navbar-end sm:navbar-start xs:navbar-start">
         <div className="mx-14">
           <NavBarLink to="/get-started">
-            <FontAwesomeIcon icon={faRocket} className="text-xl" />
-            <span className="text-xl">Register</span>
+            <FontAwesomeIcon icon={faRocket} />
+            <span>Register</span>
           </NavBarLink>
         </div>
-        <div className="ml-5 mr-5 text-xl">
+        <div className="ml-5 mr-5">
           <NavBarLink to="/login">
             <FontAwesomeIcon icon={faUser} />
             <span> LogIn</span>
