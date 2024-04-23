@@ -62,13 +62,15 @@ const TextToPDF = ({ website, qrCode, logo, businessName }) => (
       <View style={styles.pageBackgroundContainer}>
         <Image src={backgroundImageUrl} style={styles.imageBackground} />
       </View>
-      <Image src={qrCode} style={styles.styledlogo} /> {/* Use qrCode from props */}
+      <Image src={qrCode} style={styles.styledlogo} /> 
+      
       <Text style={styles.headingPrimary}>
         Website: {website}
       </Text>
       <Text style={styles.headingPrimary}>
         Business Name: {businessName}
       </Text>
+      <Image src={logo} style={styles.image} />
     </Page>
   </Document>
 );
@@ -83,12 +85,12 @@ TextToPDF.propTypes = {
 const QrCode = () => {
   const CustomerUser = useSelector(state => state.customer.userCustomerData);
   const website = CustomerUser.customer_user_profile.website;
-  //const storedQrCode = CustomerUser.customer_user_profile.qr_code;
+  const qrcode = CustomerUser.customer_user_profile.qr_code;
   const logo = CustomerUser.customer_user_profile.logo;
   const businessName = CustomerUser.customer_user_profile.business_name;
- const storedQrCode = localStorage.getItem('qrCode'); // Retrieve QR code from local storage
+ //const qrcode = localStorage.getItem('qrCode'); // Retrieve QR code from local storage
 
-  const pdfData = <TextToPDF website={website} qrCode={storedQrCode} businessName={businessName} logo={logo} />; 
+  const pdfData = <TextToPDF website={website} qrCode={qrcode} businessName={businessName} logo={logo} />; 
 
   return (
     <div className="flex items-center justify-center h-full">

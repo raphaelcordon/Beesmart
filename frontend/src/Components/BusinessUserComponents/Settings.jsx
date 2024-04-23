@@ -162,7 +162,7 @@ const Settings = () => {
           {error && <small>{String(error)}</small>}
         </div>
       </div>
-      {/* {console.log(CustomerUser)} */}
+      {console.log(CustomerUser)}
     </div>
     
   );
