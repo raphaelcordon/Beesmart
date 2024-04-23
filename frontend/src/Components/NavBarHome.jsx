@@ -5,7 +5,7 @@ import { faRocket, faUser } from "@fortawesome/free-solid-svg-icons";
 
 export const NavBarHome = () => {
   return (
-    <div className="navbar border border-base-300 bg-base-100/50 shadow-lg backdrop-blur-2xl fixed bottom-0 left-0 w-full z-10 md:relative md:flex md:justify-between">
+    <div className="navbar border border-base-300 bg-base-100/50 shadow-lg backdrop-blur-2xl fixed bottom-0 left-0 w-full z-10 md:relative md:flex md:justify-between sm:justify-around">
       <div className="navbar-start">
         <div>
           <Link to="/">
@@ -19,8 +19,8 @@ export const NavBarHome = () => {
           </Link>
         </div>
       </div>
-      <div className="navbar-end flex just">
-        <div>
+      <div className="md:navbar-end sm:navbar-start xs:navbar-start">
+        <div className="mx-14">
           <NavBarLink to="/get-started">
             <FontAwesomeIcon icon={faRocket} className="text-2xl" />
             <span className="text-xl">Register</span>
