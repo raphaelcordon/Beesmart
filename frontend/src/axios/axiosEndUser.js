@@ -52,6 +52,38 @@ export const AuthenticateEndUser = async (email, password) => {
     }
  }
 
+ export const GetMeEndUser = async () => {
+    try{
+        const config = getAxiosConfig();
+        const res = await axios.get("/enduser/user/me/", config);
+        return res.data;
+    } catch (error) {
+        throw error("Not possible fetch data");
+    }
+ }
+
+export const DeleteMeUser = async () => {
+    try{
+        const config = getAxiosConfig();
+        const res = await axios.delete("/enduser/user/me/", config);
+        return res.data;
+    } catch (error) {
+        throw error("Fail to delete, please try again");
+    }
+ }
+
+export const UpdateMeUser = async (user) => {
+    const config = getAxiosConfig();
+    try {
+      const res = await axios.patch("/enduser/user/update/", user, config);
+      console.log(res);
+      return res.data;
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+};
+
 const getAxiosConfig = () => {
     const token = window.localStorage.getItem("accessToken");
     const headers = {
