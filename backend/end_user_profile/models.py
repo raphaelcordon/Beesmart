@@ -17,7 +17,7 @@ def code_generator(length=15):
 
 
 def avatar_directory_path(instance, filename):
-    return f'user_avatar/{instance.id}/{filename}'
+    return f'user_avatar/{instance.user.id}/{filename}'
 
 
 def end_user_qr_directory_path(instance, filename):
