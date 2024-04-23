@@ -24,7 +24,7 @@ class CollectorType(models.Model):
 class Campaign(models.Model):
     name = models.CharField(max_length=200, blank=False, null=False)
     value_goal = models.FloatField(blank=False, null=False)
-    collector_type = models.ForeignKey(CollectorType, on_delete=models.DO_NOTHING, related_name='collectors')
+    collector_type = models.ForeignKey(CollectorType, on_delete=models.DO_NOTHING, related_name='campaigns')
     date_created = models.DateTimeField(auto_now_add=True)
     beginning_date = models.DateField(blank=False, null=False, auto_now_add=True)
     ending_date = models.DateField(blank=True, null=True)
