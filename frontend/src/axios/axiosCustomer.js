@@ -68,6 +68,8 @@ export const UpdateMeUser = async (user) => {
   
     try {
       const res = await axios.patch("/customer/user/update/", user, config);
+      const qrCode = res.data.qr_code; 
+       localStorage.setItem('qrCode', qrCode); // Store the QR code in local storage
       return res.data;
     } catch (err) {
       console.error(err);
