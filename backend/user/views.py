@@ -18,7 +18,7 @@ from project.permissions import IsSelf
 from project.settings import MEDIA_HOST, FRONT_END_HOST
 from user.apple_pass import build_pass
 from user.serializers import CustomerUserSerializer, UserRegistrationSerializer, EndUserSerializer, \
-    CustomerUserUpdateDeleteSerializer
+    CustomerUserUpdateDeleteSerializer, EndUserUpdateDeleteSerializer
 # from django.core.mail import EmailMessage
 from django.conf import settings
 
@@ -333,7 +333,7 @@ class UpdateCustomerUser(UpdateAPIView):
     """
     serializer_class = CustomerUserUpdateDeleteSerializer
     permission_classes = [IsAuthenticated, IsSelf]
-    queryset = CustomerUserProfile.objects.all()
+    queryset = EndUserProfile.objects.all()
 
     def get_object(self):
         """
@@ -343,6 +343,40 @@ class UpdateCustomerUser(UpdateAPIView):
         try:
             return CustomerUserProfile.objects.get(user=self.request.user)
         except CustomerUserProfile.DoesNotExist:
+            raise Http404
+
+    def patch(self, request, *args, **kwargs):
+        """
+        Handle the PATCH request to partially update the user's profile.
+        """
+        profile = self.get_object()  # Retrieve the user profile.
+        serializer = self.serializer_class(profile, data=request.data, partial=True)  # Allow partial updates
+
+        if serializer.is_valid():
+            serializer.save()  # This automatically updates the profile instance
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            # Return errors if validation fails.
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UpdateEndUser(UpdateAPIView):
+    """
+    API view to update a EndUserProfile for the currently authenticated user.
+    """
+    serializer_class = EndUserUpdateDeleteSerializer
+    permission_classes = [IsAuthenticated, IsSelf]
+    queryset = CustomerUserProfile.objects.all()
+
+    def get_object(self):
+        print('sssss')
+        """
+        Retrieve the CustomerUserProfile associated with the current authenticated user.
+        This override ensures that we directly fetch the user's profile, raising Http404 if not found.
+        """
+        try:
+            return EndUserProfile.objects.get(user=self.request.user)
+        except EndUserProfile.DoesNotExist:
             raise Http404
 
     def patch(self, request, *args, **kwargs):

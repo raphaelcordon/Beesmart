@@ -3,6 +3,7 @@ from rest_framework import serializers
 
 from customer_user_profile.models import CustomerUserProfile
 from customer_user_profile.serializers import CustomerUserProfileSerializer
+from end_user_profile.models import EndUserProfile
 from end_user_profile.serializers import EndUserProfileSerializer
 
 User = get_user_model()
@@ -41,3 +42,9 @@ class EndUserSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         representation['end_user_profile'] = EndUserProfileSerializer(instance.end_user_profile, many=False).data
         return representation
+
+
+class EndUserUpdateDeleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EndUserProfile
+        fields = '__all__'
