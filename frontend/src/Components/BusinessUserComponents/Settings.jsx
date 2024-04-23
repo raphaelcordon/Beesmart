@@ -48,9 +48,9 @@ const Settings = () => {
 
   return (
 
-    <div className="flex flex-col items-center justify-center text-center">
+    <div className="flex flex-col items-center justify-center text-center mb-10 ">
     <div className="">
-        <div className=" mt-20 w-full h-screen bg-base-100/50 rounded-lg shadow-lg">
+        <div className=" mt-20 w-full h-full bg-base-100/50 rounded-lg shadow-lg">
           <div className="p-8">
           <h1 className="text-2xl font-semibold text-center mt-8 mb-6">Update Profile</h1>
           <form className="mb-10" onSubmit={handleSubmit}>

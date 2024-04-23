@@ -4,6 +4,9 @@ import MyCampaignsClosed from "../CampaignComponents/CampaignsClosed.jsx";
 import {useParams} from "react-router-dom";
 import {getAllClosedCampaigns, getAllOpenCampaigns} from "../../axios/axiosCampaign.js";
 import NewCampaign from "./NewCampaign.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock, faPersonRunning } from "@fortawesome/free-solid-svg-icons";
+
 
 const MyCampaigns = () => {
 
@@ -57,17 +60,19 @@ const MyCampaigns = () => {
         <>
             {!createNewCampaign ? (
                 <>
-                
                     <header className="container mx-auto flex flex-row gap-4 justify-center items-center">
-                <span>
-                    <a href="#" onClick={(e) => {
+                
+                <span className="mt-8 ">
+                <a href="#" className="`cursor-pointer flex flex-col items-center pl-15 hover:font-bold  mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12 ${active ?
+         'text-secondary' : ''}`" onClick={(e) => {
                         handleToggleCampaigns(e, 'ongoing')
-                    }}>Ongoing</a>
+                    }}><FontAwesomeIcon icon={faPersonRunning} />Ongoing</a>
                 </span>
-                        <span>
-                    <a href="#" onClick={(e) => {
+                        <span className="mt-8">
+                    <a href="#" className="`cursor-pointer flex flex-col items-center pl-15 hover:font-bold  mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12 ${active ?
+         'text-secondary' : ''}`" onClick={(e) => {
                         handleToggleCampaigns(e, 'closed')
-                    }}>Closed</a>
+                    }}><FontAwesomeIcon icon={faLock} />Closed</a>
                 </span>
 
                         {/* New Campaign Button */}
@@ -95,11 +100,13 @@ const MyCampaigns = () => {
                         {isLoading && <p>Loading...</p>}
                         {error && <p>Error: {error}</p>}
                     </main>
+                    
                 </>
             ) : (
                 <div>
                     <NewCampaign/>
                 </div>
+                
                 
             )}
         </>
