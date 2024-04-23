@@ -39,20 +39,37 @@ class EndUserProfile(models.Model):
     serial_nr = models.CharField(max_length=15, unique=True, default=code_generator)
 
     def save(self, *args, **kwargs):
-        if self.pk:
-            if EndUserProfile.objects.filter(pk=self.pk).exists():
-                old_instance = EndUserProfile.objects.get(pk=self.pk)
-                if old_instance.qr_code:
-                    old_instance.qr_code.delete(save=False)
-        print('secret_key', self.secret_key)
-        qr = segno.make(f'"{self.secret_key}"')
-        buffer = BytesIO()
-        qr.save(buffer, kind='png', scale=5)
-        filename = f'qr_{self.user}.png'
-        if self.qr_code:
-            self.qr_code.delete(save=False)  # Delete the old file if it exists
-        self.qr_code.save(filename, ContentFile(buffer.getvalue()), save=False)
+        create = self._state.adding
+        if not create:
+            qr = segno.make(f'"{self.secret_key}"')
+            buffer = BytesIO()
+            qr.save(buffer, kind='png', scale=5)
+            filename = f'qr_{self.user}_{self.user.id}.png'
+            if self.qr_code:
+                self.qr_code.delete(save=False)  # Delete the old file if it exists
+            self.qr_code.save(filename, ContentFile(buffer.getvalue()), save=False)
+        else:
+            qr = segno.make(f'"{self.secret_key}"')
+            buffer = BytesIO()
+            qr.save(buffer, kind='png', scale=5)
+            filename = f'qr_{self.user}_{self.user.id}.png'
+            self.qr_code.save(filename, ContentFile(buffer.getvalue()), save=False)
         super().save(*args, **kwargs)
+
+        # if self.pk:
+        #     if EndUserProfile.objects.filter(pk=self.pk).exists():
+        #         old_instance = EndUserProfile.objects.get(pk=self.pk)
+        #         if old_instance.qr_code:
+        #             old_instance.qr_code.delete(save=False)
+        # print('secret_key', self.secret_key)
+        # qr = segno.make(f'"{self.secret_key}"')
+        # buffer = BytesIO()
+        # qr.save(buffer, kind='png', scale=5)
+        # filename = f'qr_{self.user}.png'
+        # if self.qr_code:
+        #     self.qr_code.delete(save=False)  # Delete the old file if it exists
+        # self.qr_code.save(filename, ContentFile(buffer.getvalue()), save=False)
+        # super().save(*args, **kwargs)
 
 
 @receiver(post_save, sender=User)
