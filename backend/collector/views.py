@@ -4,8 +4,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.utils import timezone
 
-from campaign.models import Campaign
-from collector.models import Collector, CollectorType
+from campaign.models import Campaign, CollectorType
+from collector.models import Collector
 from collector.serializers import CollectorSerializer
 from customer_user_profile.models import CustomerUserProfile
 from end_user_profile.models import EndUserProfile
@@ -18,8 +18,8 @@ class CollectorValidateView(CreateAPIView):
         # Retrieve request data
         data = request.data
         # Safely fetch the related objects, returning 404 if not found
-        collector_type = get_object_or_404(CollectorType, id=data.get('collector_type_id'))
         campaign = get_object_or_404(Campaign, id=data.get('campaign_id'))
+        collector_type = get_object_or_404(CollectorType, id=campaign.collector_type)
         end_user_profile = get_object_or_404(EndUserProfile, secret_key=data.get('secret_key'))
         # Retrieve the value count from data, assuming it could be None
         value_count = data.get('value_count')
@@ -82,7 +82,7 @@ class CollectorValidateView(CreateAPIView):
         )
 
 
-class EndUsersSpecificCampaignCollectors(ListAPIView):
+class CustomerAndSpecificUserCollectors(ListAPIView):
     # API view to list all collectors for a specific campaign and end user identified by a secret key.
     serializer_class = CollectorSerializer
     permission_classes = [IsAuthenticated]  # Define appropriate permissions or keep empty if intentional
@@ -96,6 +96,30 @@ class EndUsersSpecificCampaignCollectors(ListAPIView):
             return Collector.objects.none()  # Return an empty queryset if secret key is not provided
 
         return Collector.objects.filter(campaign__customer_user_profile=profile, end_user_profile__secret_key=secret_key)
+
+    def list(self, request, *args, **kwargs):
+        # Custom list method to handle the request and respond appropriately.
+        queryset = self.get_queryset()
+        if not queryset.exists():
+            return Response('No collectors exist for the given criteria.', status=status.HTTP_404_NOT_FOUND)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class EndUsersSpecificCampaignCollectors(ListAPIView):
+    # API view to list all collectors for a specific campaign and end user identified by a secret key.
+    serializer_class = CollectorSerializer
+    permission_classes = [IsAuthenticated]  # Define appropriate permissions or keep empty if intentional
+
+    def get_queryset(self):
+        # Overriding the default queryset to filter collectors based on the campaign ID and secret key.
+        campaign_id = self.kwargs.get('campaign_id')
+        secret_key = self.request.data.get('secret_key')
+        if not secret_key:
+            return Collector.objects.none()  # Return an empty queryset if secret key is not provided
+
+        return Collector.objects.filter(campaign__id=campaign_id, end_user_profile__secret_key=secret_key)
 
     def list(self, request, *args, **kwargs):
         # Custom list method to handle the request and respond appropriately.

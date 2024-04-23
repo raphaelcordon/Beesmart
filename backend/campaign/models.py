@@ -14,9 +14,17 @@ def campaign_directory_path(instance, filename):
     return f'campaign/{instance.id}/{filename}'
 
 
+class CollectorType(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
 class Campaign(models.Model):
     name = models.CharField(max_length=200, blank=False, null=False)
     value_goal = models.FloatField(blank=False, null=False)
+    collector_type = models.ForeignKey(CollectorType, on_delete=models.DO_NOTHING, related_name='collectors')
     date_created = models.DateTimeField(auto_now_add=True)
     beginning_date = models.DateField(blank=False, null=False, auto_now_add=True)
     ending_date = models.DateField(blank=True, null=True)
