@@ -6,7 +6,7 @@ const NavBarLink = ({ to, children }) => {
   return (
     <Link
       to={to}
-      className={`text-xl mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12 ${location.pathname === to ? "underline" : ""}`}
+      className={`flex flex-col items-center pl-15 text-xl hover:font-bold font-thin mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12 ${location.pathname === to ? "text-secondary" : ""}`}
     >
       {children}
     </Link>
