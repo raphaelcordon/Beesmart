@@ -1,4 +1,4 @@
-import beeLogo from "../../public/beeicon.png";
+
 import { Link } from "react-router-dom";
 import NavBarLink from "./SmallComponents/NavBarLinks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,7 +6,8 @@ import {faRocket, faUser} from "@fortawesome/free-solid-svg-icons";
 
 export const NavBarHome = () => {
   return (
-    <div className="navbar border border-base-300 bg-base-100/50 shadow-lg backdrop-blur-2xl ">
+   
+    <div className="navbar border border-base-300 bg-base-100/50 shadow-lg backdrop-blur-2xl">
       
       <div className="navbar-start">
         <div>
@@ -33,5 +34,7 @@ export const NavBarHome = () => {
         
       </div>
     </div>
+    
+
   );
 };
