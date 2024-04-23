@@ -138,7 +138,7 @@ const Profile = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="block mb-2 text-sm text-accent-content">Upload Avatar (not implemented)</label>
+                <label className="block mb-2 text-sm text-accent-content">Upload Avatar</label>
                 <input
                   name="avatar"
                   id="avatar"
