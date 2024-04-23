@@ -4,6 +4,6 @@ from collector.views import CollectorValidateView, EndUsersSpecificCampaignColle
 
 urlpatterns = [
     path('collector/validate/', CollectorValidateView.as_view(), name='checks in collector (add pints)'),
-    path('collector/enduser/<int:campaign_id>', EndUsersSpecificCampaignCollectors.as_view(), ),
+    path('collector/enduser/', EndUsersSpecificCampaignCollectors.as_view(), ),
 
 ]
