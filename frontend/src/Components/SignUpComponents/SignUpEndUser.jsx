@@ -28,7 +28,7 @@ const SignUpEndUser = () => {
 
           <form>
             <div className="mb-4">
-              <label htmlFor="email" className="block mb-2 text-sm text-accent-content">
+              <label htmlFor="email" className="text-center block mb-2 text-sm text-accent-content">
                 Enter your E-mail
               </label>
               <input
@@ -40,17 +40,17 @@ const SignUpEndUser = () => {
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                   required
               />
-            </div>
+            </div><div className="text-center">
             <div className="mt-8 mb-6">
               <ul className="steps">
                 <li className="step step-secondary"></li>
                 <li className="step"></li>
               </ul>
-            </div>
-
+            </div></div>
+            <div className="text-center">
               <Button onClick={handleSignUpClick}> Register</Button>
-              {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-
+              {error && <p className="text-error text-sm mt-2">{error}</p>}
+              </div>
           </form>
         </div>
       </div>

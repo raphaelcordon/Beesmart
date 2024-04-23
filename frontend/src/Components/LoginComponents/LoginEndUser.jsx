@@ -63,12 +63,16 @@ const LoginEndUser = () => {
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
               />
             </div>
+            <div className="text-center">
             {error?.password && <p>{error.password}</p>}
             <Button disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Login'}
             </Button>
+            </div>
           </form>
-          {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+          <div className="text-center">
+          {error && <p className="text-error text-sm mt-2">{error}</p>}
+          </div>
         </div>
       </div>
     </>
