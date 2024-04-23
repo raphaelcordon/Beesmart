@@ -2,6 +2,9 @@ import { Document, Page, Text, View, StyleSheet, Image, PDFViewer, PDFDownloadLi
 import backgroundImageUrl from "../../assets/loyaltyprogram_default_background.png"
 import Button from '../SmallComponents/Button';
 import { useSelector } from 'react-redux';
+import beelogo from "../../../public/beeicon.png";
+import qrcodeexample from "../../assets/qrcodeexample.png";
+
 
 // Styles for PDF
 const styles = StyleSheet.create({
@@ -33,24 +36,35 @@ const styles = StyleSheet.create({
     backgroundColor: "#606060",
   },
   headingPrimary: {
+    
+    paddingTop: "10px",
     fontSize: 20,
     fontWeight: "700",
     textAlign: "center",
   },
-  styledlogo: {
+  headingPrimary2: {
+    
+    fontSize: 20,
+    fontWeight: "700",
+    textAlign: "center",
+    
+  },
+  styledqrcode: {
     width: '230px',
     height: '230px',
-    marginBottom: 10,
-    marginTop: '385px',
-    marginLeft: '180px',
+    //marginBottom: 10,
+    marginTop: '382px',
+    marginLeft: '183px',
   }, 
+  
   image: {
-    width: '230px',
-    height: '230px',
-    marginBottom: 10,
-    marginTop: '10px',
-    marginLeft: '10px',
-  }
+    width: '150px',
+    position: 'absolute',
+   
+    //marginLeft: '50px',
+    marginLeft: '200px',
+  
+  },
 
 });
 
@@ -62,15 +76,18 @@ const TextToPDF = ({ website, qrCode, logo, businessName }) => (
       <View style={styles.pageBackgroundContainer}>
         <Image src={backgroundImageUrl} style={styles.imageBackground} />
       </View>
-      <Image src={qrCode} style={styles.styledlogo} /> 
+      {/* <Image src={qrCode} style={styles.styledqrcode} /> */}
       
+      <Image src={qrcodeexample} style={styles.styledqrcode} />
       <Text style={styles.headingPrimary}>
-        Website: {website}
+      Terms& Conditions:
+        </Text>
+      <Text style={styles.headingPrimary2}>
+        {website}
       </Text>
-      <Text style={styles.headingPrimary}>
-        Business Name: {businessName}
-      </Text>
-      <Image src={logo} style={styles.image} />
+      
+      {/* <Image src={logo} style={styles.image} /> */}
+      <Image src={beelogo} style={styles.image} />
     </Page>
   </Document>
 );
