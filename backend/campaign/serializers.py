@@ -18,7 +18,7 @@ class CampaignSerializer(serializers.ModelSerializer):
     class Meta:
         model = Campaign
         fields = ['id', 'is_active', 'name', 'style', 'value_goal', 'beginning_date', 'ending_date', 'image', 'logo',
-                  'customer_user_profile']
+                  'customer_user_profile', 'collector_type']
         read_only_fields = ['id', 'customer_user_profile', ]
 
     def to_representation(self, instance):

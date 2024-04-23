@@ -1,12 +1,29 @@
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import beeLogo from "../../../public/beeicon.png";
 import NavBarToggling from "../SmallComponents/NavBarToggling.jsx";
 import { useEffect, useRef, useState } from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {logoutUserEndUser} from "../../store/slices/userEndUserSlice.js";
+import useGetMeEndUser from "../../Hooks/useGetMeEndUser.js";
+
 
 const NavBarBusiness = ({ setActiveTabProp }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [activeTab, setActiveTab] = useState('Scan');
     const menuRef = useRef(null);
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.endUser.userEndUserData);
+    const { getUser, error } = useGetMeEndUser();
+    const navigate = useNavigate();
+    const secretKey = user?.end_user_profile?.secret_key;
+
+    useEffect(() => {
+        if ((!user || (Array.isArray(user) && user.length === 0)) && window.localStorage.getItem("accessToken")) {
+            getUser();
+        }
+    }, [user, getUser]);
+
+
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -30,11 +47,18 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
         };
     }, []);
 
+
+    const logoutHandler = () => {
+    dispatch(logoutUserEndUser());
+    window.localStorage.removeItem("accessToken")
+    };
+
+
     return (
         <div className="navbar">
             <div className="navbar-start">
                 <div>
-                    <Link to="/">
+                    <Link to={`/user/${secretKey}`}>
                         <img src={beeLogo} className="h-10 w-10 sm:h-10 sm:w-10 lg:h-20 lg:w-20" alt="Bee Logo"/>
                         <p className="text-lg">BeeSmart</p>
                     </Link>
@@ -63,6 +87,12 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                                 tabName="Scan">Scan</NavBarToggling>
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('Profile')} active={activeTab === 'Profile'}
                                 tabName="Profile">Profile</NavBarToggling>
+                <Link to="/" onClick={(e) => {
+                      e.preventDefault();
+                      logoutHandler();
+                      navigate("/");
+                    }}>Logout
+                </Link>
             </div>
         </div>
     );

@@ -53,7 +53,7 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
         <div className="navbar">
             <div className="navbar-start">
                 <div>
-                    <Link to="/">
+                    <Link to="/business">
                         <img src={beeLogo} className="h-10 w-10 sm:h-10 sm:w-10 lg:h-20 lg:w-20" alt="Bee Logo"/>
                         <p className="text-lg">BeeSmart</p>
                     </Link>
