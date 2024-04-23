@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutUserCustomer } from "../../store/slices/userCustomerSlice.js";
 import useGetMeUser from "../../Hooks/useGetMeUser.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faBell, faChartLine, faCirclePlus, faQrcode, faRightFromBracket, faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
+import campaign from "../../assets/campaign.png";
+import NavBarLink from "../SmallComponents/NavBarLinks.jsx";
 
 const NavBarBusiness = ({ setActiveTabProp }) => {
     const [activeTab, setActiveTab] = useState('MyCampaigns');
@@ -66,31 +68,36 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                 </div>
             </div> */}
 
-            <div ref={menuRef}
+            <div ref={menuRef} 
                 //  className="navbar-center flex md:flex-row absolute md:relative top-0 right-0 md:top-auto md:right-auto w-full md:w-auto h-full md:h-auto bg-primary bg-opacity-75 md:bg-opacity-0 z-50 py-2 md:py-0">
                 //className="navbar border border-base-300 bg-base-100/50 shadow-lg backdrop-blur-2xl fixed bottom-0 left-0 w-full z-10 md:relative md:flex md:justify-between sm:justify-around">
                 >
 
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('MyCampaigns')}
                                 active={activeTab === 'MyCampaigns'}
-                                tabName="MyCampaigns">Campaigns</NavBarToggling>
+                                tabName="MyCampaigns">
+                                    <FontAwesomeIcon icon={faBell} />Campaigns</NavBarToggling>
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('Insights')} active={activeTab === 'Insights'}
-                                tabName="Insights">Insights</NavBarToggling>
+                                tabName="Insights">
+                                    <FontAwesomeIcon icon={faChartLine} />Insights</NavBarToggling>
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('QrCode')} active={activeTab === 'QrCode'}
-                                tabName="QrCode">QR Code</NavBarToggling>
+                                tabName="QrCode">
+                                    <FontAwesomeIcon icon={faQrcode} />QR Code</NavBarToggling>
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('NewCampaign')}
                                 active={activeTab === 'NewCampaign'}
-                                tabName="NewCampaign">+ New Campaign</NavBarToggling>
+                                tabName="NewCampaign">
+                                    <FontAwesomeIcon icon={faCirclePlus} />+ New Campaign</NavBarToggling>
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('Settings')} active={activeTab === 'Settings'}
-                                tabName="Settings">Settings</NavBarToggling>
+                                tabName="Settings">
+                                    <FontAwesomeIcon icon={faScrewdriverWrench} />Settings</NavBarToggling>
                                  
                 <div className="hidden sm:inline-block">
-                <NavLink to="/" onClick={(e) => {
+                <NavBarLink to="/" onClick={(e) => {
                       e.preventDefault();
                       logoutHandler();
                       navigate("/");
-                    }}>Logout
-                </NavLink></div>
+                    }}><FontAwesomeIcon icon={faRightFromBracket} /><span> Logout</span>
+                </NavBarLink></div>
             </div>
         </div>
         </>
