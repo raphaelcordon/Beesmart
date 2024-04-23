@@ -7,7 +7,9 @@ import store from "./store/store.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
+    <div className="bg-accent">
     <App />
+    </div>
   </Provider>,
 );
 

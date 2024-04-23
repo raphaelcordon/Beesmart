@@ -45,10 +45,10 @@ const MyCampaigns = () => {
         setCreateNewCampaign(false);
     };
 
-    const handleCreateNewCampaign = (e) => {
-        e.preventDefault();
-        setCreateNewCampaign(!createNewCampaign);
-    };
+    // const handleCreateNewCampaign = (e) => {
+    //     e.preventDefault();
+    //     setCreateNewCampaign(!createNewCampaign);
+    // };
 
     console.log(campaignsOpen)
     console.log(campaignsClosed)
@@ -57,6 +57,7 @@ const MyCampaigns = () => {
         <>
             {!createNewCampaign ? (
                 <>
+                <div className="flex flex-col h-screen items-center justify-center text-center px-4 ">
                     <header className="container mx-auto flex flex-row gap-4 justify-center items-center">
                 <span>
                     <a href="#" onClick={(e) => {
@@ -70,7 +71,7 @@ const MyCampaigns = () => {
                 </span>
 
                         {/* New Campaign Button */}
-                        <button
+                        {/* <button
                             className="p-2 rounded-full bg-blue-500 text-white shadow-lg hover:bg-blue-600 transition duration-300 ease-in-out flex items-center justify-center h-12 w-12"
                             onClick={(e) => {
                                 handleCreateNewCampaign(e, 'ongoing')
@@ -80,8 +81,8 @@ const MyCampaigns = () => {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                       d="M12 4v16m8-8H4"></path>
                             </svg>
-                            {/* Icon for plus */}
-                        </button>
+                            
+                        </button> */}
                     </header>
 
                     <main>
@@ -93,12 +94,13 @@ const MyCampaigns = () => {
 
                         {isLoading && <p>Loading...</p>}
                         {error && <p>Error: {error}</p>}
-                    </main>
+                    <text>trysomething</text></main></div>
                 </>
             ) : (
                 <div>
                     <NewCampaign/>
                 </div>
+                
             )}
         </>
     )

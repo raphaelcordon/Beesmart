@@ -3,10 +3,14 @@ import { Outlet } from "react-router-dom";
 
 function Layout() {
   return (
-    <>
+    <div className="flex flex-col h-screen">
+    <div className="h-15">
       <NavBarHome />
-      <Outlet />
-    </>
+      </div>
+      <div className="flex-grow">
+        <Outlet />
+      </div>
+    </div>
   );
 }
 
