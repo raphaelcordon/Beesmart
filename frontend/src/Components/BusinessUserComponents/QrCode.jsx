@@ -4,6 +4,9 @@ import Button from '../SmallComponents/Button';
 import { useSelector } from 'react-redux';
 // import beelogo from "../../../public/beeicon.png";
 // import qrcodeexample from "../../assets/qrcodeexample.png";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PropTypes from 'prop-types';
+import { faDownload} from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
 
 });
 
-import PropTypes from 'prop-types';
+
 
 const TextToPDF = ({ website, qrCode, logo}) => (
   <Document>
@@ -113,6 +116,7 @@ const QrCode = () => {
  //const qrcode = localStorage.getItem('qrCode'); // Retrieve QR code from local storage
 
   const pdfData = <TextToPDF website={website} qrCode={qrcode} logo={logo} />; 
+  
 
 
 
@@ -125,7 +129,7 @@ const QrCode = () => {
           <div className='flex items-center justify-center'>
             <div className="mb-4 w-4/5 text-center">
               <div className="pt-8">
-              Download your QR code now to effortlessly 
+              <FontAwesomeIcon icon={faDownload} /> Download your QR code now to effortlessly 
               connect with your customers. Simply display it in your storefront, 
               on your marketing materials, or even on your products. 
               </div>
@@ -142,8 +146,8 @@ const QrCode = () => {
             <div className='mb-8'>
             <div className='flex items-center justify-center'>
             <div className="mb-4 w-4/5  text-center">
-            <div className="mb-4"> We've curated an eye-catching display option to make your QR code stand out.
-            Upload You Logo and website at Settings, than:</div></div></div>
+            <div className="mb-4"><FontAwesomeIcon icon={faDownload} /> We've curated an eye-catching display option to make your QR code stand out.
+            Upload Your Logo and website at Settings, than:</div></div></div>
             <PDFDownloadLink document={pdfData} fileName="beesmart_qrcode.pdf" 
             className="btn bg-secondary btn-md-wide px-20 text-base-100">
               {({ loading }) => (loading ? 'Loading document...' : 'Download PDF')}
