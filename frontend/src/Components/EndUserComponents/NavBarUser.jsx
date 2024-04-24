@@ -5,6 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutUserEndUser} from "../../store/slices/userEndUserSlice.js";
 import useGetMeEndUser from "../../Hooks/useGetMeEndUser.js";
+import NavBarLink from "../SmallComponents/NavBarLinks.jsx";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 const NavBarBusiness = ({ setActiveTabProp }) => {
@@ -76,9 +79,12 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
 
             <div ref={menuRef}
                  className="navbar-start">
+                    <div className="flex justify-between">
+                    <div className="ml-0 sm:ml-2">
 
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('MyCampaigns')} active={activeTab === 'MyCampaigns'}
                                 tabName="MyCampaigns">My Campaigns</NavBarToggling>
+                                </div>
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('MyVouchers')} active={activeTab === 'MyVouchers'}
                                 tabName="MyVouchers">My Vouchers</NavBarToggling>
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('Scan')}
@@ -86,12 +92,18 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                                 tabName="Scan">Scan</NavBarToggling>
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('Profile')} active={activeTab === 'Profile'}
                                 tabName="Profile">Profile</NavBarToggling>
-                <Link to="/" onClick={(e) => {
+                <div className="hidden sm:inline-block">
+                <NavBarLink to="/" onClick={(e) => {
                       e.preventDefault();
                       logoutHandler();
                       navigate("/");
-                    }}>Logout
-                </Link>
+                    }}><FontAwesomeIcon icon={faRightFromBracket} />
+                    <span>
+                         Logout
+                         </span>
+                </NavBarLink>
+                </div>
+                </div>
             </div>
         </div>
     );
