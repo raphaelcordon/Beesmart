@@ -25,27 +25,27 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
 
 
 
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    };
+    // const toggleMenu = () => {
+    //     setIsOpen(!isOpen);
+    // };
 
     const handleSetActiveTab = (tabName) => {
         setActiveTab(tabName);
         setActiveTabProp(tabName);
     };
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (menuRef.current && !menuRef.current.contains(event.target)) {
-                setIsOpen(false);
-            }
-        };
+    // useEffect(() => {
+    //     const handleClickOutside = (event) => {
+    //         if (menuRef.current && !menuRef.current.contains(event.target)) {
+    //             setIsOpen(false);
+    //         }
+    //     };
 
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
+    //     document.addEventListener('mousedown', handleClickOutside);
+    //     return () => {
+    //         document.removeEventListener('mousedown', handleClickOutside);
+    //     };
+    // }, []);
 
 
     const logoutHandler = () => {
@@ -55,17 +55,16 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
 
 
     return (
-        <div className="navbar">
-            <div className="navbar-start">
-                <div>
+        <div className="navbar border border-base-300 bg-base-100/50 shadow-lg backdrop-blur-2xl fixed bottom-0 left-0 w-full z-10 md:relative md:flex md:justify-between sm:justify-around">
+            {/* <div className="navbar-start"> */}
+                {/* <div>
                     <Link to={`/user/${secretKey}`}>
-                        <img src={beeLogo} className="h-10 w-10 sm:h-10 sm:w-10 lg:h-20 lg:w-20" alt="Bee Logo"/>
                         <p className="text-lg">BeeSmart</p>
                     </Link>
-                </div>
-            </div>
+                </div> */}
+            {/* </div> */}
 
-            {!isOpen && (
+            {/* {!isOpen && (
                 <div className="navbar-end md:hidden">
                     <button onClick={toggleMenu} className="md:hidden">
                         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -73,10 +72,10 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                         </svg>
                     </button>
                 </div>
-            )}
+            )} */}
 
             <div ref={menuRef}
-                 className={`navbar-center ${isOpen ? 'flex' : 'hidden md:flex'} absolute md:relative top-0 right-0 md:top-auto md:right-auto w-1/4 md:w-auto h-full md:h-auto bg-primary bg-opacity-75 md:bg-opacity-0 z-50 flex-col md:flex-row py-2 md:py-0`}>
+                 className="navbar-start">
 
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('MyCampaigns')} active={activeTab === 'MyCampaigns'}
                                 tabName="MyCampaigns">My Campaigns</NavBarToggling>
