@@ -37,7 +37,7 @@ class Voucher(models.Model):
         super().save(*args, **kwargs)
 
         # After the instance is saved, it has a valid ID
-        qr = segno.make(f"{self.id}")
+        qr = segno.make(f'"{self.id}"')
         buffer = BytesIO()
         qr.save(buffer, kind='png', scale=5)
         filename = f'qr_{self.name}_{self.id}.png'
