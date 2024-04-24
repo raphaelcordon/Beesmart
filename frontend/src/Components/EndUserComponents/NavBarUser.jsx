@@ -99,7 +99,7 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
 
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('MyCampaigns')} active={activeTab === 'MyCampaigns'}
                                 tabName="MyCampaigns"><FontAwesomeIcon icon={faBullhorn} />Campaigns</NavBarToggling>
-                                <div  className="mx-3" >
+                                <div  className="mx-5" >
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('MyVouchers')} active={activeTab === 'MyVouchers'}
                                 tabName="MyVouchers">
                                     <FontAwesomeIcon icon={faTicketSimple} />Vouchers</NavBarToggling></div></div>
@@ -108,7 +108,7 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('Scan')}
                                 active={activeTab === 'Scan'}
                                 tabName="Scan"><FontAwesomeIcon icon={faExpand} />Scan</NavBarToggling></div>
-                                <div  className="mx-2" >
+                                <div  className="mx-5" >
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('Profile')} active={activeTab === 'Profile'}
                                 tabName="Profile"><FontAwesomeIcon icon={faUser} />Profile</NavBarToggling></div></div>
                 <div className="hidden sm:inline-block">
