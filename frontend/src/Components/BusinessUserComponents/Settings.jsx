@@ -1,7 +1,7 @@
-import Button from "../SmallComponents/Button.jsx";
+import { useSelector } from 'react-redux';
 import { useState, useEffect } from "react";
 import { UpdateMeUser } from "../../axios/axiosCustomer.js";
-import { useSelector } from 'react-redux';
+import Button from "../SmallComponents/Button.jsx";
 
 const Settings = () => {
   const CustomerUser = useSelector(state => state.customer.userCustomerData);
