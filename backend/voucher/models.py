@@ -4,6 +4,7 @@ from django.db import models
 
 from campaign.models import Campaign
 from end_user_profile.models import EndUserProfile
+
 import segno
 from django.core.files.base import ContentFile
 from io import BytesIO
@@ -19,8 +20,7 @@ def voucher_directory_path(instance, filename):
 
 
 def voucher_qr_directory_path(instance, filename):
-    uniq = code_generator(10)
-    return f'voucher_qr/{uniq}/{filename}'
+    return f'voucher_qr/{instance.id}/{filename}'
 
 
 class Voucher(models.Model):
@@ -33,20 +33,15 @@ class Voucher(models.Model):
     qr_code = models.ImageField(upload_to=voucher_qr_directory_path)
 
     def save(self, *args, **kwargs):
-        if self.pk:
-            if Voucher.objects.filter(pk=self.pk).exists():
-                old_instance = Voucher.objects.get(pk=self.pk)
-                if old_instance.qr_code and old_instance.qr_code != self.qr_code:
-                    old_instance.qr_code.delete(save=False)
-        qr = segno.make(
-            f'"campaign_id":{self.campaign.id}, "user_email":{self.end_user_profile.user.email}"')
+        super().save(*args, **kwargs)
+        qr = segno.make(f'{self.end_user_profile.user.email}_{self.name}_{self.id}')
         buffer = BytesIO()
         qr.save(buffer, kind='png', scale=5)
-        filename = f'qr_{self.id}.png'
-        if self.qr_code:
-            self.qr_code.delete(save=False)  # Delete the old file if it exists
+        filename = f'qr_{self.name}_{self.id}.png'
+
         self.qr_code.save(filename, ContentFile(buffer.getvalue()), save=False)
-        super().save(*args, **kwargs)
+
+        super().save(update_fields=['qr_code'])
 
     def __str__(self):
         return self.campaign.name
