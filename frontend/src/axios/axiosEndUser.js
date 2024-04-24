@@ -27,6 +27,7 @@ export const PostEndUserVerify = async (userData) => {
         const res = await axios.post(`/enduser/user/verify/${userData.secret_key}/`, userData, {
             responseType: 'blob', // Important: This tells Axios to handle the response as a blob
           });
+        console.log(res)
         return res.data;
     } catch (error) {
         throw error("Not possible to fetch data");
