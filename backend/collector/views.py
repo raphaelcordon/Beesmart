@@ -106,7 +106,7 @@ class CustomerAndSpecificUserCollectors(ListAPIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class EndUsersSpecificCampaignCollectors(CreateAPIView):
+class EndUsersSpecificCampaignCollectors(ListAPIView):
     # API view to list all collectors for a specific campaign and end user identified by a secret key.
     serializer_class = CollectorSerializer
     permission_classes = [IsAuthenticated]  # Define appropriate permissions or keep empty if intentional
@@ -114,13 +114,15 @@ class EndUsersSpecificCampaignCollectors(CreateAPIView):
     def get_queryset(self):
         # Overriding the default queryset to filter collectors based on the campaign ID and secret key.
         campaign_id = self.kwargs.get('campaign_id')
-        secret_key = self.request.data.get('secret_key')
-        if not secret_key:
-            return Collector.objects.none()  # Return an empty queryset if secret key is not provided
+        user = self.request.user
+        profile = EndUserProfile.objects.get(user=user)
+        # secret_key = self.request.data.get('secret_key')
+        # if not secret_key:
+        #     return Collector.objects.none()  # Return an empty queryset if secret key is not provided
+        return Collector.objects.filter(campaign__id=campaign_id, end_user_profile=profile,
+                                        is_collected=False)
 
-        return Collector.objects.filter(campaign__id=campaign_id, end_user_profile__secret_key=secret_key)
-
-    def post(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         # Custom list method to handle the request and respond appropriately.
         queryset = self.get_queryset()
         if not queryset.exists():

@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import MyCampaignsOngoing from "../CampaignComponents/CampaignsOngoing.jsx";
-import MyCampaignsClosed from "../CampaignComponents/CampaignsClosed.jsx";
+import MyCampaignsOngoing from "../EndUserComponents/MyCampaignsComponents/MyCampaignsOngoing.jsx";
+import MyCampaignsClosed from "../EndUserComponents/MyCampaignsComponents/MyCampaignsClosed.jsx";
 import {useParams} from "react-router-dom";
 import {getCampaignByEndUser} from "../../axios/axiosCampaign.js";
 
@@ -32,7 +32,7 @@ const MyCampaigns = () => {
         e.preventDefault();
         campaignsOption === 'ongoing' ? setCurrentCampaigns('ongoing') : setCurrentCampaigns('closed');
     }
-    console.log(campaigns)
+
     return (
         <>
             <header className="container mx-auto flex flex-row gap-4 justify-center items-center">
@@ -48,11 +48,11 @@ const MyCampaigns = () => {
 
             <main>
                 {currentCampaigns === 'ongoing' && (
-                    <MyCampaignsOngoing list={campaigns}/>
+                    <MyCampaignsOngoing campaigns={campaigns}/>
                 )}
 
                 {currentCampaigns === 'closed' && (
-                    <MyCampaignsClosed list={campaigns} />
+                    <MyCampaignsClosed campaigns={campaigns} />
                 )}
 
 
