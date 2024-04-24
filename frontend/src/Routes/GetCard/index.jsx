@@ -6,6 +6,7 @@ import Button from "../../Components/SmallComponents/Button.jsx";
 
 const GetCard = () => {
     const navigator = useNavigate()
+    const userAgent = navigator.userAgent;
 
     let {id} = useParams();
     const [password, setPassword] = useState('');
@@ -57,7 +58,7 @@ const GetCard = () => {
     const verifyEndUser = async (userData) => {
         try {
             const data = await PostEndUserVerify(userData);
-            if (navigator.userAgent.includes('iOS')) {
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
                 const url = window.URL.createObjectURL(new Blob([data], {type: 'application/vnd.apple.pkpass'}));
                 const link = document.createElement('a');
                 link.href = url;
