@@ -3,22 +3,38 @@ module.exports = {
   daisyui: {
     themes: [
       {
-        light: {
-          ...require("daisyui/src/theming/themes")["light"],
-          primary: "#D9B08C",
-          secondary: "#116466",
-          'base-300': "#D1E8E2",
-          accent: "#2C3531",
-          'base-200': "#FFCB9A",
-          
+        bumblebee: {
+          ...require("daisyui/src/theming/themes")["bumblebee"],
         },
       },
     ],
     utils: true,
   },
-
   plugins: [require("daisyui")],
 };
+
+
+// module.exports = {
+//   content: ["./src/**/*.{js,ts,jsx,tsx}"],
+//   daisyui: {
+//     themes: [
+//       {
+//         light: {
+//           ...require("daisyui/src/theming/themes")["light"],
+//           primary: "#D9B08C",
+//           secondary: "#116466",
+//           'base-300': "#D1E8E2",
+//           accent: "#2C3531",
+//           'base-200': "#FFCB9A",
+          
+//         },
+//       },
+//     ],
+//     utils: true,
+//   },
+
+//   plugins: [require("daisyui")],
+// };
 
 
 //later customise themes (Böbi)
