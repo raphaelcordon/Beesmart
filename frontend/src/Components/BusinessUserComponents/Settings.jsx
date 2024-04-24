@@ -48,9 +48,10 @@ const Settings = () => {
 
   return (
 
-    <div className="flex items-center justify-center">
-      <div className="flex xl:items-center l:items-center justify-center sm:mt-p md:mt-50p">
-        <div className="max-w-md w-full p-6 bg-base-100 rounded-lg shadow-lg mb-16">
+    <div className="flex flex-col items-center justify-center text-center mb-10 ">
+    <div className="">
+        <div className=" mt-20 w-full h-full bg-base-100/50 rounded-lg shadow-lg">
+          <div className="p-8">
           <h1 className="text-2xl font-semibold text-center mt-8 mb-6">Update Profile</h1>
           <form className="mb-10" onSubmit={handleSubmit}>
             <div className="grid sm:grid-cols-2 gap-y-7 gap-x-12">
@@ -156,10 +157,12 @@ const Settings = () => {
                 />
               </div>
             </div>
-            <Button type="submit">Save</Button>
-          </form>
-          {success && <div className="text-success mb-4">Profile updated successfully!</div>}
+            <Button className="mt-8" type="submit">Save</Button>
+          
+          {success && <div className="text-success">Profile updated successfully!</div>}
           {error && <small>{String(error)}</small>}
+          </form>
+        </div>
         </div>
       </div>
       {console.log(CustomerUser)}

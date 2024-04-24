@@ -12,7 +12,9 @@ const ProtectedRoutes = () => {
       // this prevents users from an infinite loop of redirects when clicking the back button
       <Navigate to="/" replace state={{ from: location.pathname }} />
     ) : (
+      <div className="flex-grow">
       <Outlet />
+      </div>
     )
 }
 

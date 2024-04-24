@@ -4,6 +4,9 @@ import MyCampaignsClosed from "../CampaignComponents/CampaignsClosed.jsx";
 import {useParams} from "react-router-dom";
 import {getAllClosedCampaigns, getAllOpenCampaigns} from "../../axios/axiosCampaign.js";
 import NewCampaign from "./NewCampaign.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock, faPersonRunning } from "@fortawesome/free-solid-svg-icons";
+
 
 const MyCampaigns = () => {
 
@@ -45,10 +48,10 @@ const MyCampaigns = () => {
         setCreateNewCampaign(false);
     };
 
-    const handleCreateNewCampaign = (e) => {
-        e.preventDefault();
-        setCreateNewCampaign(!createNewCampaign);
-    };
+    // const handleCreateNewCampaign = (e) => {
+    //     e.preventDefault();
+    //     setCreateNewCampaign(!createNewCampaign);
+    // };
 
     console.log(campaignsOpen)
     console.log(campaignsClosed)
@@ -58,19 +61,22 @@ const MyCampaigns = () => {
             {!createNewCampaign ? (
                 <>
                     <header className="container mx-auto flex flex-row gap-4 justify-center items-center">
-                <span>
-                    <a href="#" onClick={(e) => {
+                
+                <span className="mt-8 ">
+                <a href="#" className="`cursor-pointer flex flex-col items-center pl-15 hover:font-bold  mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12 ${active ?
+         'text-secondary' : ''}`" onClick={(e) => {
                         handleToggleCampaigns(e, 'ongoing')
-                    }}>Ongoing</a>
+                    }}><FontAwesomeIcon icon={faPersonRunning} />Ongoing</a>
                 </span>
-                        <span>
-                    <a href="#" onClick={(e) => {
+                        <span className="mt-8">
+                    <a href="#" className="`cursor-pointer flex flex-col items-center pl-15 hover:font-bold  mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12 ${active ?
+         'text-secondary' : ''}`" onClick={(e) => {
                         handleToggleCampaigns(e, 'closed')
-                    }}>Closed</a>
+                    }}><FontAwesomeIcon icon={faLock} />Closed</a>
                 </span>
 
                         {/* New Campaign Button */}
-                        <button
+                        {/* <button
                             className="p-2 rounded-full bg-blue-500 text-white shadow-lg hover:bg-blue-600 transition duration-300 ease-in-out flex items-center justify-center h-12 w-12"
                             onClick={(e) => {
                                 handleCreateNewCampaign(e, 'ongoing')
@@ -80,11 +86,11 @@ const MyCampaigns = () => {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                       d="M12 4v16m8-8H4"></path>
                             </svg>
-                            {/* Icon for plus */}
-                        </button>
+                            
+                        </button> */}
                     </header>
 
-                    <main>
+                    <main className="flex flex-col h-screen items-center justify-center text-center px-4 ">
                         {currentCampaigns === 'ongoing' ? (
                             <MyCampaignsOngoing list={campaignsOpen}/>
                         ) : (
@@ -94,11 +100,14 @@ const MyCampaigns = () => {
                         {isLoading && <p>Loading...</p>}
                         {error && <p>Error: {error}</p>}
                     </main>
+                    
                 </>
             ) : (
                 <div>
                     <NewCampaign/>
                 </div>
+                
+                
             )}
         </>
     )
