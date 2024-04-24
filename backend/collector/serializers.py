@@ -2,7 +2,6 @@ from datetime import date
 
 from rest_framework import serializers
 
-from campaign.serializers import CollectorTypeSerializer
 from collector.models import Collector
 from end_user_profile.serializers import EndUserProfileOutSerializer
 
@@ -13,7 +12,7 @@ class CollectorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Collector
         fields = ['id', 'is_active', 'value_counted', 'value_goal', 'end_user_profile', 'campaign', 'is_collected',
-                  'date_created' ]
+                  'date_created']
         read_only_fields = ['id', 'end_user_profile', 'campaign', 'value_goal', 'date_created',
                             'is_collected']
 
