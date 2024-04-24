@@ -16,6 +16,10 @@ const MyCampaigns = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [createNewCampaign, setCreateNewCampaign] = useState(false)
+    
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -99,6 +103,7 @@ const MyCampaigns = () => {
 
                         {isLoading && <p>Loading...</p>}
                         {error && <p>Error: {error}</p>}
+                        <div></div>
                     </main>
                     
                 </>

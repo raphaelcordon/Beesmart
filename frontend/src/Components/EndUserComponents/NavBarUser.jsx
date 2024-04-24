@@ -1,16 +1,19 @@
-import {Link, useNavigate} from "react-router-dom";
-import beeLogo from "../../../public/beeicon.png";
+import {useNavigate} from "react-router-dom";
+//import beeLogo from "../../../public/beeicon.png";
 import NavBarToggling from "../SmallComponents/NavBarToggling.jsx";
 import { useEffect, useRef, useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutUserEndUser} from "../../store/slices/userEndUserSlice.js";
 import useGetMeEndUser from "../../Hooks/useGetMeEndUser.js";
+import NavBarLink from "../SmallComponents/NavBarLinks.jsx";
+import { faBullhorn, faExpand, faRightFromBracket, faTicketSimple, faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 const NavBarBusiness = ({ setActiveTabProp }) => {
-    const [isOpen, setIsOpen] = useState(false);
+    //const [isOpen, setIsOpen] = useState(false);
     const [activeTab, setActiveTab] = useState('Scan');
-    const menuRef = useRef(null);
+    //const menuRef = useRef(null);
     const dispatch = useDispatch();
     const user = useSelector(state => state.endUser.userEndUserData);
     const { getUser, error } = useGetMeEndUser();
@@ -25,27 +28,27 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
 
 
 
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    };
+    // const toggleMenu = () => {
+    //     setIsOpen(!isOpen);
+    // };
 
     const handleSetActiveTab = (tabName) => {
         setActiveTab(tabName);
         setActiveTabProp(tabName);
     };
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (menuRef.current && !menuRef.current.contains(event.target)) {
-                setIsOpen(false);
-            }
-        };
+    // useEffect(() => {
+    //     const handleClickOutside = (event) => {
+    //         if (menuRef.current && !menuRef.current.contains(event.target)) {
+    //             setIsOpen(false);
+    //         }
+    //     };
 
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
+    //     document.addEventListener('mousedown', handleClickOutside);
+    //     return () => {
+    //         document.removeEventListener('mousedown', handleClickOutside);
+    //     };
+    // }, []);
 
 
     const logoutHandler = () => {
@@ -55,17 +58,31 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
 
 
     return (
-        <div className="navbar">
-            <div className="navbar-start">
-                <div>
+
+
+<>
+ {/* Logout button for mobile users */}
+ <div className="absolute top-3 right-3 p-2 sm:hidden text-3xl">
+ <NavBarLink to="/" onClick={(e) => {
+           e.preventDefault();
+           logoutHandler();
+           navigate("/");
+         }}><FontAwesomeIcon icon={faRightFromBracket} />
+     </NavBarLink>
+     </div>
+
+
+
+        <div className="navbar border border-base-300 bg-base-100/50 shadow-lg backdrop-blur-2xl fixed bottom-0 left-0 w-full z-10 md:relative md:flex md:justify-between sm:justify-around">
+            {/* <div className="navbar-start"> */}
+                {/* <div>
                     <Link to={`/user/${secretKey}`}>
-                        <img src={beeLogo} className="h-10 w-10 sm:h-10 sm:w-10 lg:h-20 lg:w-20" alt="Bee Logo"/>
                         <p className="text-lg">BeeSmart</p>
                     </Link>
-                </div>
-            </div>
+                </div> */}
+            {/* </div> */}
 
-            {!isOpen && (
+            {/* {!isOpen && (
                 <div className="navbar-end md:hidden">
                     <button onClick={toggleMenu} className="md:hidden">
                         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -73,28 +90,43 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                         </svg>
                     </button>
                 </div>
-            )}
+            )} */}
 
-            <div ref={menuRef}
-                 className={`navbar-center ${isOpen ? 'flex' : 'hidden md:flex'} absolute md:relative top-0 right-0 md:top-auto md:right-auto w-1/4 md:w-auto h-full md:h-auto bg-primary bg-opacity-75 md:bg-opacity-0 z-50 flex-col md:flex-row py-2 md:py-0`}>
+            {/* <div ref={menuRef} */}
+                < div className="navbar-start">
+                    {/* <div className="flex justify-between"> */}
+                    {/* <div className="ml-0 sm:ml-2"> */}
 
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('MyCampaigns')} active={activeTab === 'MyCampaigns'}
-                                tabName="MyCampaigns">My Campaigns</NavBarToggling>
+                                tabName="MyCampaigns"><FontAwesomeIcon icon={faBullhorn} />Campaigns</NavBarToggling>
+                                <div  className="mx-5" >
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('MyVouchers')} active={activeTab === 'MyVouchers'}
-                                tabName="MyVouchers">My Vouchers</NavBarToggling>
+                                tabName="MyVouchers">
+                                    <FontAwesomeIcon icon={faTicketSimple} />Vouchers</NavBarToggling></div></div>
+                                    <div className="navbar-end md:navbar-center">
+                <div  className="block lg:hidden mx-6" >
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('Scan')}
                                 active={activeTab === 'Scan'}
-                                tabName="Scan">Scan</NavBarToggling>
+                                tabName="Scan"><FontAwesomeIcon icon={faExpand} />Scan</NavBarToggling></div>
+                                <div  className="mx-5" >
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('Profile')} active={activeTab === 'Profile'}
-                                tabName="Profile">Profile</NavBarToggling>
-                <Link to="/" onClick={(e) => {
+                                tabName="Profile"><FontAwesomeIcon icon={faUser} />Profile</NavBarToggling></div></div>
+                <div className="hidden sm:inline-block">
+                <NavBarLink to="/" onClick={(e) => {
                       e.preventDefault();
                       logoutHandler();
                       navigate("/");
-                    }}>Logout
-                </Link>
-            </div>
-        </div>
+                    }}><FontAwesomeIcon icon={faRightFromBracket} />
+                    <span>
+                         Logout
+                         </span>
+                </NavBarLink>
+                </div>
+                </div>
+                {/* </div> */}
+            
+        {/* </div> */}
+        </>
     );
 }
 

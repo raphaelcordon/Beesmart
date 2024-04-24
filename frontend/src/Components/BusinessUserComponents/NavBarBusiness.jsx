@@ -79,34 +79,34 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                 //className="navbar border border-base-300 bg-base-100/50 shadow-lg backdrop-blur-2xl fixed bottom-0 left-0 w-full z-10 md:relative md:flex md:justify-between sm:justify-around">
                 >
 
-<div className="flex justify-between">
-<div className="ml-0 sm:ml-2">
+{/* <div className="flex justify-between">
+<div className="ml-0 sm:ml-2"> */}
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('MyCampaigns')}
                                 active={activeTab === 'MyCampaigns'}
                                 tabName="MyCampaigns">
                                     <FontAwesomeIcon icon={faBell} />Campaigns</NavBarToggling>
-                                    </div>
-                                    <div className="ml-0 sm:ml-0">
+                                    
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('Insights')} active={activeTab === 'Insights'}
                                 tabName="Insights">
                                     <FontAwesomeIcon icon={faChartLine} />Insights</NavBarToggling>
                                     </div>
-                                    <div className="ml-20 sm:ml-0">
+                                    <div className="navbar-end md:navbar-center">
+                                    <div  className="mx-6" > 
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('QrCode')} active={activeTab === 'QrCode'}
                                 tabName="QrCode">
-                                    <FontAwesomeIcon icon={faQrcode} />QR</NavBarToggling>
-                                    </div>
-                                    <div>
+                                    <FontAwesomeIcon icon={faQrcode} />QR</NavBarToggling></div>
+                                    
+                                    
                 <NavBarTogglingNew setActiveTab={() => handleSetActiveTab('NewCampaign')}
                                 active={activeTab === 'NewCampaign'}
                                 tabName="NewCampaign">
                                     <FontAwesomeIcon icon={faCirclePlus} /> New Campaign</NavBarTogglingNew>
-                                    </div>
-                                    <div className="ml-6 sm:ml-0">
+                                    
+                                    <div  className="mx-3" >
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('Settings')} active={activeTab === 'Settings'}
                                 tabName="Settings">
                                     <FontAwesomeIcon icon={faScrewdriverWrench} />Settings</NavBarToggling>
-                                    </div>
+                                    </div></div>
                                  
                 <div className="hidden sm:inline-block">
                 <NavBarLink to="/" onClick={(e) => {
@@ -116,8 +116,8 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                     }}><FontAwesomeIcon icon={faRightFromBracket} /><span> Logout</span>
                 </NavBarLink></div>
             </div>
-        </div>
-        </div>
+        {/* </div>
+        </div> */}
         </>
     );
 }
