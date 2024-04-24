@@ -13,16 +13,13 @@ class CollectorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Collector
         fields = ['id', 'is_active', 'value_counted', 'value_goal', 'end_user_profile', 'campaign', 'is_collected',
-                  'date_created',
-                  'collector_type', ]
-        read_only_fields = ['id', 'end_user_profile', 'campaign', 'collector_type', 'value_goal', 'date_created',
+                  'date_created' ]
+        read_only_fields = ['id', 'end_user_profile', 'campaign', 'value_goal', 'date_created',
                             'is_collected']
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['end_user_profile'] = EndUserProfileOutSerializer(instance.end_user_profile, many=False).data
-        # representation['campaign'] = CampaignSerializer(instance.campaign, many=False).data
-        representation['collector_type'] = CollectorTypeSerializer(instance.collector_type, many=False).data
         return representation
 
     def get_is_active(self, obj):
