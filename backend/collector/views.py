@@ -19,7 +19,6 @@ class CollectorValidateView(CreateAPIView):
         data = request.data
         # Safely fetch the related objects, returning 404 if not found
         campaign = get_object_or_404(Campaign, id=data.get('campaign_id'))
-        collector_type = get_object_or_404(CollectorType, id=campaign.collector_type)
         end_user_profile = get_object_or_404(EndUserProfile, secret_key=data.get('secret_key'))
         # Retrieve the value count from data, assuming it could be None
         value_count = data.get('value_count')
@@ -38,7 +37,6 @@ class CollectorValidateView(CreateAPIView):
 
         # Try to get or create a collector, and handle it appropriately based on creation status
         collector, created = Collector.objects.get_or_create(
-            collector_type=collector_type,
             campaign=campaign,
             end_user_profile=end_user_profile,
             is_collected=False,
@@ -95,7 +93,8 @@ class CustomerAndSpecificUserCollectors(ListAPIView):
         if not secret_key:
             return Collector.objects.none()  # Return an empty queryset if secret key is not provided
 
-        return Collector.objects.filter(campaign__customer_user_profile=profile, end_user_profile__secret_key=secret_key)
+        return Collector.objects.filter(campaign__customer_user_profile=profile,
+                                        end_user_profile__secret_key=secret_key)
 
     def list(self, request, *args, **kwargs):
         # Custom list method to handle the request and respond appropriately.
