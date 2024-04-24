@@ -166,4 +166,3 @@ const QrCode = () => {
 
 export default QrCode;
 
-
