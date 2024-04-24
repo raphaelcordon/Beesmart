@@ -37,6 +37,7 @@ const Settings = () => {
       await UpdateMeUser(formData); 
       setSuccess(true);
       setError(null);   
+      window.location.reload();
     } catch (err) {
       setError(err.message);
     }

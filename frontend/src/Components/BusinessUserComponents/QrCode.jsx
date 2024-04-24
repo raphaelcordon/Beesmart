@@ -120,12 +120,16 @@ const QrCode = () => {
     <>
     <div className="flex flex-col mt-12 items-center justify-center text-center">
     <div className="flex flex-col items-center">
+    <div className="w-full bg-base-100/50 rounded-lg shadow-lg">
           <div className='mb-8'>
           <div>
             <div className="mb-4">
+              <div className="pt-8">
               Download your QR code now to effortlessly 
               connect with your customers. Simply display it in your storefront, 
-              on your marketing materials, or even on your products. </div>
+              on your marketing materials, or even on your products. 
+              </div>
+              </div>
           
         </div>
             <a href={qrcode} download="qr_code_beesmart.png">
@@ -142,12 +146,14 @@ const QrCode = () => {
             className="btn bg-secondary btn-md-wide px-20 text-base-100">
               {({ loading }) => (loading ? 'Loading document...' : 'Download PDF')}
             </PDFDownloadLink></div>
+            <div className='flex items-center justify-center'>
             <PDFViewer width={400} height={600}>
             {pdfData}
           </PDFViewer>
+          </div>
         </div>
         
-      </div>
+      </div></div>
     </>
   );
 };
