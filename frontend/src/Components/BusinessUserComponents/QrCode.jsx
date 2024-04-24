@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 // import qrcodeexample from "../../assets/qrcodeexample.png";
 
 
+
 // Styles for PDF
 const styles = StyleSheet.create({
   container: {
@@ -79,13 +80,17 @@ const TextToPDF = ({ website, qrCode, logo}) => (
       <Image src={qrCode} style={styles.styledqrcode} />
       
       {/* <Image src={qrcodeexample} style={styles.styledqrcode} /> */}
+      {website && (
+        <View>
       <Text style={styles.headingPrimary}>
       Terms& Conditions:
         </Text>
       <Text style={styles.headingPrimary2}>
         {website}
+        
       </Text>
-      
+      </View>
+      )}
       <Image src={logo} style={styles.image} />
       {/* <Image src={beelogo} style={styles.image} /> */}
     </Page>
@@ -93,9 +98,9 @@ const TextToPDF = ({ website, qrCode, logo}) => (
 );
 
 TextToPDF.propTypes = {
-  website: PropTypes.string.isRequired,
+  website: PropTypes.string,
   qrCode: PropTypes.string.isRequired, 
-  logo: PropTypes.string.isRequired,
+  logo: PropTypes.string,
     //businessName: PropTypes.string.isRequired,
 };
 
@@ -109,29 +114,48 @@ const QrCode = () => {
 
   const pdfData = <TextToPDF website={website} qrCode={qrcode} logo={logo} />; 
 
+
+
   return (
     <>
-    <div className="flex flex-col h-screen items-center justify-center text-center px-4 ">
+    <div className="flex flex-col mt-12 items-center justify-center text-center">
     <div className="flex flex-col items-center">
+    <div className="w-full bg-base-100/50 rounded-lg shadow-lg">
           <div className='mb-8'>
-          <div>
-          <PDFViewer width={400} height={600}>
-            {pdfData}
-          </PDFViewer>
+          <div className='flex items-center justify-center'>
+            <div className="mb-4 w-4/5 text-center">
+              <div className="pt-8">
+              Download your QR code now to effortlessly 
+              connect with your customers. Simply display it in your storefront, 
+              on your marketing materials, or even on your products. 
+              </div>
+              </div>
+          
         </div>
             <a href={qrcode} download="qr_code_beesmart.png">
+              
+            
             <Button>Download QR code only</Button>
             </a>
             </div>
-          
+
+            <div className='mb-8'>
+            <div className='flex items-center justify-center'>
+            <div className="mb-4 w-4/5  text-center">
+            <div className="mb-4"> We've curated an eye-catching display option to make your QR code stand out.
+            Upload You Logo and website at Settings, than:</div></div></div>
             <PDFDownloadLink document={pdfData} fileName="beesmart_qrcode.pdf" 
             className="btn bg-secondary btn-md-wide px-20 text-base-100">
               {({ loading }) => (loading ? 'Loading document...' : 'Download PDF')}
-            </PDFDownloadLink>
-          
+            </PDFDownloadLink></div>
+            <div className='flex items-center justify-center'>
+            <PDFViewer width={400} height={600}>
+            {pdfData}
+          </PDFViewer>
+          </div>
         </div>
         
-      </div>
+      </div></div>
     </>
   );
 };
