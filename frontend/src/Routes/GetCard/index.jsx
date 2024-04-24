@@ -4,9 +4,6 @@ import {useNavigate, useParams} from 'react-router-dom';
 import { PostEndUserVerify} from "../../axios/axiosEndUser.js";
 import Button from "../../Components/SmallComponents/Button.jsx";
 
-
-
-
 const GetCard = () => {
     const navigator = useNavigate()
 
@@ -14,33 +11,31 @@ const GetCard = () => {
     const [password, setPassword] = useState('');
     const [password_repeat, setPassword_repeat] = useState('');
 
-    const [verified, setVerified] = useState('');
+    const [verified, setVerified] = useState(null);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false)
-    const [userAgent, setUserAgent] = useState('')
 
-    function detectDevice() {
-        const userAgent = navigator.userAgent;
-    
-        // Check for Android
-        if (/android/i.test(userAgent)) {
-            return 'Android';
-        }
-    
-        // Check for iOS
-        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-            return 'iOS';
-        }
-    
-        // Default to PC if neither Android nor iOS
-        return 'PC';
-    }
+    // function detectDevice() {
+    //     const userAgent = navigator.userAgent;
+    //
+    //     // Check for Android
+    //     if (/android/i.test(userAgent)) {
+    //         return 'Android';
+    //     }
+    //
+    //     // Check for iOS
+    //     if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    //         return 'iOS';
+    //     }
+    //
+    //     // Default to PC if neither Android nor iOS
+    //     return 'PC';
+    // }
     
     
     // Use the function to alert or display the device type
 
     const getSubmitData = async (e) => {
-        setUserAgent(detectDevice)
         e.preventDefault();
         setIsLoading(true);
         setError('');
@@ -62,7 +57,7 @@ const GetCard = () => {
     const verifyEndUser = async (userData) => {
         try {
             const data = await PostEndUserVerify(userData);
-            if (userAgent==='iOS') {
+            if (navigator.userAgent.includes('iOS')) {
                 const url = window.URL.createObjectURL(new Blob([data], {type: 'application/vnd.apple.pkpass'}));
                 const link = document.createElement('a');
                 link.href = url;
@@ -109,20 +104,19 @@ return (
                                 required
                             />
                         </div>
-                        <Button type="submit">Set Password</Button>
+                        <Button type="submit" disabled={password === "" || setPassword === ""}>Set Password</Button>
                     </form>
                     {isLoading ? "Verifying email..." :
-                        (verified ? (
+                        verified === true ? (
                             <div>
                                 <img src={tick} className="w-16 sm:w-24 md:w-40 lg:w-40 xl:w-48" alt="Tick"/>
                                 <h2 className="mt-8 mb-6">Your email was successfully verified.</h2>
                             </div>
-                        ) : (
+                        ) : verified === false ? (
                             <div>
                                 <h2 className="mt-8 mb-6">Your email could not be verified.</h2>
-                                {error && <small>{String(error)}</small>}
                             </div>
-                        ))
+                        ) : null
                     }
                 </div>
             </div>

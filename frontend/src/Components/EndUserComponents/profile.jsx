@@ -2,13 +2,12 @@ import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {UpdateMeUser} from "../../axios/axiosEndUser.js";
 import Button from "../SmallComponents/Button.jsx";
+import useGetMeEndUser from "../../Hooks/useGetMeEndUser.js";
 
 const Profile = () => {
     const EndUser = useSelector(state => state.endUser.userEndUserData);
   useEffect(() => {
   }, []);
-
-  console.log(EndUser)
 
   const [email, setEmail] = useState(EndUser.email);
   const [first_name, setFirst_name] = useState(EndUser.end_user_profile.first_name);
@@ -17,18 +16,9 @@ const Profile = () => {
   const [street, setStreet] = useState(EndUser.end_user_profile.street);
   const [zip, setZip] = useState(EndUser.end_user_profile.zip);
 
-  useEffect(() => {
-    setEmail(EndUser.email);
-    setFirst_name(EndUser.end_user_profile.first_name);
-    setLast_name(EndUser.end_user_profile.last_name);
-    setCity(EndUser.end_user_profile.city);
-    setStreet(EndUser.end_user_profile.street);
-    setZip(EndUser.end_user_profile.zip);
-}, [EndUser]);
-
-
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const { getUser } = useGetMeEndUser();
 
     const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,6 +33,7 @@ const Profile = () => {
 
     try {
       await UpdateMeUser(formData);
+      getUser();
       setSuccess(true);
       setError(null);
     } catch (err) {
