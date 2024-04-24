@@ -60,7 +60,7 @@ const MyCampaigns = () => {
         <>
             {!createNewCampaign ? (
                 <>
-                    <header className="container mx-auto flex flex-row gap-4 justify-center items-center">
+                    <header className=" mx-auto flex flex-row  justify-center items-center">
                 
                 <span className="mt-8 ">
                 <a href="#" className="`cursor-pointer flex flex-col items-center pl-15 hover:font-bold  mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12 ${active ?
@@ -90,7 +90,7 @@ const MyCampaigns = () => {
                         </button> */}
                     </header>
 
-                    <main className="flex flex-col h-screen items-center justify-center text-center px-4 ">
+                    <main className="flex flex-col items-center justify-center text-center">
                         {currentCampaigns === 'ongoing' ? (
                             <MyCampaignsOngoing list={campaignsOpen}/>
                         ) : (

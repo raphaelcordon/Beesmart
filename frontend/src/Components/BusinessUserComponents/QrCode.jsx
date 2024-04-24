@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 // import qrcodeexample from "../../assets/qrcodeexample.png";
 
 
+
 // Styles for PDF
 const styles = StyleSheet.create({
   container: {
@@ -109,26 +110,29 @@ const QrCode = () => {
 
   const pdfData = <TextToPDF website={website} qrCode={qrcode} logo={logo} />; 
 
+
+
   return (
     <>
-    <div className="flex flex-col h-screen items-center justify-center text-center px-4 ">
+    <div className="flex flex-col mt-12 items-center justify-center text-center">
     <div className="flex flex-col items-center">
           <div className='mb-8'>
           <div>
-          <PDFViewer width={400} height={600}>
-            {pdfData}
-          </PDFViewer>
+          
         </div>
             <a href={qrcode} download="qr_code_beesmart.png">
+            
             <Button>Download QR code only</Button>
             </a>
             </div>
-          
+            <div className='mb-8'>
             <PDFDownloadLink document={pdfData} fileName="beesmart_qrcode.pdf" 
             className="btn bg-secondary btn-md-wide px-20 text-base-100">
               {({ loading }) => (loading ? 'Loading document...' : 'Download PDF')}
-            </PDFDownloadLink>
-          
+            </PDFDownloadLink></div>
+            <PDFViewer width={400} height={600}>
+            {pdfData}
+          </PDFViewer>
         </div>
         
       </div>
