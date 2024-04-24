@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.utils import timezone
 
-from campaign.models import Campaign, CollectorType
+from campaign.models import Campaign
 from collector.models import Collector
 from collector.serializers import CollectorSerializer
 from customer_user_profile.models import CustomerUserProfile
