@@ -20,7 +20,6 @@ def voucher_directory_path(instance, filename):
 
 
 def voucher_qr_directory_path(instance, filename):
-    uniq = code_generator(10)
     return f'voucher_qr/{instance.id}/{filename}'
 
 
