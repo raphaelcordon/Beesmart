@@ -33,37 +33,20 @@ class Voucher(models.Model):
     qr_code = models.ImageField(upload_to=voucher_qr_directory_path)
 
     def save(self, *args, **kwargs):
-        create = self._state.adding
-        if not create:
-            qr = segno.make(f'"{self.id}"')
-            buffer = BytesIO()
-            qr.save(buffer, kind='png', scale=5)
-            filename = f'qr_{self.name}_{self.id}.png'
-            if self.qr_code:
-                self.qr_code.delete(save=False)  # Delete the old file if it exists
-            self.qr_code.save(filename, ContentFile(buffer.getvalue()), save=False)
-        else:
-            qr = segno.make(f'"{self.id}"')
-            buffer = BytesIO()
-            qr.save(buffer, kind='png', scale=5)
-            filename = f'qr_{self.id}_{self.id}.png'
-            self.qr_code.save(filename, ContentFile(buffer.getvalue()), save=False)
+        # Save the instance to the database to ensure it has an ID
         super().save(*args, **kwargs)
 
-        # if self.pk:
-        #     if Voucher.objects.filter(pk=self.pk).exists():
-        #         old_instance = Voucher.objects.get(pk=self.pk)
-        #         if old_instance.qr_code and old_instance.qr_code != self.qr_code:
-        #             old_instance.qr_code.delete(save=False)
-        # qr = segno.make(
-        #     f'"campaign_id":{self.campaign.id}, "user_email":{self.end_user_profile.user.email}"')
-        # buffer = BytesIO()
-        # qr.save(buffer, kind='png', scale=5)
-        # filename = f'qr_{self.id}.png'
-        # if self.qr_code:
-        #     self.qr_code.delete(save=False)  # Delete the old file if it exists
-        # self.qr_code.save(filename, ContentFile(buffer.getvalue()), save=False)
-        # super().save(*args, **kwargs)
+        # After the instance is saved, it has a valid ID
+        qr = segno.make(f"{self.id}")
+        buffer = BytesIO()
+        qr.save(buffer, kind='png', scale=5)
+        filename = f'qr_{self.name}_{self.id}.png'
+
+        # Save the new QR code
+        self.qr_code.save(filename, ContentFile(buffer.getvalue()), save=False)
+
+        # Update instance
+        super().save(update_fields=['qr_code'])
 
     def __str__(self):
         return self.campaign.name
