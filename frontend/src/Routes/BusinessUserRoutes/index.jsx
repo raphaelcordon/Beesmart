@@ -4,25 +4,33 @@ import QrCode from "../../Components/BusinessUserComponents/QrCode.jsx";
 import Insights from "../../Components/BusinessUserComponents/Insights.jsx";
 import NewCampaign from "../../Components/BusinessUserComponents/NewCampaign.jsx";
 import Settings from "../../Components/BusinessUserComponents/Settings.jsx";
-import {useState} from "react";
+import { useState } from "react";
 
 const BusinessUserHome = () => {
-
     const [activeTab, setActiveTab] = useState('MyCampaigns');
 
-  return (
-      <>
-        <NavBarBusiness setActiveTabProp={setActiveTab} />
+    return (
+        <>
+            <div className="relative h-screen">
+                {/* Background element */}
+                <div className="bg-base-300 fixed inset-0 z-0"></div>
 
-        {activeTab === 'MyCampaigns' && <MyCampaigns />}
-        {activeTab === 'Insights' && <Insights />}
-        {activeTab === 'QrCode' && <QrCode />}
-        {activeTab === 'NewCampaign' && <NewCampaign />}
-        {activeTab === 'Settings' && <Settings />}
-
-      </>
-
-  )
+                {/* Content */}
+                <div className="flex flex-col h-screen relative z-10">
+                    <div className="">
+                        <NavBarBusiness setActiveTabProp={setActiveTab} />
+                    </div>
+                    <div className="flex-grow overflow-y-auto">
+                        {activeTab === 'MyCampaigns' && <MyCampaigns />}
+                        {activeTab === 'Insights' && <Insights />}
+                        {activeTab === 'QrCode' && <QrCode />}
+                        {activeTab === 'NewCampaign' && <NewCampaign />}
+                        {activeTab === 'Settings' && <Settings />}
+                    </div>
+                </div>
+            </div>
+        </>
+    );
 };
 
 export default BusinessUserHome;
