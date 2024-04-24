@@ -52,11 +52,11 @@ const VerificationSection = () => {
     <div className="flex items-center justify-center">
       <div className="flex xl:items-center l:items-center justify-center sm:mt-p md:mt-50p">
         <div className="max-w-md w-full p-6 bg-base-100 rounded-lg shadow-lg mb-16">
-          <h1 className="text-2xl font-semibold text-center mt-8 mb-6">Verification</h1>
+          <h4 className="text-2xl font-semibold text-center mt-8 mb-6">Verification</h4>
           <form className="mb-10" onSubmit={getSubmitData}>
             <div className="grid sm:grid-cols-2 gap-y-7 gap-x-12">
               <div className="mb-2">
-                <label className="block mb-2 text-sm text-accent-content">Verification Code</label>
+                <label className="block mb-2 text-sm text-accent-content">Verification Code<span className="text-red-500">*</span></label>
                 <input
                     name="verificationCode"
                     id="code"
@@ -68,7 +68,8 @@ const VerificationSection = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="block mb-2 text-sm text-accent-content">Email</label>
+                <label className="block mb-2 text-sm text-accent-content">Email<span
+                    className="text-red-500">*</span></label>
                 <input
                     name="email"
                     id="email"
@@ -82,7 +83,7 @@ const VerificationSection = () => {
 
 
               <div className="mb-2">
-                <label className="block mb-2 text-sm text-accent-content">Adress</label>
+                <label className="block mb-2 text-sm text-accent-content">Adress<span className="text-red-500">*</span></label>
                 <input
                     name="adress"
                     id={"street"}
@@ -94,7 +95,8 @@ const VerificationSection = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="block mb-2 text-sm text-accent-content">City</label>
+                <label className="block mb-2 text-sm text-accent-content">City<span
+                    className="text-red-500">*</span></label>
                 <input
                     name="city"
                     id={"city"}
@@ -106,7 +108,8 @@ const VerificationSection = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="block mb-2 text-sm text-accent-content">Postal Code</label>
+                <label className="block mb-2 text-sm text-accent-content">Postal Code<span
+                    className="text-red-500">*</span></label>
                 <input
                     name="postalcode"
                     id={"zip"}
@@ -118,7 +121,7 @@ const VerificationSection = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="block mb-2 text-sm text-accent-content">Country</label>
+                <label className="block mb-2 text-sm text-accent-content">Country<span className="text-red-500">*</span></label>
                 <input
                     name="country"
                     id={"country"}
@@ -130,7 +133,8 @@ const VerificationSection = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="block mb-2 text-sm text-accent-content">Password</label>
+                <label className="block mb-2 text-sm text-accent-content">Password<span
+                    className="text-red-500">*</span></label>
                 <input
                     name="password"
                     id={"password"}
@@ -142,7 +146,8 @@ const VerificationSection = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="block mb-2 text-sm text-accent-content">Confirm Password</label>
+                <label className="block mb-2 text-sm text-accent-content">Confirm Password<span
+                    className="text-red-500">*</span></label>
                 <input
                     name="password_repeat"
                     id={"password_repeat"}
@@ -155,7 +160,8 @@ const VerificationSection = () => {
 
               </div>
               <div className="mb-0">
-                <label className="block mb-2 text-sm text-accent-content">Business Name</label>
+                <label className="block mb-2 text-sm text-accent-content">Business Name<span
+                    className="text-red-500">*</span></label>
                 <input
                     name="business_name"
                     id={"business_name"}
@@ -200,7 +206,16 @@ const VerificationSection = () => {
             </div>
             </div>
             <div className="text-center">
-            <Button> Continue </Button>
+            <Button disabled={
+                email === "" ||
+                password === "" ||
+                password_repeat === "" ||
+                code === "" ||
+                business_name === "" ||
+                country === "" ||
+                city === "" ||
+                street === "" ||
+                zip === ""}> Continue </Button>
             </div>
           </form>
           <div className="text-center">

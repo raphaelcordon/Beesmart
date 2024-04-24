@@ -1,5 +1,4 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-//import beeLogo from "../../../public/beeicon.png";
 import NavBarToggling from "../SmallComponents/NavBarToggling.jsx";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +6,6 @@ import { logoutUserCustomer } from "../../store/slices/userCustomerSlice.js";
 import useGetMeUser from "../../Hooks/useGetMeUser.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faChartLine, faCirclePlus, faQrcode, faRightFromBracket, faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
-import campaign from "../../assets/campaign.png";
 import NavBarLink from "../SmallComponents/NavBarLinks.jsx";
 import NavBarTogglingNew from "../SmallComponents/NavBarTogglingNew.jsx";
 import NavBarTogglingNewMobile from "../SmallComponents/NavBarTogglingNewMobile.jsx";
