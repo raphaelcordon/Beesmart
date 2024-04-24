@@ -1,6 +1,6 @@
 # from django.shortcuts import render
 from rest_framework import status
-from rest_framework.generics import UpdateAPIView, CreateAPIView
+from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
@@ -9,12 +9,12 @@ from voucher.serializers import UseVoucherSerializer
 
 
 # Create your views here.
-class UseVoucherView(UpdateAPIView):
+class UseVoucherView(CreateAPIView):
     serializer_class = UseVoucherSerializer
     queryset = Voucher.objects.all()
     permission_classes = [IsAuthenticated]
 
-    def patch(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         if Voucher.objects.filter(id=kwargs['voucher_id']).exists():
             if self.request.user.customer_user_profile != Voucher.objects.get(
                     id=kwargs['voucher_id']).campaign.customer_user_profile:
