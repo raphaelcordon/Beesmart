@@ -1,5 +1,5 @@
 import Button from "../../Components/SmallComponents/Button";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import {RegisterNewCustomer} from "../../axios/axiosCustomer.js";
 import {RegisterNewEndUser} from "../../axios/axiosEndUser.js";

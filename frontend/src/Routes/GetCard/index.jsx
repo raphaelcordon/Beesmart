@@ -104,7 +104,7 @@ return (
                                 required
                             />
                         </div>
-                        <Button type="submit" disabled={password === "" || setPassword === ""}>Set Password</Button>
+                        <Button type="submit" disabled={password === "" || password_repeat === ""}>Set Password</Button>
                     </form>
                     {isLoading ? "Verifying email..." :
                         verified === true ? (
