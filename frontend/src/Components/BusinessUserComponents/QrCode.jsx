@@ -80,13 +80,17 @@ const TextToPDF = ({ website, qrCode, logo}) => (
       <Image src={qrCode} style={styles.styledqrcode} />
       
       {/* <Image src={qrcodeexample} style={styles.styledqrcode} /> */}
+      {website && (
+        <View>
       <Text style={styles.headingPrimary}>
       Terms& Conditions:
         </Text>
       <Text style={styles.headingPrimary2}>
         {website}
+        
       </Text>
-      
+      </View>
+      )}
       <Image src={logo} style={styles.image} />
       {/* <Image src={beelogo} style={styles.image} /> */}
     </Page>
@@ -94,9 +98,9 @@ const TextToPDF = ({ website, qrCode, logo}) => (
 );
 
 TextToPDF.propTypes = {
-  website: PropTypes.string.isRequired,
+  website: PropTypes.string,
   qrCode: PropTypes.string.isRequired, 
-  logo: PropTypes.string.isRequired,
+  logo: PropTypes.string,
     //businessName: PropTypes.string.isRequired,
 };
 
@@ -118,14 +122,22 @@ const QrCode = () => {
     <div className="flex flex-col items-center">
           <div className='mb-8'>
           <div>
+            <div className="mb-4">
+              Download your QR code now to effortlessly 
+              connect with your customers. Simply display it in your storefront, 
+              on your marketing materials, or even on your products. </div>
           
         </div>
             <a href={qrcode} download="qr_code_beesmart.png">
+              
             
             <Button>Download QR code only</Button>
             </a>
             </div>
+
             <div className='mb-8'>
+            <div className="mb-4"> We've curated an eye-catching display option to make your QR code stand out.
+            Upload You Logo and website at Settings, than:</div>
             <PDFDownloadLink document={pdfData} fileName="beesmart_qrcode.pdf" 
             className="btn bg-secondary btn-md-wide px-20 text-base-100">
               {({ loading }) => (loading ? 'Loading document...' : 'Download PDF')}
