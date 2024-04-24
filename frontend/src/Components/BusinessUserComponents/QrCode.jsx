@@ -122,8 +122,8 @@ const QrCode = () => {
     <div className="flex flex-col items-center">
     <div className="w-full bg-base-100/50 rounded-lg shadow-lg">
           <div className='mb-8'>
-          <div>
-            <div className="mb-4">
+          <div className='flex items-center justify-center'>
+            <div className="mb-4 w-4/5 text-center">
               <div className="pt-8">
               Download your QR code now to effortlessly 
               connect with your customers. Simply display it in your storefront, 
@@ -140,8 +140,10 @@ const QrCode = () => {
             </div>
 
             <div className='mb-8'>
+            <div className='flex items-center justify-center'>
+            <div className="mb-4 w-4/5  text-center">
             <div className="mb-4"> We've curated an eye-catching display option to make your QR code stand out.
-            Upload You Logo and website at Settings, than:</div>
+            Upload You Logo and website at Settings, than:</div></div></div>
             <PDFDownloadLink document={pdfData} fileName="beesmart_qrcode.pdf" 
             className="btn bg-secondary btn-md-wide px-20 text-base-100">
               {({ loading }) => (loading ? 'Loading document...' : 'Download PDF')}
