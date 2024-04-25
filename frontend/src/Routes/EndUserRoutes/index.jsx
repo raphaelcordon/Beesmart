@@ -6,41 +6,24 @@ import NavBarUser from "../../Components/EndUserComponents/NavBarUser.jsx";
 import MyVouchers from "../../Components/EndUserComponents/MyVouchers.jsx";
 
 const EndUserHome = () => {
-  const [activeTab, setActiveTab] = useState("MyCampaigns");
+  const [activeTab, setActiveTab] = useState('MyCampaigns');
 
   return (
-    <>
-      <div className="relative h-screen">
-        {/* Background element */}
-        <div className="bg-base-300 fixed inset-0 z-0">
-          {/* Content */}
-          <div className="flex flex-col h-screen relative z-10">
-            <div className="">
-              <NavBarUser setActiveTabProp={setActiveTab} />
-            </div>
-            <div className="flex-grow overflow-y-auto">
-              {/* Scrollable container */}
-              {activeTab === "Scan" && <Scan />}
-              {activeTab === "MyCampaigns" && (
-                <div className="scroll-container">
-                  <MyCampaigns />
-                </div>
-              )}
-              {activeTab === "MyVouchers" && (
-                <div className="scroll-container">
-                  <MyVouchers />
-                </div>
-              )}
-              {activeTab === "Profile" && (
-                <div className="scroll-container">
-                  <Profile />
-                </div>
-              )}
-            </div>
-          </div>
+    <div className="relative min-h-screen bg-base-300">
+      {/* Background element */}
+      <div className="absolute inset-0 z-0"></div>
+
+      {/* Content */}
+      <div className="flex flex-col min-h-screen relative z-10">
+        <NavBarUser setActiveTabProp={setActiveTab} />
+        <div className="flex-grow overflow-y-auto">
+          {activeTab === 'Scan' && <Scan />}
+          {activeTab === 'MyCampaigns' && <MyCampaigns />}
+          {activeTab === 'MyVouchers' && <MyVouchers />}
+          {activeTab === 'Profile' && <Profile />}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

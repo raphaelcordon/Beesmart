@@ -10,7 +10,7 @@ import { faBullhorn, faExpand, faRightFromBracket, faTicketSimple, faUser } from
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-const NavBarBusiness = ({ setActiveTabProp }) => {
+const NavBarUser = ({ setActiveTabProp }) => {
     //const [isOpen, setIsOpen] = useState(false);
     const [activeTab, setActiveTab] = useState('Campaigns');
     const menuRef = useRef(null);
@@ -130,4 +130,4 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
     );
 }
 
-export default NavBarBusiness;
+export default NavBarUser;
