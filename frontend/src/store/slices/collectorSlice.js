@@ -4,6 +4,7 @@ export const CollectorSlice = createSlice({
     name: "collector",
     initialState: {
         collectorData: [],
+        collectorTypeData: [],
     },
     reducers: {
         storeCollectorData: (state, action) => {
@@ -18,8 +19,12 @@ export const CollectorSlice = createSlice({
         deleteCollector: (state, action) => {
             state.collectorData = state.collectorData.filter(collector => collector.id !== action.payload);
         },
+
+        storeCollectorTypeData: (state, action) => {
+            state.CollectorTypeData = action.payload;
+        },
     },
 });
 
-export const {  storeCollectorData, updateCollector, deleteCollector } = CollectorSlice.actions;
+export const {  storeCollectorData, updateCollector, deleteCollector, storeCollectorTypeData } = CollectorSlice.actions;
 export default CollectorSlice.reducer;
