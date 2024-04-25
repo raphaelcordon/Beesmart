@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import NavBarToggling from "../SmallComponents/NavBarToggling.jsx";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,16 +33,15 @@ const NavBarUser = ({ setActiveTabProp }) => {
 
     return (
         <>
-            {/* Logout button for mobile users */}
-            <div className="absolute top-3 right-3 p-2 sm:hidden text-3xl">
-                <NavBarLink to="/" onClick={(e) => {
-                    e.preventDefault();
-                    logoutHandler();
-                    navigate("/");
-                }}>
-                    <FontAwesomeIcon icon={faRightFromBracket} />
-                </NavBarLink>
-            </div>
+         {/* Logout button for mobile users */}
+         <div className="absolute top-3 right-3 p-2 sm:hidden text-3xl">
+         <NavLink to="/" onClick={(e) => {
+                   e.preventDefault();
+                   logoutHandler();
+                   navigate("/");
+                 }}><FontAwesomeIcon icon={faRightFromBracket} />
+             </NavLink>
+             </div>
 
             <div className="navbar border border-base-300 bg-base-100/50 shadow-lg backdrop-blur-2xl fixed bottom-0 left-0 w-full z-10 md:relative md:flex md:justify-around sm:justify-around">
                 <div className="w-full flex justify-around">

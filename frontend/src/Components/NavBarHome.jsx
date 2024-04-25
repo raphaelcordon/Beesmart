@@ -9,13 +9,11 @@ export const NavBarHome = () => {
       <div className="navbar-start">
         <div>
           <Link to="/">
-            {/* <img src={beeLogo}  className="h-20 sm:h-10 lg:h-20 " alt="Bee Logo" /> */}
-            <p className="text-xl">
-              <span className="font-bold">B</span>
-              <span className="font-semibold">ee</span>
-              <span className="font-bold">S</span>
-              <span className="font-semibold">mart</span>
-            </p>
+            <img
+              src="/BeeSmart_Primary_Logo.png"
+              className="w-full max-w-[122rem] h-auto max-h-[127rem]"
+              alt="Bee Logo"
+            />
           </Link>
         </div>
       </div>
@@ -29,7 +27,7 @@ export const NavBarHome = () => {
         <div className="w-13">
           <NavBarLink to="/login">
             <FontAwesomeIcon icon={faUser} />
-            <span> LogIn</span>
+            <span> Login</span>
           </NavBarLink>
         </div>
       </div>
