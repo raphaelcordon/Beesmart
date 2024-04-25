@@ -17,9 +17,10 @@ const GetCard = () => {
     const [isLoading, setIsLoading] = useState(false)
 
     const isIOSDevice = () => {
-    const userAgent = navigator.userAgent;
-    return /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-}
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            return 'iOS';
+        }
+    }
 
     // function detectDevice() {
     //     const userAgent = navigator.userAgent;
@@ -63,7 +64,8 @@ const GetCard = () => {
     const verifyEndUser = async (userData) => {
         try {
             const data = await PostEndUserVerify(userData);
-            if (isIOSDevice()) {
+            if (isIOSDevice() === 'iOS') {
+                console.log(isIOSDevice())
                 const url = window.URL.createObjectURL(new Blob([data], {type: 'application/vnd.apple.pkpass'}));
                 const link = document.createElement('a');
                 link.href = url;
@@ -71,6 +73,7 @@ const GetCard = () => {
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
+                console.log('finish')
             }
             setVerified(true);
             setTimeout(() => navigator(`/login`), 12000);
