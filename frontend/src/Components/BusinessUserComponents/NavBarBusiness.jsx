@@ -55,7 +55,7 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                 </NavBarTogglingNewMobile>
             </div>
 
-            <div className="navbar border border-base-300 bg-base-100/50 shadow-lg backdrop-blur-2xl fixed bottom-0 left-0 w-full z-10 md:top-0 md:bottom-auto flex justify-between">
+            <div className="navbar border border-base-300 bg-base-100/50 shadow-lg backdrop-blur-2xl fixed bottom-0 left-0 w-full z-10 md:relative md:flex md:justify-around sm:justify-around">
 
                 <div ref={menuRef} className="w-full flex justify-row ">
                 <div className="basis-1/4 md:basis-1/6" >

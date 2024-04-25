@@ -122,7 +122,7 @@ const QrCode = () => {
 
   return (
     <>
-    <div className="flex flex-col mt-12 items-center justify-center text-center">
+    <div className="flex flex-col mb-8 md:mb-0 items-center justify-center text-center">
     <div className="flex flex-col items-center">
     <div className="w-full bg-base-100/50 rounded-lg shadow-lg">
           <div className='mb-8'>
