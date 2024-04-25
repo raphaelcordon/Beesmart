@@ -152,8 +152,9 @@ const QrCode = () => {
             className="btn bg-secondary btn-md-wide px-20 text-base-100">
               {({ loading }) => (loading ? 'Loading document...' : 'Download PDF')}
             </PDFDownloadLink></div>
-            <div className='flex items-center justify-center'>
-            <PDFViewer width={400} height={600}>
+            <div className='flex items-center justify-center mb-4'>
+            <PDFViewer className="h-[400px] w-[300px] lg:h-[600px] lg:w-[400px]">
+            {/* <PDFViewer width={400} height={600}> */}
             {pdfData}
           </PDFViewer>
           </div>
