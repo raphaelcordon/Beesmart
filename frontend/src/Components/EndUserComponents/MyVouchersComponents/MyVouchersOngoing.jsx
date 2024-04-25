@@ -4,7 +4,7 @@ const MyVouchersOngoing = ({ activeVouchers, loading }) => {
   return (
     <>
       {activeVouchers !== null ? console.log("sssss") : console.log("rffff")}
-      <div className="justify-center p-1 pt-8">
+      <div className="justify-center p-1 pt-8 p-1 flex flex-row flex-wrap items-center justify-center align-center text-center w-dvw gap-10 ">
         {activeVouchers !== null ? (
           activeVouchers.map((voucher, index) => (
             <>

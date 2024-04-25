@@ -13,7 +13,7 @@ const MyCampaignsOngoing = ({ campaigns, isLoading, setIsLoading }) => {
 
   return (
     <>
-      <div className="justify-center p-1 pt-20">
+      <div className="justify-center p-1 pt-20 p-1 flex flex-row flex-wrap items-center justify-center align-center text-center w-dvw gap-10 ">
         {isCampaign ? (
           campaigns.map(
             (item, index) =>
