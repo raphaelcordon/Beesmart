@@ -5,6 +5,8 @@ module.exports = {
       {
         bumblebee: {
           ...require("daisyui/src/theming/themes")["bumblebee"],
+          background: "#FAF7ED",
+          "base-300": "#FAF7ED",
         },
       },
     ],
@@ -15,19 +17,17 @@ module.exports = {
     extend: {
       // Customizing the width, margin, and padding
       width: {
-        'full': '100%', // Equivalent to width: 100%;
+        full: "100%", // Equivalent to width: 100%;
       },
       margin: {
-        '0': '0', // Equivalent to margin: 0;
+        0: "0", // Equivalent to margin: 0;
       },
       padding: {
-        '0': '0', // Equivalent to padding: 0;
+        0: "0", // Equivalent to padding: 0;
       },
     },
   },
 };
-
-
 
 // module.exports = {
 //   content: ["./src/**/*.{js,ts,jsx,tsx}"],
@@ -44,7 +44,6 @@ module.exports = {
 //   plugins: [require("daisyui")],
 // };
 
-
 // module.exports = {
 //   content: ["./src/**/*.{js,ts,jsx,tsx}"],
 //   daisyui: {
@@ -57,7 +56,7 @@ module.exports = {
 //           'base-300': "#D1E8E2",
 //           accent: "#2C3531",
 //           'base-200': "#FFCB9A",
-          
+
 //         },
 //       },
 //     ],
@@ -66,7 +65,6 @@ module.exports = {
 
 //   plugins: [require("daisyui")],
 // };
-
 
 //later customise themes (Böbi)
 // daisyui: {
