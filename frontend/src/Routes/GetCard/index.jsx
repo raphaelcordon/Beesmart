@@ -16,6 +16,11 @@ const GetCard = () => {
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false)
 
+    const isIOSDevice = () => {
+    const userAgent = navigator.userAgent;
+    return /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+}
+
     // function detectDevice() {
     //     const userAgent = navigator.userAgent;
     //
@@ -58,7 +63,7 @@ const GetCard = () => {
     const verifyEndUser = async (userData) => {
         try {
             const data = await PostEndUserVerify(userData);
-            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            if (isIOSDevice()) {
                 const url = window.URL.createObjectURL(new Blob([data], {type: 'application/vnd.apple.pkpass'}));
                 const link = document.createElement('a');
                 link.href = url;
@@ -67,8 +72,8 @@ const GetCard = () => {
                 link.click();
                 document.body.removeChild(link);
             }
-            setVerified(true)
-            navigator(`/login`)
+            setVerified(true);
+            setTimeout(() => navigator(`/login`), 500);
         } catch (error) {
             setError(error.message || 'Failed to register. Please try again.');
             setVerified(false)
