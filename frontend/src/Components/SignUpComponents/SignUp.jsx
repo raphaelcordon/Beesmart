@@ -48,7 +48,6 @@ const SignUp = () => {
     }
   };
 
-
   return (
       <>
 
@@ -94,8 +93,6 @@ const SignUp = () => {
             </form>
           </div>
         </div>
-
-
       </>
 
   );
