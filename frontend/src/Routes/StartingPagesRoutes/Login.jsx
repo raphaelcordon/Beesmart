@@ -3,6 +3,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import useAuthenticateUser from "../../Hooks/useAuthenticateUser.js";
 import Button from "../../Components/SmallComponents/Button.jsx";
 import {GetMeUser} from "../../axios/axiosEndUser.js";
+import useAuthenticateEndUser from "../../Hooks/useAuthenticateEndUser.js";
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -10,7 +11,8 @@ const Login = () => {
     const [error, setError] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
-    const { authenticate, AuthError } = useAuthenticateUser();
+    const { authenticateCustomer,  } = useAuthenticateUser();
+    const { authenticateEndUser,  } = useAuthenticateEndUser();
     const location = useLocation();
     const [isToggled, setIsToggled] = useState(null);
     const toggleRef = useRef(null);
@@ -37,12 +39,12 @@ const Login = () => {
       setIsLoading(true);
       try {
           if (isToggled === false) {
-              await authenticate(email, password);
+              await authenticateCustomer(email, password);
               const from = location.state?.from || "/business";
               navigate(from);
           }
           else {
-              await authenticate(email, password);
+              await authenticateEndUser(email, password);
               const data = await GetMeUser()
               const from = location.state?.from || `/user/${data.end_user_profile.secret_key}`;
               navigate(from);

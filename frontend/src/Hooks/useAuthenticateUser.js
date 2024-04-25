@@ -7,7 +7,7 @@ const useAuthenticateUser = () => {
     const dispatch = useDispatch();
     const [error, setError] = useState(null);
 
-    const authenticate = useCallback(async (email, password) => {
+    const authenticateCustomer = useCallback(async (email, password) => {
         setError(null);
         try {
             const authResponse = await AuthenticateCustomer(email, password);
@@ -20,6 +20,6 @@ const useAuthenticateUser = () => {
         }
     }, [dispatch]);
 
-    return { authenticate, error };
+    return { authenticateCustomer, error };
 };
 export default useAuthenticateUser;

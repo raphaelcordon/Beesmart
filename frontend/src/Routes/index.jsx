@@ -33,9 +33,8 @@ const Router = () => {
 
         <Route element={<ProtectedRoutes />}>
           <Route path="/business" element={<BusinessUserRoutes />} />
+          <Route path="/user/:id" element={<EndUserRoutes />} />
         </Route>
-
-        <Route path="/user/:id" element={<EndUserRoutes />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
