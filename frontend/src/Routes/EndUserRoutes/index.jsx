@@ -16,7 +16,7 @@ const EndUserHome = () => {
       {/* Content */}
       <div className="flex flex-col min-h-screen relative z-10">
         <NavBarUser setActiveTabProp={setActiveTab} />
-        <div className="flex-grow overflow-y-auto pb-[20%] md:pb-0">
+        <div className="flex-grow overflow-y-auto pb-[20%] md:pb-0 pt-[10%]">
           {activeTab === 'Scan' && <Scan />}
           {activeTab === 'MyCampaigns' && <MyCampaigns />}
           {activeTab === 'MyVouchers' && <MyVouchers />}

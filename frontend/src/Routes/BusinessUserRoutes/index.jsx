@@ -20,7 +20,7 @@ const BusinessUserHome = () => {
                     
                         <NavBarBusiness setActiveTabProp={setActiveTab} />
                     
-                    <div className="w-full flex-grow overflow-y-auto pb-[20%] md:pt-[6%]">
+                    <div className="w-full flex-grow overflow-y-auto pb-[23%] pt-[10%] md:pb-0">
                         {activeTab === 'MyCampaigns' && <MyCampaigns />}
                         {activeTab === 'Insights' && <Insights />}
                         {activeTab === 'QrCode' && <QrCode />}
