@@ -10,7 +10,7 @@ const MyCampaigns = () => {
     const [campaigns, setCampaigns] = useState([])
     const [currentCampaigns, setCurrentCampaigns] = useState('ongoing');
     const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,7 +22,7 @@ const MyCampaigns = () => {
             } catch (error) {
                 setError(error.message || "Failed to load campaigns. Please try again.");
             } finally {
-                setIsLoading(false);
+
             }
         };
         fetchData();
@@ -35,7 +35,7 @@ const MyCampaigns = () => {
 
     return (
         <>
-            <header className="container mx-auto flex flex-row gap-4 justify-center items-center">
+            {/* <header className="container mx-auto flex flex-row gap-4 justify-center items-center">
                 <span>
                     <a href="#" onClick={(e) => {
                     handleToggleCampaigns(e, 'ongoing')}}>Ongoing</a>
@@ -44,11 +44,11 @@ const MyCampaigns = () => {
                     <a href="#" onClick={(e) => {
                     handleToggleCampaigns(e, 'closed') }}>Closed</a>
                 </span>
-            </header>
+            </header> */}
 
             <main>
                 {currentCampaigns === 'ongoing' && (
-                    <MyCampaignsOngoing campaigns={campaigns}/>
+                    <MyCampaignsOngoing campaigns={campaigns} isLoading={isLoading} setIsLoading={setIsLoading}/>
                 )}
 
                 {currentCampaigns === 'closed' && (
@@ -56,7 +56,7 @@ const MyCampaigns = () => {
                 )}
 
 
-                {isLoading && <p>Loading...</p>}
+                {/* {isLoading && <p>Loading...</p>} */}
                 {error && <p>Error: {error}</p>}
             </main>
         </>
