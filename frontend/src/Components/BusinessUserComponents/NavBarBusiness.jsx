@@ -46,6 +46,7 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                     <FontAwesomeIcon icon={faRightFromBracket} />
                 </NavLink>
             </div>
+            {/* New campaign for smaller screens */}
             <div className="fixed md:hidden bottom-12 left-1/2 transform -translate-x-1/2 z-50">
                 <NavBarTogglingNewMobile setActiveTab={() => handleSetActiveTab('NewCampaign')}
                                            active={activeTab === 'NewCampaign'}
@@ -69,6 +70,16 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                                    tabName="Insights">
                         <FontAwesomeIcon icon={faChartLine} />Insights
                     </NavBarToggling></div>
+                    {/* New Campaign for lg screen */}
+                    <div className="md:basis-1/3" >
+                    <NavBarTogglingNew setActiveTab={() => handleSetActiveTab('NewCampaign')}
+                                    active={activeTab === 'NewCampaign'}
+                                    tabName="NewCampaign">
+                    <FontAwesomeIcon icon={faCirclePlus} /> New 
+                    <div className="block">Campaign</div>
+                    </NavBarTogglingNew></div>
+
+                    
                 
 
                 {/* <div className="navbar-end flex justify-around"> */}
