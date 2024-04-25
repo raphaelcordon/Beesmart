@@ -12,8 +12,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NavBarBusiness = ({ setActiveTabProp }) => {
     //const [isOpen, setIsOpen] = useState(false);
-    const [activeTab, setActiveTab] = useState('Scan');
-    //const menuRef = useRef(null);
+    const [activeTab, setActiveTab] = useState('Campaigns');
+    const menuRef = useRef(null);
     const dispatch = useDispatch();
     const user = useSelector(state => state.endUser.userEndUserData);
     const { getUser, error } = useGetMeEndUser();

@@ -97,10 +97,14 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                                     <FontAwesomeIcon icon={faQrcode} />QR</NavBarToggling></div>
                                     
                                     
-                <NavBarTogglingNew setActiveTab={() => handleSetActiveTab('NewCampaign')}
-                                active={activeTab === 'NewCampaign'}
-                                tabName="NewCampaign">
-                                    <FontAwesomeIcon icon={faCirclePlus} /> New Campaign</NavBarTogglingNew>
+                                    <NavBarTogglingNew
+    setActiveTab={() => handleSetActiveTab('NewCampaign')}
+    active={activeTab === 'NewCampaign'}
+    tabName="NewCampaign"
+>
+    <FontAwesomeIcon icon={faCirclePlus} /> New 
+    <div className="block">Campaign</div>
+</NavBarTogglingNew>
                                     
                                     <div  className="mx-3" >
                 <NavBarToggling setActiveTab={() => handleSetActiveTab('Settings')} active={activeTab === 'Settings'}
