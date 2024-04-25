@@ -73,7 +73,7 @@ const GetCard = () => {
                 document.body.removeChild(link);
             }
             setVerified(true);
-            setTimeout(() => navigator(`/login`), 1500);
+            setTimeout(() => navigator(`/login`), 2000);
         } catch (error) {
             setError(error.message || 'Failed to register. Please try again.');
             setVerified(false)
