@@ -7,7 +7,7 @@ const ProtectedRoutes = () => {
     const isCustomerLoggedIn = useSelector((state) => state.customer.accessToken)
     const isUserLoggedIn = useSelector((state) => state.endUser.accessToken)
 
-    return !isCustomerLoggedIn || !isUserLoggedIn ? (
+    return !isCustomerLoggedIn && !isUserLoggedIn ? (
       // Navigate to the /login route and replace the current history entry
       // replace true will replace the current history entry instead of adding a new one
       // this prevents users from an infinite loop of redirects when clicking the back button
