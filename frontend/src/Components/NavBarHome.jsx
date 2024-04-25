@@ -19,14 +19,14 @@ export const NavBarHome = () => {
           </Link>
         </div>
       </div>
-      <div className="md:navbar-end sm:navbar-start xs:navbar-start">
-        <div className="mx-14">
+      <div className="md:navbar-end sm:navbar-start xs:navbar-start w-full flex justify-around">
+        <div className="w-13">
           <NavBarLink to="/get-started">
             <FontAwesomeIcon icon={faRocket} />
             <span>Register</span>
           </NavBarLink>
         </div>
-        <div className="ml-5 mr-5">
+        <div className="w-13">
           <NavBarLink to="/login">
             <FontAwesomeIcon icon={faUser} />
             <span> LogIn</span>
