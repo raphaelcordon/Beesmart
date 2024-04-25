@@ -4,11 +4,11 @@ const MyVouchersClosed = ({ usedVouchers, loading }) => {
   return (
     <>
       {usedVouchers !== null ? console.log("sssss") : console.log("rffff")}
-      <div className="justify-center p-1 pt-20">
+      <div className="justify-center p-1 pt-8">
         {usedVouchers !== null ? (
           usedVouchers.map((voucher, index) => (
             <>
-              <Voucher key={voucher.id} loading={loading} voucher={voucher} />
+              <Voucher className="opacity-50" key={voucher.id} loading={loading} voucher={voucher} />
             </>
           ))
         ) : (
