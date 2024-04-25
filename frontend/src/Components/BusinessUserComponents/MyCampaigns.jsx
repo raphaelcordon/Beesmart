@@ -52,14 +52,6 @@ const MyCampaigns = () => {
         setCreateNewCampaign(false);
     };
 
-    // const handleCreateNewCampaign = (e) => {
-    //     e.preventDefault();
-    //     setCreateNewCampaign(!createNewCampaign);
-    // };
-
-    console.log(campaignsOpen)
-    console.log(campaignsClosed)
-
     return (
         <>
             {!createNewCampaign ? (
@@ -111,8 +103,6 @@ const MyCampaigns = () => {
                 <div>
                     <NewCampaign/>
                 </div>
-                
-                
             )}
         </>
     )
