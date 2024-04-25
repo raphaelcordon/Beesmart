@@ -4,12 +4,12 @@ const MyVouchersClosed = ({ usedVouchers, loading }) => {
   return (
     <>
       {usedVouchers !== null ? console.log("sssss") : console.log("rffff")}
-      <div className="justify-center p-1 pt-8">
+      <div className="justify-center p-1 pt-8 p-1 flex flex-row flex-wrap items-center justify-center align-center text-center w-dvw gap-10 ">
         {usedVouchers !== null ? (
           usedVouchers.map((voucher, index) => (
-            <>
-              <Voucher className="opacity-50" key={voucher.id} loading={loading} voucher={voucher} />
-            </>
+            <div className=" opacity-50">
+              <Voucher key={voucher.id} loading={loading} voucher={voucher} />
+            </div>
           ))
         ) : (
           <h1>You are not yet engaged in any campaign</h1>

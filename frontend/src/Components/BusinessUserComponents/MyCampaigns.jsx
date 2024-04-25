@@ -86,14 +86,13 @@ const MyCampaigns = () => {
                         </button> */}
                     </header>
 
-                    <main className="flex flex-col items-center justify-center text-center">
+                    <main className="flex flex-row items-center justify-center text-center ">
                         {currentCampaigns === 'ongoing' ? (
-                            <MyCampaignsOngoing list={campaignsOpen}/>
+                            <MyCampaignsOngoing isLoading={isLoading} list={campaignsOpen}/>
                         ) : (
-                            <MyCampaignsClosed list={campaignsClosed}/>
+                            <MyCampaignsClosed isLoading={isLoading} list={campaignsClosed}/>
                         )}
 
-                        {isLoading && <p>Loading...</p>}
                         {error && <p>Error: {error}</p>}
                         <div></div>
                     </main>

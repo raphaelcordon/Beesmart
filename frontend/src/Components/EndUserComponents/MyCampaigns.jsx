@@ -44,7 +44,7 @@ const MyCampaigns = () => {
                 </span>
             </header> */}
 
-      <main>
+      <main className="flex flex-row items-center justify-center text-center ">
         {currentCampaigns === "ongoing" && (
           <MyCampaignsOngoing campaigns={campaigns} isLoading={isLoading} setIsLoading={setIsLoading} />
         )}
