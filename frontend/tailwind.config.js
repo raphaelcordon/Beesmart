@@ -11,7 +11,38 @@ module.exports = {
     utils: true,
   },
   plugins: [require("daisyui")],
+  theme: {
+    extend: {
+      // Customizing the width, margin, and padding
+      width: {
+        'full': '100%', // Equivalent to width: 100%;
+      },
+      margin: {
+        '0': '0', // Equivalent to margin: 0;
+      },
+      padding: {
+        '0': '0', // Equivalent to padding: 0;
+      },
+    },
+  },
 };
+
+
+
+// module.exports = {
+//   content: ["./src/**/*.{js,ts,jsx,tsx}"],
+//   daisyui: {
+//     themes: [
+//       {
+//         bumblebee: {
+//           ...require("daisyui/src/theming/themes")["bumblebee"],
+//         },
+//       },
+//     ],
+//     utils: true,
+//   },
+//   plugins: [require("daisyui")],
+// };
 
 
 // module.exports = {
