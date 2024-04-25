@@ -44,9 +44,9 @@ const NavBarUser = ({ setActiveTabProp }) => {
              </div>
 
             <div className="navbar border border-base-300 bg-base-100/50 shadow-lg backdrop-blur-2xl fixed bottom-0 left-0 w-full z-10 md:relative md:flex md:justify-around sm:justify-around">
-                <div className="w-full flex justify-around">
+                <div className="w-full flex justify-row">
                     
-                        <div className="w-13" >
+                        <div className="basis-1/4 md:basis-1/3" >
                             <NavBarToggling
                                 setActiveTab={() => handleSetActiveTab('MyCampaigns')}
                                 active={activeTab === 'MyCampaigns'}
@@ -54,7 +54,7 @@ const NavBarUser = ({ setActiveTabProp }) => {
                                 <FontAwesomeIcon icon={faBullhorn} />Campaigns
                             </NavBarToggling>
                         </div>
-                        <div className="w-13" >
+                        <div className="basis-1/4 md:basis-1/3" >
                             <NavBarToggling
                                 setActiveTab={() => handleSetActiveTab('MyVouchers')}
                                 active={activeTab === 'MyVouchers'}
@@ -62,7 +62,7 @@ const NavBarUser = ({ setActiveTabProp }) => {
                                 <FontAwesomeIcon icon={faTicketSimple} />Vouchers
                             </NavBarToggling>
                         </div>
-                        <div className="block lg:hidden mx-6 w-13" >
+                        <div className="block lg:hidden basis-1/4 md:basis-1/3" >
                             <NavBarToggling
                                 setActiveTab={() => handleSetActiveTab('Scan')}
                                 active={activeTab === 'Scan'}
@@ -70,7 +70,7 @@ const NavBarUser = ({ setActiveTabProp }) => {
                                 <FontAwesomeIcon icon={faExpand} />Scan
                             </NavBarToggling>
                         </div>
-                        <div className="w-13" >
+                        <div className="basis-1/4 md:basis-1/3" >
                             <NavBarToggling
                                 setActiveTab={() => handleSetActiveTab('Profile')}
                                 active={activeTab === 'Profile'}
