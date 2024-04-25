@@ -62,7 +62,7 @@ const NavBarUser = ({ setActiveTabProp }) => {
                                 <FontAwesomeIcon icon={faTicketSimple} />Vouchers
                             </NavBarToggling>
                         </div>
-                        <div className="w-13" >
+                        <div className="block lg:hidden mx-6 w-13" >
                             <NavBarToggling
                                 setActiveTab={() => handleSetActiveTab('Scan')}
                                 active={activeTab === 'Scan'}
