@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { getCollectorByEndUser } from "../../../axios/axiosCollector";
 import stamp from "../../../assets/stamp.png";
 import notcollected from "../../../assets/notcollected.png";
-import defaultlogo from "../../../assets/defaultlogo.png"
-import check from "../../../assets/check.png"
+import defaultlogo from "../../../assets/defaultlogo.png";
+import check from "../../../assets/check.png";
 
-const MyCollector = ({ item }) => {
+const MyCollector = ({ item, setIsLoading }) => {
   const [collector, setCollector] = useState({});
   const [collectorType, setCollectorType] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -18,6 +18,7 @@ const MyCollector = ({ item }) => {
       setCollectorType(item.collector_type);
       setTimeout(() => {
         setLoading(false);
+        setIsLoading(false)
       }, 950);
     };
     getCollector();
@@ -28,7 +29,9 @@ const MyCollector = ({ item }) => {
       {loading ? (
         <div className="flex justify-center pb-20">
           <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content breadcrumbs w-80 shadow-md">
-            <div className="pt-64 pb-64">.....</div>
+            <div className="pt-64 pb-64">
+            <span className="loading loading-ball loading-lg"></span>
+            </div>
           </div>
         </div>
       ) : (
@@ -41,11 +44,11 @@ const MyCollector = ({ item }) => {
             <div>
               <div className="stat-title w-full ">
                 {collectorType === 1 ? (
-                  <div className="text-right pr-14">Your Stamps: {collector.value_counted} </div>
+                  <div className="text-right text-xs pr-14">You have: {collector.value_counted} Stamps </div>
                 ) : collectorType === 2 ? (
                   <div className="text-xl font-bold">You need: {collector.value_goal} points</div>
                 ) : (
-                    <div className="text-xl font-bold">Campaign goal: {collector.value_goal} CHF</div>
+                  <div className="text-xl font-bold">Campaign goal: {collector.value_goal} CHF</div>
                 )}
               </div>
               <div className="flex items-center justify-center min-h-24">
@@ -89,7 +92,8 @@ const MyCollector = ({ item }) => {
                 />
               </div>
               <div className="text-xs stat-title w-full text-right pr-14 pb-4">
-                <div className="text-yellow-500">Campaign expires:</div>  {item.ending_date ? <div>{item.ending_date}</div> : <div>---</div>}
+                <div className="text-yellow-500">Campaign expires:</div>{" "}
+                {item.ending_date ? <div>{item.ending_date}</div> : <div>---</div>}
               </div>
               <div className="stat-desc"></div>
             </div>

@@ -1,9 +1,10 @@
 # from django.shortcuts import render
 from rest_framework import status
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from end_user_profile.models import EndUserProfile
 from voucher.models import Voucher
 from voucher.serializers import UseVoucherSerializer
 
@@ -29,16 +30,31 @@ class UseVoucherView(CreateAPIView):
         return Response('Voucher does not exist', status=status.HTTP_404_NOT_FOUND)
 
 
-class EndUsersSpecificCampaignVouchers(CreateAPIView):
+class EndUsersActiveVouchers(ListAPIView):
     serializer_class = UseVoucherSerializer
     queryset = Voucher.objects.all()
     permission_classes = [IsAuthenticated]
 
-    def post(self, request, *args, **kwargs):
-        secret_key = request.data['secret_key']
-        if Voucher.objects.filter(campaign__id=kwargs['campaign_id'], end_user_profile__secret_key=secret_key).exists():
-            vouchers = Voucher.objects.filter(campaign__id=kwargs['campaign_id'],
-                                              end_user_profile__secret_key=secret_key)
+    def get(self, request, *args, **kwargs):
+        user = self.request.user
+        profile = EndUserProfile.objects.get(user=user)
+        if Voucher.objects.filter(end_user_profile=profile, is_used=False).exists():
+            vouchers = Voucher.objects.filter(end_user_profile=profile, is_used=False)
             serializer = UseVoucherSerializer(vouchers, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response('Voucher does not exist', status=status.HTTP_404_NOT_FOUND)
+        return Response('User don\'t have any vouchers.', status=status.HTTP_404_NOT_FOUND)
+
+
+class EndUsersUsedVouchers(ListAPIView):
+    serializer_class = UseVoucherSerializer
+    queryset = Voucher.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        user = self.request.user
+        profile = EndUserProfile.objects.get(user=user)
+        if Voucher.objects.filter(end_user_profile=profile, is_used=True).exists():
+            vouchers = Voucher.objects.filter(end_user_profile=profile, is_used=True)
+            serializer = UseVoucherSerializer(vouchers, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response('User don\'t have any vouchers.', status=status.HTTP_404_NOT_FOUND)
