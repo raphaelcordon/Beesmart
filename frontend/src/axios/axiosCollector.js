@@ -4,25 +4,25 @@ const axios = AxiosMotion;
 
 
 export const RegisterNewCollector = async (data) => {
-try{
-    const config = getAxiosConfig();
-    const res = await axios.post("/collector/validate/", data, config );
-    return res.data;
-} catch (error) {
-    console.error("Registration error: ", error.response?.data?.message || "Failed to register collector");
-    throw new Error(error.response?.data?.message || "Failed to register collector");
-}
+    try{
+        const config = getAxiosConfig();
+        const res = await axios.post("/collector/validate/", data, config );
+        return res.data;
+    } catch (error) {
+        console.error("Registration error: ", error.response?.data?.message || "Failed to register collector");
+        throw new Error(error.response?.data?.message || "Failed to register collector");
+    }
 }
 
 
 export const getCollectorByEndUser = async (campaignId) => {
-try{
-    const config = getAxiosConfig();
-    const res = await axios.get(`/collector/enduser/${campaignId}`, config);
-    return(res.data);
-} catch (error) {
-    console.error(error);
-}
+    try{
+        const config = getAxiosConfig();
+        const res = await axios.get(`/collector/enduser/${campaignId}`, config);
+        return(res.data);
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 
