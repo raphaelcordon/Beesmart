@@ -4,7 +4,7 @@ const MyVouchersClosed = ({ usedVouchers, loading }) => {
   return (
     <>
       {usedVouchers !== null ? console.log("sssss") : console.log("rffff")}
-      <div className="justify-center p-1 pt-8 p-1 flex flex-row flex-wrap items-center justify-center align-center text-center w-dvw gap-10 ">
+      <div className="justify-center p-1 pt-8 p-1 flex flex-row flex-wrap items-center justify-center align-center text-center gap-10 ">
         {usedVouchers !== null ? (
           usedVouchers.map((voucher, index) => (
             <div className=" opacity-50">
