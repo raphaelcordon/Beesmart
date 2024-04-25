@@ -5,6 +5,8 @@ module.exports = {
       {
         bumblebee: {
           ...require("daisyui/src/theming/themes")["bumblebee"],
+          background: require("daisyui/src/theming/themes")["bumblebee"]["primary"],
+          "base-300": "#FAF7ED",
         },
       },
     ],
@@ -12,7 +14,6 @@ module.exports = {
   },
   plugins: [require("daisyui")],
 };
-
 
 // module.exports = {
 //   content: ["./src/**/*.{js,ts,jsx,tsx}"],
@@ -26,7 +27,7 @@ module.exports = {
 //           'base-300': "#D1E8E2",
 //           accent: "#2C3531",
 //           'base-200': "#FFCB9A",
-          
+
 //         },
 //       },
 //     ],
@@ -35,7 +36,6 @@ module.exports = {
 
 //   plugins: [require("daisyui")],
 // };
-
 
 //later customise themes (Böbi)
 // daisyui: {
