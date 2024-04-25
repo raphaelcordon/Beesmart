@@ -8,6 +8,7 @@ from rest_framework.exceptions import NotFound
 from rest_framework.generics import CreateAPIView, UpdateAPIView, DestroyAPIView, RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from customer_user_profile.models import CustomerUserProfile
 from email_layouts.get_card_email import get_card_layout
@@ -21,8 +22,42 @@ from user.serializers import CustomerUserSerializer, UserRegistrationSerializer,
     CustomerUserUpdateDeleteSerializer, EndUserUpdateDeleteSerializer
 # from django.core.mail import EmailMessage
 from django.conf import settings
+from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
 
 User = get_user_model()
+
+
+class TokenUserObtainView(TokenObtainPairView):
+    """
+    post:
+    Create a new session for a user. Sends back tokens and user.
+    """
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+
+        try:
+            serializer.is_valid(raise_exception=True)
+        except TokenError as e:
+            raise InvalidToken(e.args[0])
+
+        user = User.objects.get(email=request.data['email'])
+        req = request
+
+        if user.is_customer:
+            customer_serializer = CustomerUserSerializer(instance=user, context={'request': req})
+            res = {
+                'customer': customer_serializer.data,
+                **serializer.validated_data
+            }
+            return Response(res, status=status.HTTP_200_OK)
+        else:
+            end_user_serializer = EndUserSerializer(instance=user, context={'request': req})
+            res = {
+                'endUser': end_user_serializer.data,
+                **serializer.validated_data
+            }
+            return Response(res, status=status.HTTP_200_OK)
 
 
 def code_generator(length=15):
