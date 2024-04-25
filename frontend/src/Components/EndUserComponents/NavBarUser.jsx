@@ -1,4 +1,4 @@
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import NavBarToggling from "../SmallComponents/NavBarToggling.jsx";
 import { useEffect, useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -8,9 +8,7 @@ import NavBarLink from "../SmallComponents/NavBarLinks.jsx";
 import { faBullhorn, faExpand, faRightFromBracket, faTicketSimple, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 const NavBarUser = ({ setActiveTabProp }) => {
-    //const [isOpen, setIsOpen] = useState(false);
     const [activeTab, setActiveTab] = useState('Campaigns');
     const dispatch = useDispatch();
     const user = useSelector(state => state.endUser.userEndUserData);
@@ -38,12 +36,12 @@ const NavBarUser = ({ setActiveTabProp }) => {
         <>
          {/* Logout button for mobile users */}
          <div className="absolute top-3 right-3 p-2 sm:hidden text-3xl">
-         <NavBarLink to="/" onClick={(e) => {
+         <NavLink to="/" onClick={(e) => {
                    e.preventDefault();
                    logoutHandler();
                    navigate("/");
                  }}><FontAwesomeIcon icon={faRightFromBracket} />
-             </NavBarLink>
+             </NavLink>
              </div>
 
 
