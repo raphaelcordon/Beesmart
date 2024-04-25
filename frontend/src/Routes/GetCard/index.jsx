@@ -75,7 +75,7 @@ const GetCard = () => {
 
             // }
             setVerified(true);
-            setTimeout(() => navigator(`/login`), 12000);
+            setTimeout(() => navigator(`/login`), 2000);
         } catch (error) {
             setError(error.message || 'Failed to register. Please try again.');
             setVerified(false)
