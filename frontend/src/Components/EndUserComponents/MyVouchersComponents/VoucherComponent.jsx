@@ -21,9 +21,9 @@ const Voucher = ({ voucher, loading }) => {
               {voucher.campaign.collector_type === 1 ? (
                 <div className="text-right pr-14"></div>
               ) : voucher.campaign.collector_type === 2 ? (
-                <div className="text-xl font-bold">You need: {collector.value_goal} points</div>
+                <></>
               ) : (
-                <div className="text-xl font-bold">Campaign goal: {collector.value_goal} CHF</div>
+                <></>
               )}
             </div>
             <div className="flex items-center justify-center min-h-24">
@@ -39,26 +39,26 @@ const Voucher = ({ voucher, loading }) => {
                   ))
                 ) : voucher.campaign.collector_type === 2 ? (
                   <div>
-                    <div className="text-slate-400 text-xl">You reached goal!:</div>
+                    <div className="text-slate-400 text-xl">You reached goal!</div>
                     <div className="text-slate-600 font-bold text-4xl">{voucher.campaign.value_goal}</div>
                   </div>
                 ) : (
                   <div>
-                    <div className="text-slate-400 text-sm">You reached goal!:</div>
-                    <div className="text-slate-600 font-bold text-2xl"> {voucher.campaign.value_goal}CHF</div>
+                    <div className="text-slate-400 text-sm">You reached goal!</div>
+                    <div className="text-slate-600 font-bold text-2xl"> {voucher.campaign.value_goal} CHF</div>
                   </div>
                 )}
               </div>
             </div>
             <div className="flex justify-center pb-10 pt-5">
-              <div className="text-2xl text-left font-bold  text-lime-700">{voucher.name.toUpperCase()}</div>
+              <div className="text-4xl text-left font-bold  text-lime-700">{voucher.name.toUpperCase()}</div>
             </div>
             <div className="flex justify-center pb-10 pt-5">
               <img src={voucher.qr_code} alt="QR_CODE " className="w-52 h-52" />
             </div>
             <div className="text-xs stat-title w-full text-right pr-14 pb-4">
               <div className="text-yellow-500">Campaign expires:</div>{" "}
-              {voucher.campaign.value_goal ? <div>{voucher.campaign.ending_date}</div> : <div>---</div>}
+              {voucher.campaign.ending_date ? <div>{voucher.campaign.ending_date}</div> : <div>---</div>}
             </div>
             <div className="stat-desc"></div>
           </div>
