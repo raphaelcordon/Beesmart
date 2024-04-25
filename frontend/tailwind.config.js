@@ -5,7 +5,7 @@ module.exports = {
       {
         bumblebee: {
           ...require("daisyui/src/theming/themes")["bumblebee"],
-          background: require("daisyui/src/theming/themes")["bumblebee"]["primary"],
+          background: "#FAF7ED",
           "base-300": "#FAF7ED",
         },
       },
