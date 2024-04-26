@@ -2,7 +2,7 @@ import random
 
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail, EmailMultiAlternatives
-from django.db.models import Sum, Q, Count
+from django.db.models import Count
 from django.db.models.functions import TruncDay
 from django.http import Http404
 from rest_framework import status
@@ -12,7 +12,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from datetime import datetime, timedelta
+from datetime import timedelta
 from django.utils import timezone
 
 from customer_user_profile.models import CustomerUserProfile
