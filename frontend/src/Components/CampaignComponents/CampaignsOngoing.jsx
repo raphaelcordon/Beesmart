@@ -49,7 +49,7 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
                                 </div>
                                 <div className="p-4">
                                   <div className="text-slate-600 text-l">Campaign Ends: </div>
-                                  <div className="text-slate-600 font-bold text-xl">{item.ending_date}</div>
+                                  <div className="text-slate-600 font-bold text-xl">{item.ending_date ? item.ending_date : "Permanent"}</div>
                                 </div>
                               </div>
                             ) : item.collector_type === 2 ? (
@@ -60,7 +60,7 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
                                 </div>
                                 <div className="p-4">
                                   <div className="text-slate-600 text-l">Campaign Ends: </div>
-                                  <div className="text-slate-600 font-bold text-xl">{item.ending_date}</div>
+                                  <div className="text-slate-600 font-bold text-xl">{item.ending_date ? item.ending_date : "Permanent"}</div>
                                 </div>
                               </div>
                             ) : (
@@ -71,7 +71,7 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
                                 </div>
                                 <div className="p-4">
                                   <div className="text-slate-600 text-l">Campaign Ends: </div>
-                                  <div className="text-slate-600 font-bold text-xl">{item.ending_date}</div>
+                                  <div className="text-slate-600 font-bold text-xl">{item.ending_date ? item.ending_date : "Permanent"}</div>
                                 </div>
                               </div>
                             )}
