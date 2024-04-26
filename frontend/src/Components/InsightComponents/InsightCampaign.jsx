@@ -50,10 +50,7 @@ const InsightCampaign = ({ campaign }) => {
                   <h1 className="text-xl text-slate-600 font-semibold text-center mt-2 mb-6">Accesses by period</h1>
                   <BarChart insight={insightVisits}/>
             </div>
-
       </>
-
-
   );
 };
 
