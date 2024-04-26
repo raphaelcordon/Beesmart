@@ -14,6 +14,7 @@ import EndUserCongratulationsSection from "../Components/SignUpComponents/SignUp
 import GetCard from "./GetCard/index.jsx";
 import GetStarted from "./StartingPagesRoutes/GetStarted.jsx";
 
+
 const Router = () => {
   return (
     <BrowserRouter>
@@ -27,7 +28,7 @@ const Router = () => {
           <Route path="/business-signup/congratulations" element={<BusinessCongratulationsSection />} />
           <Route path="/private-signup/congratulations" element={<EndUserCongratulationsSection />} />
           <Route path="/business-signup/verification" element={<VerificationSection />} />
-
+          
           <Route path="/get-card/:id" element={<GetCard />} />
         </Route>
 
