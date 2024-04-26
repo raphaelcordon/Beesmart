@@ -49,11 +49,11 @@ const Settings = () => {
 
   return (
 
-    <div className="flex flex-col items-center justify-center text-center mb-10 ">
-    <div className="">
-        <div className=" mt-20 w-full bg-base-100/50 rounded-lg shadow-lg">
+    <div className="flex flex-col items-center justify-center text-center">
+    
+        <div className=" w-full bg-base-100/50 rounded-lg shadow-lg">
           <div className="p-8">
-          <h1 className="text-2xl font-semibold text-center mt-8 mb-6">Update Profile</h1>
+          <h1 className="text-2xl font-semibold text-center">Update Profile</h1>
           <form className="mb-10" onSubmit={handleSubmit}>
             <div className="grid sm:grid-cols-2 gap-y-7 gap-x-12">
                <div className="mb-2">
@@ -165,7 +165,7 @@ const Settings = () => {
           </form>
         </div>
         </div>
-      </div>
+      
       {console.log(CustomerUser)}
     </div>
     
