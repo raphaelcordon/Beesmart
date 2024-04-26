@@ -1,9 +1,11 @@
-import tick from "../../assets/check-mark-forcongratulationsection.png";
+
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {RegisterNewCampaign} from "../../axios/axiosCampaign.js";
 import Button from "../SmallComponents/Button.jsx";
 import {useSelector} from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const NewCampaign = () => {
 
@@ -87,7 +89,7 @@ const NewCampaign = () => {
         {showSuccessMessage && (
             <div className="success-overlay">
                 <div className="text-center p-10 bg-white rounded-lg">
-                    <img src={tick} className="w-16 sm:w-24 md:w-40 lg:w-40 xl:w-48" alt="Tick"/>
+                <FontAwesomeIcon icon={faCheck} className="text-8xl text-secondary"/>
                     <h2 className="mt-8 mb-6">A new campaign was successfully created</h2>
                 </div>
             </div>

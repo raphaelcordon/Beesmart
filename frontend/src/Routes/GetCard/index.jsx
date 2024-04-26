@@ -1,8 +1,10 @@
-import tick from "../../assets/check-mark-forcongratulationsection.png";
+
 import {useState} from "react";
 import {useNavigate, useParams} from 'react-router-dom';
 import { PostEndUserVerify} from "../../axios/axiosEndUser.js";
 import Button from "../../Components/SmallComponents/Button.jsx";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const GetCard = () => {
     const navigator = useNavigate()
@@ -117,7 +119,7 @@ return (
                     {isLoading ? "Verifying email..." :
                         verified === true ? (
                             <div>
-                                <img src={tick} className="w-16 sm:w-24 md:w-40 lg:w-40 xl:w-48" alt="Tick"/>
+                                <FontAwesomeIcon icon={faCheck} className="text-8xl text-secondary"/>
                                 <h2 className="mt-8 mb-6">Your email was successfully verified.</h2>
                             </div>
                         ) : verified === false ? (
