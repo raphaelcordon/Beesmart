@@ -29,7 +29,6 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
             list.map(
               (item, index) =>
                 item.is_active === true && (
-                  <>
                     <div key={item.id || index} className="cursor-default hover:drop-shadow-xl flex justify-center  pb-10 mb-10">
                       <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content w-80 shadow-md">
                         <div className="stat flex items-center flex justify-between">
@@ -117,7 +116,6 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
                         </div>
                       </div>
                     </div>
-                  </>
                 ),
             )
           ) : (

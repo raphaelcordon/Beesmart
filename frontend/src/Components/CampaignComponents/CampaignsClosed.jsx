@@ -28,7 +28,6 @@ const CampaignsClosed = ({ list = [], isLoading }) => {
             list.map(
               (item, index) =>
                 item.is_active === false && (
-                  <>
                     <div key={item.id || index} className="cursor-default hover:drop-shadow-xl flex justify-center w-full pb-10 mb-10">
                       <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content w-80 shadow-md">
                         <div className="stat flex items-center flex justify-between">
@@ -116,7 +115,6 @@ const CampaignsClosed = ({ list = [], isLoading }) => {
                         </div>
                       </div>
                     </div>
-                  </>
                 ),
             )
           ) : (
