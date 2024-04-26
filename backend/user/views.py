@@ -2,13 +2,18 @@ import random
 
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail, EmailMultiAlternatives
+from django.db.models import Sum, Q, Count
+from django.db.models.functions import TruncDay
 from django.http import Http404
 from rest_framework import status
 from rest_framework.exceptions import NotFound
-from rest_framework.generics import CreateAPIView, UpdateAPIView, DestroyAPIView, RetrieveAPIView
+from rest_framework.generics import CreateAPIView, UpdateAPIView, DestroyAPIView, RetrieveAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
+
+from datetime import datetime, timedelta
+from django.utils import timezone
 
 from customer_user_profile.models import CustomerUserProfile
 from email_layouts.get_card_email import get_card_layout
@@ -427,3 +432,65 @@ class UpdateEndUser(UpdateAPIView):
         else:
             # Return errors if validation fails.
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserStampsCountView(ListAPIView):
+    serializer_class = EndUserSerializer
+
+    def get(self, request, *args, **kwargs):
+        campaign_id = self.kwargs['campaign_id']
+
+        # Get the counts for value_counted from 1 to 10
+        counts = (
+            EndUserProfile.objects
+            .filter(collectors__campaign__id=campaign_id)
+            .values('collectors__value_counted')
+            .annotate(count=Count('user_id', distinct=True))
+            .order_by('collectors__value_counted')
+        )
+
+        # Convert the queryset to a list of dictionaries
+        data = [
+            {'label': entry['collectors__value_counted'], 'number': entry['count']}
+            for entry in counts if 1 <= entry['collectors__value_counted'] <= 10
+        ]
+
+        # Ensure that all labels from 1 to 10 are represented in the data
+        labels_present = {entry['label'] for entry in data}
+        data.extend([
+            {'label': i, 'number': 0} for i in range(1, 11) if i not in labels_present
+        ])
+
+        # Sort the data by label to maintain the order from 1 to 10
+        data.sort(key=lambda x: x['label'])
+
+        return Response(data, status=status.HTTP_200_OK)
+
+
+class UserVisitsCountView(ListAPIView):
+    def get(self, request, *args, **kwargs):
+        today = timezone.now().date()
+        thirty_days_ago = today - timedelta(days=30)
+        campaign_id = kwargs['campaign_id']
+
+        # Fetch counts in one query using annotations
+        counts_queryset = (
+            EndUserProfile.objects
+            .filter(collectors__campaign__id=campaign_id,
+                    collectors__logs_collectors__date_created__date__range=(thirty_days_ago, today))
+            .annotate(date=TruncDay('collectors__logs_collectors__date_created'))
+            .values('date')
+            .annotate(count=Count('user__id'))  # add distinct=True to get uniq users
+            .order_by('date')
+        )
+
+        # Convert datetime to date for consistent comparison
+        counts_dict = {count['date'].date(): count['count'] for count in counts_queryset}
+
+        # Prepare the response data, ensuring every day is represented
+        data = [
+            {'day': (thirty_days_ago + timedelta(days=i)).isoformat(),
+             'number': counts_dict.get(thirty_days_ago + timedelta(days=i), 0)}
+            for i in range(31)  # Ensure it covers exactly 30 days including today
+        ]
+        return Response(data, status=status.HTTP_200_OK)

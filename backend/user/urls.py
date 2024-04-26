@@ -1,7 +1,8 @@
 from django.urls import path
 
 from user.views import CreateCustomerUser, CreateEndUser, VeryfiCustomerUserView, GenerateEndUserCard, MeCustomerUser, \
-    MeEndUser, UpdateCustomerUser, DeleteCustomerUser, EndUserBySecretKey, UpdateEndUser
+    MeEndUser, UpdateCustomerUser, DeleteCustomerUser, EndUserBySecretKey, UpdateEndUser, UserStampsCountView, \
+    UserVisitsCountView
 
 urlpatterns = [
     path('customer/user/add/', CreateCustomerUser.as_view(), name='Add customer user'),
@@ -14,5 +15,8 @@ urlpatterns = [
     path('enduser/user/me/', MeEndUser.as_view(), name='Gets back logged in end user object'),
     path('enduser/user/update/', UpdateEndUser.as_view(), name='Update end user'),
     path('enduser/user/<str:secret_key>/', EndUserBySecretKey.as_view(), name='Gets end user object by secret_key'),
+
+    path('insights/stamps/<int:campaign_id>/', UserStampsCountView.as_view(), name='Get users stamps count'),
+    path('insights/visits/<int:campaign_id>/', UserVisitsCountView.as_view(), name='Get users visits count'),
 
 ]

@@ -29,7 +29,7 @@ const CampaignsClosed = ({ list = [], isLoading }) => {
               (item, index) =>
                 item.is_active === false && (
                   <>
-                    <div key={item.id || index} className="flex justify-center w-full pb-10 mb-10">
+                    <div key={item.id || index} className="cursor-default hover:drop-shadow-xl flex justify-center w-full pb-10 mb-10">
                       <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content w-80 shadow-md">
                         <div className="stat flex items-center flex justify-between">
                           <img
@@ -81,29 +81,29 @@ const CampaignsClosed = ({ list = [], isLoading }) => {
                               {item.collector_type === 1 ? (
                                 <div>
                                   <div className="stat-title">Participants</div>
-                                  <div className="stat-value text-primary">4,200</div>
+                                  <div className="stat-value text-primary">{item.participants}</div>
                                   <div className="stat-title pt-5">Stamps Collected</div>
-                                  <div className="stat-value text-secondary">23,455</div>
+                                  <div className="stat-value text-secondary">{item.value}</div>
                                   <div className="stat-title pt-5">Vouchers issued</div>
-                                  <div className="stat-value">382</div>
+                                  <div className="stat-value">{item.vouchers_issued}</div>
                                 </div>
                               ) : item.collector_type === 2 ? (
                                 <div>
                                   <div className="stat-title">Participants</div>
-                                  <div className="stat-value text-primary">7,400</div>
+                                  <div className="stat-value text-primary">{item.participants}</div>
                                   <div className="stat-title pt-5">Points Collected</div>
-                                  <div className="stat-value text-secondary">280,876</div>
+                                  <div className="stat-value text-secondary">{item.value}</div>
                                   <div className="stat-title pt-5">Vouchers issued</div>
-                                  <div className="stat-value">2895</div>
+                                  <div className="stat-value">{item.vouchers_issued}</div>
                                 </div>
                               ) : (
                                 <div>
                                   <div className="stat-title">Participants</div>
-                                  <div className="stat-value text-primary">7,400</div>
+                                  <div className="stat-value text-primary">{item.participants}</div>
                                   <div className="stat-title pt-5">Money Spent</div>
-                                  <div className="stat-value text-secondary">280,876</div>
+                                  <div className="stat-value text-secondary">{item.value}</div>
                                   <div className="stat-title pt-5">Vouchers issued</div>
-                                  <div className="stat-value">2895</div>
+                                  <div className="stat-value">{item.vouchers_issued}</div>
                                 </div>
                               )}
                             </div>

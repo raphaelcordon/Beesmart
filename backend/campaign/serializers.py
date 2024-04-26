@@ -1,9 +1,13 @@
 from datetime import date
 
+from django.db.models import Sum
 from rest_framework import serializers
 
 from campaign.models import Campaign, CampaignStyle, CollectorType
+from collector.models import LogsCollector, Collector
 from customer_user_profile.serializers import CustomerUserProfileSerializer
+from end_user_profile.models import EndUserProfile
+from voucher.models import Voucher
 
 
 class CollectorTypeSerializer(serializers.ModelSerializer):
@@ -14,11 +18,14 @@ class CollectorTypeSerializer(serializers.ModelSerializer):
 
 class CampaignSerializer(serializers.ModelSerializer):
     is_active = serializers.SerializerMethodField()
+    participants = serializers.SerializerMethodField()
+    value = serializers.SerializerMethodField()
+    vouchers_issued = serializers.SerializerMethodField()
 
     class Meta:
         model = Campaign
         fields = ['id', 'is_active', 'name', 'style', 'value_goal', 'beginning_date', 'ending_date', 'image', 'logo',
-                  'customer_user_profile', 'collector_type']
+                  'customer_user_profile', 'collector_type', 'participants', 'value', 'vouchers_issued']
         read_only_fields = ['id', 'customer_user_profile', ]
 
     def to_representation(self, instance):
@@ -37,6 +44,19 @@ class CampaignSerializer(serializers.ModelSerializer):
             if obj.ending_date <= today_date:
                 return False
         return True
+
+    def get_participants(self, obj):
+        return EndUserProfile.objects.filter(collectors__campaign=obj).distinct().count()
+        # return obj.collectors.end_user_profile.count()
+
+    def get_value(self, obj):
+        print(obj.collector_type)
+        return Collector.objects.filter(campaign=obj).distinct().aggregate(total=Sum('value_counted'))['total']
+
+        # return obj.collectors.end_user_profile.count()
+
+    def get_vouchers_issued(self, obj):
+        return Voucher.objects.filter(campaign=obj).count()
 
 
 class CampaignStyleSerializer(serializers.ModelSerializer):
