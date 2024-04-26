@@ -3,6 +3,7 @@ import userCustomerReducer from './slices/userCustomerSlice.js';
 import userEndUserReducer from './slices/userEndUserSlice.js';
 import campaignReducer from './slices/campaignSlice.js';
 import collectorReducer from './slices/collectorSlice.js';
+import insightReducer from './slices/insightSlice.js';
 
 
 export default configureStore({
@@ -11,5 +12,6 @@ export default configureStore({
         endUser: userEndUserReducer,
         campaign: campaignReducer,
         collector: collectorReducer,
+        insight: insightReducer,
     },
 },)
