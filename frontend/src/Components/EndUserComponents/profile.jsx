@@ -21,8 +21,7 @@ const Profile = () => {
   const [city, setCity] = useState(EndUser.end_user_profile.city);
   const [street, setStreet] = useState(EndUser.end_user_profile.street);
   const [zip, setZip] = useState(EndUser.end_user_profile.zip);
-  const [avatar, setAvatar] = useState(null); 
- 
+  const [avatar, setAvatar] = useState(EndUser.end_user_profile.avatar || null); 
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -38,7 +37,7 @@ const Profile = () => {
     formData.append('city', city);
     formData.append('street', street);
     formData.append('zip', zip);
-    if (avatar) {
+    if (avatar !== null) { // Check if avatar is not null before appending to formData
       formData.append('avatar', avatar); // Only append avatar if a file is selected
     }
 
@@ -58,6 +57,10 @@ const Profile = () => {
 
   const handleInputFocus = () => {
     setSuccess(false); // Clear success message when any input field gains focus
+  };
+
+  const handleAvatarChange = (e) => {
+    setAvatar(e.target.files[0]); // Update avatar state with the selected file
   };
 
   return (
@@ -89,7 +92,7 @@ const Profile = () => {
                     }}
                   >
                     <div className="bg-white/90 rounded-full w-6 h-6 text-center ml-28 mt-4 ">
-                      <input type="file" name="profile" id="upload_profile" onChange={(e) => setAvatar(e.target.files[0])}
+                      <input type="file" name="profile" id="upload_profile" onChange={handleAvatarChange}
                         onFocus={handleInputFocus}
                         accept="image/*" hidden />
                       <label htmlFor="upload_profile">
