@@ -10,7 +10,7 @@ const Voucher = ({ voucher, loading }) => {
 
   return (
     <>
-     <div className="flex justify-center pb-10 mb-10 ">
+      <div className="cursor-default hover:drop-shadow-xl flex justify-center pb-10 mb-10 ">
         <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content w-80 shadow-md ">
           <div className="stat flex items-center">
             <img src={`${voucher.logo || defaultlogo}`} alt="Campaign Logo" className="w-16 h-16 rounded-full p-2" />

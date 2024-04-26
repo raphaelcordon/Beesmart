@@ -18,7 +18,7 @@ const MyCollector = ({ item, setIsLoading }) => {
       setCollectorType(item.collector_type);
       setTimeout(() => {
         setLoading(false);
-        setIsLoading(false)
+        setIsLoading(false);
       }, 950);
     };
     getCollector();
@@ -30,12 +30,12 @@ const MyCollector = ({ item, setIsLoading }) => {
         <div className="flex justify-center pb-20">
           <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content breadcrumbs w-80 shadow-md">
             <div className="pt-64 pb-64">
-            <span className="loading loading-ball loading-lg"></span>
+              <span className="loading loading-ball loading-lg"></span>
             </div>
           </div>
         </div>
       ) : (
-        <div className="flex justify-center pb-10 mb-10">
+        <div className="hover:drop-shadow-xl cursor-default flex justify-center pb-10 mb-10">
           <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content w-80 shadow-md">
             <div className="stat flex items-center">
               <img src={`${item.logo || defaultlogo}`} alt="Campaign Logo" className="w-16 h-16 rounded-full p-2" />
@@ -44,17 +44,17 @@ const MyCollector = ({ item, setIsLoading }) => {
             <div>
               <div className="stat-title w-full ">
                 {collectorType === 1 ? (
-                  <div className="text-right text-xs pr-14">You have: {collector.value_counted} Stamps </div>
+                  <div className="text-right text-xs h-8 pr-14">You have: {collector.value_counted} Stamps </div>
                 ) : collectorType === 2 ? (
-                  <div className="text-xl font-bold">You need: {collector.value_goal} points</div>
+                  <div className="text-xl h-8 font-bold">You need: {collector.value_goal} points</div>
                 ) : (
-                  <div className="text-xl font-bold">Campaign goal: {collector.value_goal} CHF</div>
+                  <div className="text-xl h-8 font-bold">Campaign goal: {collector.value_goal} CHF</div>
                 )}
               </div>
               <div className="flex items-center justify-center min-h-24">
                 {console.log(item)}
 
-                <div className="flex flex-row flex-wrap items-center justify-center rounded-lg w-80">
+                <div className="flex flex-row flex-wrap items-center justify-center rounded-lg h-32 w-80">
                   {collectorType === 1 ? (
                     Array.from({ length: collector.value_goal }).map((_, index) =>
                       collector.value_counted > index ? (
