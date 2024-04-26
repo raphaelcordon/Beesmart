@@ -15,6 +15,7 @@ const Profile = () => {
   const [city, setCity] = useState(EndUser.end_user_profile.city);
   const [street, setStreet] = useState(EndUser.end_user_profile.street);
   const [zip, setZip] = useState(EndUser.end_user_profile.zip);
+  const [avatar, setAvatar] = useState(null); 
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -30,6 +31,9 @@ const Profile = () => {
     formData.append('city', city);
     formData.append('street', street);
     formData.append('zip', zip);
+    if (avatar) {
+      formData.append('avatar', avatar); // Only append avatar if a file is selected
+    }
 
     try {
       await UpdateMeUser(formData);
@@ -129,7 +133,7 @@ const Profile = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="block mb-2 text-sm text-accent-content">Upload Avatar (not implemented)</label>
+                <label className="block mb-2 text-sm text-accent-content">Upload Avatar</label>
                 <input
                   name="avatar"
                   id="avatar"
@@ -147,7 +151,7 @@ const Profile = () => {
           {error && <small>{String(error)}</small>}
         </div>
       </div>
-      {console.log(EndUser)}
+      {/* {console.log(EndUser)} */}
     </div>
 
   );

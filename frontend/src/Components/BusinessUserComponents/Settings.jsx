@@ -16,7 +16,7 @@ const Settings = () => {
   const [street, setStreet] = useState(CustomerUser.customer_user_profile.street);
   const [zip, setZip] = useState(CustomerUser.customer_user_profile.zip);
   const [website, setWebsite] = useState(CustomerUser.customer_user_profile.website);
-  const [logo, setLogo] = useState(null); // Initialize logo state to null
+  const [logo, setLogo] = useState(null); 
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
