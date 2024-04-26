@@ -21,6 +21,7 @@
     "@react-pdf/renderer": "^3.4.2",
     "@reduxjs/toolkit": "^2.2.3",
     "axios": "^1.6.8",
+    "chart.js": "^4.4.2",
     "date-fns": "^3.6.0",
     "qr-scanner": "^1.4.2",
     "qrcode": "^1.5.3",
