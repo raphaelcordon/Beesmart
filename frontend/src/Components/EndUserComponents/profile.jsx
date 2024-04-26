@@ -3,6 +3,8 @@ import {useEffect, useState} from "react";
 import {UpdateMeUser} from "../../axios/axiosEndUser.js";
 import Button from "../SmallComponents/Button.jsx";
 import useGetMeEndUser from "../../Hooks/useGetMeEndUser.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const Profile = () => {
     const EndUser = useSelector(state => state.endUser.userEndUserData);
@@ -15,6 +17,7 @@ const Profile = () => {
   const [city, setCity] = useState(EndUser.end_user_profile.city);
   const [street, setStreet] = useState(EndUser.end_user_profile.street);
   const [zip, setZip] = useState(EndUser.end_user_profile.zip);
+  const [avatar, setAvatar] = useState(null); 
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -30,12 +33,19 @@ const Profile = () => {
     formData.append('city', city);
     formData.append('street', street);
     formData.append('zip', zip);
+    if (avatar) {
+      formData.append('avatar', avatar); // Only append avatar if a file is selected
+    }
 
     try {
       await UpdateMeUser(formData);
       getUser();
       setSuccess(true);
       setError(null);
+      setTimeout(() => {
+        setSuccess(false); // Hide the success message
+        // window.location.reload(); // Reload the page
+      }, 1000); 
     } catch (err) {
       setError(err.message);
     }
@@ -47,6 +57,13 @@ const Profile = () => {
 
     return (
         <div className="flex items-center justify-center">
+          {success && (<div className="success-overlay">
+                <div className="text-center p-10 bg-base-100 rounded-lg">
+                <FontAwesomeIcon icon={faCheck} className="text-8xl text-secondary"/>
+                    <h2 className="mt-8 mb-6">Profile succesfully updated</h2>
+                </div>
+                </div>)}
+          {error && <small>{String(error)}</small>}
       <div className="flex xl:items-center l:items-center justify-center sm:mt-p md:mt-50p">
         <div className="max-w-md w-full p-6 bg-base-100 rounded-lg shadow-lg mb-16">
           <h1 className="text-2xl font-semibold text-center mt-8 mb-6">Update Profile</h1>
@@ -129,7 +146,7 @@ const Profile = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="block mb-2 text-sm text-accent-content">Upload Avatar (not implemented)</label>
+                <label className="block mb-2 text-sm text-accent-content">Upload Avatar</label>
                 <input
                   name="avatar"
                   id="avatar"
@@ -143,11 +160,10 @@ const Profile = () => {
             </div>
             <Button type="submit">Save</Button>
           </form>
-          {success && <div className="text-success mb-4">Profile updated successfully!</div>}
-          {error && <small>{String(error)}</small>}
+         
         </div>
       </div>
-      {console.log(EndUser)}
+      {/* {console.log(EndUser)} */}
     </div>
 
   );
