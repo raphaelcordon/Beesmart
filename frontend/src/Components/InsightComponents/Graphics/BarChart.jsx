@@ -1,7 +1,7 @@
 import Chart from 'chart.js/auto';
 import {useEffect, useRef} from "react";
 
-const BarChart = () =>{
+const BarChart = ({ insight }) =>{
 
   const chartRef = useRef(null);
 
@@ -9,10 +9,10 @@ const BarChart = () =>{
     const barChart = new Chart(chartRef.current, {
       type: 'bar',
       data: {
-        labels: ['1', '2', '3', '4', '5', '6'],
+        labels: insight.map(item => item.day? item.day : item.label),
         datasets: [{
           label: '',
-          data: [100, 119, 33, 65, 62, 37],
+          data: insight.map(item => item.number),
           backgroundColor: [
             'rgba(250,177,103,0.2)',
 
@@ -38,7 +38,7 @@ const BarChart = () =>{
     });
 
     return () => barChart.destroy();
-  }, []);
+  }, [insight]);
 
     return (
         <>

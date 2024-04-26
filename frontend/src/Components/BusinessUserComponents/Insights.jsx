@@ -92,7 +92,7 @@ return (
                    </a>
                     {insightsVisibility[item.id] && (
                       <div className="w-100">
-                        <InsightCampaign isLoading={isLoading} list={openCampaigns} />
+                        <InsightCampaign isLoading={isLoading} campaign={item} />
                       </div>
                     )}
 
