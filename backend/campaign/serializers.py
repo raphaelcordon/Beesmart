@@ -4,7 +4,7 @@ from django.db.models import Sum
 from rest_framework import serializers
 
 from campaign.models import Campaign, CampaignStyle, CollectorType
-from collector.models import LogsCollector, Collector
+from collector.models import Collector
 from customer_user_profile.serializers import CustomerUserProfileSerializer
 from end_user_profile.models import EndUserProfile
 from voucher.models import Voucher
