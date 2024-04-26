@@ -43,8 +43,6 @@ const Insights = () => {
       }));
     };
 
-    console.log(openCampaigns)
-
 return (
     <>
       {isLoading ? (
@@ -67,7 +65,9 @@ return (
             <h1>Insights of Open Campaigns</h1>
 
             {openCampaigns.map((item) => (
-              <div key={item.id} className="rounded-md bg-zinc-50 flex flex-col text-primary-content w-100 shadow-md mb-5">
+              <div key={item.id} className="rounded-md bg-zinc-50 flex flex-col text-primary-content w-100 shadow-md mb-5"
+              onClick={() => handleToggleInsights(item.id)}>
+
                 <div className="stat flex items-center justify-around pb-0">
                   <img
                     src={item.logo || defaultlogo}
@@ -87,9 +87,9 @@ return (
                   </div>
                 </div>
 
-                   <button onClick={() => handleToggleInsights(item.id)}>
-                       See insights
-                   </button>
+                   <a>
+                        {insightsVisibility[item.id] ? "Close insights" : "See insights"}
+                   </a>
                     {insightsVisibility[item.id] && (
                       <div className="w-100">
                         <InsightCampaign isLoading={isLoading} list={openCampaigns} />
