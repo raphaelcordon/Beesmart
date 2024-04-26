@@ -21,7 +21,7 @@ const Profile = () => {
   const [city, setCity] = useState(EndUser.end_user_profile.city);
   const [street, setStreet] = useState(EndUser.end_user_profile.street);
   const [zip, setZip] = useState(EndUser.end_user_profile.zip);
-  const [avatar, setAvatar] = useState(EndUser.end_user_profile.avatar || null); 
+  const [avatar, setAvatar] = useState(null); 
  
 
   const [error, setError] = useState('');
@@ -106,7 +106,7 @@ const Profile = () => {
                       value={email}
                       readOnly
                       onFocus={handleInputFocus}
-                      className="mt-2 p-4 w-full bg-secondary/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                      className="mt-2 p-4 w-full bg-secondary/10  rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
                     />
                   </div>
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6">
@@ -119,7 +119,7 @@ const Profile = () => {
                       onChange={(e) => setFirst_name(e.target.value )}
                       onFocus={handleInputFocus}
                       required
-                      className="mt-2 p-4 w-full bg-secondary/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" 
+                      className="mt-2 p-4 w-full bg-secondary/10  rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" 
                     />
                   </div>
                 </div>
@@ -134,7 +134,7 @@ const Profile = () => {
                       onChange={(e) => setLast_name(e.target.value )}
                       onFocus={handleInputFocus}
                       required
-                      className="mt-2 p-4 w-full bg-secondary/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" 
+                      className="mt-2 p-4 w-full bg-secondary/10  rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" 
                     />
                   </div>
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6">
@@ -147,7 +147,7 @@ const Profile = () => {
                       onChange={(e) => setStreet(e.target.value )}
                       onFocus={handleInputFocus}
                       required
-                      className="mt-2 p-4 w-full bg-secondary/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" 
+                      className="mt-2 p-4 w-full bg-secondary/10  rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" 
                     />
                   </div>
                 </div>
@@ -162,7 +162,7 @@ const Profile = () => {
                       onChange={(e) => setCity( e.target.value)}
                       onFocus={handleInputFocus}
                       required
-                      className="mt-2 p-4 w-full bg-secondary/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" 
+                      className="mt-2 p-4 w-full bg-secondary/10  rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" 
                     />
                   </div>
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6">
@@ -175,7 +175,7 @@ const Profile = () => {
                       onChange={(e) => setZip(e.target.value)}
                       onFocus={handleInputFocus}
                       required
-                      className="mt-2 p-4 w-full bg-secondary/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" 
+                      className="mt-2 p-4 w-full bg-secondary/10  rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" 
                     />
                   </div>
                 </div>
