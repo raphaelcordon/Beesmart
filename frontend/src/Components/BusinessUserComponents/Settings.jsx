@@ -2,6 +2,8 @@ import { useSelector } from 'react-redux';
 import { useState, useEffect } from "react";
 import { UpdateMeUser } from "../../axios/axiosCustomer.js";
 import Button from "../SmallComponents/Button.jsx";
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Settings = () => {
   const CustomerUser = useSelector(state => state.customer.userCustomerData);
@@ -36,8 +38,11 @@ const Settings = () => {
     try {
       await UpdateMeUser(formData); 
       setSuccess(true);
-      setError(null);   
-      window.location.reload();
+      setError(null);  
+      setTimeout(() => {
+        setSuccess(false); // Hide the success message
+        window.location.reload(); // Reload the page
+      }, 1000); 
     } catch (err) {
       setError(err.message);
     }
@@ -50,6 +55,13 @@ const Settings = () => {
   return (
 
     <div className="flex flex-col items-center justify-center text-center">
+      {success && (<div className="success-overlay">
+                <div className="text-center p-10 bg-base-100 rounded-lg">
+                <FontAwesomeIcon icon={faCheck} className="text-8xl text-secondary"/>
+                    <h2 className="mt-8 mb-6">Profile succesfully updated</h2>
+                </div>
+            </div>)}
+          {error && <small>{String(error)}</small>}
     
         <div className=" w-full bg-base-100/50 rounded-lg shadow-lg">
           <div className="p-8">
@@ -160,13 +172,12 @@ const Settings = () => {
             </div>
             <Button className="mt-8" type="submit">Save</Button>
           
-          {success && <div className="text-success">Profile updated successfully!</div>}
-          {error && <small>{String(error)}</small>}
+          
           </form>
         </div>
         </div>
       
-      {console.log(CustomerUser)}
+      {/* {console.log(CustomerUser)} */}
     </div>
     
   );
