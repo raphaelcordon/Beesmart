@@ -2,6 +2,10 @@ import { useSelector } from 'react-redux';
 import { useState, useEffect } from "react";
 import { UpdateMeUser } from "../../axios/axiosCustomer.js";
 import Button from "../SmallComponents/Button.jsx";
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useGetMeUser from '../../Hooks/useGetMeUser.js';
+
 
 const Settings = () => {
   const CustomerUser = useSelector(state => state.customer.userCustomerData);
@@ -14,10 +18,12 @@ const Settings = () => {
   const [street, setStreet] = useState(CustomerUser.customer_user_profile.street);
   const [zip, setZip] = useState(CustomerUser.customer_user_profile.zip);
   const [website, setWebsite] = useState(CustomerUser.customer_user_profile.website);
-  const [logo, setLogo] = useState(null); // Initialize logo state to null
+  const [logo, setLogo] = useState(null); 
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const { getUser } = useGetMeUser()
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,9 +41,13 @@ const Settings = () => {
 
     try {
       await UpdateMeUser(formData); 
+      getUser()
       setSuccess(true);
-      setError(null);   
-      window.location.reload();
+      setError(null);  
+      setTimeout(() => {
+        setSuccess(false); // Hide the success message
+        // window.location.reload(); // Reload the page
+      }, 1000); 
     } catch (err) {
       setError(err.message);
     }
@@ -49,11 +59,18 @@ const Settings = () => {
 
   return (
 
-    <div className="flex flex-col items-center justify-center text-center mb-10 ">
-    <div className="">
-        <div className=" mt-20 w-full bg-base-100/50 rounded-lg shadow-lg">
+    <div className="flex flex-col items-center justify-center text-center">
+      {success && (<div className="success-overlay">
+                <div className="text-center p-10 bg-base-100 rounded-lg">
+                <FontAwesomeIcon icon={faCheck} className="text-8xl text-secondary"/>
+                    <h2 className="mt-8 mb-6">Profile succesfully updated</h2>
+                </div>
+            </div>)}
+          {error && <small>{String(error)}</small>}
+    
+        <div className=" w-full bg-base-100/50 rounded-lg shadow-lg">
           <div className="p-8">
-          <h1 className="text-2xl font-semibold text-center mt-8 mb-6">Update Profile</h1>
+          <h1 className="text-2xl font-semibold text-center">Update Profile</h1>
           <form className="mb-10" onSubmit={handleSubmit}>
             <div className="grid sm:grid-cols-2 gap-y-7 gap-x-12">
                <div className="mb-2">
@@ -160,13 +177,12 @@ const Settings = () => {
             </div>
             <Button className="mt-8" type="submit">Save</Button>
           
-          {success && <div className="text-success">Profile updated successfully!</div>}
-          {error && <small>{String(error)}</small>}
+          
           </form>
         </div>
         </div>
-      </div>
-      {console.log(CustomerUser)}
+      
+      {/* {console.log(CustomerUser)} */}
     </div>
     
   );

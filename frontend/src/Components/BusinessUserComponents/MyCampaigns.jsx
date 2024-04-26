@@ -56,15 +56,15 @@ const MyCampaigns = () => {
         <>
             {!createNewCampaign ? (
                 <>
-                    <header className=" mx-auto flex flex-row  justify-center items-center">
+                    <header className="mx-auto flex flex-row  justify-center items-center">
                 
-                <span className="mt-8 ">
+                <span className="">
                 <a href="#" className="`cursor-pointer flex flex-col items-center pl-15 hover:font-bold  mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12 ${active ?
          'text-secondary' : ''}`" onClick={(e) => {
                         handleToggleCampaigns(e, 'ongoing')
                     }}><FontAwesomeIcon icon={faPersonRunning} />Ongoing</a>
                 </span>
-                        <span className="mt-8">
+                        <span className="">
                     <a href="#" className="`cursor-pointer flex flex-col items-center pl-15 hover:font-bold  mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12 ${active ?
          'text-secondary' : ''}`" onClick={(e) => {
                         handleToggleCampaigns(e, 'closed')

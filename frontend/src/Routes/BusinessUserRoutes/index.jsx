@@ -11,23 +11,24 @@ const BusinessUserHome = () => {
 
     return (
         <>
-            <div className="relative h-screen">
-                {/* Background element */}
-                <div className="bg-base-300 fixed inset-0 z-0"></div>
+            <div className="relative min-h-screen bg-base-300">
+      {/* Background element */}
+      <div className="absolute inset-0 z-0"></div>
 
                 {/* Content */}
-                <div className="flex flex-col h-screen relative z-10">
-                    <div className="">
+                <div className="flex flex-col min-h-screen relative z-10">
+                    
                         <NavBarBusiness setActiveTabProp={setActiveTab} />
-                    </div>
-                    <div className="flex-grow overflow-y-auto">
+                        
+                    
+                    <div className="w-full flex-grow overflow-y-auto pb-[23%] pt-[2%] md:pb-3">
                         {activeTab === 'MyCampaigns' && <MyCampaigns />}
                         {activeTab === 'Insights' && <Insights />}
                         {activeTab === 'QrCode' && <QrCode />}
                         {activeTab === 'NewCampaign' && <NewCampaign />}
                         {activeTab === 'Settings' && <Settings />}
                     </div>
-                </div>
+                    </div>
             </div>
         </>
     );

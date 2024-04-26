@@ -46,6 +46,7 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                     <FontAwesomeIcon icon={faRightFromBracket} />
                 </NavLink>
             </div>
+            {/* New campaign for smaller screens */}
             <div className="fixed md:hidden bottom-12 left-1/2 transform -translate-x-1/2 z-50">
                 <NavBarTogglingNewMobile setActiveTab={() => handleSetActiveTab('NewCampaign')}
                                            active={activeTab === 'NewCampaign'}
@@ -54,40 +55,50 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                 </NavBarTogglingNewMobile>
             </div>
 
-            <div className="navbar border border-base-300 bg-base-100/50 shadow-lg backdrop-blur-2xl fixed bottom-0 left-0 w-full z-10 md:relative md:flex md:justify-between sm:justify-around">
+            <div className="navbar border border-base-300 bg-base-100/50 shadow-lg backdrop-blur-2xl fixed bottom-0 left-0 w-full z-10 md:relative md:flex md:justify-around sm:justify-around">
 
                 <div ref={menuRef} className="w-full flex justify-row ">
-                <div className="basis-1/4 md:basis-1/3" >
+                <div className="basis-1/4 md:basis-1/6" >
                     <NavBarToggling setActiveTab={() => handleSetActiveTab('MyCampaigns')}
                                    active={activeTab === 'MyCampaigns'}
                                    tabName="MyCampaigns">
                         <FontAwesomeIcon icon={faBell} />Campaigns
                     </NavBarToggling></div>
-                    <div className="basis-1/4 md:basis-1/3" >
+                    <div className="basis-1/4 md:basis-1/6" >
                     <NavBarToggling setActiveTab={() => handleSetActiveTab('Insights')}
                                    active={activeTab === 'Insights'}
                                    tabName="Insights">
                         <FontAwesomeIcon icon={faChartLine} />Insights
                     </NavBarToggling></div>
+                    {/* New Campaign for lg screen */}
+                    <div className="basis-0 md:basis-1/6" >
+                    <NavBarTogglingNew setActiveTab={() => handleSetActiveTab('NewCampaign')}
+                                    active={activeTab === 'NewCampaign'}
+                                    tabName="NewCampaign">
+                    <FontAwesomeIcon icon={faCirclePlus} /> New 
+                    <div className="block">Campaign</div>
+                    </NavBarTogglingNew></div>
+
+                    
                 
 
                 {/* <div className="navbar-end flex justify-around"> */}
-                <div className="basis-1/4 md:basis-1/3" >
+                <div className="basis-1/4 md:basis-1/6" >
                     <NavBarToggling style={{ marginLeft: '10px' }} setActiveTab={() => handleSetActiveTab('QrCode')}
                                    active={activeTab === 'QrCode'}
                                    tabName="QrCode" className="">
                         <FontAwesomeIcon icon={faQrcode} />QR
                     </NavBarToggling></div>
-                    <div className="basis-1/4 md:basis-1/3" >
+                    <div className="basis-1/4 md:basis-1/6" >
                     <NavBarToggling setActiveTab={() => handleSetActiveTab('Settings')}
                                    active={activeTab === 'Settings'}
                                    tabName="Settings">
                         <FontAwesomeIcon icon={faScrewdriverWrench} />Settings
                     </NavBarToggling></div>
                 
-                </div>
+                
 
-                <div className="hidden sm:inline-block">
+                <div className="hidden sm:inline-block basis-0 md:basis-1/6">
                     <NavBarLink to="/" onClick={(e) => {
                         e.preventDefault();
                         logoutHandler();
@@ -95,6 +106,7 @@ const NavBarBusiness = ({ setActiveTabProp }) => {
                     }}>
                         <FontAwesomeIcon icon={faRightFromBracket} /><span> Logout</span>
                     </NavBarLink>
+                </div>
                 </div>
                 </div>
             
