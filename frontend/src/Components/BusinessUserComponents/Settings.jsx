@@ -4,6 +4,8 @@ import { UpdateMeUser } from "../../axios/axiosCustomer.js";
 import Button from "../SmallComponents/Button.jsx";
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useGetMeUser from '../../Hooks/useGetMeUser.js';
+
 
 const Settings = () => {
   const CustomerUser = useSelector(state => state.customer.userCustomerData);
@@ -20,6 +22,8 @@ const Settings = () => {
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const { getUser } = useGetMeUser()
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,11 +41,12 @@ const Settings = () => {
 
     try {
       await UpdateMeUser(formData); 
+      getUser()
       setSuccess(true);
       setError(null);  
       setTimeout(() => {
         setSuccess(false); // Hide the success message
-        window.location.reload(); // Reload the page
+        // window.location.reload(); // Reload the page
       }, 1000); 
     } catch (err) {
       setError(err.message);
