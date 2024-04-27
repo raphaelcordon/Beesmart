@@ -9,10 +9,12 @@ import defaultavatar from "../../assets/avatar_default.png"
 
 const Profile = () => {
   const EndUser = useSelector(state => state.endUser.userEndUserData);
-  const { getUser } = useGetMeEndUser();
-
   useEffect(() => {
-  }, []);
+    // Fetch user's avatar data when component mounts
+    if (EndUser.end_user_profile.avatar) {
+      setAvatar(EndUser.end_user_profile.avatar);
+    }
+  }, [EndUser]);
 
   const [email, setEmail] = useState(EndUser.email);
   const [first_name, setFirst_name] = useState(EndUser.end_user_profile.first_name);
@@ -20,10 +22,12 @@ const Profile = () => {
   const [city, setCity] = useState(EndUser.end_user_profile.city);
   const [street, setStreet] = useState(EndUser.end_user_profile.street);
   const [zip, setZip] = useState(EndUser.end_user_profile.zip);
-  const [avatar, setAvatar] = useState(EndUser.end_user_profile.avatar || null); 
 
+  const [avatar, setAvatar] = useState(null);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const { getUser } = useGetMeEndUser();
+
 
   const handleSubmitProfile = async (e) => {
     e.preventDefault();
@@ -49,32 +53,44 @@ const Profile = () => {
     }
   };
 
-  const handleSubmitAvatar = async (e) => {
-    e.preventDefault();
 
-    if (!avatar) {
-      setError("Please select an image.");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('avatar', avatar);
-
-    try {
-      await UpdateMeUser(formData);
-      getUser();
-      setSuccess(true);
-      setError(null);
-      setTimeout(() => {
-        setSuccess(false);
-      }, 1000); 
-    } catch (err) {
-      setError(err.message);
+  const handleUploadAvatar = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const avatarUrl = reader.result;
+        setAvatar(avatarUrl); // Set avatar state to the data of the uploaded image
+        console.log(avatarUrl);
+      };
+      reader.onerror = (error) => {
+        console.error("Error reading file:", error);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
+  // console.log(avatar);
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData();
+  //   formData.append('avatar', avatar);
+  //   try {
+  //     await UpdateMeUser(formData);
+  //     getUser();
+  //     setSuccess(true);
+  //     setError(null);
+  //     setTimeout(() => {
+  //       setSuccess(false);
+  //     }, 1000); 
+  //   } catch (err) {
+  //     setError(err.message);
+  //   }
+  // };
+
   const handleInputFocus = () => {
-    setSuccess(false); // Clear success message when any input field gains focus
+    setSuccess(false);
   };
 
   return (
@@ -87,7 +103,7 @@ const Profile = () => {
                 <div className="success-overlay">
                   <div className="text-center p-10 bg-base-100/70 rounded-lg">
                     <FontAwesomeIcon icon={faCheck} className="text-8xl text-secondary"/>
-                    <h2 className="mt-8 mb-6">Profile succesfully updated</h2>
+                    <h2 className="mt-8 mb-6">Profile successfully updated</h2>
                   </div>
                 </div>
               )}
@@ -108,14 +124,14 @@ const Profile = () => {
                   <div className="bg-white/90 rounded-full w-6 h-6 text-center ml-28 mt-4 ">
                     <input 
                       type="file" 
-                      name="profile" 
-                      id="upload_profile" 
-                      onChange={(e) => setAvatar(e.target.files[0])}
+                      name="avatar" 
+                      id="avatar" 
+                      onChange={handleUploadAvatar} 
                       onFocus={handleInputFocus}
                       accept="image/*" 
                       hidden 
                     />
-                    <label htmlFor="upload_profile">
+                    <label htmlFor="avatar">
                       <FontAwesomeIcon icon={faCamera} className='cursor-pointer text-secondary' />
                     </label>
                   </div>
@@ -214,9 +230,6 @@ const Profile = () => {
                 <Button type="submit" className="m-6">Save Profile</Button>
               </form>
 
-              <form onSubmit={handleSubmitAvatar}>
-                <Button type="submit" className="m-6">Upload Avatar</Button>
-              </form>
             </div>
           </div>
         </div>
