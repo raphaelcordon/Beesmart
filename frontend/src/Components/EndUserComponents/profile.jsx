@@ -146,7 +146,7 @@ const Profile = () => {
                     />
                   </div>
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center ">
-                    <label htmlFor="first_name" className="mb-2  text-xs uppercase tracking-widest">First Name</label>
+                    <label htmlFor="first_name" className="mb-2 ml-5 text-xs uppercase tracking-widest">First Name</label>
                     <input
                       name="first_name"
                       id="first_name"
