@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera, faCheck } from "@fortawesome/free-solid-svg-icons";
 import defaultavatar from "../../assets/avatar_default.png"
 
+
 const Profile = () => {
   const EndUser = useSelector(state => state.endUser.userEndUserData);
   const { getUser } = useGetMeEndUser();
@@ -67,7 +68,10 @@ const Profile = () => {
       setError(null);
       setTimeout(() => {
         setSuccess(false);
+        window.location.reload();
+        
       }, 1000); 
+      
     } catch (err) {
       setError(err.message);
     }
