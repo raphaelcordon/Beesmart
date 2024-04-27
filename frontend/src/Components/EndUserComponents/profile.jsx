@@ -9,12 +9,10 @@ import defaultavatar from "../../assets/avatar_default.png"
 
 const Profile = () => {
   const EndUser = useSelector(state => state.endUser.userEndUserData);
+  const { getUser } = useGetMeEndUser();
+
   useEffect(() => {
-    // Fetch user's avatar data when component mounts
-    if (EndUser.end_user_profile.avatar) {
-      setAvatar(EndUser.end_user_profile.avatar);
-    }
-  }, [EndUser]);
+  }, []);
 
   const [email, setEmail] = useState(EndUser.email);
   const [first_name, setFirst_name] = useState(EndUser.end_user_profile.first_name);
@@ -22,12 +20,10 @@ const Profile = () => {
   const [city, setCity] = useState(EndUser.end_user_profile.city);
   const [street, setStreet] = useState(EndUser.end_user_profile.street);
   const [zip, setZip] = useState(EndUser.end_user_profile.zip);
+  const [avatar, setAvatar] = useState(EndUser.end_user_profile.avatar || null); 
 
-  const [avatar, setAvatar] = useState(null);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
-  const { getUser } = useGetMeEndUser();
-
 
   const handleSubmitProfile = async (e) => {
     e.preventDefault();
@@ -53,44 +49,32 @@ const Profile = () => {
     }
   };
 
+  const handleSubmitAvatar = async (e) => {
+    e.preventDefault();
 
-  const handleUploadAvatar = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const avatarUrl = reader.result;
-        setAvatar(avatarUrl); // Set avatar state to the data of the uploaded image
-        console.log(avatarUrl);
-      };
-      reader.onerror = (error) => {
-        console.error("Error reading file:", error);
-      };
-      reader.readAsDataURL(file);
+    if (!avatar) {
+      setError("Please select an image.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('avatar', avatar);
+
+    try {
+      await UpdateMeUser(formData);
+      getUser();
+      setSuccess(true);
+      setError(null);
+      setTimeout(() => {
+        setSuccess(false);
+      }, 1000); 
+    } catch (err) {
+      setError(err.message);
     }
   };
 
-  // console.log(avatar);
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData();
-  //   formData.append('avatar', avatar);
-  //   try {
-  //     await UpdateMeUser(formData);
-  //     getUser();
-  //     setSuccess(true);
-  //     setError(null);
-  //     setTimeout(() => {
-  //       setSuccess(false);
-  //     }, 1000); 
-  //   } catch (err) {
-  //     setError(err.message);
-  //   }
-  // };
-
   const handleInputFocus = () => {
-    setSuccess(false);
+    setSuccess(false); // Clear success message when any input field gains focus
   };
 
   return (
@@ -103,7 +87,7 @@ const Profile = () => {
                 <div className="success-overlay">
                   <div className="text-center p-10 bg-base-100/70 rounded-lg">
                     <FontAwesomeIcon icon={faCheck} className="text-8xl text-secondary"/>
-                    <h2 className="mt-8 mb-6">Profile successfully updated</h2>
+                    <h2 className="mt-8 mb-6">Profile succesfully updated</h2>
                   </div>
                 </div>
               )}
@@ -124,24 +108,27 @@ const Profile = () => {
                   <div className="bg-white/90 rounded-full w-6 h-6 text-center ml-28 mt-4 ">
                     <input 
                       type="file" 
-                      name="avatar" 
-                      id="avatar" 
-                      onChange={handleUploadAvatar} 
+                      name="profile" 
+                      id="upload_profile" 
+                      onChange={(e) => setAvatar(e.target.files[0])}
                       onFocus={handleInputFocus}
                       accept="image/*" 
                       hidden 
                     />
-                    <label htmlFor="avatar">
+                    <label htmlFor="upload_profile">
                       <FontAwesomeIcon icon={faCamera} className='cursor-pointer text-secondary' />
                     </label>
                   </div>
                 </div>
+                <form onSubmit={handleSubmitAvatar}>
+                <Button type="submit" className="px-6">Save Avatar</Button>
+              </form>
               </div>
 
               <form onSubmit={handleSubmitProfile}>
                 <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full mt-6">
                   <div className="w-full mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                    <label htmlFor="email" className="mb-2 pl-2 text-xs uppercase tracking-widest">Email</label>
+                    <label htmlFor="email" className="mb-2 ml-5 text-xs uppercase tracking-widest">Email</label>
                     <input
                       name="email"
                       id="email"
@@ -151,11 +138,11 @@ const Profile = () => {
                       onFocus={handleInputFocus}
                       required
                       readOnly
-                      className="w-3/4 mt-2 mb-2 pl-2 border-b-2 border-secondary focus:outline-none focus:border-primary"
+                      className="w-3/4 mt-2 mb-2 ml-5  border-b-2 border-secondary focus:outline-none focus:border-primary"
                     />
                   </div>
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center ">
-                    <label htmlFor="first_name" className="mb-2 pl-2 text-xs uppercase tracking-widest">First Name</label>
+                    <label htmlFor="first_name" className="mb-2  text-xs uppercase tracking-widest">First Name</label>
                     <input
                       name="first_name"
                       id="first_name"
@@ -164,14 +151,14 @@ const Profile = () => {
                       onChange={(e) => setFirst_name(e.target.value )}
                       onFocus={handleInputFocus}
                       required
-                      className="w-3/4 mt-2 mb-2 pl-2 border-b-2 border-secondary  focus:outline-none focus:border-primary bg-transparent"
+                      className="w-3/4 mt-2 mb-2  ml-5  border-b-2 border-secondary  focus:outline-none focus:border-primary bg-transparent"
                     />
                   </div>
                 </div>
 
                 <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                    <label htmlFor="last_name" className="mb-2 pl-2 text-xs uppercase tracking-widest">Last Name</label>
+                    <label htmlFor="last_name" className="mb-2 ml-5 text-xs uppercase tracking-widest">Last Name</label>
                     <input
                       name="last_name"
                       id="last_name"
@@ -180,11 +167,11 @@ const Profile = () => {
                       onChange={(e) => setLast_name(e.target.value )}
                       onFocus={handleInputFocus}
                       required
-                      className="w-3/4 mt-2 mb-2 pl-2 border-b-2 border-secondary focus:outline-none focus:border-primary"
+                      className="w-3/4 mt-2 mb-2 ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary"
                     />
                   </div>
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                    <label htmlFor="street" className="mb-2 pl-2 text-xs uppercase tracking-widest">Adress</label>
+                    <label htmlFor="street" className="mb-2 ml-5 text-xs uppercase tracking-widest">Adress</label>
                     <input
                       name="street"
                       id="street"
@@ -193,14 +180,14 @@ const Profile = () => {
                       onChange={(e) => setStreet(e.target.value )}
                       onFocus={handleInputFocus}
                       required
-                      className="w-3/4 mt-2 mb-2 pl-2 border-b-2 border-secondary focus:outline-none focus:border-primary"
+                      className="w-3/4 mt-2 mb-2 ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary"
                     />
                   </div>
                 </div>
 
                 <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                    <label htmlFor="city" className="mb-2 pl-2 text-xs uppercase tracking-widest">City</label>
+                    <label htmlFor="city" className="mb-2 ml-5 text-xs uppercase tracking-widest">City</label>
                     <input
                       name="city"
                       id="city"
@@ -209,11 +196,11 @@ const Profile = () => {
                       onChange={(e) => setCity( e.target.value)}
                       onFocus={handleInputFocus}
                       required
-                      className="w-3/4 mt-2 mb-2 pl-2 border-b-2 border-secondary focus:outline-none focus:border-primary"
+                      className="w-3/4 mt-2 mb-2 ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary"
                     />
                   </div>
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                    <label htmlFor="zip" className="mb-2 pl-2 text-xs uppercase tracking-widest">Postal Code</label>
+                    <label htmlFor="zip" className="mb-2 ml-5 text-xs uppercase tracking-widest">Postal Code</label>
                     <input
                       name="zip"
                       id="zip"
@@ -222,14 +209,16 @@ const Profile = () => {
                       onChange={(e) => setZip(e.target.value)}
                       onFocus={handleInputFocus}
                       required
-                      className="w-3/4 mt-2 mb-2 pl-2 border-b-2 border-secondary focus:outline-none focus:border-primary"
+                      className="w-3/4 mt-2 mb-2 ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary"
                     />
                   </div>
                 </div>
-
+<div className='flex justify-end lg:mr-[10%]'>
                 <Button type="submit" className="m-6">Save Profile</Button>
+                </div>
               </form>
 
+              
             </div>
           </div>
         </div>
