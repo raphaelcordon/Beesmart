@@ -4,8 +4,7 @@ const axios = AxiosMotion;
 
 export const RegisterNewEndUser = async (email) => {
     try{
-        const res = await axios.post("/enduser/user/add/", { email } );
-        console.log(res)
+        await axios.post("/enduser/user/add/", { email } );
     } catch (error) {
         console.log(error)
         throw error("Fail, please try again");
@@ -77,7 +76,6 @@ export const UpdateMeUser = async (user) => {
     const config = getAxiosConfig();
     try {
       const res = await axios.patch("/enduser/user/update/", user, config);
-      console.log(res);
       return res.data;
     } catch (err) {
       console.error(err);
