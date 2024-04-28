@@ -1,206 +1,229 @@
-
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {RegisterNewCampaign} from "../../axios/axiosCampaign.js";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { RegisterNewCampaign } from "../../axios/axiosCampaign.js";
 import Button from "../SmallComponents/Button.jsx";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faCaretDown, faCheck, faPaperclip } from "@fortawesome/free-solid-svg-icons";
+
+// CSS rule for styling the calendar icon and file input
+const styles = `
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+  },
+`;
 
 const NewCampaign = () => {
+  const [name, setName] = useState('');
+  const [value_goal, setValue_goal] = useState('');
+  const [beginning_date, setBeginning_date] = useState('');
+  const [ending_date, setEnding_date] = useState('');
+  const [image, setImage] = useState('');
+  const [logo, setLogo] = useState('');
+  const [style, setStyle] = useState(0);
+  const [customer_user_profile, setCustomer_user_profile] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState('Select an option'); // Default text or first option
+  const [collector_type, setCollector_type] = useState('');
 
-    const [name, setName] = useState('');
-    const [value_goal, setValue_goal] = useState('');
-    const [beginning_date, setBeginning_date] = useState('');
-    const [ending_date, setEnding_date] = useState('');
-    const [image, setImage] = useState('');
-    const [logo, setLogo] = useState('');
-    const [style, setStyle] = useState(0);
-    const [customer_user_profile, setCustomer_user_profile] = useState('');
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState('Select an option'); // Default text or first option
-    const [collector_type, setCollector_type] = useState('');
+  const [isLoading, setIsLoading] = useState(false)
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
+  const user = useSelector(state => state.customer.userCustomerData);
 
-    const [isLoading, setIsLoading] = useState(false)
-    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-    const navigate = useNavigate();
-    const [error, setError] = useState('');
-    const user = useSelector(state => state.customer.userCustomerData);
-
-    useEffect(() => {
+  useEffect(() => {
     if (user) {
-        setCustomer_user_profile(user);
+      setCustomer_user_profile(user);
     }
-}, [user]);
-    const toggleDropdown = () => setIsOpen(!isOpen);
+  }, [user]);
 
-    const handleSelectOption = (value, label) => {
-        setCollector_type(value);
-        setSelectedOption(label);
-        setIsOpen(false); // Close the dropdown after selection
-    };
+  const toggleDropdown = () => setIsOpen(!isOpen);
 
-    const handleLogoChange = (e) => {
+  const handleSelectOption = (value, label) => {
+    setCollector_type(value);
+    setSelectedOption(label);
+    setIsOpen(false); // Close the dropdown after selection
+  };
+
+  const handleLogoChange = (e) => {
     setLogo(e.target.files[0]);
-};
+  };
 
-    const handleImageChange = (e) => {
-        setImage(e.target.files[0]);
-    };
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
 
-    const getSubmitData = async (e) => {
-        e.preventDefault();
-        setError('');
+  const getSubmitData = async (e) => {
+    e.preventDefault();
+    setError('');
 
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('value_goal', value_goal);
-        formData.append('collector_type', collector_type);
-        if (beginning_date) formData.append('beginning_date', beginning_date);
-        if (ending_date) formData.append('ending_date', ending_date);
-        if (image) formData.append('image', image);
-        if (logo) formData.append('logo', logo);
-        if (style) formData.append('style', style);
-        if (customer_user_profile) formData.append('customer_user_profile', customer_user_profile.id); // Assuming you need to send the ID
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('value_goal', value_goal);
+    formData.append('collector_type', collector_type);
+    if (beginning_date) formData.append('beginning_date', beginning_date);
+    if (ending_date) formData.append('ending_date', ending_date);
+    if (image) formData.append('image', image);
+    if (logo) formData.append('logo', logo);
+    if (style) formData.append('style', style);
+    if (customer_user_profile) formData.append('customer_user_profile', customer_user_profile.id); // Assuming you need to send the ID
 
-        try {
-            setIsLoading(true);
-            await RegisterNewCampaign(formData);
-            displaySuccessMessage()
-        } catch (error) {
-            console.log(error)
-            setError(error.message || 'Failed to register. Please try again.');
-        }
-        finally {
-            setIsLoading(false);
-        }
+    try {
+      setIsLoading(true);
+      await RegisterNewCampaign(formData);
+      displaySuccessMessage()
+    } catch (error) {
+      console.log(error)
+      setError(error.message || 'Failed to register. Please try again.');
     }
+    finally {
+      setIsLoading(false);
+    }
+  }
 
-    const displaySuccessMessage = () => {
-      setShowSuccessMessage(true);
-      setTimeout(() => {
-        setShowSuccessMessage(false);
-        navigate(`/business`);
-      }, 3000);  // Hides the overlay after 3 seconds
-    };
+  const displaySuccessMessage = () => {
+    setShowSuccessMessage(true);
+    setTimeout(() => {
+      setShowSuccessMessage(false);
+      navigate(`/business`);
+    }, 3000);  // Hides the overlay after 3 seconds
+  };
 
-    return (
-    <div className="flex items-center justify-center">
-        {showSuccessMessage && (
-            <div className="success-overlay">
-                <div className="text-center p-10 bg-base-100/70 rounded-lg">
-                <FontAwesomeIcon icon={faCheck} className="text-8xl text-secondary"/>
+  return (
+    <div className="md:pt-0">
+      <style>{styles}</style>
+      <section className="py-10 bg-transparent md:bg-base-100/50">
+        <div className="lg:w-[80%] md:w-[90%] xs:w-[80%] mx-10 md:mx-auto ">
+          <div className="lg:w-[88%] md:w-[80%] xs:w-[100%] mx-auto bg-transparent md:bg-base-100 h-fit self-center">
+            <div>
+              {showSuccessMessage && (
+                <div className="success-overlay">
+                  <div className="text-center p-10 bg-base-100/70 rounded-lg">
+                    <FontAwesomeIcon icon={faCheck} className="text-8xl text-secondary"/>
                     <h2 className="mt-8 mb-6">A new campaign was successfully created</h2>
-                </div>
-            </div>
-        )}
-      <div className="flex xl:items-center l:items-center justify-center sm:mt-p md:mt-50p">
-        <div className="max-w-md w-full p-6 bg-base-100 rounded-lg shadow-lg mb-16">
-          <h2 className="text-2xl font-semibold text-center mt-8 mb-6">New Campaign Creation</h2>
-          <form className="mb-10" onSubmit={getSubmitData}>
-              <div className="grid sm:grid-cols-2 gap-y-7 gap-x-12">
-                  <div className="mb-2">
-                      <label className="block mb-2 text-sm text-accent-content">Name</label>
-                      <input
-                          name="name"
-                          id="name"
-                          type="text"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
-                          required
-                      />
                   </div>
-                  <div className="mb-2">
-                      <label className="block mb-2 text-sm text-accent-content">Type of Campaign</label>
-                      <div className="relative">
-                          <button
-                              type="button"
-                              className="w-full px-8 py-2 text-left flex justify-around items-center border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary bg-white text-gray-700"
-                              onClick={toggleDropdown}
-                          >
-                              {selectedOption}
-                              <svg className="w-6 h-4" fill="none" stroke="currentColor" style={{display: 'block'}}>
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                        d="M19 9l-7 7-7-7"/>
-                              </svg>
-                          </button>
-                          {isOpen && (
-                              <div
-                                  className="absolute w-full bg-white shadow-lg max-h-60 overflow-auto rounded-lg z-10">
-                                  <div className="py-1" onClick={() => handleSelectOption('1', 'Stamps')}>Stamps</div>
-                                  <div className="py-1" onClick={() => handleSelectOption('2', 'Points')}>Points</div>
-                                  <div className="py-1" onClick={() => handleSelectOption('3', 'Money spent')}>Money spent</div>
+                </div>
+              )}
+              {error && <small>{String(error)}</small>}
+              <h1 className="lg:text-3xl md:text-2xl sm:text-xl xs:text-xl font-serif font-extrabold mt-2 mb-2">Create new Campaign</h1>
+              <h2 className="text-sm mb-4"></h2>
+
+              <form onSubmit={getSubmitData}>
+                <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2  w-full mt-6">
+                  <div className="w-full mb-4 lg:mb-0 md:mt-6 flex flex-col ">
+                    <label htmlFor="email" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Name</label>
+                    <input
+                      name="name"
+                      id="name"
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+
+                      required
+
+                      className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5  border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
+                    />
+                  </div>
+                  <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center ">
+                    <label htmlFor="first_name" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Type of Campaign</label>
+                    <div className="relative cursor-pointer">
+                      <button
+                        type="button"
+                        className="relative w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent text-left"
+                        onClick={toggleDropdown}
+                      >
+                        <FontAwesomeIcon icon={faCaretDown} className="text-s pr-2 text-secondary absolute right-0 top-1/2 transform -translate-y-1/2"/>
+                        {selectedOption}
+                        {isOpen && (
+                          <div className="absolute left-0 w-full bg-base-100/90 shadow-lg max-h-60 overflow-auto rounded-md z-10">
+                            <div className="py-1 pl-4" onClick={() => handleSelectOption('1', 'Stamps')}>Stamps</div>
+                            <div className="py-1 pl-4" onClick={() => handleSelectOption('2', 'Points')}>Points</div>
+                            <div className="py-1 pl-4" onClick={() => handleSelectOption('3', 'Money spent')}>Money spent</div>
                           </div>
                         )}
-                      </div>
+                      </button>
+                    </div>
                   </div>
-                  <div className="mb-2">
-                      <label className="block mb-2 text-sm text-accent-content">Value Goal</label>
-                      <input
-                          name="value_goal"
-                          id="value_goal"
-                          type="text"
-                          value={value_goal}
-                          onChange={(e) => setValue_goal(e.target.value)}
-                          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
-                          required
-                      />
+                </div>
+
+                <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
+                  <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
+                    <label htmlFor="last_name" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Value Goal</label>
+                    <input
+                      name="value_goal"
+                      id="value_goal"
+                      type="text"
+                      value={value_goal}
+                      onChange={(e) => setValue_goal(e.target.value)}
+
+                      required
+                      className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
+                    />
                   </div>
+                  <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
+                    <label htmlFor="beginning_date" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Beginning Date</label>
+                    
+  <input
+    name="beginning_date"
+    id="beginning_date"
+    type="date"
+    value={beginning_date}
+    onChange={(e) => setBeginning_date(e.target.value)}
+    className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
+  />
+  
+
+                  </div>
+                </div>
+
+                <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
+                  <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
+                    <label htmlFor="ending_date" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Ending Date</label>
+                    <input
+                      name="ending_date"
+                      id={"ending_date"}
+                      type="date"
+                      value={ending_date}
+                      onChange={(e) => setEnding_date(e.target.value)}
+
+                      className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
+                    />
+                  </div>
+                  <div className="w-full mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
+  <label htmlFor="logo" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Upload Logo</label>
+  <div className="relative border-b-2 border-secondary focus-within:border-primary bg-transparent rounded-md  w-full md:w-3/4 mx-0 md:mx-5">
+    <input
+      name="logo"
+      id="logo"
+      type="file"
+      onChange={handleLogoChange}
+      required
+      className="w-full h-full opacity-0 cursor-pointer absolute inset-0"
+    />
+    <div className="flex items-center justify-between p-2">
+      <span className="text-secondary mr-2"></span>
+      <FontAwesomeIcon icon={faPaperclip} className="text-secondary" />
+    </div>
+  </div>
 
 
-                  <div className="mb-2">
-                      <label className="block mb-2 text-sm text-accent-content">Beginning Date</label>
-                      <input
-                          name="beginning_date"
-                          id={"beginning_date"}
-                          type="date"
-                          value={beginning_date}
-                          onChange={(e) => setBeginning_date(e.target.value)}
-                          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
-                      />
                   </div>
-                  <div className="mb-2">
-                      <label className="block mb-2 text-sm text-accent-content">Ending Date</label>
-                      <input
-                          name="ending_date"
-                          id={"ending_date"}
-                          type="date"
-                          value={ending_date}
-                          onChange={(e) => setEnding_date(e.target.value)}
-                          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
-                      />
-                  </div>
+                </div>
+                <div className='flex justify-center md:justify-end lg:mr-[10%]'>
+                  <Button type="submit" className="m-0 md:m-6 mt-6"
+                    disabled={isLoading || name === "" || collector_type === "" || value_goal === ""}>
+                    {isLoading ? 'Creating Campaign...' : 'Create Campaign'}</Button>
 
-                  <div className="mb-10">
-                      <label className="block mb-2 text-sm text-accent-content">Upload Logo</label>
-                      <input
-                        name="logo"
-                        id="logo"
-                        type="file"
-                        onChange={handleLogoChange}
-                        className="file-input file-input-secondary text-sm w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
-                      />
-                  </div>
+                  {error && <p className="text-error text-sm mt-2">{error}</p>}
+                </div>
+              </form>
 
-                  <div className="mb-10">
-                      <label className="block mb-2 text-sm text-accent-content">Upload Campaign Image</label>
-                      <input
-                        name="image"
-                        id="image"
-                        type="file"
-                        onChange={handleImageChange}
-                        className="file-input file-input-secondary text-sm w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
-                      />
-                  </div>
-              </div>
 
-            <Button disabled={isLoading || name === "" || collector_type === "" || value_goal === ""}>
-            {isLoading ? 'Creating Campaign...' : 'Create Campaign'}</Button>
-          </form>
-          {error && <p className="text-error text-sm mt-2">{error}</p>}
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
