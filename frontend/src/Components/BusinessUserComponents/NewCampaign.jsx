@@ -88,7 +88,7 @@ const NewCampaign = () => {
     <div className="flex items-center justify-center">
         {showSuccessMessage && (
             <div className="success-overlay">
-                <div className="text-center p-10 bg-base-100 rounded-lg">
+                <div className="text-center p-10 bg-base-100/70 rounded-lg">
                 <FontAwesomeIcon icon={faCheck} className="text-8xl text-secondary"/>
                     <h2 className="mt-8 mb-6">A new campaign was successfully created</h2>
                 </div>
