@@ -15,14 +15,19 @@ const MyVouchers = () => {
   useEffect(() => {
     setLoading(true);
     const getVouchers = async () => {
-      const activeVouchers = await getActiveUserVouchers();
-      const usedVouchers = await getUsedUserVouchers();
-      setActiveVouchers(activeVouchers);
-      console.log(activeVouchers);
-      setUsedVouchers(usedVouchers);
-      setTimeout(() => {
-        setLoading(false);
-      }, 950);
+      try {
+        const activeVouchers = await getActiveUserVouchers();
+        const usedVouchers = await getUsedUserVouchers();
+        setActiveVouchers(activeVouchers);
+        console.log(activeVouchers);
+        setUsedVouchers(usedVouchers);
+      } finally {
+        setTimeout(() => {
+          setLoading(false);
+        }, 950);
+      }
+
+
     };
     getVouchers();
   }, []);

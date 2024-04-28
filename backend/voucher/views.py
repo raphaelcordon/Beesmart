@@ -38,11 +38,9 @@ class EndUsersActiveVouchers(ListAPIView):
     def get(self, request, *args, **kwargs):
         user = self.request.user
         profile = EndUserProfile.objects.get(user=user)
-        if Voucher.objects.filter(end_user_profile=profile, is_used=False).exists():
-            vouchers = Voucher.objects.filter(end_user_profile=profile, is_used=False)
-            serializer = UseVoucherSerializer(vouchers, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response('User don\'t have any vouchers.', status=status.HTTP_404_NOT_FOUND)
+        vouchers = Voucher.objects.filter(end_user_profile=profile, is_used=False)
+        serializer = UseVoucherSerializer(vouchers, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class EndUsersUsedVouchers(ListAPIView):
@@ -53,8 +51,6 @@ class EndUsersUsedVouchers(ListAPIView):
     def get(self, request, *args, **kwargs):
         user = self.request.user
         profile = EndUserProfile.objects.get(user=user)
-        if Voucher.objects.filter(end_user_profile=profile, is_used=True).exists():
-            vouchers = Voucher.objects.filter(end_user_profile=profile, is_used=True)
-            serializer = UseVoucherSerializer(vouchers, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response('User don\'t have any vouchers.', status=status.HTTP_404_NOT_FOUND)
+        vouchers = Voucher.objects.filter(end_user_profile=profile, is_used=True)
+        serializer = UseVoucherSerializer(vouchers, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
