@@ -1,9 +1,21 @@
 import Chart from 'chart.js/auto';
 import { useEffect, useRef } from "react";
 
+function formatDateLabel(label) {
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/; // Regex to match YYYY/MM/DD format
+  if (dateRegex.test(label)) {
+    const date = new Date(label);
+    return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}`; // Converts to DD/MM
+  }
+  console.log(label)
+  return label;
+}
+
 const BarChart = ({ insight }) => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
+
+    // Helper function to format date
 
   useEffect(() => {
     const maxNumber = Math.max(...insight.map(item => item.number)) + 2;
@@ -26,7 +38,7 @@ const BarChart = ({ insight }) => {
     chartInstance.current = new Chart(chartRef.current, {
       type: 'bar',
       data: {
-        labels: insight.map(item => item.day ? item.day : item.label),
+        labels: insight.map(item => item.day ? formatDateLabel(item.day) : item.label),
         datasets: [{
           label: '',
           data: insight.map(item => item.number),
@@ -41,14 +53,16 @@ const BarChart = ({ insight }) => {
             max: maxNumber,
             beginAtZero: true,
             ticks: {
+              stepSize: 1,
+              precision: 0,
               display: true
             },
-            gridLines: {
+            grid: {
               display: false
             }
           },
           x: {
-            gridLines: {
+            grid: {
               display: false
             },
             ticks: {
