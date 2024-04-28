@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const GetCard = () => {
     const navigator = useNavigate()
-    const userAgent = navigator.userAgent;
 
     let {id} = useParams();
     const [password, setPassword] = useState('');
@@ -17,12 +16,6 @@ const GetCard = () => {
     const [verified, setVerified] = useState(null);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false)
-
-    // const isIOSDevice = () => {
-    //     if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-    //         return 'iOS';
-    //     }
-    // }
 
     // function detectDevice() {
     //     const userAgent = navigator.userAgent;
@@ -40,9 +33,7 @@ const GetCard = () => {
     //     // Default to PC if neither Android nor iOS
     //     return 'PC';
     // }
-    
-    
-    // Use the function to alert or display the device type
+
 
     const getSubmitData = async (e) => {
         e.preventDefault();
@@ -67,6 +58,7 @@ const GetCard = () => {
         try {
             const data = await PostEndUserVerify(userData);
             // if (isIOSDevice() === 'iOS') {
+                console.log(data)
                 const url = window.URL.createObjectURL(new Blob([data], {type: 'application/vnd.apple.pkpass'}));
                 const link = document.createElement('a');
                 link.href = url;
