@@ -14,7 +14,7 @@ const Profile = () => {
 
   useEffect(() => {
   }, []);
-
+  const [isLoading, setIsLoading] = useState(false)
   const [email, setEmail] = useState(EndUser.email);
   const [first_name, setFirst_name] = useState(EndUser.end_user_profile.first_name);
   const [last_name, setLast_name] = useState(EndUser.end_user_profile.last_name);
@@ -218,7 +218,9 @@ const Profile = () => {
                   </div>
                 </div>
 <div className='flex justify-center md:justify-end lg:mr-[10%]'>
-                <Button type="submit" className="m-0 md:m-6 mt-6">Save Profile</Button>
+                <Button type="submit" className="m-0 md:m-6 mt-6"
+                    disabled={isLoading}>
+                    {isLoading ? 'Saving Profile...' : 'Save Profile'}</Button>
                 </div>
               </form>
 
