@@ -2,6 +2,8 @@ import InsightCampaign from "../InsightComponents/InsightCampaign.jsx";
 import {useEffect, useState} from "react";
 import {getAllOpenCampaigns} from "../../axios/axiosCampaign.js";
 import defaultlogo from "../../assets/defaultlogo.png";
+import {faArrowUp, faArrowDown} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const Insights = () => {
 
@@ -46,62 +48,65 @@ const Insights = () => {
 return (
     <>
       {isLoading ? (
-        <div className="p-1 flex flex-row items-center justify-center align-center text-center">
-          <div className="flex justify-center pb-10 mb-10">
-            <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content breadcrumbs w-80 shadow-md">
-              <div className="pt-64 pb-64">
-                <span className="loading loading-ball loading-lg">Loading...</span>
-              </div>
-            </div>
-          </div>
+        <div className="flex justify-center items-center h-full">
+          <span className="loading loading-ball loading-lg">Loading...</span>
         </div>
       ) : error ? (
-        <div>Error: {error}</div>
+        <div className="text-center text-red-500">{error}</div>
       ) : !isCampaign ? (
-        <h1>There are no campaigns in progress for you at the moment.</h1>
+        <div className="text-center">There are no campaigns in progress for you at the moment.</div>
       ) : (
-        <div className="flex flex-col items-center justify-center text-center px-4">
-          <div className="max-w-md w-full p-6 bg-base-100 rounded-lg shadow-lg">
-            <h1>Insights of Open Campaigns</h1>
-
+        <div className="flex flex-col lg:flex-row items-start lg:items-stretch justify-center text-center w-full">
+          <div className="w-full lg:flex-grow">
+            <h1 className="text-lg lg:text-xl font-bold mb-4">Insights of Open Campaigns</h1>
             {openCampaigns.map((item) => (
-              <div key={item.id} className="rounded-md bg-zinc-50 flex flex-col text-primary-content w-100 shadow-md mb-5"
-              onClick={() => handleToggleInsights(item.id)}>
-
-                <div className="stat flex items-center justify-around pb-0">
-                  <img
-                    src={item.logo || defaultlogo}
-                    alt="Campaign Logo"
-                    className="w-16 h-16 rounded-full p-2"
-                  />
-                  <div className="text-xl">{item.name.toUpperCase()}</div>
-                </div>
-                <div className="stat-title w-full flex flex-row justify-between p-2">
-                  <div>
-                    <div className="text-slate-600">Campaign goal:</div>
-                    <div className="text-slate-600 font-bold text-xl">{item.value_goal} {item.collector_type === 1 ? 'stamps' : 'points'}</div>
+              <div key={item.id} className="bg-white rounded-lg shadow-md mb-4 cursor-pointer hover:bg-yellow-50 transition-colors duration-300"
+                   onClick={() => handleToggleInsights(item.id)}>
+                <div className="p-4 flex flex-col lg:flex-row w-full">
+                  <div className="lg:w-1/4">
+                    <img src={item.logo || defaultlogo} alt="Campaign Logo" className="w-16 h-16 rounded-full mx-auto"/>
+                    <div className="text-md font-semibold">{item.name.toUpperCase()}</div>
                   </div>
-                  <div>
-                    <div className="text-slate-600">Campaign Ends:</div>
-                    <div className="text-slate-600 font-bold text-xl">{item.ending_date ? item.ending_date : "Permanent"}</div>
-                  </div>
-                </div>
-
-                   <a>
-                        {insightsVisibility[item.id] ? "Close insights" : "See insights"}
-                   </a>
-                    {insightsVisibility[item.id] && (
-                      <div className="w-100">
-                        <InsightCampaign isLoading={isLoading} campaign={item} />
+                  <div className="flex-grow p-4 lg:flex lg:items-center lg:justify-between">
+                    <div className="lg:flex lg:flex-1 lg:justify-center lg:items-center">
+                      <div className="mb-2 lg:mb-0">
+                        <div className="text-gray-600">Campaign goal:</div>
+                        <div className="font-bold">{item.value_goal} {item.collector_type === 1 ? 'stamps' : 'points'}</div>
                       </div>
-                    )}
-
+                    </div>
+                    <div className="lg:flex lg:flex-1 lg:justify-center lg:items-center">
+                      <div className="mb-2 lg:mb-0">
+                        <div className="text-gray-600">Campaign Ends:</div>
+                        <div className="font-bold">{item.ending_date ? item.ending_date : "Permanent"}</div>
+                      </div>
+                    </div>
+                    <div className="lg:flex lg:flex-1 lg:justify-center lg:items-center">
+                      <a className="inline-block mt-8 bg-secondary text-white font-semibold py-2 px-4 rounded
+                                hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-secondary-darker
+                                focus:ring-opacity-50 cursor-pointer transition-colors duration-300">
+                        {insightsVisibility[item.id] ? (
+                          <>
+                            <FontAwesomeIcon icon={faArrowUp}/> Close insights
+                          </>
+                        ) : (
+                          <>
+                            <FontAwesomeIcon icon={faArrowDown}/> See insights
+                          </>
+                        )}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                {insightsVisibility[item.id] && (
+                  <div className="w-full bg-white rounded-lg shadow-lg p-4">
+                    <InsightCampaign isLoading={isLoading} campaign={item}/>
+                  </div>
+                )}
               </div>
             ))}
           </div>
         </div>
       )}
-
     </>
   );
 };

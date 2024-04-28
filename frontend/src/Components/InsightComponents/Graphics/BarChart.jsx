@@ -13,6 +13,16 @@ const BarChart = ({ insight }) => {
       chartInstance.current.destroy();
     }
 
+    // Resizing the chart instance on window resize to adapt the chart size
+    const resizeListener = () => {
+      if (chartInstance.current) {
+        chartInstance.current.resize();
+      }
+    };
+    window.addEventListener('resize', resizeListener);
+
+
+
     chartInstance.current = new Chart(chartRef.current, {
       type: 'bar',
       data: {
@@ -22,7 +32,7 @@ const BarChart = ({ insight }) => {
           data: insight.map(item => item.number),
           backgroundColor: ['rgba(250,177,103,0.2)'],
           borderColor: ['rgba(250, 159, 64, 1)'],
-          borderWidth: 1
+          borderWidth: 2
         }]
       },
       options: {
@@ -54,6 +64,10 @@ const BarChart = ({ insight }) => {
             enabled: false
           }
         },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+        },
         animation: {
           onComplete: () => {
             // Check if the chart instance still exists before handling animation complete
@@ -70,13 +84,18 @@ const BarChart = ({ insight }) => {
       if (chartInstance.current) {
         chartInstance.current.destroy();
       }
+
+      window.removeEventListener('resize', resizeListener);
+      if (chartInstance.current) {
+        chartInstance.current.destroy();
+      }
     };
   }, [insight]);
 
   return (
     <>
-      <div className="w-full p-0">
-        <canvas ref={chartRef} className="p-0 bg-white rounded-lg shadow"></canvas>
+      <div className="w-full lg:w-12/12 m-0 p-0">
+        <canvas ref={chartRef} className="p-0 m-0 bg-white rounded-lg shadow w-full" style={{height: '200px'}}></canvas>
       </div>
     </>
   );
@@ -88,10 +107,10 @@ function handleAnimationComplete(chart) {
     return;  // Exit if context is not available
   }
 
-  ctx.font = '10px Arial';
+  ctx.font = '12px Arial';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'bottom';
-  ctx.fillStyle = '#000';
+  ctx.fillStyle = 'rgba(250, 159, 64, 1)';
 
   chart.data.datasets.forEach((dataset, i) => {
     const meta = chart.getDatasetMeta(i);

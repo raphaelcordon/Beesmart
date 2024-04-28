@@ -40,16 +40,22 @@ const InsightCampaign = ({ campaign }) => {
 
   return (
       <>
-            <div className="max-w-md w-full p-6 bg-base-100 rounded-lg shadow-lg">
-                  <h1 className="text-xl text-slate-600 font-semibold text-center mt-2 mb-6">Acquired Stamps - Per
-                        User</h1>
+          <div className="lg:flex lg:justify-center lg:gap-4">
+              <div
+                  className="max-w-md lg:max-w-xl xl:max-w-4xl 2xl:max-w-5xl w-full bg-base-100 rounded-lg shadow-lg lg:pb-2">
+                  <h1 className="text-xl lg:text-2xl text-slate-600 font-semibold text-center mt-2 mb-6">Acquired Stamps
+                      - Per User</h1>
                   <BarChart insight={insightStamps}/>
-            </div>
+              </div>
 
-            <div className="max-w-md w-full p-6 bg-base-100 rounded-lg shadow-lg">
-                  <h1 className="text-xl text-slate-600 font-semibold text-center mt-2 mb-6">Accesses by period</h1>
+              <div
+                  className="max-w-md lg:max-w-xl xl:max-w-4xl 2xl:max-w-5xl w-full bg-base-100 rounded-lg shadow-lg lg:pb-2">
+                  <h1 className="text-xl lg:text-2xl text-slate-600 font-semibold text-center mt-2 mb-6">Accesses by
+                      period</h1>
                   <BarChart insight={insightVisits}/>
-            </div>
+              </div>
+          </div>
+
       </>
   );
 };
