@@ -26,8 +26,6 @@ const MyVouchers = () => {
           setLoading(false);
         }, 950);
       }
-
-
     };
     getVouchers();
   }, []);
@@ -39,21 +37,34 @@ const MyVouchers = () => {
 
   return (
     <>
-                    <header className=" mx-auto flex flex-row  justify-center items-center">
-                
-                <span className="mt-8 ">
-                <a href="#" className="`cursor-pointer flex flex-col items-center pl-15 hover:font-bold  mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12 ${active ?
-         'text-secondary' : ''}`" onClick={(e) => {
-                        handleToggleVouchers(e, 'ongoing')
-                    }}><FontAwesomeIcon icon={faPersonRunning} />Ongoing</a>
-                </span>
-                        <span className="mt-8">
-                    <a href="#" className="`cursor-pointer flex flex-col items-center pl-15 hover:font-bold  mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12 ${active ?
-         'text-secondary' : ''}`" onClick={(e) => {
-                        handleToggleVouchers(e, 'closed')
-                    }}><FontAwesomeIcon icon={faLock} />Closed</a>
-                </span>
-                </header>
+      <header className=" mx-auto flex flex-row  justify-center items-center">
+        <span className="mt-8 ">
+          <a
+            href="#"
+            className="`cursor-pointer flex flex-col items-center pl-15 hover:font-bold  mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12 ${active ?
+         'text-secondary' : ''}`"
+            onClick={(e) => {
+              handleToggleVouchers(e, "ongoing");
+            }}
+          >
+            <FontAwesomeIcon icon={faPersonRunning} />
+            Active
+          </a>
+        </span>
+        <span className="mt-8">
+          <a
+            href="#"
+            className="`cursor-pointer flex flex-col items-center pl-15 hover:font-bold  mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12 ${active ?
+         'text-secondary' : ''}`"
+            onClick={(e) => {
+              handleToggleVouchers(e, "closed");
+            }}
+          >
+            <FontAwesomeIcon icon={faLock} />
+            Used
+          </a>
+        </span>
+      </header>
       {loading ? (
         <div className="flex justify-center pt-8 pb-20">
           <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content breadcrumbs w-80 shadow-md">
