@@ -15,6 +15,9 @@ module.exports = {
   plugins: [require("daisyui")],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Varela Round", "sans-serif"],
+      },
       // Customizing the width, margin, and padding
       width: {
         full: "100%", // Equivalent to width: 100%;
