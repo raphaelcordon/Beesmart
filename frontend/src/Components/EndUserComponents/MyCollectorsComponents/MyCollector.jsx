@@ -73,13 +73,13 @@ const MyCollector = ({ item, setIsLoading }) => {
                     )
                   ) : collectorType === 2 ? (
                     <div>
-                      <div className="text-slate-400 text-xl">You have:</div>
-                      <div className="text-slate-600 font-bold text-4xl">{collector.value_counted}</div>
+                      <div className="text-slate-400 text-sm">You have:</div>
+                      <div className="text-slate-600 font-bold text-4xl">{collector.value_counted} POINTS</div>
                     </div>
                   ) : (
                     <div>
                       <div className="text-slate-400 text-sm">You already spent:</div>
-                      <div className="text-slate-600 font-bold text-2xl"> {collector.value_counted}CHF</div>
+                      <div className="text-slate-600 font-bold text-4xl"> {collector.value_counted} CHF</div>
                     </div>
                   )}
                 </div>

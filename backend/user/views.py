@@ -29,6 +29,8 @@ from user.serializers import CustomerUserSerializer, UserRegistrationSerializer,
 from django.conf import settings
 from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
 
+from voucher.models import Voucher
+
 User = get_user_model()
 
 
@@ -493,4 +495,50 @@ class UserVisitsCountView(ListAPIView):
              'number': counts_dict.get(thirty_days_ago + timedelta(days=i), 0)}
             for i in range(31)  # Ensure it covers exactly 30 days including today
         ]
+        return Response(data, status=status.HTTP_200_OK)
+
+
+# class NotClaimedVouchersView(ListAPIView):
+#     def get(self, request, *args, **kwargs):
+#         start_day = timezone.now().date()
+#         one_week_ago = start_day - timedelta(days=7)
+#         campaign_id = kwargs['campaign_id']
+#         data = []
+#
+#         for i in range(1, 6):
+#             number = Voucher.objects.filter(campaign__id=campaign_id, is_used=False, date_created__date__range=(
+#                 one_week_ago, start_day)).count()
+#             data.append({'label': f'{one_week_ago} - {start_day}', 'number': number})
+#             start_day = start_day - timedelta(days=7)
+#             one_week_ago = start_day - timedelta(days=7)
+#
+#         return Response(data, status=status.HTTP_200_OK)
+
+class NotClaimedVouchersView(ListAPIView):
+    def get(self, request, *args, **kwargs):
+        today = timezone.now().date()
+        ten_weeks_ago = today - timedelta(days=70)  # 10 weeks back from today
+        campaign_id = kwargs['campaign_id']
+
+        # Fetch all vouchers within the last 5 weeks for the specific campaign that haven't been used
+        vouchers = Voucher.objects.filter(
+            campaign__id=campaign_id,
+            is_used=False,
+            date_created__date__range=(ten_weeks_ago, today)
+        ).values('date_created__date')
+
+        # Organize data by weeks
+        week_counts = {}
+        for voucher in vouchers:
+            voucher_date = voucher['date_created__date']
+            start_of_week = voucher_date - timedelta(days=voucher_date.weekday())  # Monday as the start of the week
+            week_label = f"{start_of_week} - {start_of_week + timedelta(days=6)}"
+            if week_label not in week_counts:
+                week_counts[week_label] = 0
+            week_counts[week_label] += 1
+
+        # Create response data
+        data = [{'label': week, 'number': week_counts.get(week, 0)} for week in
+                sorted(week_counts.keys(), reverse=True)]
+
         return Response(data, status=status.HTTP_200_OK)

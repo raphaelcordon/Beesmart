@@ -37,7 +37,7 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
                             alt="Campaign Logo"
                             className="w-16 h-16 rounded-full p-2 text-right"
                           />
-                          <div className="text-2xl text-right stat-value">{item.name.toUpperCase()}</div>
+                          <div className="text-2xl text-wrap text-right stat-value">{item.name.toUpperCase()}</div>
                         </div>
                         <div>
                           <div className="stat-title w-full flex flex-col">
@@ -83,7 +83,7 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
                                   <div className="stat-title">Participants</div>
                                   <div className="stat-value text-primary">{item.participants}</div>
                                   <div className="stat-title pt-5">Stamps Collected</div>
-                                  <div className="stat-value text-secondary">{item.value}</div>
+                                  <div className="stat-value text-secondary">{item.value ? item.value : <div>0</div>}</div>
                                   <div className="stat-title pt-5">Vouchers issued</div>
                                   <div className="stat-value">{item.vouchers_issued}</div>
                                 </div>
@@ -92,7 +92,7 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
                                   <div className="stat-title">Participants</div>
                                   <div className="stat-value text-primary">{item.participants}</div>
                                   <div className="stat-title pt-5">Points Collected</div>
-                                  <div className="stat-value text-secondary">{item.value}</div>
+                                  <div className="stat-value text-secondary">{item.value ? item.value : <div>0</div>}</div>
                                   <div className="stat-title pt-5">Vouchers issued</div>
                                   <div className="stat-value">{item.vouchers_issued}</div>
                                 </div>
@@ -101,7 +101,7 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
                                   <div className="stat-title">Participants</div>
                                   <div className="stat-value text-primary">{item.participants}</div>
                                   <div className="stat-title pt-5">Money Spent</div>
-                                  <div className="stat-value text-secondary">{item.value}</div>
+                                  <div className="stat-value text-secondary">{item.value ? item.value : <div>0</div>}</div>
                                   <div className="stat-title pt-5">Vouchers issued</div>
                                   <div className="stat-value">{item.vouchers_issued}</div>
                                 </div>
