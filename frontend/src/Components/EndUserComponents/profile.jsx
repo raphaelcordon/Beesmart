@@ -82,10 +82,10 @@ const Profile = () => {
   };
 
   return (
-    <div className="pt-[5%] md:pt-0">
-      <section className="py-10 bg-base-100/50">
-        <div className="lg:w-[80%] md:w-[90%] xs:w-[96%] mx-auto flex gap-4">
-          <div className="lg:w-[88%] md:w-[80%] sm:w-[88%] xs:w-full mx-auto bg-base-100 shadow-2xl p-4 h-fit self-center">
+    <div className="md:pt-0">
+      <section className="py-10 bg-transparent md:bg-base-100/50">
+        <div className="lg:w-[80%] md:w-[90%] xs:w-[80%] mx-10 md:mx-auto ">
+          <div className="lg:w-[88%] md:w-[80%] xs:w-[100%] mx-auto bg-tsansparent md:bg-base-100  h-fit self-center">
             <div>
               {success && (
                 <div className="success-overlay">
@@ -96,7 +96,7 @@ const Profile = () => {
                 </div>
               )}
               {error && <small>{String(error)}</small>}
-              <h1 className="lg:text-3xl md:text-2xl sm:text-xl xs:text-xl font-serif font-extrabold mb-2">Profile</h1>
+              <h1 className="lg:text-3xl md:text-2xl sm:text-xl xs:text-xl font-serif font-extrabold mt-2 mb-2">Profile</h1>
               <h2 className="text-sm mb-4">Create/Update Your Profile</h2>
               
               <div className="w-full rounded-sm bg-cover bg-center bg-no-repeat items-center">
@@ -125,14 +125,14 @@ const Profile = () => {
                   </div>
                 </div>
                 <form onSubmit={handleSubmitAvatar}>
-                <Button type="submit" className="px-6">Save Avatar</Button>
+                <Button type="submit" className="px-6 mt-6">Save Avatar</Button>
               </form>
               </div>
 
               <form onSubmit={handleSubmitProfile}>
-                <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full mt-6">
-                  <div className="w-full mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                    <label htmlFor="email" className="mb-2 ml-5 text-xs uppercase tracking-widest">Email</label>
+                <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2  w-full mt-6">
+                  <div className="w-full mb-4 lg:mb-0 md:mt-6 flex flex-col ">
+                    <label htmlFor="email" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Email</label>
                     <input
                       name="email"
                       id="email"
@@ -142,11 +142,11 @@ const Profile = () => {
                       onFocus={handleInputFocus}
                       required
                       readOnly
-                      className="w-3/4 mt-2 mb-2 ml-5  border-b-2 border-secondary focus:outline-none focus:border-primary"
+                      className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5  border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
                     />
                   </div>
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center ">
-                    <label htmlFor="first_name" className="mb-2 ml-5 text-xs uppercase tracking-widest">First Name</label>
+                    <label htmlFor="first_name" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">First Name</label>
                     <input
                       name="first_name"
                       id="first_name"
@@ -155,14 +155,14 @@ const Profile = () => {
                       onChange={(e) => setFirst_name(e.target.value )}
                       onFocus={handleInputFocus}
                       required
-                      className="w-3/4 mt-2 mb-2  ml-5  border-b-2 border-secondary  focus:outline-none focus:border-primary bg-transparent"
+                      className="w-full md:w-3/4 mt-2 mb-2  ml-0 md:ml-5  border-b-2 border-secondary  focus:outline-none focus:border-primary bg-transparent"
                     />
                   </div>
                 </div>
 
                 <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                    <label htmlFor="last_name" className="mb-2 ml-5 text-xs uppercase tracking-widest">Last Name</label>
+                    <label htmlFor="last_name" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Last Name</label>
                     <input
                       name="last_name"
                       id="last_name"
@@ -171,11 +171,11 @@ const Profile = () => {
                       onChange={(e) => setLast_name(e.target.value )}
                       onFocus={handleInputFocus}
                       required
-                      className="w-3/4 mt-2 mb-2 ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary"
+                      className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
                     />
                   </div>
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                    <label htmlFor="street" className="mb-2 ml-5 text-xs uppercase tracking-widest">Adress</label>
+                    <label htmlFor="street" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Adress</label>
                     <input
                       name="street"
                       id="street"
@@ -184,14 +184,14 @@ const Profile = () => {
                       onChange={(e) => setStreet(e.target.value )}
                       onFocus={handleInputFocus}
                       required
-                      className="w-3/4 mt-2 mb-2 ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary"
+                      className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
                     />
                   </div>
                 </div>
 
                 <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                    <label htmlFor="city" className="mb-2 ml-5 text-xs uppercase tracking-widest">City</label>
+                    <label htmlFor="city" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">City</label>
                     <input
                       name="city"
                       id="city"
@@ -200,11 +200,11 @@ const Profile = () => {
                       onChange={(e) => setCity( e.target.value)}
                       onFocus={handleInputFocus}
                       required
-                      className="w-3/4 mt-2 mb-2 ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary"
+                      className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
                     />
                   </div>
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                    <label htmlFor="zip" className="mb-2 ml-5 text-xs uppercase tracking-widest">Postal Code</label>
+                    <label htmlFor="zip" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Postal Code</label>
                     <input
                       name="zip"
                       id="zip"
@@ -213,12 +213,12 @@ const Profile = () => {
                       onChange={(e) => setZip(e.target.value)}
                       onFocus={handleInputFocus}
                       required
-                      className="w-3/4 mt-2 mb-2 ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary"
+                      className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
                     />
                   </div>
                 </div>
-<div className='flex justify-end lg:mr-[10%]'>
-                <Button type="submit" className="m-6">Save Profile</Button>
+<div className='flex justify-center md:justify-end lg:mr-[10%]'>
+                <Button type="submit" className="m-0 md:m-6 mt-6">Save Profile</Button>
                 </div>
               </form>
 
