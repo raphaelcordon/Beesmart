@@ -31,6 +31,7 @@ class Voucher(models.Model):
     is_used = models.BooleanField(default=False)
     end_user_profile = models.ForeignKey(EndUserProfile, on_delete=models.CASCADE)
     qr_code = models.ImageField(upload_to=voucher_qr_directory_path)
+    date_created = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

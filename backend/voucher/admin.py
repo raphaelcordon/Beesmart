@@ -4,4 +4,4 @@ from django.contrib import admin
 
 @admin.register(Voucher)
 class VoucherAdmin(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ['name', 'date_created']

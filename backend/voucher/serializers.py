@@ -7,8 +7,8 @@ from voucher.models import Voucher
 class UseVoucherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Voucher
-        fields = ['id', 'image', 'name', 'expiration_date', 'campaign', 'end_user_profile', 'qr_code']
-        read_only_fields = ['id', 'image', 'name', 'expiration_date', 'campaign', 'end_user_profile', 'qr_code']
+        fields = ['id', 'image', 'name', 'expiration_date', 'campaign', 'end_user_profile', 'qr_code', 'date_created']
+        read_only_fields = ['id', 'image', 'name', 'expiration_date', 'campaign', 'end_user_profile', 'qr_code', 'date_created']
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)

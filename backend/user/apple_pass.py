@@ -4,9 +4,9 @@ from wallet.models import Pass, Barcode, Generic
 
 def build_pass(nickname, serial_nr, to_qr, secret_key):
     cardInfo = Generic()
-    cardInfo.addPrimaryField(f'{nickname}', 'MILLION REWARDS CARD', 'BEESMART SMART CARD')
+    cardInfo.addPrimaryField(f'{nickname}', 'REWARDS CARD', 'BEESMART SMART CARD')
     cardInfo.addSecondaryField('Holder', f'{nickname}', 'CARD HOLDER')
-    cardInfo.addAuxiliaryField('profile', 'SOME INFO', 'SOME INFO')
+    cardInfo.addAuxiliaryField('Card id', f'#{serial_nr}', 'CARD ID')
     cardInfo.addBackField('website', f'https://beesmart.propulsion-learn.ch/user/{secret_key}', 'YOUR PROFILE')
 
     organizationName = 'BeeSmart'
