@@ -44,7 +44,9 @@ export const GetEndUserBySecretKey = async (secret_key) => {
 export const GetEndUserCard = async () => {
     try{
         const config = getAxiosConfig();
-        const res = await axios.get(`/enduser/user/card/`, config);
+        const res = await axios.get(`/enduser/user/card/`, config, {
+            responseType: 'blob', // Important: This tells Axios to handle the response as a blob
+          });
         console.log(res)
         return res.data;
     } catch (error) {
@@ -65,9 +67,7 @@ export const AuthenticateEndUser = async (email, password) => {
  export const GetMeEndUser = async () => {
     try{
         const config = getAxiosConfig();
-        const res = await axios.get("/enduser/user/me/", config, {
-            responseType: 'blob', // Important: This tells Axios to handle the response as a blob
-          });
+        const res = await axios.get("/enduser/user/me/", config);
         return res.data;
     } catch (error) {
         throw error("Not possible fetch data");
