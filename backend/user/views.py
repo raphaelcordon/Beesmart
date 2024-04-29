@@ -354,11 +354,12 @@ class GenerateEndUserCard(CreateAPIView):
             return Response('Failed to send QR code. Please try again.', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-class EndUserCard(ListAPIView):
+class EndUserCard(CreateAPIView):
     """
     API view to generate a new QR code for an end user and send it via email.
     """
     serializer_class = UserRegistrationSerializer
+    permission_classes = []
 
     def get_object(self):
         """
@@ -366,14 +367,14 @@ class EndUserCard(ListAPIView):
         Overriding this method to include specific error handling and logic for code regeneration.
         """
         try:
-            user = self.request.user
-            profile = EndUserProfile.objects.get(user=user)
+            secret_key = self.request.data['secret_key']
+            profile = EndUserProfile.objects.get(secret_key=secret_key)
             return profile
         except EndUserProfile.DoesNotExist:
             # Handle case where profile does not exist to send a specific error response.
             raise NotFound('Profile does not exist.')
 
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         """
         Overridden retrieve method to send an email with the QR code after successful retrieval
         and regeneration of the user's code.

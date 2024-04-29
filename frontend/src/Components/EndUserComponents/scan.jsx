@@ -28,7 +28,7 @@ const Scan = () => {
         setError('');
 
         try {
-            const userData = await GetEndUserCard();
+            const userData = await GetEndUserCard(EndUser.end_user_profile.secret_key);
             const url = window.URL.createObjectURL(new Blob([userData], {type: 'application/vnd.apple.pkpass'}));
             const link = document.createElement('a');
             link.href = url;

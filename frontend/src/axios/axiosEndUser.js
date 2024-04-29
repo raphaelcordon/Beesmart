@@ -41,10 +41,9 @@ export const GetEndUserBySecretKey = async (secret_key) => {
     }
 }
 
-export const GetEndUserCard = async () => {
+export const GetEndUserCard = async (secret_key) => {
     try{
-        const config = getAxiosConfig();
-        const res = await axios.get(`/enduser/user/card/`, config, {
+        const res = await axios.post(`/enduser/user/card/`, {secret_key}, {
             responseType: 'blob', // Important: This tells Axios to handle the response as a blob
           });
         console.log(res)
