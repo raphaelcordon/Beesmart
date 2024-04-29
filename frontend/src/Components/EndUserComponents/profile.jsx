@@ -140,7 +140,7 @@ const Profile = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       onFocus={handleInputFocus}
-                      required
+                      
                       readOnly
                       className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5  border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
                     />
@@ -154,7 +154,7 @@ const Profile = () => {
                       value={first_name}
                       onChange={(e) => setFirst_name(e.target.value )}
                       onFocus={handleInputFocus}
-                      required
+                      
                       className="w-full md:w-3/4 mt-2 mb-2  ml-0 md:ml-5  border-b-2 border-secondary  focus:outline-none focus:border-primary bg-transparent"
                     />
                   </div>
@@ -170,12 +170,12 @@ const Profile = () => {
                       value={last_name}
                       onChange={(e) => setLast_name(e.target.value )}
                       onFocus={handleInputFocus}
-                      required
+                      
                       className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
                     />
                   </div>
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                    <label htmlFor="street" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Adress</label>
+                    <label htmlFor="street" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Address</label>
                     <input
                       name="street"
                       id="street"
@@ -183,7 +183,7 @@ const Profile = () => {
                       value={street}
                       onChange={(e) => setStreet(e.target.value )}
                       onFocus={handleInputFocus}
-                      required
+                      
                       className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
                     />
                   </div>
@@ -199,7 +199,7 @@ const Profile = () => {
                       value={city}
                       onChange={(e) => setCity( e.target.value)}
                       onFocus={handleInputFocus}
-                      required
+                      
                       className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
                     />
                   </div>
@@ -212,7 +212,7 @@ const Profile = () => {
                       value={zip}
                       onChange={(e) => setZip(e.target.value)}
                       onFocus={handleInputFocus}
-                      required
+                      
                       className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
                     />
                   </div>

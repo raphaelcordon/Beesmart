@@ -116,7 +116,7 @@ const NewCampaign = () => {
               <form onSubmit={getSubmitData}>
                 <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2  w-full mt-6">
                   <div className="w-full mb-4 lg:mb-0 md:mt-6 flex flex-col ">
-                    <label  className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Name</label>
+                    <label  className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Name<span className='text-error text-l font-semibold'>*</span></label>
                     <input
                       name="name"
                       id="name"
@@ -130,7 +130,7 @@ const NewCampaign = () => {
                     />
                   </div>
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center ">
-                    <label  className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Type of Campaign</label>
+                    <label  className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Type of Campaign<span className='text-error text-l font-semibold'>*</span></label>
                     <div className="relative cursor-pointer">
                       <button
                         type="button"
@@ -153,7 +153,7 @@ const NewCampaign = () => {
 
                 <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                    <label  className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Value Goal</label>
+                    <label  className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Value Goal<span className='text-error text-l font-semibold'>*</span></label>
                     <input
                       name="value_goal"
                       id="value_goal"
