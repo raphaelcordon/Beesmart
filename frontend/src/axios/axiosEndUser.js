@@ -65,7 +65,9 @@ export const AuthenticateEndUser = async (email, password) => {
  export const GetMeEndUser = async () => {
     try{
         const config = getAxiosConfig();
-        const res = await axios.get("/enduser/user/me/", config);
+        const res = await axios.get("/enduser/user/me/", config, {
+            responseType: 'blob', // Important: This tells Axios to handle the response as a blob
+          });
         return res.data;
     } catch (error) {
         throw error("Not possible fetch data");
