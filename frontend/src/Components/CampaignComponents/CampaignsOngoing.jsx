@@ -17,7 +17,7 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
       {isLoading ? (
         <div className="p-1 flex flex-row items-center justify-center align-center text-center ">
           <div className="flex justify-center  pb-10 mb-10">
-            <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content breadcrumbs w-80 shadow-md">
+            <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content breadcrumbs w-100 shadow-md">
               <div className="pt-64 pb-64">
                 <span className="loading loading-ball loading-lg">dddd</span>
               </div>
@@ -35,7 +35,7 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
                     className="cursor-default hover:drop-shadow-xl flex justify-center  pb-10 mb-10"
                   >
                     <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content w-80 shadow-md">
-                      <div className="stat flex items-center flex justify-between">
+                      <div className="stat flex items-center justify-between">
                         <img
                           src={`${item.logo || defaultlogo}`}
                           alt="Campaign Logo"
@@ -46,7 +46,7 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
                       <div>
                         <div className="stat-title w-full flex flex-col">
                           {item.collector_type === 1 ? (
-                            <div className="stat-title w-full flex flex-row flex justify-between">
+                            <div className="stat-title w-full flex flex-row  justify-between">
                               <div className="p-4">
                                 <div className="text-slate-600 text-l">Campaign goal: </div>
                                 <div className="text-slate-600 font-bold text-xl">{item.value_goal} stamps</div>
@@ -59,7 +59,7 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
                               </div>
                             </div>
                           ) : item.collector_type === 2 ? (
-                            <div className="stat-title w-full flex flex-row flex justify-between">
+                            <div className="stat-title w-full flex flex-row justify-between">
                               <div className="p-4">
                                 <div className="text-slate-600 text-l">Campaign goal: </div>
                                 <div className="text-slate-600 font-bold text-xl">{item.value_goal} points</div>
@@ -72,7 +72,7 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
                               </div>
                             </div>
                           ) : (
-                            <div className="stat-title w-full flex flex-row flex justify-between">
+                            <div className="stat-title w-full flex flex-row justify-between">
                               <div className="p-4">
                                 <div className="text-slate-600 text-l">Campaign goal: </div>
                                 <div className="text-slate-600 font-bold text-xl">{item.value_goal} CHF</div>
@@ -136,7 +136,7 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
             )
           ) : (
             <div>
-              <h1 className="">You are not yet engaged in any campaign</h1>
+              <h1 className="pt-2">You are not running any campaign yet</h1>
               <NoCampaignComponent />
             </div>
           )}
