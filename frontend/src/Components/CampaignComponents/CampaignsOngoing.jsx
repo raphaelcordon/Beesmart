@@ -14,7 +14,9 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
 
   return (
     <>
+    <div className="w-full flex-grow overflow-y-auto">
       {isLoading ? (
+        
         <div className="p-1 flex flex-col lg:flex-row items-center justify-center align-center w-[100%] text-center gap-10 flex-wrap">
           <div className="flex justify-center  pb-10 mb-10">
             <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content breadcrumbs w-100 shadow-md">
@@ -142,6 +144,7 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
           )}
         </div>
       )}
+      </div>
     </>
   );
 };
