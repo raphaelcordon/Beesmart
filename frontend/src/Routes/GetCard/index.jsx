@@ -58,7 +58,6 @@ const GetCard = () => {
         try {
             const data = await PostEndUserVerify(userData);
             // if (isIOSDevice() === 'iOS') {
-                console.log(data)
                 const url = window.URL.createObjectURL(new Blob([data], {type: 'application/vnd.apple.pkpass'}));
                 const link = document.createElement('a');
                 link.href = url;
