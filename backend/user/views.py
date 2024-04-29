@@ -600,7 +600,7 @@ class UserPointsMoneyCountView(ListAPIView):
         # Get the counts for value_counted from 1 to 10
         counts = (
             EndUserProfile.objects
-            .filter(collectors__campaign__id=campaign_id, is_collected=False)
+            .filter(collectors__campaign__id=campaign_id, collectors__is_collected=False)
             .values('collectors__value_counted')
             .annotate(count=Count('user_id', distinct=True))
             .order_by('collectors__value_counted')

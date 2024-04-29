@@ -13,7 +13,11 @@ const Voucher = ({ voucher, loading }) => {
       <div className="cursor-default hover:drop-shadow-xl flex justify-center pb-10 mb-10 ">
         <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content w-80 shadow-md ">
           <div className="stat flex items-center">
-            <img src={`${voucher.logo || defaultlogo}`} alt="Campaign Logo" className="w-16 h-16 rounded-full p-2" />
+            <img
+              src={`${voucher.campaign.logo || defaultlogo}`}
+              alt="Campaign Logo"
+              className="w-16 h-16 rounded-full p-2"
+            />
             <div className="text-l text-left font-bold  text-lime-700">{voucher.name.toUpperCase()}</div>
           </div>
           <div>
@@ -51,7 +55,7 @@ const Voucher = ({ voucher, loading }) => {
               </div>
             </div>
             <div className="flex justify-center pb-10 pt-5">
-              <div className="text-4xl text-left font-bold  text-lime-700">{voucher.name.toUpperCase()}</div>
+              <div className="text-4xl text-wrap text-left font-bold  text-lime-700">{voucher.name.toUpperCase()}</div>
             </div>
             <div className="flex justify-center pb-10 pt-5">
               <img src={voucher.qr_code} alt="QR_CODE " className="w-52 h-52" />
