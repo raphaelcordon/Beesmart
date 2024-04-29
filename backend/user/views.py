@@ -381,6 +381,7 @@ class EndUserCard(ListAPIView):
         profile = self.get_object()  # Get the object using the overridden get_object method.
         user = profile.user  # Access user directly from profile assuming a reverse relation from User to EndUserProfile.
         secret_key = profile.secret_key
+
         def remove_domain(email):
             return email.split('@')[0] + '@'
 
