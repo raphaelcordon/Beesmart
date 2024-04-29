@@ -140,7 +140,7 @@ const Profile = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       onFocus={handleInputFocus}
-                      required
+                      
                       readOnly
                       className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5  border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
                     />
@@ -154,7 +154,7 @@ const Profile = () => {
                       value={first_name}
                       onChange={(e) => setFirst_name(e.target.value )}
                       onFocus={handleInputFocus}
-                      required
+                      
                       className="w-full md:w-3/4 mt-2 mb-2  ml-0 md:ml-5  border-b-2 border-secondary  focus:outline-none focus:border-primary bg-transparent"
                     />
                   </div>
@@ -162,28 +162,26 @@ const Profile = () => {
 
                 <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                    <label htmlFor="last_name" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Last Name</label>
+                    <label htmlFor="last_name" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Email</label>
                     <input
-                      name="last_name"
-                      id="last_name"
                       type="text"
-                      value={last_name}
-                      onChange={(e) => setLast_name(e.target.value )}
+                      value={CustomerUser.email} 
                       onFocus={handleInputFocus}
-                      required
+                      readOnly
                       className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
                     />
                   </div>
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                    <label htmlFor="street" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Address</label>
+                    <label htmlFor="street" className="required-label mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Address</label>
                     <input
-                      name="street"
-                      id="street"
-                      type="text"
-                      value={street}
-                      onChange={(e) => setStreet(e.target.value )}
-                      onFocus={handleInputFocus}
-                      required
+                       name="address"
+                       id="street"
+                       type="text"
+                       value={street} 
+                       onChange={(e) => setStreet(e.target.value )}
+                       onFocus={handleInputFocus}
+                       required
+                      
                       className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
                     />
                   </div>
@@ -193,26 +191,88 @@ const Profile = () => {
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
                     <label htmlFor="city" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">City</label>
                     <input
-                      name="city"
-                      id="city"
-                      type="text"
-                      value={city}
-                      onChange={(e) => setCity( e.target.value)}
-                      onFocus={handleInputFocus}
-                      required
+                     name="city"
+                     id="city"
+                     type="text"
+                     value={city} 
+                     onChange={(e) => setCity( e.target.value)}
+                     onFocus={handleInputFocus}
+                     required
+                      
                       className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
                     />
                   </div>
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
                     <label htmlFor="zip" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Postal Code</label>
                     <input
-                      name="zip"
-                      id="zip"
-                      type="text"
-                      value={zip}
-                      onChange={(e) => setZip(e.target.value)}
+                       name="postalCode"
+                       id="zip"
+                       type="text"
+                       value={zip} 
+                       onChange={(e) => setZip(e.target.value)}
+                       onFocus={handleInputFocus}
+                       required
+                      
+                      className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
+                    />
+                  </div>
+                </div>
+                <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
+                  <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
+                    <label htmlFor="city" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Country</label>
+                    <input
+                     name="country"
+                     id="country"
+                     type="text"
+                     value={country} 
+                     onChange={(e) => setCountry( e.target.value)}
+                     onFocus={handleInputFocus}
+                     required
+                      
+                      className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
+                    />
+                  </div>
+                  <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
+                    <label htmlFor="zip" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Business Name</label>
+                    <input
+                       name="business_name"
+                       id="business_name"
+                       type="text"
+                       value={business_name} 
+                       onChange={(e) => setBusinessName(e.target.value)}
+                       onFocus={handleInputFocus}
+                       required
+                      
+                      className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
+                    />
+                  </div>
+                </div>
+                <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
+                  <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
+                    <label htmlFor="city" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Upload Logo</label>
+                    <input
+                      name="logo"
+                      id="logo"
+                      type="file"
+                      onChange={(e) => setLogo(e.target.files[0])} 
                       onFocus={handleInputFocus}
-                      required
+                      accept="image/*"
+                      
+                      className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
+                    />
+                  </div>
+                  <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
+                    <label htmlFor="zip" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Website</label>
+                    <input
+                       name="website"
+                       id="website"
+                       type="text"
+                      // value={user.website} 
+                      value={website}
+                       onChange={(e) => setWebsite(e.target.value)}
+                       onFocus={handleInputFocus}
+                      
+                      
                       className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
                     />
                   </div>
