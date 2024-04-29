@@ -109,9 +109,9 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
                             </div>
                           </div>
                           <div className="flex justify-center pb-10 pt-5">
-                            <Link to={`/business/${item.id}`}>
+                            {/* <Link to={`/business/${item.id}`}>
                               <button className="btn btn-success w-64">Get More Insights</button>
-                            </Link>
+                            </Link> */}
                           </div>
                         </div>
                       </div>
