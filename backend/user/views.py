@@ -354,6 +354,49 @@ class GenerateEndUserCard(CreateAPIView):
             return Response('Failed to send QR code. Please try again.', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+class EndUserCard(ListAPIView):
+    """
+    API view to generate a new QR code for an end user and send it via email.
+    """
+    serializer_class = UserRegistrationSerializer
+
+    def get_object(self):
+        """
+        Retrieve and return the EndUserProfile based on the provided 'code' in the URL.
+        Overriding this method to include specific error handling and logic for code regeneration.
+        """
+        try:
+            user = self.request.user
+            profile = EndUserProfile.objects.get(user=user)
+            return profile
+        except EndUserProfile.DoesNotExist:
+            # Handle case where profile does not exist to send a specific error response.
+            raise NotFound('Profile does not exist.')
+
+    def get(self, request, *args, **kwargs):
+        """
+        Overridden retrieve method to send an email with the QR code after successful retrieval
+        and regeneration of the user's code.
+        """
+        profile = self.get_object()  # Get the object using the overridden get_object method.
+        user = profile.user  # Access user directly from profile assuming a reverse relation from User to EndUserProfile.
+        secret_key = profile.secret_key
+        def remove_domain(email):
+            return email.split('@')[0] + '@'
+
+        # Attempt to send an email with the QR code
+        nickname = remove_domain(user.email)
+        try:
+            serial_nr = profile.serial_nr
+            to_qr = f'https://beesmart.propulsion-learn.ch/user/{secret_key}'
+            response = build_pass(nickname, serial_nr, to_qr, secret_key)
+
+            return response
+        except Exception as e:
+            print(e)  # Consider logging this instead of printing for production.
+            return Response('Failed to send Apple card', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 class DeleteCustomerUser(DestroyAPIView):
     """
     API view to delete a CustomerUserProfile associated with the current authenticated user.
@@ -571,7 +614,7 @@ class UserPointsMoneyCountView(ListAPIView):
         # Ensure that all labels from 0 to value_goal are represented in the data
         labels_present = {entry['label'] for entry in data}
         data.extend([
-            {'label': i, 'number': 0} for i in range(10, int(value_goal)+10, 10) if i not in labels_present
+            {'label': i, 'number': 0} for i in range(10, int(value_goal) + 10, 10) if i not in labels_present
         ])
 
         # Sort the data by label

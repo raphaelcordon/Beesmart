@@ -2,7 +2,7 @@ from django.urls import path
 
 from user.views import CreateCustomerUser, CreateEndUser, VeryfiCustomerUserView, GenerateEndUserCard, MeCustomerUser, \
     MeEndUser, UpdateCustomerUser, DeleteCustomerUser, EndUserBySecretKey, UpdateEndUser, UserStampsCountView, \
-    UserVisitsCountView, NotClaimedVouchersView, UserPointsMoneyCountView
+    UserVisitsCountView, NotClaimedVouchersView, UserPointsMoneyCountView, EndUserCard
 
 urlpatterns = [
     path('customer/user/add/', CreateCustomerUser.as_view(), name='Add customer user'),
@@ -12,6 +12,7 @@ urlpatterns = [
     path('customer/user/delete/', DeleteCustomerUser.as_view(), name='Delete customer user'),
     path('enduser/user/add/', CreateEndUser.as_view(), name='Add end user'),
     path('enduser/user/verify/<str:generated_code>/', GenerateEndUserCard.as_view(), name='Verify end user'),
+    path('enduser/user/card/', EndUserCard.as_view(), name='Download users card'),
     path('enduser/user/me/', MeEndUser.as_view(), name='Gets back logged in end user object'),
     path('enduser/user/update/', UpdateEndUser.as_view(), name='Update end user'),
     path('enduser/user/<str:secret_key>/', EndUserBySecretKey.as_view(), name='Gets end user object by secret_key'),
