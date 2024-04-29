@@ -26,7 +26,6 @@ export const PostEndUserVerify = async (userData) => {
         const res = await axios.post(`/enduser/user/verify/${userData.secret_key}/`, userData, {
             responseType: 'blob', // Important: This tells Axios to handle the response as a blob
           });
-        console.log(res)
         return res.data;
     } catch (error) {
         throw error("Not possible to fetch data");
@@ -36,6 +35,19 @@ export const PostEndUserVerify = async (userData) => {
 export const GetEndUserBySecretKey = async (secret_key) => {
     try{
         const res = await axios.get(`/enduser/user/${secret_key}/`);
+        return res.data;
+    } catch (error) {
+        throw error("Not possible to fetch data");
+    }
+}
+
+export const GetEndUserCard = async () => {
+    try{
+        const config = getAxiosConfig();
+        const res = await axios.get(`/enduser/user/card/`, config, {
+            responseType: 'blob', // Important: This tells Axios to handle the response as a blob
+          });
+        console.log(res)
         return res.data;
     } catch (error) {
         throw error("Not possible to fetch data");
