@@ -600,7 +600,7 @@ class UserPointsMoneyCountView(ListAPIView):
         # Get the counts for value_counted from 1 to 10
         counts = (
             EndUserProfile.objects
-            .filter(collectors__campaign__id=campaign_id)
+            .filter(collectors__campaign__id=campaign_id, is_collected=False)
             .values('collectors__value_counted')
             .annotate(count=Count('user_id', distinct=True))
             .order_by('collectors__value_counted')
@@ -615,7 +615,7 @@ class UserPointsMoneyCountView(ListAPIView):
         # Ensure that all labels from 0 to value_goal are represented in the data
         labels_present = {entry['label'] for entry in data}
         data.extend([
-            {'label': i, 'number': 0} for i in range(10, int(value_goal) + 10, 10) if i not in labels_present
+            {'label': i, 'number': 0} for i in range(10, int(value_goal), 10) if i not in labels_present
         ])
 
         # Sort the data by label
