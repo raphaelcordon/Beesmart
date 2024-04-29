@@ -52,8 +52,6 @@ const MyCollector = ({ item, setIsLoading }) => {
                 )}
               </div>
               <div className="flex items-center justify-center min-h-24">
-                {console.log(item)}
-
                 <div className="flex flex-row flex-wrap items-center justify-center rounded-lg h-32 w-80">
                   {collectorType === 1 ? (
                     Array.from({ length: collector.value_goal }).map((_, index) =>
