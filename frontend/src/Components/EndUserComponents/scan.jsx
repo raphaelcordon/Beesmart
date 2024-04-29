@@ -1,6 +1,7 @@
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import defaultavatar from "../../assets/avatar_default.png";
+import {PostEndUserVerify} from "../../axios/axiosEndUser.js";
 
 const Scan = () => {
 
@@ -8,13 +9,49 @@ const Scan = () => {
     const [first_name, setFirst_name] = useState('');
     const [avatar, setAvatar] = useState(null);
     const [qr_code, setQr_code] = useState(null);
+    const [secret_key, setSecret_key] = useState(null);
+    const [password, setPassword] = useState(null);
+
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState('');
 
     useEffect(() => {
         setFirst_name(EndUser.end_user_profile.first_name)
         setAvatar(EndUser.end_user_profile.avatar)
         setQr_code(EndUser.end_user_profile.qr_code)
+        setSecret_key(EndUser.end_user_profile.secret_key)
 
     }, [EndUser]);
+
+    const getSubmitData = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setError('');
+
+        const userData = {
+            secret_key: secret_key,
+            password: password,
+            password_repeat: password
+        }
+        verifyEndUser(userData);
+    }
+
+
+    const verifyEndUser = async () => {
+        setIsLoading(true);
+        try {
+            const url = window.URL.createObjectURL(new Blob([userData], {type: 'application/vnd.apple.pkpass'}));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'BeeSmart.pkpass');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } catch (error) {
+            setError(error.message || 'Failed to send the wallet card. Please try again.');
+        }
+        setIsLoading(false);
+  };
 
     return (
         <div className="pt-[5%] md:pt-0">
@@ -24,11 +61,11 @@ const Scan = () => {
                     {/* Header */}
                     <div className="flex justify-between items-center p-4 rounded-lg">
                         <div className="flex items-center space-x-4">
-                            <div className="w-24 h-24 rounded-badge overflow-hidden bg-gray-100">
-                                {/*<img src="./../../../src/assets/devtest/Carolina.png" alt="Profile avatar"*/}
-                                {/*     className="w-full h-full object-cover"/>*/}
-                                <img src={avatar || defaultavatar} alt="Profile avatar"
-                                     className="w-full h-full object-cover"/>
+                            <div className="w-1/3">
+                                <img src="./../../../src/assets/devtest/Carolina.png" alt="Profile avatar"
+                                     className="w-24 h-24 rounded-full overflow-hidden object-cover"/>
+                                {/*<img src={avatar || defaultavatar} alt="Profile avatar"*/}
+                                {/*     className="w-24 h-24 rounded-full overflow-hidden object-cover"/>*/}
                             </div>
                             <div className="text-md text-left">
                                 <p className="pb-1">Hey <b>{first_name || "there"}</b>, that's your QR Code.</p>
@@ -41,12 +78,12 @@ const Scan = () => {
                     {/* Main */}
                     <div className="flex justify-center">
                         <div className="flex justify-center items-center m-10 p-6 bg-secondary rounded-lg">
-                            <img src={qr_code}
-                                 className="m-2"
-                                 alt="QR Code"/>
-                            {/*<img src="./../../../src/assets/devtest/qr_cordonoutlook.com_YaUOIee.png"*/}
+                            {/*<img src={qr_code}*/}
                             {/*     className="m-2"*/}
                             {/*     alt="QR Code"/>*/}
+                            <img src="./../../../src/assets/devtest/qr_cordonoutlook.com_YaUOIee.png"
+                                 className="m-2"
+                                 alt="QR Code"/>
                         </div>
                     </div>
 
@@ -56,12 +93,27 @@ const Scan = () => {
                             <p>Why not make everything even easier
                                 by adding the QR code to your Smart Phone's Wallet?</p>
                         </div>
+
+                        <form className="mb-10" onSubmit={getSubmitData}>
+                            <div className="mb-2">
+                                <label className="block mb-2 text-sm text-accent-content">Password</label>
+                                <input
+                                    name="password"
+                                    id="password"
+                                    type="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                                    required
+                                />
+                            </div>
+                        </form>
                     </div>
 
                 </div>
             </section>
         </div>
-    );
+);
 }
 
 export default Scan;
