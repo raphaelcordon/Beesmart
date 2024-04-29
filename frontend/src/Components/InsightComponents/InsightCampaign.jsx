@@ -50,7 +50,6 @@ const InsightCampaign = ({ campaign }) => {
           }, []);
 
       console.log('Points', insightPoints)
-      console.log('Voucher', insightVouchers)
 
 
   return (
@@ -71,11 +70,11 @@ const InsightCampaign = ({ campaign }) => {
               </div>
           </div>
           <div className="lg:flex lg:justify-center lg:gap-4">
-              <div
-                  className="max-w-md lg:max-w-xl xl:max-w-4xl 2xl:max-w-5xl w-full bg-base-100 rounded-lg shadow-lg lg:pb-2">
-                  <h1 className="text-xl lg:text-2xl text-slate-600 font-semibold text-center mt-2 mb-6">POINTS</h1>
-                  <BarChart insight={insightPoints}/>
-              </div>
+              {/*<div*/}
+              {/*    className="max-w-md lg:max-w-xl xl:max-w-4xl 2xl:max-w-5xl w-full bg-base-100 rounded-lg shadow-lg lg:pb-2">*/}
+              {/*    <h1 className="text-xl lg:text-2xl text-slate-600 font-semibold text-center mt-2 mb-6">POINTS</h1>*/}
+              {/*    <BarChart insight={insightPoints}/>*/}
+              {/*</div>*/}
 
               <div
                   className="max-w-md lg:max-w-xl xl:max-w-4xl 2xl:max-w-5xl w-full bg-base-100 rounded-lg shadow-lg lg:pb-2">
