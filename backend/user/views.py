@@ -15,6 +15,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from datetime import timedelta
 from django.utils import timezone
 
+from campaign.models import Campaign
 from customer_user_profile.models import CustomerUserProfile
 from email_layouts.get_card_email import get_card_layout
 from email_layouts.qr_email import email_layout
@@ -353,6 +354,50 @@ class GenerateEndUserCard(CreateAPIView):
             return Response('Failed to send QR code. Please try again.', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+class EndUserCard(ListAPIView):
+    """
+    API view to generate a new QR code for an end user and send it via email.
+    """
+    serializer_class = UserRegistrationSerializer
+
+    def get_object(self):
+        """
+        Retrieve and return the EndUserProfile based on the provided 'code' in the URL.
+        Overriding this method to include specific error handling and logic for code regeneration.
+        """
+        try:
+            user = self.request.user
+            profile = EndUserProfile.objects.get(user=user)
+            return profile
+        except EndUserProfile.DoesNotExist:
+            # Handle case where profile does not exist to send a specific error response.
+            raise NotFound('Profile does not exist.')
+
+    def get(self, request, *args, **kwargs):
+        """
+        Overridden retrieve method to send an email with the QR code after successful retrieval
+        and regeneration of the user's code.
+        """
+        profile = self.get_object()  # Get the object using the overridden get_object method.
+        user = profile.user  # Access user directly from profile assuming a reverse relation from User to EndUserProfile.
+        secret_key = profile.secret_key
+
+        def remove_domain(email):
+            return email.split('@')[0] + '@'
+
+        # Attempt to send an email with the QR code
+        nickname = remove_domain(user.email)
+        try:
+            serial_nr = profile.serial_nr
+            to_qr = f'https://beesmart.propulsion-learn.ch/user/{secret_key}'
+            response = build_pass(nickname, serial_nr, to_qr, secret_key)
+
+            return response
+        except Exception as e:
+            print(e)  # Consider logging this instead of printing for production.
+            return Response('Failed to send Apple card', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 class DeleteCustomerUser(DestroyAPIView):
     """
     API view to delete a CustomerUserProfile associated with the current authenticated user.
@@ -540,5 +585,40 @@ class NotClaimedVouchersView(ListAPIView):
         # Create response data
         data = [{'label': week, 'number': week_counts.get(week, 0)} for week in
                 sorted(week_counts.keys(), reverse=True)]
+
+        return Response(data, status=status.HTTP_200_OK)
+
+
+class UserPointsMoneyCountView(ListAPIView):
+    serializer_class = EndUserSerializer
+
+    def get(self, request, *args, **kwargs):
+        campaign_id = self.kwargs['campaign_id']
+        campaign = Campaign.objects.get(id=campaign_id)
+        value_goal = campaign.value_goal
+
+        # Get the counts for value_counted from 1 to 10
+        counts = (
+            EndUserProfile.objects
+            .filter(collectors__campaign__id=campaign_id, is_collected=False)
+            .values('collectors__value_counted')
+            .annotate(count=Count('user_id', distinct=True))
+            .order_by('collectors__value_counted')
+        )
+
+        # Convert the queryset to a list of dictionaries
+        data = [
+            {'label': entry['collectors__value_counted'], 'number': entry['count']}
+            for entry in counts if 1 <= entry['collectors__value_counted'] <= value_goal
+        ]
+
+        # Ensure that all labels from 0 to value_goal are represented in the data
+        labels_present = {entry['label'] for entry in data}
+        data.extend([
+            {'label': i, 'number': 0} for i in range(10, int(value_goal), 10) if i not in labels_present
+        ])
+
+        # Sort the data by label
+        data.sort(key=lambda x: x['label'])
 
         return Response(data, status=status.HTTP_200_OK)
