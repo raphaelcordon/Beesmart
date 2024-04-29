@@ -15,6 +15,7 @@ const Settings = () => {
   useEffect(() => {
   }, []);
 
+  const [isLoading, setIsLoading] = useState(false)
   const [business_name, setBusinessName] = useState(CustomerUser.customer_user_profile.business_name);
   const [country, setCountry] = useState(CustomerUser.customer_user_profile.country);
   const [city, setCity] = useState(CustomerUser.customer_user_profile.city);
@@ -103,7 +104,7 @@ const Settings = () => {
                 </div>
               )}
               {error && <small>{String(error)}</small>}
-              <h1 className="lg:text-3xl md:text-2xl sm:text-xl xs:text-xl font-serif font-extrabold mt-2 mb-2">Profile</h1>
+              <h1 className="lg:text-3xl md:text-2xl sm:text-xl xs:text-xl font-serif font-extrabold mt-2 mb-2 pt-2 ">Settings</h1>
               <h2 className="text-sm mb-4">Update Your Profile</h2>
               
               <div className="w-full rounded-sm bg-cover bg-center bg-no-repeat items-center">
@@ -132,14 +133,16 @@ const Settings = () => {
                   </div>
                 </div>
                 <form onSubmit={handleSubmitLogo}>
-                <Button type="submit" className="px-6 mt-6">Save Logo</Button>
+                <Button type="submit" className="m-0 md:m-6 mt-6"
+                    disabled={isLoading}>
+                    {isLoading ? 'Saving Logo...' : 'Save Logo'}</Button>
               </form>
               </div>
 
               <form onSubmit={handleSubmit}>
                 <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2  w-full mt-6">
                   <div className="w-full mb-4 lg:mb-0 md:mt-6 flex flex-col ">
-                    <label htmlFor="email" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Email</label>
+                    <label htmlFor="email" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Email<span className='text-error text-l font-semibold'>*</span></label>
                     <input
                       type="text"
                       value={CustomerUser.email} 
@@ -149,15 +152,16 @@ const Settings = () => {
                     />
                   </div>
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                    <label htmlFor="street" className="required-label mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Address <span className='text-error text-l font-semibold'>*</span></label>
+                    <label htmlFor="street" className="required-label mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Country<span className='text-error text-l font-semibold'>*</span></label>
                     <input
-                       name="address"
-                       id="street"
-                       type="text"
-                       value={street} 
-                       onChange={(e) => setStreet(e.target.value )}
-                       onFocus={handleInputFocus}
-                       required
+                        name="country"
+                        id="country"
+                        type="text"
+                        value={country} 
+                        onChange={(e) => setCountry( e.target.value)}
+                        onFocus={handleInputFocus}
+                        required
+                       
                       
                       className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
                     />
@@ -167,7 +171,7 @@ const Settings = () => {
 
                  <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                  <label htmlFor="street" className="required-label mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Address</label>
+                  <label htmlFor="street" className="required-label mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Address<span className='text-error text-l font-semibold'>*</span></label>
                     <input
                        name="address"
                        id="street"
@@ -181,7 +185,7 @@ const Settings = () => {
                     />
                   </div>
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                  <label htmlFor="city" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">City</label>
+                  <label htmlFor="city" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">City<span className='text-error text-l font-semibold'>*</span></label>
                     <input
                      name="city"
                      id="city"
@@ -198,7 +202,7 @@ const Settings = () => {
 
                 <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                  <label htmlFor="zip" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Postal Code</label>
+                  <label htmlFor="zip" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Postal Code<span className='text-error text-l font-semibold'>*</span></label>
                     <input
                        name="postalCode"
                        id="zip"
@@ -212,15 +216,15 @@ const Settings = () => {
                     />
                   </div>
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                  <label htmlFor="city" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Country</label>
+                  <label htmlFor="city" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Business Name<span className='text-error text-l font-semibold'>*</span></label>
                     <input
-                     name="country"
-                     id="country"
-                     type="text"
-                     value={country} 
-                     onChange={(e) => setCountry( e.target.value)}
-                     onFocus={handleInputFocus}
-                     required
+                    name="business_name"
+                    id="business_name"
+                    type="text"
+                    value={business_name} 
+                    onChange={(e) => setBusinessName(e.target.value)}
+                    onFocus={handleInputFocus}
+                    required
                       
                       className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
                     />
@@ -228,22 +232,8 @@ const Settings = () => {
                 </div>
                 <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                  <label htmlFor="zip" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Business Name</label>
-                    <input
-                       name="business_name"
-                       id="business_name"
-                       type="text"
-                       value={business_name} 
-                       onChange={(e) => setBusinessName(e.target.value)}
-                       onFocus={handleInputFocus}
-                       required
-                      
-                      className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
-                    />
-                  </div>
-                  <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
                   <label htmlFor="zip" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Website</label>
-                    <input
+                  <input
                        name="website"
                        id="website"
                        type="text"
@@ -256,11 +246,16 @@ const Settings = () => {
                       className="w-full md:w-3/4 mt-2 mb-2 ml-0 md:ml-5 border-b-2 border-secondary focus:outline-none focus:border-primary bg-transparent"
                     />
                   </div>
+                  <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
+                  <label htmlFor="zip" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest"></label>
+                    
+                  </div>
                 </div>
                 
 <div className='flex justify-center md:justify-end lg:mr-[10%]'>
                 <Button type="submit" className="m-0 md:m-6 mt-6"
-                    >Save Changes</Button>
+                    disabled={isLoading}>
+                    {isLoading ? 'Saving Profile...' : 'Save Profile'}</Button>
                 </div>
               </form>
 
