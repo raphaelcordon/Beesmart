@@ -175,7 +175,7 @@ const Profile = () => {
                     />
                   </div>
                   <div className="w-full  mb-4 lg:mb-0 md:mt-6 flex flex-col justify-center">
-                    <label htmlFor="street" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Adress</label>
+                    <label htmlFor="street" className="mb-2 ml-0 md:ml-5 text-xs uppercase tracking-widest">Address</label>
                     <input
                       name="street"
                       id="street"
