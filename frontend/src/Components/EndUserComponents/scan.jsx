@@ -1,7 +1,8 @@
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import defaultavatar from "../../assets/avatar_default.png";
-import {PostEndUserVerify} from "../../axios/axiosEndUser.js";
+import {GetEndUserCard, PostEndUserVerify} from "../../axios/axiosEndUser.js";
+import addAppleWallet from "../../assets/add-to-apple-wallet-logo.png";
 
 const Scan = () => {
 
@@ -9,8 +10,6 @@ const Scan = () => {
     const [first_name, setFirst_name] = useState('');
     const [avatar, setAvatar] = useState(null);
     const [qr_code, setQr_code] = useState(null);
-    const [secret_key, setSecret_key] = useState(null);
-    const [password, setPassword] = useState(null);
 
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState('');
@@ -19,27 +18,17 @@ const Scan = () => {
         setFirst_name(EndUser.end_user_profile.first_name)
         setAvatar(EndUser.end_user_profile.avatar)
         setQr_code(EndUser.end_user_profile.qr_code)
-        setSecret_key(EndUser.end_user_profile.secret_key)
 
     }, [EndUser]);
 
-    const getSubmitData = async (e) => {
+
+    const handleGetCard = async (e) => {
         e.preventDefault();
         setIsLoading(true);
         setError('');
 
-        const userData = {
-            secret_key: secret_key,
-            password: password,
-            password_repeat: password
-        }
-        verifyEndUser(userData);
-    }
-
-
-    const verifyEndUser = async () => {
-        setIsLoading(true);
         try {
+            const userData = await GetEndUserCard();
             const url = window.URL.createObjectURL(new Blob([userData], {type: 'application/vnd.apple.pkpass'}));
             const link = document.createElement('a');
             link.href = url;
@@ -94,20 +83,15 @@ const Scan = () => {
                                 by adding the QR code to your Smart Phone's Wallet?</p>
                         </div>
 
-                        <form className="mb-10" onSubmit={getSubmitData}>
-                            <div className="mb-2">
-                                <label className="block mb-2 text-sm text-accent-content">Password</label>
-                                <input
-                                    name="password"
-                                    id="password"
-                                    type="password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
-                                    required
-                                />
-                            </div>
-                        </form>
+                        <div className="flex items-center justify-center h-full p-6 bg-base-100">
+                            <img src={addAppleWallet} alt="Add to Apple Wallet"
+                                 className="w-15 h-12 cursor-pointer" onClick={handleGetCard}/>
+                        </div>
+
+                    <div className="text-center">
+                        {isLoading ? 'Reading Apple Wallet...' : ''}
+
+                    </div>
                     </div>
 
                 </div>
