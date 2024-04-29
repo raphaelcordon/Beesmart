@@ -66,13 +66,13 @@ const MyCampaigns = () => {
                 <a href="#" className="`cursor-pointer flex flex-col items-center pl-15 hover:font-bold  mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12 ${active ?
          'text-secondary' : ''}`" onClick={(e) => {
                         handleToggleCampaigns(e, 'ongoing')
-                    }}><FontAwesomeIcon icon={faPersonRunning} className="pt-3" />Ongoing</a>
+                    }}><FontAwesomeIcon icon={faPersonRunning} className="py-3" />Ongoing</a>
                 </span>
                         <span className="">
                     <a href="#" className="`cursor-pointer flex flex-col items-center pl-15 hover:font-bold  mx-2 my-2 md:mx-10 lg:mx-8 lg:my-0 xl:mx-12 ${active ?
          'text-secondary' : ''}`" onClick={(e) => {
                         handleToggleCampaigns(e, 'closed')
-                    }}><FontAwesomeIcon icon={faLock} className="pt-3" />Closed</a>
+                    }}><FontAwesomeIcon icon={faLock} className="py-3" />Closed</a>
                 </span>
 
                         {/* New Campaign Button */}
