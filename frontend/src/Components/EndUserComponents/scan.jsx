@@ -51,10 +51,10 @@ const Scan = () => {
                     <div className="flex justify-between items-center p-4 rounded-lg">
                         <div className="flex items-center space-x-4">
                             <div className="w-1/3">
-                                <img src="./../../../src/assets/devtest/Carolina.png" alt="Profile avatar"
-                                     className="w-24 h-24 rounded-full overflow-hidden object-cover"/>
-                                {/*<img src={avatar || defaultavatar} alt="Profile avatar"*/}
+                                {/*<img src="./../../../src/assets/devtest/Carolina.png" alt="Profile avatar"*/}
                                 {/*     className="w-24 h-24 rounded-full overflow-hidden object-cover"/>*/}
+                                <img src={avatar || defaultavatar} alt="Profile avatar"
+                                     className="w-24 h-24 rounded-full overflow-hidden object-cover"/>
                             </div>
                             <div className="text-md text-left">
                                 <p className="pb-1">Hey <b>{first_name || "there"}</b>, that's your QR Code.</p>
@@ -67,12 +67,12 @@ const Scan = () => {
                     {/* Main */}
                     <div className="flex justify-center">
                         <div className="flex justify-center items-center m-10 p-6 bg-secondary rounded-lg">
-                            {/*<img src={qr_code}*/}
-                            {/*     className="m-2"*/}
-                            {/*     alt="QR Code"/>*/}
-                            <img src="./../../../src/assets/devtest/qr_cordonoutlook.com_YaUOIee.png"
+                            <img src={qr_code}
                                  className="m-2"
                                  alt="QR Code"/>
+                            {/*<img src="./../../../src/assets/devtest/qr_cordonoutlook.com_YaUOIee.png"*/}
+                            {/*     className="m-2"*/}
+                            {/*     alt="QR Code"/>*/}
                         </div>
                     </div>
 
