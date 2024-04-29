@@ -92,7 +92,7 @@ const Settings = () => {
 
     <div className="md:pt-0">
       <section className="py-10 bg-transparent md:bg-base-100/50">
-        <div className="lg:w-[80%] md:w-[90%] xs:w-[80%] mx-10 md:mx-auto ">
+        {/* <div className="lg:w-[80%] md:w-[90%] xs:w-[80%] mx-10 md:mx-auto "> */}
           <div className="lg:w-[88%] md:w-[80%] xs:w-[100%] mx-auto bg-tsansparent md:bg-base-100  h-fit self-center">
             <div>
               {success && (
@@ -138,7 +138,7 @@ const Settings = () => {
                     {isLoading ? 'Saving Logo...' : 'Save Logo'}</Button>
               </form>
               </div>
-
+              <div className="pl-[10%] pr-[10%] md:pr-0">
               <form onSubmit={handleSubmit}>
                 <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2  w-full mt-6">
                   <div className="w-full mb-4 lg:mb-0 md:mt-6 flex flex-col ">
@@ -258,11 +258,12 @@ const Settings = () => {
                     {isLoading ? 'Saving Profile...' : 'Save Profile'}</Button>
                 </div>
               </form>
+              </div>
 
               
             </div>
           </div>
-        </div>
+        {/* </div> */}
       </section>
     </div>
   );

@@ -2,16 +2,16 @@ import defaultlogo from "../../assets/defaultlogo.png";
 
 const NoCampaignComponent = () => {
   return (
-    <div className="p-12 flex opacity-25 select-none flex-row flex-wrap items-center justify-center align-center text-center w-dvw gap-10 ">
-      <div className="cursor-default flex justify-center  pb-10 mb-10 isolate">
+    <div className="p-12 flex opacity-25 select-none flex-col lg:flex-row items-center justify-center align-center w-[100%] text-center gap-10 flex-wrap">
+      <div className="cursor-default flex justify-center  pb-10 mb-10 ">
         <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content w-80 shadow-md">
-          <div className="stat flex items-center flex justify-between">
+          <div className="stat flex items-center  justify-between">
             <img src={`${defaultlogo}`} alt="Campaign Logo" className="w-16 h-16 rounded-full p-2 text-right" />
             <div className="text-2xl text-wrap text-right stat-value">FREE COFFEE</div>
           </div>
           <div>
             <div className="stat-title w-full flex flex-col">
-              <div className="stat-title w-full flex flex-row flex justify-between">
+              <div className="stat-title w-full flex flex-row justify-between">
                 <div className="p-4">
                   <div className="text-slate-600 text-l">Campaign goal: </div>
                   <div className="text-slate-600 font-bold text-xl">10 stamps</div>
@@ -38,16 +38,15 @@ const NoCampaignComponent = () => {
           </div>
         </div>
       </div>
-
       <div className="cursor-default flex justify-center  pb-10 mb-10">
         <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content w-80 shadow-md">
-          <div className="stat flex items-center flex justify-between">
+          <div className="stat flex items-center justify-between">
             <img src={`${defaultlogo}`} alt="Campaign Logo" className="w-16 h-16 rounded-full p-2 text-right" />
             <div className="text-2xl text-wrap text-right stat-value">10% DISCOUNT</div>
           </div>
           <div>
             <div className="stat-title w-full flex flex-col">
-              <div className="stat-title w-full flex flex-row flex justify-between">
+              <div className="stat-title w-full flex flex-row  justify-between">
                 <div className="p-4">
                   <div className="text-slate-600 text-l">Campaign goal: </div>
                   <div className="text-slate-600 font-bold text-xl">500 points</div>
@@ -77,13 +76,13 @@ const NoCampaignComponent = () => {
 
       <div className="cursor-default flex justify-center  pb-10 mb-10">
         <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content w-80 shadow-md">
-          <div className="stat flex items-center flex justify-between">
+          <div className="stat flex items-center justify-between">
             <img src={`${defaultlogo}`} alt="Campaign Logo" className="w-16 h-16 rounded-full p-2 text-right" />
             <div className="text-2xl text-wrap text-right stat-value">25 CHF VOUCHER</div>
           </div>
           <div>
             <div className="stat-title w-full flex flex-col">
-              <div className="stat-title w-full flex flex-row flex justify-between">
+              <div className="stat-title w-full flex flex-row  justify-between">
                 <div className="p-4">
                   <div className="text-slate-600 text-l">Campaign goal: </div>
                   <div className="text-slate-600 font-bold text-xl">300 CHF</div>
@@ -108,9 +107,12 @@ const NoCampaignComponent = () => {
             </div>
             <div className="flex justify-center pb-10 pt-5"></div>
           </div>
+          
         </div>
       </div>
+      
     </div>
+    
   );
 };
 

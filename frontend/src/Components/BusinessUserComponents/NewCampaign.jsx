@@ -98,8 +98,8 @@ const NewCampaign = () => {
     <div className="md:pt-0">
       <style>{styles}</style>
       <section className="py-10 bg-transparent md:bg-base-100/50">
-        <div className="lg:w-[80%] md:w-[90%] xs:w-[80%] mx-10 md:mx-auto ">
-          <div className="lg:w-[88%] md:w-[80%] xs:w-[100%] mx-auto bg-transparent md:bg-base-100 h-fit self-center">
+        {/* <div className="lg:w-[80%] md:w-[90%] xs:w-[80%] mx-10 md:mx-auto "> */}
+          <div className="lg:w-[88%] md:w-[80%] xs:w-[100%] mx-auto bg-tsansparent md:bg-base-100  h-fit self-center">
             <div>
               {showSuccessMessage && (
                 <div className="success-overlay">
@@ -112,7 +112,7 @@ const NewCampaign = () => {
               {error && <small>{String(error)}</small>}
               <h1 className="lg:text-3xl md:text-2xl sm:text-xl xs:text-xl font-serif font-extrabold mt-2 mb-2 pt-2">Create new Campaign</h1>
               <h2 className="text-sm mb-4"></h2>
-
+<div className="pl-[10%] pr-[10%] md:pr-0">
               <form onSubmit={getSubmitData}>
                 <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2  w-full mt-6">
                   <div className="w-full mb-4 lg:mb-0 md:mt-6 flex flex-col ">
@@ -229,11 +229,12 @@ const NewCampaign = () => {
                   {error && <p className="text-error text-sm mt-2">{error}</p>}
                 </div>
               </form>
+              </div>
 
 
             </div>
           </div>
-        </div>
+        {/* </div> */}
       </section>
     </div>
   );
