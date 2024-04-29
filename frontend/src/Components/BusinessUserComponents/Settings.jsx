@@ -138,7 +138,7 @@ const Settings = () => {
                     {isLoading ? 'Saving Logo...' : 'Save Logo'}</Button>
               </form>
               </div>
-
+              <div className="pl-[10%] pr-[10%] md:pr-0">
               <form onSubmit={handleSubmit}>
                 <div className="flex text-left flex-col lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2  w-full mt-6">
                   <div className="w-full mb-4 lg:mb-0 md:mt-6 flex flex-col ">
@@ -258,6 +258,7 @@ const Settings = () => {
                     {isLoading ? 'Saving Profile...' : 'Save Profile'}</Button>
                 </div>
               </form>
+              </div>
 
               
             </div>

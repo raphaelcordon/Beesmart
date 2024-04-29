@@ -15,7 +15,7 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
   return (
     <>
       {isLoading ? (
-        <div className="p-1 flex flex-row items-center justify-center align-center text-center ">
+        <div className="p-1 flex flex-col lg:flex-row items-center justify-center align-center w-[100%] text-center gap-10 flex-wrap">
           <div className="flex justify-center  pb-10 mb-10">
             <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content breadcrumbs w-100 shadow-md">
               <div className="pt-64 pb-64">
@@ -136,7 +136,7 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
             )
           ) : (
             <div>
-              <h1 className="pt-2">You are not running any campaign yet</h1>
+              <h1 className="p-5 font-bold text-yellow-500 text-xl">You don't have any campaigns running at the moment.</h1>
               <NoCampaignComponent />
             </div>
           )}
