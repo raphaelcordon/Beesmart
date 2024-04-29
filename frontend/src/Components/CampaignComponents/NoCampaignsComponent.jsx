@@ -4,7 +4,7 @@ const NoCampaignComponent = () => {
   return (
     <div className="p-12 flex opacity-25 select-none flex-col lg:flex-row items-center justify-center align-center w-[100%] text-center gap-10 flex-wrap">
       <div className="cursor-default flex justify-center  pb-10 mb-10 ">
-        <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content w-[100%] shadow-md">
+        <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content w-80 shadow-md">
           <div className="stat flex items-center  justify-between">
             <img src={`${defaultlogo}`} alt="Campaign Logo" className="w-16 h-16 rounded-full p-2 text-right" />
             <div className="text-2xl text-wrap text-right stat-value">FREE COFFEE</div>

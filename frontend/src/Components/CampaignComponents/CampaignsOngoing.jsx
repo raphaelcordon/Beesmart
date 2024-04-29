@@ -25,7 +25,7 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
           </div>
         </div>
       ) : (
-        <div className="p-1 flex flex-row flex-wrap items-center justify-center align-center text-center w-dvw gap-10 ">
+        <div className="p-1 flex flex-col lg:flex-row items-center justify-center align-center w-[100%] text-center gap-10 flex-wrap">
           {isCampaign ? (
             list.map(
               (item, index) =>
