@@ -136,7 +136,7 @@ const CampaignsOngoing = ({ list = [], isLoading }) => {
             )
           ) : (
             <div>
-              <h1 className="">You are not yet engaged in any campaign</h1>
+              <h1 className="p-5 font-bold text-yellow-500 text-xl">You don't have any campaigns running at the moment.</h1>
               <NoCampaignComponent />
             </div>
           )}
