@@ -7,7 +7,6 @@ export const getInsightPoints = async (campaignId) => {
     try{
         const config = getAxiosConfig();
         const res = await axios.get(`/insights/points/${campaignId}`, config);
-        console.log('axios points', res)
         return(res.data);
     } catch (error) {
         console.error(error);
