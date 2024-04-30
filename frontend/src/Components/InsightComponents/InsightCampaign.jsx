@@ -14,6 +14,7 @@ const InsightCampaign = ({campaign}) => {
     useEffect(() => {
         const fetchData = async () => {
             setError(null);
+            setError(null);
             setIsLoading(true);
 
             try {
@@ -49,7 +50,15 @@ const InsightCampaign = ({campaign}) => {
         fetchData();
     }, []);
 
-    console.log(insightVouchers)
+    let barChartProps = {};
+    if (campaign.collector_type === 1) {
+        barChartProps = { insight: insightStamps, type: 'Stamps' };
+    } else if (campaign.collector_type === 2) {
+        barChartProps = { insight: insightPoints, type: 'Points' };
+    } else if (campaign.collector_type === 3) {
+        barChartProps = { insight: insightPoints, type: 'Money' };  // Not sure if this should also be insightPoints
+    }
+
     return (
         <>
             <div className="lg:flex lg:justify-center lg:gap-4">
@@ -63,26 +72,24 @@ const InsightCampaign = ({campaign}) => {
                     className="max-w-md lg:max-w-xl xl:max-w-4xl 2xl:max-w-5xl w-full bg-base-100 rounded-lg shadow-lg lg:pb-2">
                     <h1 className="text-xl lg:text-2xl text-slate-600 font-semibold text-center mt-2 mb-6">Accesses by
                         period</h1>
-                    <BarChart insight={insightVisits}/>
+                    <BarChart insight={insightVisits} type={'AccessesByPeriod'}/>
                 </div>
             </div>
             <div className="lg:flex lg:justify-center lg:gap-4 lg:pt-4">
                 <div
                     className="max-w-md lg:max-w-xl xl:max-w-4xl 2xl:max-w-5xl w-full bg-base-100 rounded-lg shadow-lg lg:pb-2">
                     <h1 className="text-xl lg:text-2xl text-slate-600 font-semibold text-center mt-2 mb-6">
-                        {campaign.collector_type === 1 ? "Number of users with ongoing Stamps" :
-                         campaign.collector_type === 2 ? "points" :
-                         campaign.collector_type === 3 ? "Number of users with ongoing campaigns by Money Spent" : "Unknown Type"}
+                        {campaign.collector_type === 1 ? "Users with ongoing STAMPS" :
+                            campaign.collector_type === 2 ? "Users with ongoing POINTS" :
+                                campaign.collector_type === 3 ? "Users with ongoing campaigns by MONEY SPENT" : "Unknown Type"}
                     </h1>
-                    <BarChart insight={campaign.collector_type === 1 ? insightStamps :
-                                       campaign.collector_type === 2 ? insightPoints :
-                                       campaign.collector_type === 3 ? insightPoints : "Not possible to plot"}/>
+                    <BarChart {...barChartProps} />
                 </div>
 
                 <div
                     className="max-w-md lg:max-w-xl xl:max-w-4xl 2xl:max-w-5xl w-full bg-base-100 rounded-lg shadow-lg lg:pb-2">
                     <h1 className="text-xl lg:text-2xl text-slate-600 font-semibold text-center mt-2 mb-6">VOUCHER</h1>
-                    <BarChart insight={insightVouchers}/>
+                     <BarChart insight={insightVouchers} type={'Voucher'}/>
                 </div>
             </div>
 
