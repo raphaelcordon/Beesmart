@@ -15,7 +15,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from datetime import timedelta
 from django.utils import timezone
 
-from campaign.models import Campaign
+# from campaign.models import Campaign
 from customer_user_profile.models import CustomerUserProfile
 from email_layouts.get_card_email import get_card_layout
 from email_layouts.qr_email import email_layout
@@ -253,7 +253,7 @@ class CreateEndUser(CreateAPIView):
 
         # Prepare and send the email.
         send_mail(
-            'Registration code:',
+            'BeeSmart email authentication',
             f'{MEDIA_HOST}/backend/api/enduser/user/verify/{code}',
             'mot83161@gmail.com',
             [email],
@@ -540,25 +540,10 @@ class UserVisitsCountView(ListAPIView):
             {'day': (thirty_days_ago + timedelta(days=i)).isoformat(),
              'number': counts_dict.get(thirty_days_ago + timedelta(days=i), 0)}
             for i in range(31)  # Ensure it covers exactly 30 days including today
+            if counts_dict.get(thirty_days_ago + timedelta(days=i), 0) > 0
         ]
         return Response(data, status=status.HTTP_200_OK)
 
-
-# class NotClaimedVouchersView(ListAPIView):
-#     def get(self, request, *args, **kwargs):
-#         start_day = timezone.now().date()
-#         one_week_ago = start_day - timedelta(days=7)
-#         campaign_id = kwargs['campaign_id']
-#         data = []
-#
-#         for i in range(1, 6):
-#             number = Voucher.objects.filter(campaign__id=campaign_id, is_used=False, date_created__date__range=(
-#                 one_week_ago, start_day)).count()
-#             data.append({'label': f'{one_week_ago} - {start_day}', 'number': number})
-#             start_day = start_day - timedelta(days=7)
-#             one_week_ago = start_day - timedelta(days=7)
-#
-#         return Response(data, status=status.HTTP_200_OK)
 
 class NotClaimedVouchersView(ListAPIView):
     def get(self, request, *args, **kwargs):
@@ -595,8 +580,9 @@ class UserPointsMoneyCountView(ListAPIView):
 
     def get(self, request, *args, **kwargs):
         campaign_id = self.kwargs['campaign_id']
-        campaign = Campaign.objects.get(id=campaign_id)
-        value_goal = campaign.value_goal
+
+        # campaign = Campaign.objects.get(id=campaign_id)
+        # value_goal = campaign.value_goal
 
         # Get the counts for value_counted from 1 to 10
         counts = (
@@ -610,14 +596,16 @@ class UserPointsMoneyCountView(ListAPIView):
         # Convert the queryset to a list of dictionaries
         data = [
             {'label': entry['collectors__value_counted'], 'number': entry['count']}
-            for entry in counts if 1 <= entry['collectors__value_counted'] <= value_goal
+            # for entry in counts if 1 <= entry['collectors__value_counted'] <= value_goal
+            for entry in counts if entry['count'] > 0
         ]
 
         # Ensure that all labels from 0 to value_goal are represented in the data
-        labels_present = {entry['label'] for entry in data}
-        data.extend([
-            {'label': i, 'number': 0} for i in range(10, int(value_goal), 10) if i not in labels_present
-        ])
+
+        # labels_present = {entry['label'] for entry in data}
+        # data.extend([
+        #     {'label': i, 'number': 0} for i in range(10, int(value_goal), 10) if i not in labels_present
+        # ])
 
         # Sort the data by label
         data.sort(key=lambda x: x['label'])
