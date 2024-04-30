@@ -15,7 +15,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from datetime import timedelta
 from django.utils import timezone
 
-from campaign.models import Campaign
+# from campaign.models import Campaign
 from customer_user_profile.models import CustomerUserProfile
 from email_layouts.get_card_email import get_card_layout
 from email_layouts.qr_email import email_layout
