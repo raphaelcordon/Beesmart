@@ -41,7 +41,8 @@ class CustomerUserProfile(models.Model):
     def save(self, *args, **kwargs):
         create = self._state.adding
         if not create:
-            qr = segno.make(f'"{self.user.email}"')
+            # qr = segno.make(f'"{self.user.email}"')
+            qr = segno.make("https://beesmart.propulsion-learn.ch/get-started/")
             buffer = BytesIO()
             qr.save(buffer, kind='png', scale=5)
             filename = f'qr_{self.user}_{self.user.id}.png'
@@ -49,7 +50,8 @@ class CustomerUserProfile(models.Model):
                 self.qr_code.delete(save=False)  # Delete the old file if it exists
             self.qr_code.save(filename, ContentFile(buffer.getvalue()), save=False)
         else:
-            qr = segno.make(f'"{self.user.email}"')
+            # qr = segno.make(f'"{self.user.email}"')
+            qr = segno.make("https://beesmart.propulsion-learn.ch/get-started/")
             buffer = BytesIO()
             qr.save(buffer, kind='png', scale=5)
             filename = f'qr_{self.user}_{self.user.id}.png'

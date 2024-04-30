@@ -32,7 +32,7 @@ const MyCampaignsOngoing = ({ campaigns, isLoading, setIsLoading }) => {
         ) : (
           <div>
             <h1 className=" font-bold text-yellow-500 text-xl">You are not yet engaged in any campaign</h1>
-            <div className="select-none opacity-25 justify-center p-1 pt-10 p-1 flex flex-row flex-wrap items-center justify-center align-center text-center w-dvw gap-10 ">
+            <div className="select-none opacity-25 justify-center p-1 pt-10 p-1 flex flex-row flex-wrap items-center justify-center align-center text-center gap-10 ">
             <div className="cursor-default flex justify-center pb-10 mb-10">
               <div className="rounded-md bg-zinc-50 flex flex-col text-primary-content w-80 shadow-md">
                 <div className="stat flex items-center">

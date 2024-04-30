@@ -118,7 +118,7 @@ const CampaignsClosed = ({ list = [], isLoading }) => {
                 ),
             )
           ) : (
-            <h1>You do not have closed campaigns to show</h1>
+            <h1 className="font-bold text-yellow-500 text-xl">You do not have closed campaigns to show</h1>
           )}
         </div>
       )}

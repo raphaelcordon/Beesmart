@@ -11,7 +11,7 @@ const MyVouchersClosed = ({ usedVouchers, loading }) => {
             </div>
           ))
         ) : (
-          <h1>You are not yet engaged in any campaign</h1>
+          <h1 className="font-bold text-yellow-500 text-xl">You don't have any used vouchers.</h1>
         )}
       </div>
     </>

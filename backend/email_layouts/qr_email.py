@@ -1,3 +1,4 @@
+
 def email_layout(qr_code, media_root, front_end_root, secret_key):
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -10,7 +11,7 @@ def email_layout(qr_code, media_root, front_end_root, secret_key):
     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
         <tr style="background-color: #f8e71c;">
             <td style="padding: 20px; text-align: center;">
-                <img src="https://yourdomain.com/path-to-your-logo.png" alt="Bee Logo" width="100" style="vertical-align: middle;">
+                <img src="{front_end_root}/beeicon.png" alt="Bee Logo" width="100" style="vertical-align: middle;">
                 <h1 style="color: #333; font-size: 24px; margin-top: 20px;">Welcome to Our Service!</h1>
             </td>
         </tr>

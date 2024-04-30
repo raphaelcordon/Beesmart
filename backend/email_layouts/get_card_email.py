@@ -10,7 +10,7 @@ def get_card_layout(front_end_root, code, media_host):
     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
         <tr style="background-color: #f8e71c;">
             <td style="padding: 20px; text-align: center;">
-                <img src="https://yourdomain.com/path-to-your-logo.png" alt="Bee Logo" width="100" style="vertical-align: middle;">
+                <img src="{front_end_root}/beeicon.png" alt="Bee Logo" width="100" style="vertical-align: middle;">
                 <h1 style="color: #333; font-size: 24px; margin-top: 20px;">Welcome to Our Service!</h1>
             </td>
         </tr>
@@ -30,11 +30,6 @@ def get_card_layout(front_end_root, code, media_host):
                 <a href="https://beesmart.propulsion-learn.ch/" style="color: #333; text-decoration: none; font-weight: bold;">Social Media</a>
             </td>
         </tr>
-            <p>
-                (Activate account, will be deleted later:)
-                <a href="{media_host}/backend/api/enduser/user/verify/{code}" style="color: #333;
-                text-decoration: none; font-weight: bold;">Link to Activate account</a>
-            </p>
     </table>
 </body>
 </html>'''
