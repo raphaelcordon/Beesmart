@@ -44,8 +44,8 @@ const Scan = () => {
 
     return (
         <div className="pt-[5%] md:pt-0">
-            <section className="py-10 bg-base-100/50">
-                <div className="w-full mx-auto bg-base-100 shadow-2xl p-4">
+            <section className="py-10 bg-transparent md:bg-base-100/50">
+                <div className="w-[90%] mx-auto   p-4">
 
                     {/* Header */}
                     <div className="flex justify-between items-center p-4 rounded-lg">
@@ -83,7 +83,7 @@ const Scan = () => {
                                 by adding the QR code to your Smart Phone's Wallet?</p>
                         </div>
 
-                        <div className="flex items-center justify-center h-full p-6 bg-base-100">
+                        <div className="flex items-center justify-center h-full p-6 ">
                             <img src={addAppleWallet} alt="Add to Apple Wallet"
                                  className="w-15 h-12 cursor-pointer" onClick={handleGetCard}/>
                         </div>

@@ -1,3 +1,4 @@
+
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from "react";
 import { UpdateMeUser } from "../../axios/axiosCustomer.js";
@@ -93,7 +94,7 @@ const Settings = () => {
     <div className="md:pt-0">
       <section className="py-10 bg-transparent md:bg-base-100/50">
         {/* <div className="lg:w-[80%] md:w-[90%] xs:w-[80%] mx-10 md:mx-auto "> */}
-          <div className="lg:w-[88%] md:w-[80%] xs:w-[100%] mx-auto bg-tsansparent md:bg-base-100  h-fit self-center">
+          <div className="lg:w-[88%] md:w-[80%] xs:w-[100%] mx-auto bg-tsansparent  h-fit self-center">
             <div>
               {success && (
                 <div className="success-overlay">
