@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 // CSS rule for styling the calendar icon and file input
-const SecondaryColor = getComputedStyle(document.documentElement).getPropertyValue('--color-secondary');
+
 const styles = `
 input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
@@ -99,7 +99,7 @@ const NewCampaign = () => {
       <style>{styles}</style>
       <section className="py-10 bg-transparent md:bg-base-100/50">
         {/* <div className="lg:w-[80%] md:w-[90%] xs:w-[80%] mx-10 md:mx-auto "> */}
-          <div className="lg:w-[88%] md:w-[80%] xs:w-[100%] mx-auto bg-tsansparent md:bg-base-100  h-fit self-center">
+          <div className="lg:w-[88%] md:w-[80%] xs:w-[100%] mx-auto bg-tsansparent  h-fit self-center">
             <div>
               {showSuccessMessage && (
                 <div className="success-overlay">

@@ -52,12 +52,14 @@ const Insights = () => {
     }
 
     if (!hasActiveCampaigns) {
-        return <div className="text-center">There are no campaigns in progress for you at the moment.</div>;
+        return <div className="text-center bg-transparent md:bg-base-100/50 h-80 pt-20">There are no campaigns in progress for you at the moment.
+        </div>;
     }
 
     return (
-        <div className="flex flex-col lg:flex-row items-start lg:items-stretch justify-center text-center w-full">
+        <div className="flex flex-col lg:flex-row items-start lg:items-stretch justify-center text-center w-full bg-transparent md:bg-base-100/50">
             <div className="w-full lg:flex-grow">
+                
                 <h1 className="text-lg lg:text-xl font-bold mb-4">Insights of Open Campaigns</h1>
                 {openCampaigns.filter(campaign => campaign.is_active).map(item => (
                     <div key={item.id} className="bg-white rounded-lg shadow-md mb-4 cursor-pointer hover:bg-yellow-50 transition-colors duration-300"

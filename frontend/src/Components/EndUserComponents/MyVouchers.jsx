@@ -37,6 +37,9 @@ const MyVouchers = () => {
 
   return (
     <>
+    <section className="py-10 bg-transparent md:bg-base-100/50">
+    {/* <div className="lg:w-[80%] md:w-[90%] xs:w-[80%] mx-10 md:mx-auto "> */}
+      <div className="lg:w-[88%] md:w-[80%] xs:w-[100%] mx-auto bg-tsansparent pt-6  ">
       <header className=" mx-auto flex flex-row  justify-center items-center">
         <span className="mt-8 ">
           <a
@@ -80,6 +83,9 @@ const MyVouchers = () => {
           {currentVouchers === "closed" && <MyVouchersClosed loading={loading} usedVouchers={usedVouchers} />}
         </main>
       )}
+    </div>
+    
+    </section>
     </>
   );
 };
