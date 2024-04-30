@@ -125,7 +125,7 @@ const QrCode = () => {
     <div className="md:pt-0">
       <section className="py-10 bg-transparent md:bg-base-100/50">
         {/* <div className="lg:w-[80%] md:w-[90%] xs:w-[80%] mx-10 md:mx-auto "> */}
-          <div className="lg:w-[88%] md:w-[80%] xs:w-[100%] mx-auto bg-tsansparent pt-6 md:bg-base-100  ">
+          <div className="lg:w-[88%] md:w-[80%] xs:w-[100%] mx-auto bg-tsansparent pt-6  ">
             <div className="mb-4 w-full md:w-[75%] mx-auto text-center ">
              
                 <div className="bg-base-100/60 w-[100%] pt-0 md:pt-6  flex flex-col justify-center shadow-lg">
