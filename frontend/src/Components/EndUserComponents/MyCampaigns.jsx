@@ -33,7 +33,7 @@ const MyCampaigns = () => {
 
   return (
     <>
-    <section className="py-10 bg-transparent md:bg-base-100/50">
+    <section className=" bg-transparent md:bg-base-100/50">
         {/* <div className="lg:w-[80%] md:w-[90%] xs:w-[80%] mx-10 md:mx-auto "> */}
           <div className="lg:w-[88%] md:w-[80%] xs:w-[100%] mx-auto bg-tsansparent h-fit self-center">
       {/* <header className="container mx-auto flex flex-row gap-4 justify-center items-center">
