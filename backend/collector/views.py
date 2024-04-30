@@ -126,7 +126,7 @@ class EndUsersSpecificCampaignCollectors(ListAPIView):
         # Custom list method to handle the request and respond appropriately.
         queryset = self.get_queryset()
         if not queryset.exists():
-            return Response('No collectors exist for the given criteria.', status=status.HTTP_404_NOT_FOUND)
+            return Response('No collectors exist for the given criteria.', status=status.HTTP_200_OK)
 
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
