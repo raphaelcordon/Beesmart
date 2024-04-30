@@ -580,8 +580,9 @@ class UserPointsMoneyCountView(ListAPIView):
 
     def get(self, request, *args, **kwargs):
         campaign_id = self.kwargs['campaign_id']
-        campaign = Campaign.objects.get(id=campaign_id)
-        value_goal = campaign.value_goal
+
+        # campaign = Campaign.objects.get(id=campaign_id)
+        # value_goal = campaign.value_goal
 
         # Get the counts for value_counted from 1 to 10
         counts = (
