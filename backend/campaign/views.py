@@ -52,4 +52,5 @@ class ListEndUsersCampaignsView(ListAPIView):
         Filters campaigns based on the secret key of the end user profile linked to the campaigns through collectors.
         """
         secret_key = self.kwargs['secret_key']
-        return Campaign.objects.filter(collectors__end_user_profile__secret_key=secret_key).distinct()
+        return Campaign.objects.filter(collectors__end_user_profile__secret_key=secret_key,
+                                       collectors__is_collected=False).distinct()
