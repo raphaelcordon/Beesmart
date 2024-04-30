@@ -1,5 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQrcode } from "@fortawesome/free-solid-svg-icons";
+import screenshot from "../../../public/promo_collector_money.png";
+import screenshotforuser from "../../../public/promo_collector_stamps.png";
+import loyaltyforuser from "../../assets/loyalty_rewards.png";
+import loyaltyforbusiness from "../../assets/loyalty_for_business.png";
 
 const Home = () => {
   return (
@@ -7,11 +11,21 @@ const Home = () => {
       <div className="container max-w-xl p-6 mx-auto space-y-12 lg:px-8 lg:max-w-7xl">
         <div>
           <h2 className="text-3xl font-bold text-center sm:text-5xl">Bee Smart, Get Rewarded</h2>
-          <p className="max-w-3xl mx-auto mt-4 text-xl text-center">
+          <p className="max-w-3xl mx-auto mt-4 text-xl text-center tp-5">
+
             Bee Smart is the world&apos;s sweetest digital loyalty rewards program. Collect Nectar when you visit your
             favorite shops and bee rewarded!
           </p>
+          <img
+              src={loyaltyforuser}
+              className="mx-auto rounded-lg  dark-bg-gray-500 w-[60%]"
+              alt="Feature"
+              style={{ color: "transparent" }}
+            />
         </div>
+        
+            
+          
         <div className="grid lg:gap-8 lg:grid-cols-2 lg:items-center">
           <div>
             <div className="mt-4 space-y-12">
@@ -41,10 +55,8 @@ const Home = () => {
           </div>
           <div aria-hidden="true" className="mt-10 lg:mt-0">
             <img
-              width="600"
-              height="600"
-              src="https://images.unsplash.com/photo-1516542076529-1ea3854896f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxNHx8Y29tcHV0ZXJ8ZW58MHwwfHx8MTY5OTE3MDk1N3ww&ixlib=rb-4.0.3&q=80&w=1080"
-              className="mx-auto rounded-lg shadow-lg dark-bg-gray-500"
+              src={loyaltyforbusiness}
+              className="mx-auto rounded-lg  dark-bg-gray-500 w-[60%]"
               alt="Feature"
               style={{ color: "transparent" }}
             />
