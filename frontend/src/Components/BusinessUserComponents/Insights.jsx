@@ -52,7 +52,7 @@ const Insights = () => {
     }
 
     if (!hasActiveCampaigns) {
-        return <div className="text-center">There are no campaigns in progress for you at the moment.
+        return <div className="text-center bg-transparent md:bg-base-100/50 h-80 pt-20">There are no campaigns in progress for you at the moment.
         </div>;
     }
 
