@@ -124,11 +124,11 @@ const QrCode = () => {
     <>
     <div className="md:pt-0">
       <section className="py-10 bg-transparent md:bg-base-100/50">
-        {/* <div className="lg:w-[80%] md:w-[90%] xs:w-[80%] mx-10 md:mx-auto "> */}
-          <div className="lg:w-[88%] md:w-[80%] xs:w-[100%] mx-auto bg-tsansparent pt-6  ">
+        
+          <div className="lg:w-[88%] md:w-[80%] xs:w-[100%] mx-10 md:mx-auto bg-tsansparent pt-6  ">
             <div className="mb-4 w-full md:w-[75%] mx-auto text-center ">
              
-                <div className="bg-base-100/60 w-[100%] pt-0 md:pt-6  flex flex-col justify-center shadow-lg">
+                <div className="pl-2 pr-2 bg-base-100/60 w-[100%] pt-0 md:pt-6  flex flex-col justify-center shadow-lg">
               <FontAwesomeIcon icon={faDownload} className='text-xl p-5' /> Download your QR code now to effortlessly 
               connect with your customers. Simply display it in your storefront, 
               on your marketing materials, or even on your products. 
@@ -143,7 +143,7 @@ const QrCode = () => {
             
 
             
-            <div className="bg-base-100/60 w-[100%] pt-0 md:pt-6  flex flex-col justify-center shadow-lg mt-8 mb-8 ">
+            <div className="pl-2 pr-2 bg-base-100/60 w-[100%] pt-0 md:pt-6  flex flex-col justify-center shadow-lg mt-8 mb-8 ">
             <FontAwesomeIcon icon={faDownload}  className='text-xl p-5'/> We've curated an eye-catching display option to make your QR code stand out.
             Upload Your Logo and website at Settings, than:
             <PDFDownloadLink document={pdfData} fileName="beesmart_qrcode.pdf" 
