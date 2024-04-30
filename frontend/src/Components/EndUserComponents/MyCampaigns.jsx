@@ -12,6 +12,10 @@ const MyCampaigns = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+    }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       setError(null);
       setIsLoading(true);
