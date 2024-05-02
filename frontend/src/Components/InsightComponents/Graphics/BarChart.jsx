@@ -41,7 +41,7 @@ const BarChart = ({ insight, type }) => {
   const [yAxisTitle, setYAxisTitle] = useState(null);
   const [xAxisTitle, setXAxisTitle] = useState(null);
 
-  console.log(type)
+  console.log(insight)
 
     // Helper function to format date
 
@@ -180,7 +180,7 @@ const BarChart = ({ insight, type }) => {
   return (
     <>
       <div className="w-full lg:w-12/12 m-0 p-0">
-        <canvas ref={chartRef} className="p-0 m-0 bg-white rounded-lg shadow w-full" style={{height: '200px'}}></canvas>
+        <canvas ref={chartRef} className="p-0 m-0 bg-white rounded-lg -full" style={{height: '200px'}}></canvas>
       </div>
     </>
   );
