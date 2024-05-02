@@ -158,7 +158,7 @@ class CreateCustomerUser(CreateAPIView):
         send_mail(
             'Registration code:',
             f'generated code: {code}',
-            'mot83161@gmail.com',
+            'bee.smart.constructor@gmail.com',
             [email],
             fail_silently=False,
         )
@@ -255,7 +255,7 @@ class CreateEndUser(CreateAPIView):
         send_mail(
             'BeeSmart email authentication',
             f'{MEDIA_HOST}/backend/api/enduser/user/verify/{code}',
-            'mot83161@gmail.com',
+            'bee.smart.constructor@gmail.com',
             [email],
             # html_message=f'<h1>WELCOME {MEDIA_HOST}/backend/api/enduser/user/verify/{code}</h1>',
             html_message=get_card_layout(FRONT_END_HOST, code, MEDIA_HOST),
