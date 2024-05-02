@@ -180,7 +180,7 @@ const BarChart = ({ insight, type }) => {
   return (
     <>
       <div className="w-full lg:w-12/12 m-0 p-0">
-        <canvas ref={chartRef} className="p-0 m-0 bg-white rounded-lg -full" style={{height: '200px'}}></canvas>
+        <canvas ref={chartRef} className="p-0 m-0 bg-white rounded-lg w-full" style={{height: '200px'}}></canvas>
       </div>
     </>
   );
