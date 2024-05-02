@@ -25,7 +25,7 @@ const BusinessUserHome = () => {
                         {activeTab === 'MyCampaigns' && <MyCampaigns />}
                         {activeTab === 'Insights' && <Insights />}
                         {activeTab === 'QrCode' && <QrCode />}
-                        {activeTab === 'NewCampaign' && <NewCampaign />}
+                        {activeTab === 'NewCampaign' && <NewCampaign setActiveTab={setActiveTab}/>}
                         {activeTab === 'Settings' && <Settings />}
                     </div>
                     </div>
