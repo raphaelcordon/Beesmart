@@ -306,7 +306,7 @@ class GenerateEndUserCard(CreateAPIView):
         nickname = remove_domain(user.email)
         try:
             serial_nr = profile.serial_nr
-            to_qr = f'https://beesmart.propulsion-learn.ch/user/{secret_key}'
+            to_qr = f'"{secret_key}"'
             response = build_pass(nickname, serial_nr, to_qr, secret_key)
 
             # send_mail(
