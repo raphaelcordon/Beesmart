@@ -17,31 +17,27 @@
   - Vytas Urbelis: 
 
 
-## **Project Scope**
+## **Technical Project**
+- BACKEND:
+    - Python-Django Rest Framework
+    - Postgres database
+    - Applied software modeling concepts of DDD.
+- Authentication and Access:
+    - JWT authentication.
+    - Roles for access level control (authorization).
+- FRONTEND:
+    - React-Vite;
+    - Style: daisy-UI, Tailwind CSS, Fontawesome;
+- Docker:
+    - Docker-compose integrating containers for application and database;
+    - In production, also integrates the implementation of NGINX on a virtual machine for reverse proxy management and caching.
 
-## Getting started
+## **Environment**
+1.  Building implemented in Gitlab pipeline publishing the application image on Docker Hub.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+2.  Deployment on a virtual machine on Digital Ocean via docker-compose.deploy.yml which includes:
+    - Creation of container for Postgres server and application database.
+    - Creation of container for application, Web Api, and Front End building.
+    - Creation of container for Nginx to manage reverse proxy and web application caching.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.propulsion-home.ch/full-stack/batch-27-feb-2024/final-projects/besmart.git
-git branch -M master
-git push -uf origin master
-```
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+3.  Removal of old images and startup of containers.
