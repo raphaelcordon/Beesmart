@@ -7,7 +7,7 @@
   - Erzsebet Erdei (Böbi): 
   - Joshua Sussman: 
   - Raphael Cordon: https://github.com/raphaelcordon
-  - Vytas Urbelis: 
+  - Vytas Urbelis: https://github.com/vytautas-urbelis
 
 
 ## **Technical Project**
